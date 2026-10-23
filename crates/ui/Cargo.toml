@@ -1,0 +1,20 @@
+[package]
+name = "ui"
+description = "The GTK 4 and libadwaita windows — they see the presentation's types only"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+presentation.workspace = true
+gtk.workspace = true
+adw.workspace = true
+soup.workspace = true
+gettext-rs.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+
+[lints]
+workspace = true

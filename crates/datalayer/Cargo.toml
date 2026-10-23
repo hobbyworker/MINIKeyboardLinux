@@ -1,0 +1,22 @@
+[package]
+name = "datalayer"
+description = "The keyboards' commands, finding them and writing to them over USB or hidraw, simulated keyboards"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+domain.workspace = true
+async-channel.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+libc.workspace = true
+rusb.workspace = true
+
+[dev-dependencies]
+futures-executor.workspace = true
+
+[lints]
+workspace = true

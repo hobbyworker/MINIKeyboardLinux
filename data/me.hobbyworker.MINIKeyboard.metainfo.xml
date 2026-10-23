@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>me.hobbyworker.MINIKeyboard</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT AND CC-BY-SA-4.0</project_license>
+
+  <name>MINIKeyboard</name>
+  <summary>Set up small USB macro keyboards</summary>
+  <developer id="me.hobbyworker">
+    <name>hobbyworker</name>
+  </developer>
+
+  <description>
+    <p>
+      Writes key settings to small USB macro keyboards — the ones sold with anything from a single knob to 21 keys,
+      and up to four knobs.
+    </p>
+    <p>
+      For each key and knob action (rotate left, press, rotate right) it sets key presses, a media key or a mouse
+      action on layers 1–3, and the keyboard’s lighting. A keyboard that doesn’t say its shape gets the layout you
+      pick, and the app remembers it.
+    </p>
+    <p>
+      Linux lets an app open a USB device only when a udev rule gives it to the signed-in user, so after installing,
+      add the rule once: the app shows it, with the commands to copy, under How to Allow…, and the project’s help
+      page explains it.
+    </p>
+  </description>
+
+  <launchable type="desktop-id">me.hobbyworker.MINIKeyboard.desktop</launchable>
+  <translation type="gettext">minikeyboard</translation>
+
+  <url type="homepage">https://github.com/hobbyworker/MINIKeyboardLinux</url>
+  <url type="bugtracker">https://github.com/hobbyworker/MINIKeyboardLinux/issues</url>
+  <url type="help">https://github.com/hobbyworker/MINIKeyboardLinux#letting-the-app-open-the-keyboard</url>
+  <url type="vcs-browser">https://github.com/hobbyworker/MINIKeyboardLinux</url>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#d9eee3</color>
+    <color type="primary" scheme_preference="dark">#1d5c40</color>
+  </branding>
+
+  <content_rating type="oars-1.1"/>
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </supports>
+
+  <releases>
+    <release version="0.9.9" date="2026-10-24"/>
+  </releases>
+</component>

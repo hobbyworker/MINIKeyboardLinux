@@ -1,0 +1,41 @@
+# The configurator's layers, as crates whose dependencies point inwards — datalayer → domain ←
+# presentation ← ui — so a layer that reaches outwards does not compile. The `minikeyboard` binary is the
+# composition root: the only crate that sees them all.
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+
+[workspace.package]
+version = "1.0.0"
+edition = "2024"
+rust-version = "1.88"
+license = "MIT"
+publish = false
+
+[workspace.dependencies]
+domain = { path = "crates/domain" }
+datalayer = { path = "crates/datalayer" }
+presentation = { path = "crates/presentation" }
+ui = { path = "crates/ui" }
+async-channel = "2.5"
+futures-executor = "0.3"
+futures = "0.3"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+libc = "0.2"
+rusb = "0.9"
+gtk = { package = "gtk4", version = "0.11", features = ["v4_18"] }
+adw = { package = "libadwaita", version = "0.9", features = ["v1_7"] }
+# libsoup 3 — the new-version notice reads its feed over HTTPS with the GNOME runtime's own HTTP client.
+soup = { package = "soup3", version = "0.9" }
+gettext-rs = { version = "0.8", features = ["gettext-system"] }
+
+[workspace.lints.rust]
+unsafe_code = "deny"
+missing_debug_implementations = "warn"
+
+[workspace.lints.clippy]
+all = { level = "deny", priority = -1 }
+
+[profile.release]
+lto = "thin"

@@ -1,0 +1,919 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: minikeyboard\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+
+#: crates/ui/src/dialogs.rs:63
+msgid "The keyboard reports its keys and knobs: %@"
+msgstr "键盘告知的按键和旋钮：%@"
+
+#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:160 crates/ui/src/header.rs:248
+msgid "Keys: %lld · Knobs: %lld"
+msgstr "按键 %1$lld 个 · 旋钮 %2$lld 个"
+
+#: crates/ui/src/dialogs.rs:65
+msgid "The keyboard doesn’t say how many keys and knobs it has."
+msgstr "此键盘不会告知按键和旋钮的数量。"
+
+#: crates/ui/src/dialogs.rs:68
+msgid "Its real shape isn’t known either. Set how many keys and knobs it has and how many keys are in a row, then rotate it to match how it sits in front of you."
+msgstr "实际形状也无法得知。请设置按键和旋钮的数量以及每行的按键数，再将其旋转到与摆放方向一致。"
+
+#: crates/ui/src/dialogs.rs:72
+msgid "Pick the shape that matches the keyboard, then rotate it to match how it sits in front of you."
+msgstr "请选择与键盘相同的形状，再将其旋转到与摆放方向一致。"
+
+#: crates/ui/src/dialogs.rs:170 crates/ui/src/window.rs:71 crates/ui/src/window.rs:279
+msgid "Rotate"
+msgstr "旋转"
+
+#: crates/ui/src/dialogs.rs:173
+msgid "Cancel"
+msgstr "取消"
+
+#: crates/ui/src/dialogs.rs:174
+msgid "Done"
+msgstr "完成"
+
+#: crates/ui/src/dialogs.rs:189
+msgid "Choose the Keyboard’s Shape"
+msgstr "选择键盘形状"
+
+#: crates/ui/src/dialogs.rs:243 crates/ui/src/names.rs:192
+msgid "Keys"
+msgstr "按键"
+
+#: crates/ui/src/dialogs.rs:244
+msgid "Keys per row"
+msgstr "每行按键数"
+
+#: crates/ui/src/dialogs.rs:247
+msgid "Knobs"
+msgstr "旋钮"
+
+#: crates/ui/src/dialogs.rs:348
+msgid "Linux lets an app open a USB keyboard only when a udev rule gives the signed-in user its device. Run these commands in a terminal once — they write %@ — then plug the keyboard in again."
+msgstr "在 Linux 上，只有当 udev 规则把设备交给已登录的用户时，应用才能打开 USB 键盘。请在终端中运行一次以下命令（它会写入 %@），然后重新插入键盘。"
+
+#: crates/ui/src/dialogs.rs:371 crates/ui/src/log_window.rs:42
+msgid "Copy"
+msgstr "拷贝"
+
+#: crates/ui/src/dialogs.rs:379
+msgid "Allow Access to the Keyboard"
+msgstr "允许访问键盘"
+
+#: crates/ui/src/header.rs:46 crates/ui/src/header.rs:50 crates/ui/src/header.rs:207
+msgid "Keyboard Information"
+msgstr "键盘信息"
+
+#: crates/ui/src/header.rs:51 crates/ui/src/header.rs:52
+msgid "Retry"
+msgstr "重试"
+
+#: crates/ui/src/header.rs:53
+msgid "How to Allow…"
+msgstr "如何允许…"
+
+#: crates/ui/src/header.rs:69
+msgid "Main Menu"
+msgstr "主菜单"
+
+#: crates/ui/src/header.rs:73
+msgid "Save"
+msgstr "保存"
+
+#: crates/ui/src/header.rs:73 crates/ui/src/window.rs:273
+msgid "Save to Keyboard"
+msgstr "保存到键盘"
+
+#: crates/ui/src/header.rs:76
+msgid "Read"
+msgstr "读取"
+
+#: crates/ui/src/header.rs:77 crates/ui/src/window.rs:273
+msgid "Read from Keyboard"
+msgstr "从键盘读取"
+
+#: crates/ui/src/header.rs:145
+msgid "Not Connected"
+msgstr "未连接"
+
+#: crates/ui/src/header.rs:145
+msgid "Connect the keyboard via USB."
+msgstr "请通过 USB 连接键盘。"
+
+#: crates/ui/src/header.rs:147 crates/ui/src/names.rs:275
+msgid "Access to the keyboard is needed"
+msgstr "需要访问键盘的权限"
+
+#: crates/ui/src/header.rs:148
+msgid "Add the udev rule for this keyboard, then plug it in again."
+msgstr "请为此键盘添加 udev 规则，然后重新插入。"
+
+#: crates/ui/src/header.rs:150
+msgid "The keyboard couldn’t be opened"
+msgstr "无法打开键盘"
+
+#: crates/ui/src/header.rs:153
+msgid "Asking the keyboard what it is…"
+msgstr "正在询问键盘类型…"
+
+#: crates/ui/src/header.rs:154
+msgid "Reading…"
+msgstr "正在读取…"
+
+#: crates/ui/src/header.rs:155
+msgid "Saving…"
+msgstr "正在保存…"
+
+#: crates/ui/src/header.rs:156
+msgid "Simulated Keyboard"
+msgstr "模拟键盘"
+
+#: crates/ui/src/header.rs:157
+msgid "Connected"
+msgstr "已连接"
+
+#: crates/ui/src/header.rs:160 crates/ui/src/names.rs:295 crates/ui/src/names.rs:297
+msgid "%@ · %@"
+msgstr "%@ · %@"
+
+#: crates/ui/src/header.rs:183 crates/ui/src/inspector.rs:112
+msgid "Layer %lld"
+msgstr "第 %lld 层"
+
+#: crates/ui/src/header.rs:227
+msgid "Not provided by the keyboard"
+msgstr "键盘未提供"
+
+#: crates/ui/src/header.rs:236
+msgid "Name"
+msgstr "名称"
+
+#: crates/ui/src/header.rs:237
+msgid "Manufacturer"
+msgstr "生产企业"
+
+#: crates/ui/src/header.rs:238
+msgid "Serial Number"
+msgstr "序列号"
+
+#: crates/ui/src/header.rs:240
+msgid "Chip"
+msgstr "芯片"
+
+#: crates/ui/src/header.rs:242
+msgid "Firmware"
+msgstr "固件"
+
+#: crates/ui/src/header.rs:262
+msgid "Power"
+msgstr "电源"
+
+#: crates/ui/src/header.rs:271
+msgid "Interfaces"
+msgstr "接口"
+
+#: crates/ui/src/header.rs:273 crates/ui/src/names.rs:146
+msgid "Configuration Channel"
+msgstr "配置通道"
+
+#: crates/ui/src/header.rs:274
+msgid "Commands"
+msgstr "命令集"
+
+#: crates/ui/src/inspector.rs:37 crates/ui/src/names.rs:210 crates/ui/src/pages.rs:694
+msgid "Select a key or knob."
+msgstr "请选择按键或旋钮。"
+
+#: crates/ui/src/inspector.rs:44 crates/ui/src/log_window.rs:43
+msgid "Clear"
+msgstr "清除"
+
+#: crates/ui/src/inspector.rs:45 crates/ui/src/window.rs:277
+msgid "Clear Layer"
+msgstr "清除层"
+
+#: crates/ui/src/inspector.rs:84
+msgid "Next key with %@"
+msgstr "下一个键加 %@"
+
+#: crates/ui/src/inspector.rs:93
+msgid "Unsaved changes"
+msgstr "未保存的更改"
+
+#: crates/ui/src/inspector.rs:98
+msgid "No unsaved changes"
+msgstr "没有未保存的更改"
+
+#: crates/ui/src/inspector.rs:120
+msgid "Not known — this keyboard doesn’t tell what its keys do. Whatever you set here is written when you save."
+msgstr "未知 — 此键盘不会告知按键的功能。在此设置的内容会在保存时写入。"
+
+#: crates/ui/src/inspector.rs:128
+msgid "Nothing"
+msgstr "无"
+
+#: crates/ui/src/inspector.rs:156
+msgid "Waits %lld ms"
+msgstr "等待 %lld 毫秒"
+
+#: crates/ui/src/inspector.rs:158
+msgid "%lld of %lld presses"
+msgstr "已用 %1$lld 个输入，最多 %2$lld 个"
+
+#: crates/ui/src/inspector.rs:161
+msgid "Remove Last Press"
+msgstr "删除最后一个输入"
+
+#: crates/ui/src/log_window.rs:41 crates/ui/src/log_window.rs:259
+msgid "Expand All"
+msgstr "全部展开"
+
+#: crates/ui/src/log_window.rs:61
+msgid "No packets yet."
+msgstr "暂无数据包。"
+
+#: crates/ui/src/log_window.rs:76 crates/ui/src/window.rs:280
+msgid "Device Log"
+msgstr "设备日志"
+
+#: crates/ui/src/log_window.rs:151
+msgid "Packets: %lld"
+msgstr "数据包：%lld"
+
+#: crates/ui/src/log_window.rs:175 crates/ui/src/log_window.rs:268
+msgid "Expand"
+msgstr "展开"
+
+#: crates/ui/src/log_window.rs:197 crates/ui/src/names.rs:314
+msgid "%lld bytes"
+msgstr "%lld 字节"
+
+#: crates/ui/src/log_window.rs:259
+msgid "Collapse All"
+msgstr "全部折叠"
+
+#: crates/ui/src/log_window.rs:268
+msgid "Collapse"
+msgstr "折叠"
+
+#: crates/ui/src/names.rs:12
+msgid "Key %lld"
+msgstr "按键 %lld"
+
+#: crates/ui/src/names.rs:13
+msgid "Knob %lld · Rotate left"
+msgstr "旋钮 %lld · 向左旋转"
+
+#: crates/ui/src/names.rs:14
+msgid "Knob %lld · Press"
+msgstr "旋钮 %lld · 按下"
+
+#: crates/ui/src/names.rs:15
+msgid "Knob %lld · Rotate right"
+msgstr "旋钮 %lld · 向右旋转"
+
+#: crates/ui/src/names.rs:16
+msgid "Knob %lld · Press and rotate left"
+msgstr "旋钮 %lld · 按下并向左旋转"
+
+#: crates/ui/src/names.rs:18
+msgid "Knob %lld · Press and rotate right"
+msgstr "旋钮 %lld · 按下并向右旋转"
+
+#: crates/ui/src/names.rs:25
+msgid "Play/Pause"
+msgstr "播放/暂停"
+
+#: crates/ui/src/names.rs:26
+msgid "Stop"
+msgstr "停止"
+
+#: crates/ui/src/names.rs:27
+msgid "Prev Song"
+msgstr "上一曲"
+
+#: crates/ui/src/names.rs:28
+msgid "Next Song"
+msgstr "下一曲"
+
+#: crates/ui/src/names.rs:29
+msgid "Mute"
+msgstr "静音"
+
+#: crates/ui/src/names.rs:30
+msgid "Volume+"
+msgstr "音量 +"
+
+#: crates/ui/src/names.rs:31
+msgid "Volume-"
+msgstr "音量 -"
+
+#: crates/ui/src/names.rs:32
+msgid "Brightness+"
+msgstr "亮度 +"
+
+#: crates/ui/src/names.rs:33
+msgid "Brightness-"
+msgstr "亮度 -"
+
+#: crates/ui/src/names.rs:34
+msgid "Bass+"
+msgstr "低音 +"
+
+#: crates/ui/src/names.rs:35
+msgid "Bass-"
+msgstr "低音 -"
+
+#: crates/ui/src/names.rs:36
+msgid "Treble+"
+msgstr "高音 +"
+
+#: crates/ui/src/names.rs:37
+msgid "Treble-"
+msgstr "高音 -"
+
+#: crates/ui/src/names.rs:38
+msgid "Media Player"
+msgstr "媒体播放器"
+
+#: crates/ui/src/names.rs:39
+msgid "Email"
+msgstr "电子邮件"
+
+#: crates/ui/src/names.rs:40
+msgid "Calculator"
+msgstr "计算器"
+
+#: crates/ui/src/names.rs:41
+msgid "My Computer"
+msgstr "我的电脑"
+
+#: crates/ui/src/names.rs:42
+msgid "Web Home"
+msgstr "网页：主页"
+
+#: crates/ui/src/names.rs:43
+msgid "Web Back"
+msgstr "网页：后退"
+
+#: crates/ui/src/names.rs:44
+msgid "Web Forward"
+msgstr "网页：前进"
+
+#: crates/ui/src/names.rs:45
+msgid "Web Refresh"
+msgstr "网页：刷新"
+
+#: crates/ui/src/names.rs:76
+msgid "Mouse Left"
+msgstr "鼠标左键"
+
+#: crates/ui/src/names.rs:77
+msgid "Mouse Centre"
+msgstr "鼠标中键"
+
+#: crates/ui/src/names.rs:78
+msgid "Mouse Right"
+msgstr "鼠标右键"
+
+#: crates/ui/src/names.rs:79
+msgid "Mouse wheel Up"
+msgstr "鼠标滚轮向上"
+
+#: crates/ui/src/names.rs:80
+msgid "Mouse wheel Down"
+msgstr "鼠标滚轮向下"
+
+#: crates/ui/src/names.rs:81
+msgid "Ctrl + Mouse wheel Up"
+msgstr "Ctrl + 鼠标滚轮向上"
+
+#: crates/ui/src/names.rs:82
+msgid "Ctrl + Mouse wheel Down"
+msgstr "Ctrl + 鼠标滚轮向下"
+
+#: crates/ui/src/names.rs:83
+msgid "Shift + Mouse wheel Up"
+msgstr "Shift + 鼠标滚轮向上"
+
+#: crates/ui/src/names.rs:84
+msgid "Shift + Mouse wheel Down"
+msgstr "Shift + 鼠标滚轮向下"
+
+#: crates/ui/src/names.rs:85
+msgid "Alt + Mouse wheel Up"
+msgstr "Alt + 鼠标滚轮向上"
+
+#: crates/ui/src/names.rs:86
+msgid "Alt + Mouse wheel Down"
+msgstr "Alt + 鼠标滚轮向下"
+
+#: crates/ui/src/names.rs:105
+msgid "Control"
+msgstr "Control"
+
+#: crates/ui/src/names.rs:106
+msgid "Alt"
+msgstr "Alt"
+
+#: crates/ui/src/names.rs:107
+msgid "Shift"
+msgstr "Shift"
+
+#: crates/ui/src/names.rs:108
+msgid "Super"
+msgstr "Super"
+
+#: crates/ui/src/names.rs:109
+msgid "Right Control"
+msgstr "右Control键"
+
+#: crates/ui/src/names.rs:110
+msgid "Right Alt"
+msgstr "右Alt键"
+
+#: crates/ui/src/names.rs:111
+msgid "Right Shift"
+msgstr "右Shift键"
+
+#: crates/ui/src/names.rs:112
+msgid "Right Super"
+msgstr "右Super键"
+
+#: crates/ui/src/names.rs:118
+msgid "Red"
+msgstr "红色"
+
+#: crates/ui/src/names.rs:119
+msgid "Orange"
+msgstr "橙色"
+
+#: crates/ui/src/names.rs:120
+msgid "Yellow"
+msgstr "黄色"
+
+#: crates/ui/src/names.rs:121
+msgid "Green"
+msgstr "绿色"
+
+#: crates/ui/src/names.rs:122
+msgid "Cyan"
+msgstr "青色"
+
+#: crates/ui/src/names.rs:123
+msgid "Blue"
+msgstr "蓝色"
+
+#: crates/ui/src/names.rs:124
+msgid "Purple"
+msgstr "紫色"
+
+#: crates/ui/src/names.rs:143
+msgid "Keyboard"
+msgstr "键盘"
+
+#: crates/ui/src/names.rs:144 crates/ui/src/names.rs:194 crates/ui/src/pages.rs:77
+msgid "Mouse"
+msgstr "鼠标"
+
+#: crates/ui/src/names.rs:145 crates/ui/src/names.rs:193 crates/ui/src/pages.rs:68
+msgid "Multimedia"
+msgstr "多媒体"
+
+#: crates/ui/src/names.rs:147
+msgid "Other"
+msgstr "其他"
+
+#: crates/ui/src/names.rs:155
+msgid "Off"
+msgstr "关闭"
+
+#: crates/ui/src/names.rs:156
+msgid "Blink Last Key"
+msgstr "最后按键闪烁"
+
+#: crates/ui/src/names.rs:157
+msgid "Running Light"
+msgstr "流水灯"
+
+#: crates/ui/src/names.rs:158
+msgid "Mode %lld"
+msgstr "模式 %lld"
+
+#: crates/ui/src/names.rs:164
+msgid "The last key pressed keeps blinking, in a new color with each press."
+msgstr "最后按下的键持续闪烁，每按一次换一种颜色。"
+
+#: crates/ui/src/names.rs:165
+msgid "A light runs across the keys in order, in a new color each round."
+msgstr "灯光依次流过各键，每转一圈换一种颜色。"
+
+#: crates/ui/src/names.rs:180
+msgid "Letters"
+msgstr "字母"
+
+#: crates/ui/src/names.rs:181
+msgid "Numbers"
+msgstr "数字"
+
+#: crates/ui/src/names.rs:182
+msgid "Editing"
+msgstr "编辑"
+
+#: crates/ui/src/names.rs:183
+msgid "Symbols"
+msgstr "符号"
+
+#: crates/ui/src/names.rs:184
+msgid "Function Keys"
+msgstr "功能键"
+
+#: crates/ui/src/names.rs:185
+msgid "Navigation"
+msgstr "导航"
+
+#: crates/ui/src/names.rs:186
+msgid "Numpad"
+msgstr "小键盘"
+
+#: crates/ui/src/names.rs:195 crates/ui/src/pages.rs:572
+msgid "LED"
+msgstr "LED"
+
+#: crates/ui/src/names.rs:196 crates/ui/src/pages.rs:685 crates/ui/src/pages.rs:697
+msgid "Delay"
+msgstr "延迟"
+
+#: crates/ui/src/names.rs:202
+msgid "Saved to the keyboard."
+msgstr "已保存到键盘。"
+
+#: crates/ui/src/names.rs:203
+msgid "Read from the keyboard."
+msgstr "已从键盘读取。"
+
+#: crates/ui/src/names.rs:204
+msgid "Nothing to save — no key has changed."
+msgstr "没有需要保存的内容 — 没有按键被更改。"
+
+#: crates/ui/src/names.rs:205
+msgid "The keyboard couldn’t be asked what it is."
+msgstr "无法询问键盘类型。"
+
+#: crates/ui/src/names.rs:206
+msgid "Reading from the keyboard failed."
+msgstr "从键盘读取失败。"
+
+#: crates/ui/src/names.rs:207 crates/ui/src/names.rs:277
+msgid "Writing to the keyboard failed (%@)."
+msgstr "写入键盘失败（%@）。"
+
+#: crates/ui/src/names.rs:208
+msgid "The keyboard is no longer connected."
+msgstr "键盘已断开连接。"
+
+#: crates/ui/src/names.rs:209
+msgid "A key holds up to %lld presses."
+msgstr "每个按键最多可添加 %lld 个输入。"
+
+#: crates/ui/src/names.rs:212
+msgid "Modifiers alone make the key a modifier key, so they can’t go with other presses."
+msgstr "仅修饰键会使该按键成为修饰键，因此不能与其他输入一起添加。"
+
+#: crates/ui/src/names.rs:214
+msgid "Only keys 1–%lld have a color. Select one of them."
+msgstr "只有按键 1–%lld 有颜色。请选择其中一个。"
+
+#: crates/ui/src/names.rs:215
+msgid "This keyboard can’t do that."
+msgstr "此键盘不支持该功能。"
+
+#: crates/ui/src/names.rs:225
+msgid "Media Key %@"
+msgstr "媒体键 %@"
+
+#: crates/ui/src/names.rs:234
+msgid "Enter"
+msgstr "Enter键"
+
+#: crates/ui/src/names.rs:235
+msgid "Escape"
+msgstr "Escape"
+
+#: crates/ui/src/names.rs:236
+msgid "Backspace"
+msgstr "退格键"
+
+#: crates/ui/src/names.rs:237
+msgid "Tab"
+msgstr "Tab键"
+
+#: crates/ui/src/names.rs:238
+msgid "Space"
+msgstr "空格键"
+
+#: crates/ui/src/names.rs:239
+msgid "Caps Lock"
+msgstr "大写锁定键"
+
+#: crates/ui/src/names.rs:240
+msgid "Menu Key"
+msgstr "菜单键"
+
+#: crates/ui/src/names.rs:241
+msgid "Print Screen"
+msgstr "打印屏幕"
+
+#: crates/ui/src/names.rs:242
+msgid "Scroll Lock"
+msgstr "Scroll Lock"
+
+#: crates/ui/src/names.rs:243
+msgid "Insert"
+msgstr "Insert键"
+
+#: crates/ui/src/names.rs:244
+msgid "Home"
+msgstr "Home键"
+
+#: crates/ui/src/names.rs:245
+msgid "Page Up"
+msgstr "Page Up键"
+
+#: crates/ui/src/names.rs:246
+msgid "Delete"
+msgstr "Delete键"
+
+#: crates/ui/src/names.rs:247
+msgid "End"
+msgstr "End键"
+
+#: crates/ui/src/names.rs:248
+msgid "Page Down"
+msgstr "Page Down键"
+
+#: crates/ui/src/names.rs:249
+msgid "Right Arrow"
+msgstr "右箭头"
+
+#: crates/ui/src/names.rs:250
+msgid "Left Arrow"
+msgstr "左箭头"
+
+#: crates/ui/src/names.rs:251
+msgid "Down Arrow"
+msgstr "下箭头"
+
+#: crates/ui/src/names.rs:252
+msgid "Up Arrow"
+msgstr "上箭头"
+
+#: crates/ui/src/names.rs:253
+msgid "Num Lock"
+msgstr "数字锁定键"
+
+#: crates/ui/src/names.rs:254
+msgid "Keypad Enter"
+msgstr "数字键盘 Enter键"
+
+#: crates/ui/src/names.rs:264
+msgid "Keypad %@"
+msgstr "数字键盘 %@"
+
+#: crates/ui/src/names.rs:266
+msgid "Non-US Key %@ %@"
+msgstr "非美式键 %1$@ %2$@"
+
+#: crates/ui/src/names.rs:273
+msgid "Looking for the keyboard"
+msgstr "正在查找键盘"
+
+#: crates/ui/src/names.rs:274
+msgid "Connected to %@, interface %lld"
+msgstr "已连接到 %1$@，接口 %2$lld"
+
+#: crates/ui/src/names.rs:276
+msgid "The keyboard couldn’t be opened (%@)."
+msgstr "无法打开键盘（%@）。"
+
+#: crates/ui/src/names.rs:278
+msgid "Simulated keyboard: %@"
+msgstr "模拟键盘：%@"
+
+#: crates/ui/src/names.rs:293 crates/ui/src/names.rs:313 crates/ui/src/names.rs:321
+msgid "Report ID %lld"
+msgstr "报告 ID %lld"
+
+#: crates/ui/src/names.rs:295
+msgid "Keys: %lld · Knobs: %lld · Type %lld"
+msgstr "按键 %1$lld 个 · 旋钮 %2$lld 个 · 类型 %3$lld"
+
+#: crates/ui/src/names.rs:306 crates/ui/src/window.rs:390
+msgid "Simulator"
+msgstr "模拟器"
+
+#: crates/ui/src/names.rs:308
+msgid "Interface %lld · %@ · %@ · %@"
+msgstr "接口 %1$lld · %2$@ · %3$@ · %4$@"
+
+#: crates/ui/src/names.rs:321
+msgid "8890 Packets · %@"
+msgstr "8890 数据包 · %@"
+
+#: crates/ui/src/names.rs:322
+msgid "884x · Standard Firmware (Type 10)"
+msgstr "884x · 标准固件（类型 10）"
+
+#: crates/ui/src/names.rs:323
+msgid "884x · Legacy Firmware"
+msgstr "884x · 旧版固件"
+
+#: crates/ui/src/names.rs:324
+msgid "884x · Doesn’t Answer Identification"
+msgstr "884x · 不回应类型询问"
+
+#: crates/ui/src/pages.rs:69
+msgid "A media key replaces what the key did."
+msgstr "媒体键会替换该按键原来的操作。"
+
+#: crates/ui/src/pages.rs:78
+msgid "A mouse action replaces what the key did."
+msgstr "鼠标操作会替换该按键原来的操作。"
+
+#: crates/ui/src/pages.rs:187
+msgid "Key Layout"
+msgstr "按键布局"
+
+#: crates/ui/src/pages.rs:188
+msgid "Modifiers Only"
+msgstr "仅修饰键"
+
+#: crates/ui/src/pages.rs:189
+msgid "Makes the key hold these modifiers, as a modifier key does."
+msgstr "按住该按键时会按下这些修饰键，就像修饰键一样。"
+
+#: crates/ui/src/pages.rs:262
+msgid "Modifiers apply to the next key."
+msgstr "修饰键会与下一个按下的键组合。"
+
+#: crates/ui/src/pages.rs:264
+msgid "Modifiers apply to the next key. A key holds up to %lld presses, each modifier counting as one."
+msgstr "修饰键会与下一个按下的键组合。每个按键的输入和修饰键合计最多可添加 %lld 个。"
+
+#: crates/ui/src/pages.rs:269
+msgid "Modifiers apply to the next key. A key holds up to %lld presses."
+msgstr "修饰键会与下一个按下的键组合。每个按键最多可添加 %lld 个输入。"
+
+#: crates/ui/src/pages.rs:333
+msgid "This keyboard doesn’t take this key."
+msgstr "此键盘无法设置该按键。"
+
+#: crates/ui/src/pages.rs:354
+msgid "More Keys"
+msgstr "更多按键"
+
+#: crates/ui/src/pages.rs:370
+msgid "Modifiers"
+msgstr "修饰键"
+
+#: crates/ui/src/pages.rs:387
+msgid "Shift Symbols"
+msgstr "Shift 符号"
+
+#: crates/ui/src/pages.rs:504 crates/ui/src/pages.rs:540
+msgid "Color"
+msgstr "颜色"
+
+#: crates/ui/src/pages.rs:508 crates/ui/src/pages.rs:572
+msgid "Lighting is set per layer; no key selection is needed."
+msgstr "灯光按层分别设置，无需选择按键。"
+
+#: crates/ui/src/pages.rs:539
+msgid "Select one of keys 1–%lld on the keyboard, then pick its color."
+msgstr "请在键盘上选择按键 1–%lld 之一，然后选择颜色。"
+
+#: crates/ui/src/pages.rs:585
+msgid "Effect"
+msgstr "效果"
+
+#: crates/ui/src/pages.rs:668
+msgid "The selected key has no presses."
+msgstr "所选按键没有输入。"
+
+#: crates/ui/src/pages.rs:672
+msgid "Press %lld"
+msgstr "输入 %lld"
+
+#: crates/ui/src/pages.rs:684
+msgid "Each press can wait before it is sent. Give the key its presses on the Keys page first."
+msgstr "每个输入在发送前都可以等待。请先在“按键”页给按键添加输入。"
+
+#: crates/ui/src/pages.rs:698
+msgid "One wait for the whole key. Its presses stay."
+msgstr "为整个按键设置一个等待时间。按键的输入保持不变。"
+
+#: crates/ui/src/preferences.rs:28
+msgid "Language & Appearance"
+msgstr "语言与外观"
+
+#: crates/ui/src/preferences.rs:29
+msgid "The base language is English. You can follow the system language or choose one yourself."
+msgstr "基本语言为英语。可以跟随系统语言，也可以自行选择。"
+
+#: crates/ui/src/preferences.rs:35 crates/ui/src/preferences.rs:47
+msgid "Follow System"
+msgstr "跟随系统"
+
+#: crates/ui/src/preferences.rs:37
+msgid "Language"
+msgstr "语言"
+
+#: crates/ui/src/preferences.rs:47
+msgid "Light"
+msgstr "浅色"
+
+#: crates/ui/src/preferences.rs:47
+msgid "Dark"
+msgstr "深色"
+
+#: crates/ui/src/preferences.rs:49
+msgid "Appearance"
+msgstr "外观"
+
+#: crates/ui/src/preferences.rs:60
+msgid "UI"
+msgstr "UI"
+
+#: crates/ui/src/preferences.rs:62 crates/ui/src/window.rs:284
+msgid "Preferences"
+msgstr "首选项"
+
+#: crates/ui/src/preferences.rs:66
+msgid "Check for updates automatically"
+msgstr "自动检查更新"
+
+#: crates/ui/src/preferences.rs:73
+msgid "General"
+msgstr "通用"
+
+#: crates/ui/src/preferences.rs:108
+msgid "Language Changed"
+msgstr "语言已更改"
+
+#: crates/ui/src/preferences.rs:109
+msgid "%@ needs to relaunch to apply the change."
+msgstr "要应用更改，需要重启 %@。"
+
+#: crates/ui/src/preferences.rs:111
+msgid "Later"
+msgstr "稍后"
+
+#: crates/ui/src/preferences.rs:111
+msgid "Relaunch Now"
+msgstr "立即重启"
+
+#: crates/ui/src/window.rs:63
+msgid "Keys appear here once the keyboard is connected."
+msgstr "连接键盘后，按键会显示在这里。"
+
+#: crates/ui/src/window.rs:76 crates/ui/src/window.rs:279
+msgid "Shape…"
+msgstr "形状…"
+
+#: crates/ui/src/window.rs:119
+msgid "Download"
+msgstr "下载"
+
+#: crates/ui/src/window.rs:277
+msgid "Clear Key"
+msgstr "清除按键"
+
+#: crates/ui/src/window.rs:286
+msgid "Check for Updates…"
+msgstr "检查更新…"
+
+#: crates/ui/src/window.rs:288
+msgid "About %@"
+msgstr "关于%@"
+
+#: crates/ui/src/window.rs:339
+msgid "%@ is up to date."
+msgstr "%@ 已是最新版本。"
+
+#: crates/ui/src/window.rs:340
+msgid "Couldn’t check for updates."
+msgstr "无法检查更新。"
+
+#: crates/ui/src/window.rs:347
+msgid "%1$@ %2$@ is available."
+msgstr "%1$@ %2$@ 已发布。"
+
+#: crates/ui/src/window.rs:375
+msgid "Keyboard on USB"
+msgstr "USB 上的键盘"

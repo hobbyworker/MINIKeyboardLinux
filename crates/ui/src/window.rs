@@ -1,0 +1,495 @@
+//! The main window: the keyboard on top, what to give the selected key below.
+
+use std::cell::{Cell, RefCell};
+use std::rc::Rc;
+
+use adw::prelude::*;
+use gtk::{gio, glib};
+use presentation::{DeviceLogModel, EditorModel, SimulatorChoice, SimulatorGroup};
+
+use crate::AppInfo;
+use crate::canvas::KeyboardCanvas;
+use crate::dialogs::{LayoutDialog, permission_dialog};
+use crate::header::Header;
+use crate::i18n::{t, tf};
+use crate::inspector::Inspector;
+use crate::log_window::LogWindow;
+use crate::names::{commands_text, notice_message, simulator_kind_title};
+use crate::pages::ActionPanel;
+use crate::preferences::{about_dialog, preferences_dialog};
+use crate::settings::Settings;
+use crate::updates::{self, Release};
+
+pub struct MainWindow {
+    pub window: adw::ApplicationWindow,
+    pub(crate) editor: Rc<EditorModel>,
+    toasts: adw::ToastOverlay,
+    /// "A newer version is out", with the way to its download page.
+    banner: adw::Banner,
+    release_link: Rc<RefCell<Option<String>>>,
+    app_name: String,
+    pub(crate) header: Header,
+    canvas: KeyboardCanvas,
+    canvas_stack: gtk::Stack,
+    layout_buttons: gtk::Box,
+    panel: ActionPanel,
+    inspector: Inspector,
+    layout_dialog: Rc<RefCell<Option<adw::Dialog>>>,
+    shown_notice: Cell<u64>,
+    toast: RefCell<Option<adw::Toast>>,
+    actions: RefCell<Vec<(&'static str, gio::SimpleAction)>>,
+    simulator: RefCell<Option<gio::SimpleAction>>,
+}
+
+impl MainWindow {
+    pub fn new(
+        app: &adw::Application,
+        info: &AppInfo,
+        settings: Rc<Settings>,
+        editor: Rc<EditorModel>,
+        log: Rc<DeviceLogModel>,
+    ) -> Rc<Self> {
+        let header = Header::new(editor.clone());
+
+        let canvas = KeyboardCanvas::default();
+        canvas.set_hexpand(true);
+        canvas.set_vexpand(true);
+        {
+            let editor = editor.clone();
+            canvas.connect_select(move |control| editor.select(control));
+        }
+        let empty = adw::StatusPage::builder()
+            .icon_name("input-keyboard-symbolic")
+            .description(t("Keys appear here once the keyboard is connected."))
+            .build();
+        empty.add_css_class("compact");
+        let canvas_stack = gtk::Stack::new();
+        canvas_stack.add_named(&canvas, Some("canvas"));
+        canvas_stack.add_named(&empty, Some("empty"));
+        let rotate = gtk::Button::builder()
+            .icon_name("object-rotate-right-symbolic")
+            .tooltip_text(t("Rotate"))
+            .action_name("win.rotate")
+            .build();
+        rotate.add_css_class("osd");
+        rotate.add_css_class("circular");
+        let shape = gtk::Button::builder().label(t("Shape…")).action_name("win.shape").build();
+        shape.add_css_class("osd");
+        let layout_buttons = gtk::Box::builder()
+            .spacing(6)
+            .halign(gtk::Align::End)
+            .valign(gtk::Align::End)
+            .margin_end(10)
+            .margin_bottom(10)
+            .build();
+        layout_buttons.append(&rotate);
+        layout_buttons.append(&shape);
+        let overlay = gtk::Overlay::builder()
+            .child(&canvas_stack)
+            .margin_start(24)
+            .margin_end(24)
+            .margin_top(10)
+            .margin_bottom(10)
+            .build();
+        overlay.add_overlay(&layout_buttons);
+        let keyboard_area = gtk::Box::builder().height_request(230).build();
+        keyboard_area.add_css_class("canvas-area");
+        overlay.set_hexpand(true);
+        keyboard_area.append(&overlay);
+
+        let panel = ActionPanel::new(editor.clone(), settings.clone());
+        panel.widget().set_hexpand(true);
+        let inspector = Inspector::new(editor.clone());
+        let bottom = gtk::Box::new(gtk::Orientation::Horizontal, 0);
+        bottom.append(panel.widget());
+        bottom.append(&gtk::Separator::new(gtk::Orientation::Vertical));
+        bottom.append(inspector.widget());
+
+        let paned = gtk::Paned::builder()
+            .orientation(gtk::Orientation::Vertical)
+            .start_child(&keyboard_area)
+            .end_child(&bottom)
+            .shrink_start_child(false)
+            .shrink_end_child(false)
+            .resize_start_child(true)
+            .resize_end_child(false)
+            .wide_handle(true)
+            .position(330)
+            .build();
+        let banner = adw::Banner::builder().button_label(t("Download")).build();
+        let toolbar = adw::ToolbarView::new();
+        toolbar.add_top_bar(&header.bar);
+        toolbar.add_top_bar(&banner);
+        toolbar.set_content(Some(&paned));
+        let toasts = adw::ToastOverlay::new();
+        toasts.set_child(Some(&toolbar));
+        let window = adw::ApplicationWindow::builder()
+            .application(app)
+            .title(&info.name)
+            .default_width(1100)
+            .default_height(800)
+            .width_request(900)
+            .height_request(640)
+            .content(&toasts)
+            .build();
+
+        let main = Rc::new(Self {
+            window,
+            editor: editor.clone(),
+            toasts,
+            banner,
+            release_link: Rc::default(),
+            app_name: info.name.clone(),
+            header,
+            canvas,
+            canvas_stack,
+            layout_buttons,
+            panel,
+            inspector,
+            layout_dialog: Rc::default(),
+            shown_notice: Cell::new(0),
+            toast: RefCell::default(),
+            actions: RefCell::default(),
+            simulator: RefCell::default(),
+        });
+        main.install_actions(app, info, settings.clone(), log);
+        main.watch_for_updates(info, settings);
+        {
+            let (window, link) = (main.window.clone(), main.release_link.clone());
+            main.banner.connect_button_clicked(move |_| {
+                if let Some(link) = link.borrow().as_deref() {
+                    gtk::UriLauncher::new(link).launch(Some(&window), gio::Cancellable::NONE, |_| {});
+                }
+            });
+        }
+        {
+            let weak = Rc::downgrade(&main);
+            editor.subscribe(move || {
+                if let Some(main) = weak.upgrade() {
+                    main.refresh();
+                }
+            });
+        }
+        main.refresh();
+        main
+    }
+
+    fn install_actions(
+        self: &Rc<Self>,
+        app: &adw::Application,
+        info: &AppInfo,
+        settings: Rc<Settings>,
+        log: Rc<DeviceLogModel>,
+    ) {
+        let editor = &self.editor;
+        let mut actions = vec![];
+        let mut add = |name: &'static str, handler: Box<dyn Fn()>| {
+            let action = gio::SimpleAction::new(name, None);
+            action.connect_activate(move |_, _| handler());
+            self.window.add_action(&action);
+            actions.push((name, action));
+        };
+        {
+            let editor = editor.clone();
+            add(
+                "read",
+                Box::new(move || {
+                    let editor = editor.clone();
+                    glib::spawn_future_local(async move { editor.read().await });
+                }),
+            );
+        }
+        {
+            let editor = editor.clone();
+            add(
+                "save",
+                Box::new(move || {
+                    let editor = editor.clone();
+                    glib::spawn_future_local(async move { editor.save().await });
+                }),
+            );
+        }
+        let with = |handler: fn(&EditorModel)| {
+            let editor = editor.clone();
+            Box::new(move || handler(&editor)) as Box<dyn Fn()>
+        };
+        add("clear-key", with(EditorModel::clear_selected));
+        add("clear-layer", with(EditorModel::clear_layer));
+        add("shape", with(|editor| editor.set_choosing_layout(true)));
+        add("rotate", with(EditorModel::rotate));
+        {
+            let window = self.window.clone();
+            let log_window: Rc<RefCell<Option<Rc<LogWindow>>>> = Rc::default();
+            add(
+                "device-log",
+                Box::new(move || {
+                    let mut log_window = log_window.borrow_mut();
+                    let shown = log_window.get_or_insert_with(|| {
+                        let created = LogWindow::new(log.clone());
+                        created.window.set_transient_for(None::<&gtk::Window>);
+                        created.window.set_application(window.application().as_ref());
+                        created
+                    });
+                    shown.window.present();
+                }),
+            );
+        }
+        {
+            let (window, settings, info) = (self.window.clone(), settings.clone(), info.clone());
+            add("preferences", Box::new(move || preferences_dialog(&settings, &info, &window).present(Some(&window))));
+        }
+        {
+            let (window, info) = (self.window.clone(), info.clone());
+            add("about", Box::new(move || about_dialog(&info).present(Some(&window))));
+        }
+        if info.update_feed.is_some() {
+            let (main, info) = (Rc::downgrade(self), info.clone());
+            add(
+                "check-updates",
+                Box::new(move || {
+                    if let Some(main) = main.upgrade() {
+                        main.check_for_updates(&info, true);
+                    }
+                }),
+            );
+        }
+        {
+            let window = self.window.clone();
+            add("allow", Box::new(move || permission_dialog().present(Some(&window))));
+        }
+        self.header.allow.set_action_name(Some("win.allow"));
+        *self.actions.borrow_mut() = actions;
+
+        let menu = gio::Menu::new();
+        let section = |items: &[(String, &str)]| {
+            let section = gio::Menu::new();
+            for (label, action) in items {
+                section.append(Some(label), Some(action));
+            }
+            section
+        };
+        menu.append_section(
+            None,
+            &section(&[(t("Read from Keyboard"), "win.read"), (t("Save to Keyboard"), "win.save")]),
+        );
+        menu.append_section(
+            None,
+            &section(&[(t("Clear Key"), "win.clear-key"), (t("Clear Layer"), "win.clear-layer")]),
+        );
+        menu.append_section(None, &section(&[(t("Shape…"), "win.shape"), (t("Rotate"), "win.rotate")]));
+        menu.append_section(None, &section(&[(t("Device Log"), "win.device-log")]));
+        if self.editor.can_select_source() {
+            menu.append_section(None, &self.simulator_menu());
+        }
+        let mut last = vec![(t("Preferences"), "win.preferences")];
+        if info.update_feed.is_some() {
+            last.push((t("Check for Updates…"), "win.check-updates"));
+        }
+        last.push((tf("About %@", &[&info.name]), "win.about"));
+        menu.append_section(None, &section(&last));
+        self.header.menu.set_menu_model(Some(&menu));
+
+        for (action, accels) in [
+            ("win.read", &["<Control>r"][..]),
+            ("win.save", &["<Control>s"]),
+            ("win.clear-key", &["<Control>BackSpace"]),
+            ("win.clear-layer", &["<Control><Shift>BackSpace"]),
+            ("win.rotate", &["<Control>t"]),
+            ("win.device-log", &["<Control><Alt>l"]),
+            ("win.preferences", &["<Control>comma"]),
+            ("window.close", &["<Control>w"]),
+            ("app.quit", &["<Control>q"]),
+        ] {
+            app.set_accels_for_action(action, accels);
+        }
+    }
+
+    /// In a build with a feed: a look at launch, then once a day while the window is open, if the user leaves it on.
+    fn watch_for_updates(self: &Rc<Self>, info: &AppInfo, settings: Rc<Settings>) {
+        if info.update_feed.is_none() {
+            return;
+        }
+        let look = {
+            let (main, info) = (Rc::downgrade(self), info.clone());
+            move || {
+                let Some(main) = main.upgrade() else { return glib::ControlFlow::Break };
+                if settings.choices().check_for_updates {
+                    main.check_for_updates(&info, false);
+                }
+                glib::ControlFlow::Continue
+            }
+        };
+        let first = look.clone();
+        glib::timeout_add_seconds_local_once(3, move || {
+            let _ = first();
+        });
+        glib::timeout_add_seconds_local(24 * 60 * 60, look);
+    }
+
+    /// Reads the feed. Asked from the menu, the user hears how it went either way; on its own, only of a newer version.
+    fn check_for_updates(self: &Rc<Self>, info: &AppInfo, asked: bool) {
+        let Some(feed) = info.update_feed.clone() else { return };
+        let (main, info) = (Rc::downgrade(self), info.clone());
+        glib::spawn_future_local(async move {
+            let agent = format!("{}/{}", info.name, info.version);
+            let newest = updates::fetch(&feed, &agent).await.ok().and_then(|feed| updates::newest(&feed));
+            let Some(main) = main.upgrade() else { return };
+            match newest {
+                Some(release) if updates::is_newer(&release.version, &info.version) => main.show_release(&release),
+                Some(_) if asked => main.toasts.add_toast(adw::Toast::new(&tf("%@ is up to date.", &[&info.name]))),
+                None if asked => main.toasts.add_toast(adw::Toast::new(&t("Couldn’t check for updates."))),
+                _ => {}
+            }
+        });
+    }
+
+    pub(crate) fn show_release(&self, release: &Release) {
+        self.banner.set_title(&tf("%1$@ %2$@ is available.", &[&self.app_name, &release.version]));
+        *self.release_link.borrow_mut() = Some(release.link.clone());
+        self.banner.set_revealed(true);
+    }
+
+    /// Debug builds: the keyboard on USB, or a simulated one of every kind.
+    fn simulator_menu(&self) -> gio::Menu {
+        let action = gio::SimpleAction::new_stateful("simulator", Some(glib::VariantTy::STRING), &"".to_variant());
+        {
+            let editor = self.editor.clone();
+            action.connect_activate(move |action, parameter| {
+                let Some(id) = parameter.and_then(|parameter| parameter.get::<String>()) else { return };
+                editor.select_simulator((!id.is_empty()).then_some(id.as_str()));
+                action.set_state(&id.to_variant());
+            });
+        }
+        self.window.add_action(&action);
+        *self.simulator.borrow_mut() = Some(action);
+
+        let choices = self.editor.simulator_choices();
+        let items = |group: SimulatorGroup| {
+            let menu = gio::Menu::new();
+            for choice in choices.iter().filter(|choice| choice.group == group) {
+                menu.append_item(&simulator_item(choice));
+            }
+            menu
+        };
+        let menu = gio::Menu::new();
+        let usb = gio::MenuItem::new(Some(&t("Keyboard on USB")), None);
+        usb.set_action_and_target_value(Some("win.simulator"), Some(&"".to_variant()));
+        menu.append_item(&usb);
+        let groups = gio::Menu::new();
+        groups.append_submenu(Some("1189:8890"), &items(SimulatorGroup::K8890));
+        groups.append_submenu(
+            Some(&commands_text(presentation::InfoCommands::Standard)),
+            &items(SimulatorGroup::Standard),
+        );
+        groups.append_submenu(Some(&commands_text(presentation::InfoCommands::Legacy)), &items(SimulatorGroup::Legacy));
+        for choice in choices.iter().filter(|choice| choice.group == SimulatorGroup::Unidentified) {
+            groups.append_item(&simulator_item(choice));
+        }
+        menu.append_section(None, &groups);
+        let outer = gio::Menu::new();
+        outer.append_submenu(Some(&t("Simulator")), &menu);
+        outer
+    }
+
+    pub fn refresh(&self) {
+        let editor = &self.editor;
+        self.header.refresh();
+        let drawing = editor.drawing();
+        self.canvas_stack.set_visible_child_name(if drawing.is_some() { "canvas" } else { "empty" });
+        self.canvas.set_drawing(drawing);
+        let ready = editor.is_ready();
+        self.canvas.set_sensitive(ready);
+        self.canvas.set_opacity(if ready { 1.0 } else { 0.45 });
+        self.layout_buttons.set_visible(editor.has_layout());
+        self.panel.refresh();
+        self.inspector.refresh();
+        self.update_actions();
+        self.update_notice();
+        self.update_layout_dialog();
+    }
+
+    fn update_actions(&self) {
+        let editor = &self.editor;
+        let ready = editor.is_ready();
+        for (name, action) in self.actions.borrow().iter() {
+            action.set_enabled(match *name {
+                "read" => editor.can_read(),
+                "save" => ready && editor.has_unsaved_changes(),
+                "clear-key" => ready && editor.selected_control().is_some(),
+                "clear-layer" => ready,
+                "shape" | "rotate" => editor.has_layout(),
+                _ => true,
+            });
+        }
+        if let Some(simulator) = self.simulator.borrow().as_ref() {
+            simulator.set_state(&editor.active_simulator_id().unwrap_or_default().to_variant());
+        }
+    }
+
+    /// A message that comes and goes, as a toast.
+    fn update_notice(&self) {
+        let editor = &self.editor;
+        let serial = editor.notice_serial();
+        match editor.notice() {
+            Some(notice) if serial != self.shown_notice.get() => {
+                self.shown_notice.set(serial);
+                let previous = self.toast.borrow_mut().take();
+                if let Some(previous) = previous {
+                    previous.dismiss();
+                }
+                let toast = adw::Toast::builder()
+                    .title(notice_message(notice))
+                    .use_markup(false)
+                    .timeout(notice.lifetime().as_secs_f64().ceil() as u32)
+                    .build();
+                let editor = editor.clone();
+                toast.connect_dismissed(move |_| editor.expire_notice(serial));
+                self.toasts.add_toast(toast.clone());
+                *self.toast.borrow_mut() = Some(toast);
+            }
+            None => {
+                let shown = self.toast.borrow_mut().take();
+                if let Some(shown) = shown {
+                    shown.dismiss();
+                }
+            }
+            Some(_) => {}
+        }
+    }
+
+    /// The layout dialog is up while the editor says it is.
+    fn update_layout_dialog(&self) {
+        let editor = &self.editor;
+        let open = self.layout_dialog.borrow().is_some();
+        let sheet = editor.layout_sheet();
+        match (editor.is_choosing_layout(), sheet, open) {
+            (true, Some(sheet), false) => {
+                let dialog = LayoutDialog::new(editor, &sheet).dialog;
+                {
+                    let (editor, stored) = (editor.clone(), self.layout_dialog.clone());
+                    dialog.connect_closed(move |_| {
+                        stored.borrow_mut().take();
+                        if editor.is_choosing_layout() {
+                            editor.set_choosing_layout(false);
+                        }
+                    });
+                }
+                *self.layout_dialog.borrow_mut() = Some(dialog.clone());
+                dialog.present(Some(&self.window));
+            }
+            (false, _, true) | (true, None, true) => {
+                let dialog = self.layout_dialog.borrow_mut().take();
+                if let Some(dialog) = dialog {
+                    dialog.force_close();
+                }
+            }
+            _ => {}
+        }
+    }
+}
+
+fn simulator_item(choice: &SimulatorChoice) -> gio::MenuItem {
+    let item = gio::MenuItem::new(Some(&simulator_kind_title(&choice.kind)), None);
+    item.set_action_and_target_value(Some("win.simulator"), Some(&choice.id.to_variant()));
+    item
+}

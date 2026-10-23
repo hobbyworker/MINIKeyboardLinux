@@ -1,0 +1,133 @@
+/* The app's own looks, on top of libadwaita's. Colours come from its named colours, so light and dark follow. */
+
+/* A key cap in the action pages. */
+button.keycap {
+  min-width: 34px;
+  min-height: 34px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background-color: @card_bg_color;
+  box-shadow: inset 0 0 0 1px alpha(currentColor, 0.15), 0 1px 1px alpha(black, 0.1);
+  font-weight: 500;
+}
+
+button.keycap:hover {
+  background-color: alpha(@accent_bg_color, 0.15);
+}
+
+button.keycap.active,
+button.keycap.active:hover {
+  background-color: @accent_bg_color;
+  color: @accent_fg_color;
+  box-shadow: inset 0 0 0 1px @accent_bg_color;
+}
+
+button.keycap:disabled {
+  opacity: 0.45;
+}
+
+/* A cap on the full-size keyboard takes the size it is given. */
+button.keycap.compact {
+  min-width: 0;
+  min-height: 30px;
+  padding: 0;
+  font-size: 0.78em;
+}
+
+button.keycap.tall {
+  min-height: 52px;
+}
+
+.keycap .shifted {
+  font-size: 0.75em;
+  opacity: 0.6;
+}
+
+/* The connected keyboard. Its body and caps are drawn; these buttons lie over them. */
+button.canvas-control {
+  background: none;
+  box-shadow: none;
+  border-radius: 10px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  color: white;
+}
+
+button.canvas-control.knob {
+  border-radius: 999px;
+}
+
+button.canvas-control .key-number {
+  color: #66db66;
+  font-weight: 700;
+}
+
+button.canvas-control.lit .key-number {
+  color: white;
+  text-shadow: 0 0 2px alpha(black, 0.8);
+}
+
+button.canvas-control .caption {
+  text-shadow: 0 0 2px alpha(black, 0.7);
+  font-weight: 500;
+}
+
+.canvas-area {
+  background-color: @view_bg_color;
+}
+
+.panel-section-title {
+  font-weight: 600;
+  opacity: 0.6;
+}
+
+.status-dot {
+  min-width: 10px;
+  min-height: 10px;
+  border-radius: 999px;
+}
+
+.status-dot.connected { background-color: @success_color; }
+.status-dot.identifying { background-color: @warning_color; }
+.status-dot.permission { background-color: @warning_color; }
+.status-dot.disconnected { background-color: @error_color; }
+
+.stroke-chip {
+  padding: 2px 7px;
+  border-radius: 5px;
+  background-color: alpha(currentColor, 0.08);
+  font-weight: 500;
+}
+
+.swatch {
+  min-width: 24px;
+  min-height: 24px;
+  padding: 0;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1px alpha(currentColor, 0.2);
+}
+
+.color-preview {
+  min-width: 60px;
+  min-height: 60px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 1px alpha(currentColor, 0.2);
+}
+
+.preview-box {
+  border-radius: 10px;
+  background-color: alpha(currentColor, 0.05);
+}
+
+.log-line {
+  font-family: monospace;
+  font-size: 0.85em;
+}
+
+.log-output { color: @accent_color; }
+.log-input { color: @success_color; }
+
+.unsaved {
+  color: @warning_color;
+}

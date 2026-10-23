@@ -1,0 +1,18 @@
+[package]
+name = "minikeyboard"
+description = "Writes key settings to small USB macro keyboards — the composition root"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+domain.workspace = true
+datalayer.workspace = true
+presentation.workspace = true
+ui.workspace = true
+gtk.workspace = true
+
+[lints]
+workspace = true

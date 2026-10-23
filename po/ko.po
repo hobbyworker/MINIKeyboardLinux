@@ -1,0 +1,919 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: minikeyboard\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ko\n"
+
+#: crates/ui/src/dialogs.rs:63
+msgid "The keyboard reports its keys and knobs: %@"
+msgstr "키보드가 알려 준 키와 노브: %@"
+
+#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:160 crates/ui/src/header.rs:248
+msgid "Keys: %lld · Knobs: %lld"
+msgstr "키 %1$lld개 · 노브 %2$lld개"
+
+#: crates/ui/src/dialogs.rs:65
+msgid "The keyboard doesn’t say how many keys and knobs it has."
+msgstr "이 키보드는 키와 노브가 몇 개인지 알려 주지 않습니다."
+
+#: crates/ui/src/dialogs.rs:68
+msgid "Its real shape isn’t known either. Set how many keys and knobs it has and how many keys are in a row, then rotate it to match how it sits in front of you."
+msgstr "실제 모양도 알 수 없습니다. 키와 노브의 개수, 한 줄의 키 개수를 정한 다음, 앞에 놓인 방향에 맞게 돌리세요."
+
+#: crates/ui/src/dialogs.rs:72
+msgid "Pick the shape that matches the keyboard, then rotate it to match how it sits in front of you."
+msgstr "키보드와 같은 모양을 고른 다음, 앞에 놓인 방향에 맞게 돌리세요."
+
+#: crates/ui/src/dialogs.rs:170 crates/ui/src/window.rs:71 crates/ui/src/window.rs:279
+msgid "Rotate"
+msgstr "회전"
+
+#: crates/ui/src/dialogs.rs:173
+msgid "Cancel"
+msgstr "취소"
+
+#: crates/ui/src/dialogs.rs:174
+msgid "Done"
+msgstr "완료"
+
+#: crates/ui/src/dialogs.rs:189
+msgid "Choose the Keyboard’s Shape"
+msgstr "키보드 모양 고르기"
+
+#: crates/ui/src/dialogs.rs:243 crates/ui/src/names.rs:192
+msgid "Keys"
+msgstr "키"
+
+#: crates/ui/src/dialogs.rs:244
+msgid "Keys per row"
+msgstr "한 줄의 키"
+
+#: crates/ui/src/dialogs.rs:247
+msgid "Knobs"
+msgstr "노브"
+
+#: crates/ui/src/dialogs.rs:348
+msgid "Linux lets an app open a USB keyboard only when a udev rule gives the signed-in user its device. Run these commands in a terminal once — they write %@ — then plug the keyboard in again."
+msgstr "리눅스에서는 로그인한 사용자에게 장치를 내주는 udev 규칙이 있어야 앱이 USB 키보드를 열 수 있습니다. 아래 명령을 터미널에서 한 번 실행해 %@ 파일을 만든 뒤, 키보드를 다시 꽂으세요."
+
+#: crates/ui/src/dialogs.rs:371 crates/ui/src/log_window.rs:42
+msgid "Copy"
+msgstr "복사"
+
+#: crates/ui/src/dialogs.rs:379
+msgid "Allow Access to the Keyboard"
+msgstr "키보드 접근 허용"
+
+#: crates/ui/src/header.rs:46 crates/ui/src/header.rs:50 crates/ui/src/header.rs:207
+msgid "Keyboard Information"
+msgstr "키보드 정보"
+
+#: crates/ui/src/header.rs:51 crates/ui/src/header.rs:52
+msgid "Retry"
+msgstr "재시도"
+
+#: crates/ui/src/header.rs:53
+msgid "How to Allow…"
+msgstr "허용하는 방법…"
+
+#: crates/ui/src/header.rs:69
+msgid "Main Menu"
+msgstr "주 메뉴"
+
+#: crates/ui/src/header.rs:73
+msgid "Save"
+msgstr "저장"
+
+#: crates/ui/src/header.rs:73 crates/ui/src/window.rs:273
+msgid "Save to Keyboard"
+msgstr "키보드에 저장"
+
+#: crates/ui/src/header.rs:76
+msgid "Read"
+msgstr "읽기"
+
+#: crates/ui/src/header.rs:77 crates/ui/src/window.rs:273
+msgid "Read from Keyboard"
+msgstr "키보드에서 읽기"
+
+#: crates/ui/src/header.rs:145
+msgid "Not Connected"
+msgstr "연결 안 됨"
+
+#: crates/ui/src/header.rs:145
+msgid "Connect the keyboard via USB."
+msgstr "USB로 키보드를 연결하세요."
+
+#: crates/ui/src/header.rs:147 crates/ui/src/names.rs:275
+msgid "Access to the keyboard is needed"
+msgstr "키보드에 접근할 권한이 필요합니다"
+
+#: crates/ui/src/header.rs:148
+msgid "Add the udev rule for this keyboard, then plug it in again."
+msgstr "이 키보드의 udev 규칙을 추가한 뒤 다시 꽂으세요."
+
+#: crates/ui/src/header.rs:150
+msgid "The keyboard couldn’t be opened"
+msgstr "키보드를 열 수 없습니다"
+
+#: crates/ui/src/header.rs:153
+msgid "Asking the keyboard what it is…"
+msgstr "키보드 종류를 묻는 중…"
+
+#: crates/ui/src/header.rs:154
+msgid "Reading…"
+msgstr "읽는 중…"
+
+#: crates/ui/src/header.rs:155
+msgid "Saving…"
+msgstr "저장하는 중…"
+
+#: crates/ui/src/header.rs:156
+msgid "Simulated Keyboard"
+msgstr "시뮬레이터 키보드"
+
+#: crates/ui/src/header.rs:157
+msgid "Connected"
+msgstr "연결됨"
+
+#: crates/ui/src/header.rs:160 crates/ui/src/names.rs:295 crates/ui/src/names.rs:297
+msgid "%@ · %@"
+msgstr "%@ · %@"
+
+#: crates/ui/src/header.rs:183 crates/ui/src/inspector.rs:112
+msgid "Layer %lld"
+msgstr "레이어 %lld"
+
+#: crates/ui/src/header.rs:227
+msgid "Not provided by the keyboard"
+msgstr "키보드가 알려 주지 않음"
+
+#: crates/ui/src/header.rs:236
+msgid "Name"
+msgstr "이름"
+
+#: crates/ui/src/header.rs:237
+msgid "Manufacturer"
+msgstr "제조업체"
+
+#: crates/ui/src/header.rs:238
+msgid "Serial Number"
+msgstr "일련 번호"
+
+#: crates/ui/src/header.rs:240
+msgid "Chip"
+msgstr "칩"
+
+#: crates/ui/src/header.rs:242
+msgid "Firmware"
+msgstr "펌웨어"
+
+#: crates/ui/src/header.rs:262
+msgid "Power"
+msgstr "전원"
+
+#: crates/ui/src/header.rs:271
+msgid "Interfaces"
+msgstr "인터페이스"
+
+#: crates/ui/src/header.rs:273 crates/ui/src/names.rs:146
+msgid "Configuration Channel"
+msgstr "설정 통로"
+
+#: crates/ui/src/header.rs:274
+msgid "Commands"
+msgstr "명령 체계"
+
+#: crates/ui/src/inspector.rs:37 crates/ui/src/names.rs:210 crates/ui/src/pages.rs:694
+msgid "Select a key or knob."
+msgstr "키 또는 노브를 선택하세요."
+
+#: crates/ui/src/inspector.rs:44 crates/ui/src/log_window.rs:43
+msgid "Clear"
+msgstr "지우기"
+
+#: crates/ui/src/inspector.rs:45 crates/ui/src/window.rs:277
+msgid "Clear Layer"
+msgstr "레이어 지우기"
+
+#: crates/ui/src/inspector.rs:84
+msgid "Next key with %@"
+msgstr "다음 키에 %@"
+
+#: crates/ui/src/inspector.rs:93
+msgid "Unsaved changes"
+msgstr "저장하지 않은 변경 사항"
+
+#: crates/ui/src/inspector.rs:98
+msgid "No unsaved changes"
+msgstr "저장하지 않은 변경 사항 없음"
+
+#: crates/ui/src/inspector.rs:120
+msgid "Not known — this keyboard doesn’t tell what its keys do. Whatever you set here is written when you save."
+msgstr "알 수 없음 — 이 키보드는 키에 무엇이 들어 있는지 알려 주지 않습니다. 여기서 정한 것은 저장할 때 키보드에 씁니다."
+
+#: crates/ui/src/inspector.rs:128
+msgid "Nothing"
+msgstr "없음"
+
+#: crates/ui/src/inspector.rs:156
+msgid "Waits %lld ms"
+msgstr "%lld ms 지연"
+
+#: crates/ui/src/inspector.rs:158
+msgid "%lld of %lld presses"
+msgstr "입력 %1$lld개 / 최대 %2$lld개"
+
+#: crates/ui/src/inspector.rs:161
+msgid "Remove Last Press"
+msgstr "마지막 입력 지우기"
+
+#: crates/ui/src/log_window.rs:41 crates/ui/src/log_window.rs:259
+msgid "Expand All"
+msgstr "모두 펼치기"
+
+#: crates/ui/src/log_window.rs:61
+msgid "No packets yet."
+msgstr "아직 패킷이 없습니다."
+
+#: crates/ui/src/log_window.rs:76 crates/ui/src/window.rs:280
+msgid "Device Log"
+msgstr "장치 기록"
+
+#: crates/ui/src/log_window.rs:151
+msgid "Packets: %lld"
+msgstr "패킷 %lld개"
+
+#: crates/ui/src/log_window.rs:175 crates/ui/src/log_window.rs:268
+msgid "Expand"
+msgstr "펼치기"
+
+#: crates/ui/src/log_window.rs:197 crates/ui/src/names.rs:314
+msgid "%lld bytes"
+msgstr "%lld바이트"
+
+#: crates/ui/src/log_window.rs:259
+msgid "Collapse All"
+msgstr "모두 접기"
+
+#: crates/ui/src/log_window.rs:268
+msgid "Collapse"
+msgstr "접기"
+
+#: crates/ui/src/names.rs:12
+msgid "Key %lld"
+msgstr "키 %lld"
+
+#: crates/ui/src/names.rs:13
+msgid "Knob %lld · Rotate left"
+msgstr "노브 %lld · 왼쪽으로 회전"
+
+#: crates/ui/src/names.rs:14
+msgid "Knob %lld · Press"
+msgstr "노브 %lld · 누르기"
+
+#: crates/ui/src/names.rs:15
+msgid "Knob %lld · Rotate right"
+msgstr "노브 %lld · 오른쪽으로 회전"
+
+#: crates/ui/src/names.rs:16
+msgid "Knob %lld · Press and rotate left"
+msgstr "노브 %lld · 누른 채 왼쪽으로 회전"
+
+#: crates/ui/src/names.rs:18
+msgid "Knob %lld · Press and rotate right"
+msgstr "노브 %lld · 누른 채 오른쪽으로 회전"
+
+#: crates/ui/src/names.rs:25
+msgid "Play/Pause"
+msgstr "재생/일시 정지"
+
+#: crates/ui/src/names.rs:26
+msgid "Stop"
+msgstr "정지"
+
+#: crates/ui/src/names.rs:27
+msgid "Prev Song"
+msgstr "이전 곡"
+
+#: crates/ui/src/names.rs:28
+msgid "Next Song"
+msgstr "다음 곡"
+
+#: crates/ui/src/names.rs:29
+msgid "Mute"
+msgstr "소리 끔"
+
+#: crates/ui/src/names.rs:30
+msgid "Volume+"
+msgstr "음량 +"
+
+#: crates/ui/src/names.rs:31
+msgid "Volume-"
+msgstr "음량 -"
+
+#: crates/ui/src/names.rs:32
+msgid "Brightness+"
+msgstr "밝기 +"
+
+#: crates/ui/src/names.rs:33
+msgid "Brightness-"
+msgstr "밝기 -"
+
+#: crates/ui/src/names.rs:34
+msgid "Bass+"
+msgstr "저음 +"
+
+#: crates/ui/src/names.rs:35
+msgid "Bass-"
+msgstr "저음 -"
+
+#: crates/ui/src/names.rs:36
+msgid "Treble+"
+msgstr "고음 +"
+
+#: crates/ui/src/names.rs:37
+msgid "Treble-"
+msgstr "고음 -"
+
+#: crates/ui/src/names.rs:38
+msgid "Media Player"
+msgstr "미디어 플레이어"
+
+#: crates/ui/src/names.rs:39
+msgid "Email"
+msgstr "이메일"
+
+#: crates/ui/src/names.rs:40
+msgid "Calculator"
+msgstr "계산기"
+
+#: crates/ui/src/names.rs:41
+msgid "My Computer"
+msgstr "내 컴퓨터"
+
+#: crates/ui/src/names.rs:42
+msgid "Web Home"
+msgstr "웹 홈"
+
+#: crates/ui/src/names.rs:43
+msgid "Web Back"
+msgstr "웹 뒤로"
+
+#: crates/ui/src/names.rs:44
+msgid "Web Forward"
+msgstr "웹 앞으로"
+
+#: crates/ui/src/names.rs:45
+msgid "Web Refresh"
+msgstr "웹 새로 고침"
+
+#: crates/ui/src/names.rs:76
+msgid "Mouse Left"
+msgstr "마우스 왼쪽 버튼"
+
+#: crates/ui/src/names.rs:77
+msgid "Mouse Centre"
+msgstr "마우스 가운데 버튼"
+
+#: crates/ui/src/names.rs:78
+msgid "Mouse Right"
+msgstr "마우스 오른쪽 버튼"
+
+#: crates/ui/src/names.rs:79
+msgid "Mouse wheel Up"
+msgstr "마우스 휠 위로"
+
+#: crates/ui/src/names.rs:80
+msgid "Mouse wheel Down"
+msgstr "마우스 휠 아래로"
+
+#: crates/ui/src/names.rs:81
+msgid "Ctrl + Mouse wheel Up"
+msgstr "Ctrl + 마우스 휠 위로"
+
+#: crates/ui/src/names.rs:82
+msgid "Ctrl + Mouse wheel Down"
+msgstr "Ctrl + 마우스 휠 아래로"
+
+#: crates/ui/src/names.rs:83
+msgid "Shift + Mouse wheel Up"
+msgstr "Shift + 마우스 휠 위로"
+
+#: crates/ui/src/names.rs:84
+msgid "Shift + Mouse wheel Down"
+msgstr "Shift + 마우스 휠 아래로"
+
+#: crates/ui/src/names.rs:85
+msgid "Alt + Mouse wheel Up"
+msgstr "Alt + 마우스 휠 위로"
+
+#: crates/ui/src/names.rs:86
+msgid "Alt + Mouse wheel Down"
+msgstr "Alt + 마우스 휠 아래로"
+
+#: crates/ui/src/names.rs:105
+msgid "Control"
+msgstr "Control"
+
+#: crates/ui/src/names.rs:106
+msgid "Alt"
+msgstr "Alt"
+
+#: crates/ui/src/names.rs:107
+msgid "Shift"
+msgstr "Shift"
+
+#: crates/ui/src/names.rs:108
+msgid "Super"
+msgstr "Super"
+
+#: crates/ui/src/names.rs:109
+msgid "Right Control"
+msgstr "오른쪽 Control"
+
+#: crates/ui/src/names.rs:110
+msgid "Right Alt"
+msgstr "오른쪽 Alt"
+
+#: crates/ui/src/names.rs:111
+msgid "Right Shift"
+msgstr "오른쪽 Shift"
+
+#: crates/ui/src/names.rs:112
+msgid "Right Super"
+msgstr "오른쪽 Super"
+
+#: crates/ui/src/names.rs:118
+msgid "Red"
+msgstr "빨간색"
+
+#: crates/ui/src/names.rs:119
+msgid "Orange"
+msgstr "주황색"
+
+#: crates/ui/src/names.rs:120
+msgid "Yellow"
+msgstr "노란색"
+
+#: crates/ui/src/names.rs:121
+msgid "Green"
+msgstr "초록색"
+
+#: crates/ui/src/names.rs:122
+msgid "Cyan"
+msgstr "사이안색"
+
+#: crates/ui/src/names.rs:123
+msgid "Blue"
+msgstr "파란색"
+
+#: crates/ui/src/names.rs:124
+msgid "Purple"
+msgstr "보라색"
+
+#: crates/ui/src/names.rs:143
+msgid "Keyboard"
+msgstr "키보드"
+
+#: crates/ui/src/names.rs:144 crates/ui/src/names.rs:194 crates/ui/src/pages.rs:77
+msgid "Mouse"
+msgstr "마우스"
+
+#: crates/ui/src/names.rs:145 crates/ui/src/names.rs:193 crates/ui/src/pages.rs:68
+msgid "Multimedia"
+msgstr "멀티미디어"
+
+#: crates/ui/src/names.rs:147
+msgid "Other"
+msgstr "기타"
+
+#: crates/ui/src/names.rs:155
+msgid "Off"
+msgstr "끔"
+
+#: crates/ui/src/names.rs:156
+msgid "Blink Last Key"
+msgstr "마지막 키 깜빡임"
+
+#: crates/ui/src/names.rs:157
+msgid "Running Light"
+msgstr "흐르는 불빛"
+
+#: crates/ui/src/names.rs:158
+msgid "Mode %lld"
+msgstr "모드 %lld"
+
+#: crates/ui/src/names.rs:164
+msgid "The last key pressed keeps blinking, in a new color with each press."
+msgstr "마지막으로 누른 키가 계속 깜빡이고, 누를 때마다 색이 바뀝니다."
+
+#: crates/ui/src/names.rs:165
+msgid "A light runs across the keys in order, in a new color each round."
+msgstr "불빛이 키를 차례로 지나가고, 한 바퀴마다 색이 바뀝니다."
+
+#: crates/ui/src/names.rs:180
+msgid "Letters"
+msgstr "문자"
+
+#: crates/ui/src/names.rs:181
+msgid "Numbers"
+msgstr "숫자"
+
+#: crates/ui/src/names.rs:182
+msgid "Editing"
+msgstr "편집"
+
+#: crates/ui/src/names.rs:183
+msgid "Symbols"
+msgstr "기호"
+
+#: crates/ui/src/names.rs:184
+msgid "Function Keys"
+msgstr "기능 키"
+
+#: crates/ui/src/names.rs:185
+msgid "Navigation"
+msgstr "탐색"
+
+#: crates/ui/src/names.rs:186
+msgid "Numpad"
+msgstr "숫자 키패드"
+
+#: crates/ui/src/names.rs:195 crates/ui/src/pages.rs:572
+msgid "LED"
+msgstr "LED"
+
+#: crates/ui/src/names.rs:196 crates/ui/src/pages.rs:685 crates/ui/src/pages.rs:697
+msgid "Delay"
+msgstr "지연"
+
+#: crates/ui/src/names.rs:202
+msgid "Saved to the keyboard."
+msgstr "키보드에 저장했습니다."
+
+#: crates/ui/src/names.rs:203
+msgid "Read from the keyboard."
+msgstr "키보드에서 읽었습니다."
+
+#: crates/ui/src/names.rs:204
+msgid "Nothing to save — no key has changed."
+msgstr "바뀐 키가 없어 저장할 것이 없습니다."
+
+#: crates/ui/src/names.rs:205
+msgid "The keyboard couldn’t be asked what it is."
+msgstr "키보드에 종류를 물을 수 없었습니다."
+
+#: crates/ui/src/names.rs:206
+msgid "Reading from the keyboard failed."
+msgstr "키보드에서 읽지 못했습니다."
+
+#: crates/ui/src/names.rs:207 crates/ui/src/names.rs:277
+msgid "Writing to the keyboard failed (%@)."
+msgstr "키보드에 쓰지 못했습니다(%@)."
+
+#: crates/ui/src/names.rs:208
+msgid "The keyboard is no longer connected."
+msgstr "키보드가 더 이상 연결되어 있지 않습니다."
+
+#: crates/ui/src/names.rs:209
+msgid "A key holds up to %lld presses."
+msgstr "키 하나에 입력은 %lld개까지 넣을 수 있습니다."
+
+#: crates/ui/src/names.rs:212
+msgid "Modifiers alone make the key a modifier key, so they can’t go with other presses."
+msgstr "보조 키만 넣으면 그 키가 보조 키가 되므로, 다른 입력과 함께 넣을 수 없습니다."
+
+#: crates/ui/src/names.rs:214
+msgid "Only keys 1–%lld have a color. Select one of them."
+msgstr "색은 키 1–%lld에만 있습니다. 그중 하나를 선택하세요."
+
+#: crates/ui/src/names.rs:215
+msgid "This keyboard can’t do that."
+msgstr "이 키보드는 그 기능을 지원하지 않습니다."
+
+#: crates/ui/src/names.rs:225
+msgid "Media Key %@"
+msgstr "미디어 키 %@"
+
+#: crates/ui/src/names.rs:234
+msgid "Enter"
+msgstr "Enter"
+
+#: crates/ui/src/names.rs:235
+msgid "Escape"
+msgstr "Escape"
+
+#: crates/ui/src/names.rs:236
+msgid "Backspace"
+msgstr "백스페이스"
+
+#: crates/ui/src/names.rs:237
+msgid "Tab"
+msgstr "Tab"
+
+#: crates/ui/src/names.rs:238
+msgid "Space"
+msgstr "스페이스"
+
+#: crates/ui/src/names.rs:239
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+#: crates/ui/src/names.rs:240
+msgid "Menu Key"
+msgstr "메뉴 키"
+
+#: crates/ui/src/names.rs:241
+msgid "Print Screen"
+msgstr "화면 프린트"
+
+#: crates/ui/src/names.rs:242
+msgid "Scroll Lock"
+msgstr "Scroll Lock"
+
+#: crates/ui/src/names.rs:243
+msgid "Insert"
+msgstr "Insert"
+
+#: crates/ui/src/names.rs:244
+msgid "Home"
+msgstr "Home"
+
+#: crates/ui/src/names.rs:245
+msgid "Page Up"
+msgstr "Page Up"
+
+#: crates/ui/src/names.rs:246
+msgid "Delete"
+msgstr "Delete"
+
+#: crates/ui/src/names.rs:247
+msgid "End"
+msgstr "End"
+
+#: crates/ui/src/names.rs:248
+msgid "Page Down"
+msgstr "Page Down"
+
+#: crates/ui/src/names.rs:249
+msgid "Right Arrow"
+msgstr "오른쪽 화살표"
+
+#: crates/ui/src/names.rs:250
+msgid "Left Arrow"
+msgstr "왼쪽 화살표"
+
+#: crates/ui/src/names.rs:251
+msgid "Down Arrow"
+msgstr "아래쪽 화살표"
+
+#: crates/ui/src/names.rs:252
+msgid "Up Arrow"
+msgstr "위쪽 화살표"
+
+#: crates/ui/src/names.rs:253
+msgid "Num Lock"
+msgstr "Num Lock"
+
+#: crates/ui/src/names.rs:254
+msgid "Keypad Enter"
+msgstr "키패드 Enter"
+
+#: crates/ui/src/names.rs:264
+msgid "Keypad %@"
+msgstr "키패드 %@"
+
+#: crates/ui/src/names.rs:266
+msgid "Non-US Key %@ %@"
+msgstr "미국 외 배열의 %1$@ %2$@ 키"
+
+#: crates/ui/src/names.rs:273
+msgid "Looking for the keyboard"
+msgstr "키보드를 찾는 중"
+
+#: crates/ui/src/names.rs:274
+msgid "Connected to %@, interface %lld"
+msgstr "%1$@에 연결됨, 인터페이스 %2$lld"
+
+#: crates/ui/src/names.rs:276
+msgid "The keyboard couldn’t be opened (%@)."
+msgstr "키보드를 열지 못했습니다(%@)."
+
+#: crates/ui/src/names.rs:278
+msgid "Simulated keyboard: %@"
+msgstr "시뮬레이터 키보드: %@"
+
+#: crates/ui/src/names.rs:293 crates/ui/src/names.rs:313 crates/ui/src/names.rs:321
+msgid "Report ID %lld"
+msgstr "리포트 ID %lld"
+
+#: crates/ui/src/names.rs:295
+msgid "Keys: %lld · Knobs: %lld · Type %lld"
+msgstr "키 %1$lld개 · 노브 %2$lld개 · 종류 %3$lld"
+
+#: crates/ui/src/names.rs:306 crates/ui/src/window.rs:390
+msgid "Simulator"
+msgstr "시뮬레이터"
+
+#: crates/ui/src/names.rs:308
+msgid "Interface %lld · %@ · %@ · %@"
+msgstr "인터페이스 %1$lld · %2$@ · %3$@ · %4$@"
+
+#: crates/ui/src/names.rs:321
+msgid "8890 Packets · %@"
+msgstr "8890 패킷 · %@"
+
+#: crates/ui/src/names.rs:322
+msgid "884x · Standard Firmware (Type 10)"
+msgstr "884x · 표준 펌웨어 (종류 10)"
+
+#: crates/ui/src/names.rs:323
+msgid "884x · Legacy Firmware"
+msgstr "884x · 옛 펌웨어"
+
+#: crates/ui/src/names.rs:324
+msgid "884x · Doesn’t Answer Identification"
+msgstr "884x · 종류에 답하지 않음"
+
+#: crates/ui/src/pages.rs:69
+msgid "A media key replaces what the key did."
+msgstr "미디어 키를 넣으면 키에 있던 동작을 대신합니다."
+
+#: crates/ui/src/pages.rs:78
+msgid "A mouse action replaces what the key did."
+msgstr "마우스 동작을 넣으면 키에 있던 동작을 대신합니다."
+
+#: crates/ui/src/pages.rs:187
+msgid "Key Layout"
+msgstr "키 배열"
+
+#: crates/ui/src/pages.rs:188
+msgid "Modifiers Only"
+msgstr "보조 키만"
+
+#: crates/ui/src/pages.rs:189
+msgid "Makes the key hold these modifiers, as a modifier key does."
+msgstr "키를 누르는 동안 이 보조 키가 눌린 것으로 만듭니다. 보조 키처럼 동작합니다."
+
+#: crates/ui/src/pages.rs:262
+msgid "Modifiers apply to the next key."
+msgstr "보조 키는 다음에 누르는 키에 붙습니다."
+
+#: crates/ui/src/pages.rs:264
+msgid "Modifiers apply to the next key. A key holds up to %lld presses, each modifier counting as one."
+msgstr "보조 키는 다음에 누르는 키에 붙습니다. 키 하나에 입력은 보조 키까지 합쳐 %lld개까지 넣을 수 있습니다."
+
+#: crates/ui/src/pages.rs:269
+msgid "Modifiers apply to the next key. A key holds up to %lld presses."
+msgstr "보조 키는 다음에 누르는 키에 붙습니다. 키 하나에 입력은 %lld개까지 넣을 수 있습니다."
+
+#: crates/ui/src/pages.rs:333
+msgid "This keyboard doesn’t take this key."
+msgstr "이 키보드에는 넣을 수 없는 키입니다."
+
+#: crates/ui/src/pages.rs:354
+msgid "More Keys"
+msgstr "그 밖의 키"
+
+#: crates/ui/src/pages.rs:370
+msgid "Modifiers"
+msgstr "보조 키"
+
+#: crates/ui/src/pages.rs:387
+msgid "Shift Symbols"
+msgstr "Shift 기호"
+
+#: crates/ui/src/pages.rs:504 crates/ui/src/pages.rs:540
+msgid "Color"
+msgstr "색상"
+
+#: crates/ui/src/pages.rs:508 crates/ui/src/pages.rs:572
+msgid "Lighting is set per layer; no key selection is needed."
+msgstr "조명은 레이어마다 따로 정하므로 키를 선택할 필요가 없습니다."
+
+#: crates/ui/src/pages.rs:539
+msgid "Select one of keys 1–%lld on the keyboard, then pick its color."
+msgstr "키보드에서 키 1–%lld 중 하나를 선택한 다음 색을 고르세요."
+
+#: crates/ui/src/pages.rs:585
+msgid "Effect"
+msgstr "효과"
+
+#: crates/ui/src/pages.rs:668
+msgid "The selected key has no presses."
+msgstr "선택한 키에 입력이 없습니다."
+
+#: crates/ui/src/pages.rs:672
+msgid "Press %lld"
+msgstr "입력 %lld"
+
+#: crates/ui/src/pages.rs:684
+msgid "Each press can wait before it is sent. Give the key its presses on the Keys page first."
+msgstr "입력마다 보내기 전에 기다리게 할 수 있습니다. 먼저 키 쪽에서 입력을 넣으세요."
+
+#: crates/ui/src/pages.rs:698
+msgid "One wait for the whole key. Its presses stay."
+msgstr "키 전체에 지연을 하나 둡니다. 넣어 둔 입력은 그대로 남습니다."
+
+#: crates/ui/src/preferences.rs:28
+msgid "Language & Appearance"
+msgstr "언어 및 화면 모드"
+
+#: crates/ui/src/preferences.rs:29
+msgid "The base language is English. You can follow the system language or choose one yourself."
+msgstr "기본 언어는 영어입니다. 시스템 언어를 따르거나 직접 고를 수 있습니다."
+
+#: crates/ui/src/preferences.rs:35 crates/ui/src/preferences.rs:47
+msgid "Follow System"
+msgstr "시스템 따름"
+
+#: crates/ui/src/preferences.rs:37
+msgid "Language"
+msgstr "언어"
+
+#: crates/ui/src/preferences.rs:47
+msgid "Light"
+msgstr "라이트"
+
+#: crates/ui/src/preferences.rs:47
+msgid "Dark"
+msgstr "다크"
+
+#: crates/ui/src/preferences.rs:49
+msgid "Appearance"
+msgstr "화면 모드"
+
+#: crates/ui/src/preferences.rs:60
+msgid "UI"
+msgstr "UI"
+
+#: crates/ui/src/preferences.rs:62 crates/ui/src/window.rs:284
+msgid "Preferences"
+msgstr "기본 설정"
+
+#: crates/ui/src/preferences.rs:66
+msgid "Check for updates automatically"
+msgstr "업데이트 자동 확인"
+
+#: crates/ui/src/preferences.rs:73
+msgid "General"
+msgstr "일반"
+
+#: crates/ui/src/preferences.rs:108
+msgid "Language Changed"
+msgstr "언어가 변경되었습니다"
+
+#: crates/ui/src/preferences.rs:109
+msgid "%@ needs to relaunch to apply the change."
+msgstr "변경 사항을 적용하려면 %@를 다시 실행해야 합니다."
+
+#: crates/ui/src/preferences.rs:111
+msgid "Later"
+msgstr "나중에"
+
+#: crates/ui/src/preferences.rs:111
+msgid "Relaunch Now"
+msgstr "지금 다시 실행"
+
+#: crates/ui/src/window.rs:63
+msgid "Keys appear here once the keyboard is connected."
+msgstr "키보드를 연결하면 여기에 키가 나타납니다."
+
+#: crates/ui/src/window.rs:76 crates/ui/src/window.rs:279
+msgid "Shape…"
+msgstr "모양…"
+
+#: crates/ui/src/window.rs:119
+msgid "Download"
+msgstr "내려받기"
+
+#: crates/ui/src/window.rs:277
+msgid "Clear Key"
+msgstr "키 지우기"
+
+#: crates/ui/src/window.rs:286
+msgid "Check for Updates…"
+msgstr "업데이트 확인…"
+
+#: crates/ui/src/window.rs:288
+msgid "About %@"
+msgstr "%@ 정보"
+
+#: crates/ui/src/window.rs:339
+msgid "%@ is up to date."
+msgstr "%@는 최신 버전입니다."
+
+#: crates/ui/src/window.rs:340
+msgid "Couldn’t check for updates."
+msgstr "업데이트를 확인하지 못했습니다."
+
+#: crates/ui/src/window.rs:347
+msgid "%1$@ %2$@ is available."
+msgstr "%1$@ %2$@ 버전이 나왔습니다."
+
+#: crates/ui/src/window.rs:375
+msgid "Keyboard on USB"
+msgstr "USB에 꽂힌 키보드"

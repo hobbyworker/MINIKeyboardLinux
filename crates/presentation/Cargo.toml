@@ -1,0 +1,18 @@
+[package]
+name = "presentation"
+description = "View models and the values the screens draw — the layouts' geometry, key and colour tables — without a toolkit"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+domain.workspace = true
+
+[dev-dependencies]
+async-channel.workspace = true
+futures.workspace = true
+
+[lints]
+workspace = true

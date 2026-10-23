@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=MINIKeyboard
+Comment=Set up small USB macro keyboards
+Exec=minikeyboard
+Icon=me.hobbyworker.MINIKeyboard
+Terminal=false
+Categories=Settings;HardwareSettings;
+Keywords=keyboard;macro;keypad;knob;USB;
+StartupNotify=true
