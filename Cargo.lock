@@ -101,7 +101,7 @@ checksum = "a31eee39dddec8330830986fcd7625edb5a24ec90ea038215273bbc3adb08ac6"
 
 [[package]]
 name = "datalayer"
-version = "1.0.0"
+version = "0.9.9"
 dependencies = [
  "async-channel",
  "domain",
@@ -114,7 +114,7 @@ dependencies = [
 
 [[package]]
 name = "domain"
-version = "1.0.0"
+version = "0.9.9"
 dependencies = [
  "futures-executor",
 ]
@@ -635,7 +635,7 @@ dependencies = [
 
 [[package]]
 name = "minikeyboard"
-version = "1.0.0"
+version = "0.9.9"
 dependencies = [
  "datalayer",
  "domain",
@@ -716,7 +716,7 @@ checksum = "f6b464fbc74e149a392436b17d523f769e057cb6877f6a5c4618bc6f11800548"
 
 [[package]]
 name = "presentation"
-version = "1.0.0"
+version = "0.9.9"
 dependencies = [
  "async-channel",
  "domain",
@@ -1002,7 +1002,7 @@ checksum = "06bdbd8cfc056b8d2e2e85f29b56a3bdbecb527cef81eb39e3e7b98af4652770"
 
 [[package]]
 name = "ui"
-version = "1.0.0"
+version = "0.9.9"
 dependencies = [
  "gettext-rs",
  "gtk4",
