@@ -20,12 +20,17 @@ use crate::preferences::{about_dialog, preferences_dialog};
 use crate::settings::Settings;
 use crate::updates::{self, Release};
 
+/// The inspector column's width: the inspector's own least (270, and 16 either side).
+const INSPECTOR_WIDTH: i32 = 302;
+
 pub struct MainWindow {
     pub window: adw::ApplicationWindow,
     pub(crate) editor: Rc<EditorModel>,
     toasts: adw::ToastOverlay,
     /// "A newer version is out", with the way to its download page.
     banner: adw::Banner,
+    /// "Simulator in use", across the window while a simulated keyboard is.
+    simulator_bar: gtk::Box,
     release_link: Rc<RefCell<Option<String>>>,
     app_name: String,
     pub(crate) header: Header,
@@ -100,10 +105,20 @@ impl MainWindow {
         let panel = ActionPanel::new(editor.clone(), settings.clone());
         panel.widget().set_hexpand(true);
         let inspector = Inspector::new(editor.clone());
+        // The inspector at one width, whatever it shows. Left to its wrapping labels it asks for more or less with every
+        // selection, the panel beside it narrows and widens, its rows wrap and unwrap — and through the panes the keyboard
+        // above shrinks and grows with them.
+        let inspector_column = adw::Clamp::builder()
+            .orientation(gtk::Orientation::Horizontal)
+            .maximum_size(INSPECTOR_WIDTH)
+            .tightening_threshold(INSPECTOR_WIDTH)
+            .width_request(INSPECTOR_WIDTH)
+            .child(inspector.widget())
+            .build();
         let bottom = gtk::Box::new(gtk::Orientation::Horizontal, 0);
         bottom.append(panel.widget());
         bottom.append(&gtk::Separator::new(gtk::Orientation::Vertical));
-        bottom.append(inspector.widget());
+        bottom.append(&inspector_column);
 
         let paned = gtk::Paned::builder()
             .orientation(gtk::Orientation::Vertical)
@@ -118,7 +133,9 @@ impl MainWindow {
             .build();
         let banner = adw::Banner::builder().button_label(t("Download")).build();
         let toolbar = adw::ToolbarView::new();
+        let simulator_bar = simulator_bar();
         toolbar.add_top_bar(&header.bar);
+        toolbar.add_top_bar(&simulator_bar);
         toolbar.add_top_bar(&banner);
         toolbar.set_content(Some(&paned));
         let toasts = adw::ToastOverlay::new();
@@ -138,6 +155,7 @@ impl MainWindow {
             editor: editor.clone(),
             toasts,
             banner,
+            simulator_bar,
             release_link: Rc::default(),
             app_name: info.name.clone(),
             header,
@@ -349,7 +367,8 @@ impl MainWindow {
         self.banner.set_revealed(true);
     }
 
-    /// Debug builds: the keyboard on USB, or a simulated one of every kind.
+    /// The keyboard on USB, or a simulated one: the kinds users have, and in a debug build every kind (the 8890's
+    /// other report IDs, the legacy records).
     fn simulator_menu(&self) -> gio::Menu {
         let action = gio::SimpleAction::new_stateful("simulator", Some(glib::VariantTy::STRING), &"".to_variant());
         {
@@ -363,25 +382,37 @@ impl MainWindow {
         self.window.add_action(&action);
         *self.simulator.borrow_mut() = Some(action);
 
-        let choices = self.editor.simulator_choices();
-        let items = |group: SimulatorGroup| {
-            let menu = gio::Menu::new();
-            for choice in choices.iter().filter(|choice| choice.group == group) {
-                menu.append_item(&simulator_item(choice));
-            }
-            menu
-        };
+        let mut choices = self.editor.simulator_choices();
+        if !cfg!(debug_assertions) {
+            choices.retain(SimulatorChoice::is_for_everyone);
+        }
         let menu = gio::Menu::new();
         let usb = gio::MenuItem::new(Some(&t("Keyboard on USB")), None);
         usb.set_action_and_target_value(Some("win.simulator"), Some(&"".to_variant()));
         menu.append_item(&usb);
         let groups = gio::Menu::new();
-        groups.append_submenu(Some("1189:8890"), &items(SimulatorGroup::K8890));
-        groups.append_submenu(
-            Some(&commands_text(presentation::InfoCommands::Standard)),
-            &items(SimulatorGroup::Standard),
-        );
-        groups.append_submenu(Some(&commands_text(presentation::InfoCommands::Legacy)), &items(SimulatorGroup::Legacy));
+        // A group of one is an item of its own, under the group's name; an empty one isn't there.
+        let group = |title: &str, group: SimulatorGroup| {
+            let members: Vec<&SimulatorChoice> = choices.iter().filter(|choice| choice.group == group).collect();
+            match members.as_slice() {
+                [] => {}
+                [only] => {
+                    let item = gio::MenuItem::new(Some(title), None);
+                    item.set_action_and_target_value(Some("win.simulator"), Some(&only.id.to_variant()));
+                    groups.append_item(&item);
+                }
+                many => {
+                    let menu = gio::Menu::new();
+                    for choice in many {
+                        menu.append_item(&simulator_item(choice));
+                    }
+                    groups.append_submenu(Some(title), &menu);
+                }
+            }
+        };
+        group("1189:8890", SimulatorGroup::K8890);
+        group(&commands_text(presentation::InfoCommands::Standard), SimulatorGroup::Standard);
+        group(&commands_text(presentation::InfoCommands::Legacy), SimulatorGroup::Legacy);
         for choice in choices.iter().filter(|choice| choice.group == SimulatorGroup::Unidentified) {
             groups.append_item(&simulator_item(choice));
         }
@@ -397,6 +428,9 @@ impl MainWindow {
         let drawing = editor.drawing();
         self.canvas_stack.set_visible_child_name(if drawing.is_some() { "canvas" } else { "empty" });
         self.canvas.set_drawing(drawing);
+        let simulated = editor.active_simulator_id().is_some();
+        self.simulator_bar.set_visible(simulated);
+        self.canvas.set_simulated(simulated);
         let ready = editor.is_ready();
         self.canvas.set_sensitive(ready);
         self.canvas.set_opacity(if ready { 1.0 } else { 0.45 });
@@ -486,6 +520,35 @@ impl MainWindow {
             _ => {}
         }
     }
+}
+
+/// While a simulated keyboard is in use, a bar across the window says so, loudly — nothing saved then reaches a
+/// keyboard — with the way back to the keyboard on USB (the Simulator menu's own item).
+fn simulator_bar() -> gtk::Box {
+    let bar = gtk::Box::builder().spacing(14).visible(false).build();
+    bar.add_css_class("simulator-bar");
+    let icon =
+        gtk::Image::builder().icon_name("dialog-warning-symbolic").pixel_size(22).valign(gtk::Align::Center).build();
+    let title = gtk::Label::builder().label(t("Simulator in use")).xalign(0.0).build();
+    title.add_css_class("title");
+    let body = gtk::Label::builder()
+        .label(t("This isn't a real keyboard. Nothing you save here is written to any keyboard."))
+        .xalign(0.0)
+        .wrap(true)
+        .build();
+    let texts = gtk::Box::builder().orientation(gtk::Orientation::Vertical).spacing(2).hexpand(true).build();
+    texts.append(&title);
+    texts.append(&body);
+    let back = gtk::Button::builder()
+        .label(t("Back to the Keyboard on USB"))
+        .valign(gtk::Align::Center)
+        .action_name("win.simulator")
+        .action_target(&"".to_variant())
+        .build();
+    bar.append(&icon);
+    bar.append(&texts);
+    bar.append(&back);
+    bar
 }
 
 fn simulator_item(choice: &SimulatorChoice) -> gio::MenuItem {

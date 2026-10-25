@@ -199,7 +199,8 @@ pub fn tab_title(tab: EditorTab) -> String {
 
 pub fn notice_message(notice: Notice) -> String {
     match notice {
-        Notice::Saved => t("Saved to the keyboard."),
+        Notice::Saved { simulated: true } => t("Saved to the simulator — nothing was written to a keyboard."),
+        Notice::Saved { simulated: false } => t("Saved to the keyboard."),
         Notice::ReadComplete => t("Read from the keyboard."),
         Notice::NothingToSave => t("Nothing to save — no key has changed."),
         Notice::IdentifyFailed => t("The keyboard couldn’t be asked what it is."),

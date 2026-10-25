@@ -2,7 +2,7 @@
 //! drawn; over each cap lies a button — for clicking, focus, its tooltip and its name for assistive tools. A
 //! key shows its number and what it does.
 
-use std::cell::RefCell;
+use std::cell::{Cell, RefCell};
 use std::rc::Rc;
 
 use adw::prelude::*;
@@ -10,6 +10,7 @@ use gtk::subclass::prelude::*;
 use gtk::{gdk, glib, graphene, gsk};
 use presentation::{ControlDrawing, ControlFace, ControlRef, KeyboardDrawing, KnobAction, LayoutRect};
 
+use crate::i18n::t;
 use crate::names::{caption_text, control_title};
 
 /// Where a drawing in layout space lands in a widget: scaled to fit, in the middle.
@@ -57,6 +58,9 @@ mod imp {
         pub(super) drawing: RefCell<Option<KeyboardDrawing>>,
         pub(super) buttons: RefCell<Vec<gtk::Button>>,
         pub(super) on_select: RefCell<Option<SelectHandler>>,
+        pub(super) simulated: Cell<bool>,
+        /// "Simulator" on the body's top edge, while a simulated keyboard is drawn.
+        pub(super) badge: RefCell<Option<gtk::Label>>,
     }
 
     impl std::fmt::Debug for KeyboardCanvas {
@@ -92,6 +96,14 @@ mod imp {
             let drawing = self.drawing.borrow();
             let Some(drawing) = drawing.as_ref() else { return };
             let placement = Placement::fit(drawing.bounds, f64::from(width), f64::from(height), 14.0);
+            if let Some(badge) = self.badge.borrow().as_ref() {
+                let frame = placement.rect(&drawing.frame);
+                let (_, badge_width, ..) = badge.measure(gtk::Orientation::Horizontal, -1);
+                let (_, badge_height, ..) = badge.measure(gtk::Orientation::Vertical, -1);
+                let x = (frame.x() + frame.width() / 2.0).round() as i32 - badge_width / 2;
+                let y = frame.y().round() as i32 - badge_height / 2;
+                badge.size_allocate(&gtk::Allocation::new(x, y, badge_width, badge_height), -1);
+            }
             for (button, control) in self.buttons.borrow().iter().zip(&drawing.controls) {
                 let rect = placement.rect(&control.rect);
                 let (minimum_width, ..) = button.measure(gtk::Orientation::Horizontal, -1);
@@ -109,7 +121,7 @@ mod imp {
             if let Some(drawing) = self.drawing.borrow().as_ref() {
                 let placement =
                     Placement::fit(drawing.bounds, f64::from(widget.width()), f64::from(widget.height()), 14.0);
-                draw_body(snapshot, &placement, drawing);
+                draw_body(snapshot, &placement, drawing, self.simulated.get());
                 let accent = adw::StyleManager::default().accent_color_rgba();
                 for control in &drawing.controls {
                     draw_control(snapshot, &placement, control, &accent);
@@ -174,6 +186,24 @@ impl KeyboardCanvas {
             }
         }
         *imp.drawing.borrow_mut() = drawing;
+        self.queue_allocate();
+        self.queue_draw();
+    }
+
+    /// Marks the keyboard as a simulated one: an orange outline, and a badge on its top edge.
+    pub fn set_simulated(&self, simulated: bool) {
+        let imp = self.imp();
+        if imp.simulated.replace(simulated) == simulated {
+            return;
+        }
+        if simulated {
+            let badge = gtk::Label::new(Some(&t("Simulator")));
+            badge.add_css_class("simulator-badge");
+            badge.set_parent(self);
+            *imp.badge.borrow_mut() = Some(badge);
+        } else if let Some(badge) = imp.badge.borrow_mut().take() {
+            badge.unparent();
+        }
         self.queue_allocate();
         self.queue_draw();
     }
@@ -255,8 +285,11 @@ fn rgba(white: f32, alpha: f32) -> gdk::RGBA {
     gdk::RGBA::new(white, white, white, alpha)
 }
 
-/// The keyboard's body: a dark slab with a soft shadow.
-fn draw_body(snapshot: &gtk::Snapshot, placement: &Placement, drawing: &KeyboardDrawing) {
+/// The simulator's colour: the bar across the window, the outline here, the header's dot (style.css).
+const SIMULATOR_ORANGE: gdk::RGBA = gdk::RGBA::new(0xC2 as f32 / 255.0, 0x41 as f32 / 255.0, 0x0C as f32 / 255.0, 1.0);
+
+/// The keyboard's body: a dark slab with a soft shadow, outlined in orange when it is a simulated keyboard.
+fn draw_body(snapshot: &gtk::Snapshot, placement: &Placement, drawing: &KeyboardDrawing, simulated: bool) {
     let rect = placement.rect(&drawing.frame);
     let rounded = gsk::RoundedRect::from_rect(rect, (24.0 * placement.scale()) as f32);
     snapshot.append_outset_shadow(&rounded, &gdk::RGBA::new(0.0, 0.0, 0.0, 0.3), 0.0, 3.0, 0.0, 8.0);
@@ -268,6 +301,9 @@ fn draw_body(snapshot: &gtk::Snapshot, placement: &Placement, drawing: &Keyboard
         &[gsk::ColorStop::new(0.0, rgba(0.28, 1.0)), gsk::ColorStop::new(1.0, rgba(0.19, 1.0))],
     );
     snapshot.pop();
+    if simulated {
+        snapshot.append_border(&rounded, &[4.0; 4], &[SIMULATOR_ORANGE; 4]);
+    }
 }
 
 /// A key's cap or a knob's action, its outline showing whether it is selected and whether it changed.

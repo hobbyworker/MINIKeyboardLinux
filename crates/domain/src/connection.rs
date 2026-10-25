@@ -9,7 +9,7 @@ pub enum Channel {
     Usb { out_endpoint: u8 },
     /// Written and read as a HID device.
     Hid,
-    /// A keyboard that exists only in the app (debug builds).
+    /// A keyboard that exists only in the app.
     Simulated,
 }
 

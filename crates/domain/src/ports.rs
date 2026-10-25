@@ -77,7 +77,7 @@ pub trait DeviceLogRepository {
     fn clear(&self);
 }
 
-/// Choosing between the keyboard on USB and a simulated one (debug builds).
+/// Choosing between the keyboard on USB and a simulated one.
 pub trait KeyboardSourceRepository {
     fn current(&self) -> KeyboardSource;
     fn select(&self, source: KeyboardSource);

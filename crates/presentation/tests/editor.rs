@@ -237,7 +237,7 @@ fn the_8890_is_arranged() {
 
     fixture.save();
     let editor = &fixture.editor;
-    assert_eq!(editor.notice(), Some(Notice::Saved));
+    assert_eq!(editor.notice(), Some(Notice::Saved { simulated: false }));
     assert!(!editor.has_unsaved_changes());
     assert_eq!(fixture.device.writes.borrow().len(), 1);
 

@@ -487,7 +487,7 @@ pub enum SimulatorKind {
     },
 }
 
-/// A keyboard the simulator can play (debug builds).
+/// A keyboard the simulator can play.
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 pub struct SimulatorChoice {
     pub id: String,
@@ -496,6 +496,17 @@ pub struct SimulatorChoice {
 }
 
 impl SimulatorChoice {
+    /// Whether everyone's menu has it, not only a debug build's: the 8890 as it ships (report ID 3), each 884x
+    /// layout on its standard records, and a 884x that doesn't answer. The 8890's other report IDs and the
+    /// legacy records are for testing the app.
+    pub fn is_for_everyone(&self) -> bool {
+        match self.group {
+            SimulatorGroup::K8890 => matches!(self.kind, SimulatorKind::K8890 { report_id: 3 }),
+            SimulatorGroup::Legacy => false,
+            SimulatorGroup::Standard | SimulatorGroup::Unidentified => true,
+        }
+    }
+
     pub(crate) fn of(model: &SimulatedModel) -> Self {
         let (group, kind) = match model.kind {
             SimulatedKind::K8890 { report_id } => (SimulatorGroup::K8890, SimulatorKind::K8890 { report_id }),

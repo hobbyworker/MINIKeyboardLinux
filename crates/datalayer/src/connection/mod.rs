@@ -40,8 +40,7 @@ const PERMISSION_RETRY: Duration = Duration::from_secs(3);
 pub struct HardwareConnection {
     state: Broadcaster<ConnectionState>,
     open: Arc<Mutex<Option<Arc<IoChannel>>>>,
-    /// Debug builds' simulator follows the connection through these (`simulator.rs`).
-    #[cfg(debug_assertions)]
+    /// The simulator follows the connection through these (`simulator.rs`).
     mirrors: Arc<Mutex<Vec<Mirror>>>,
     commands: mpsc::Sender<Command>,
 }
@@ -85,20 +84,13 @@ impl HardwareConnection {
                 watcher.disconnect();
             })
             .expect("a thread for the connection");
-        Self {
-            state,
-            open,
-            #[cfg(debug_assertions)]
-            mirrors,
-            commands,
-        }
+        Self { state, open, mirrors, commands }
     }
 
     pub fn state(&self) -> ConnectionState {
         self.state.value()
     }
 
-    #[cfg(debug_assertions)]
     pub(crate) fn mirror_into(&self, target: Broadcaster<ConnectionState>, active: Arc<AtomicBool>) {
         self.mirrors.lock().unwrap_or_else(PoisonError::into_inner).push(Mirror { target, active });
     }

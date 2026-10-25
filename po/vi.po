@@ -6,11 +6,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: vi\n"
 
+#: crates/ui/src/canvas.rs:200 crates/ui/src/names.rs:307 crates/ui/src/window.rs:421
+msgid "Simulator"
+msgstr "Trình mô phỏng"
+
 #: crates/ui/src/dialogs.rs:63
 msgid "The keyboard reports its keys and knobs: %@"
 msgstr "Bàn phím cho biết phím và núm xoay của nó: %@"
 
-#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:160 crates/ui/src/header.rs:248
+#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:161 crates/ui/src/header.rs:249
 msgid "Keys: %lld · Knobs: %lld"
 msgstr "Phím: %1$lld · Núm xoay: %2$lld"
 
@@ -26,7 +30,7 @@ msgstr "Hình dạng thực tế cũng không rõ. Hãy đặt số phím, số 
 msgid "Pick the shape that matches the keyboard, then rotate it to match how it sits in front of you."
 msgstr "Hãy chọn hình dạng giống với bàn phím, rồi xoay cho khớp với hướng đặt bàn phím trước mặt bạn."
 
-#: crates/ui/src/dialogs.rs:170 crates/ui/src/window.rs:71 crates/ui/src/window.rs:279
+#: crates/ui/src/dialogs.rs:170 crates/ui/src/window.rs:76 crates/ui/src/window.rs:297
 msgid "Rotate"
 msgstr "Xoay"
 
@@ -66,7 +70,7 @@ msgstr "Sao chép"
 msgid "Allow Access to the Keyboard"
 msgstr "Cho phép truy cập bàn phím"
 
-#: crates/ui/src/header.rs:46 crates/ui/src/header.rs:50 crates/ui/src/header.rs:207
+#: crates/ui/src/header.rs:46 crates/ui/src/header.rs:50 crates/ui/src/header.rs:208
 msgid "Keyboard Information"
 msgstr "Thông tin bàn phím"
 
@@ -86,7 +90,7 @@ msgstr "Menu chính"
 msgid "Save"
 msgstr "Lưu"
 
-#: crates/ui/src/header.rs:73 crates/ui/src/window.rs:273
+#: crates/ui/src/header.rs:73 crates/ui/src/window.rs:291
 msgid "Save to Keyboard"
 msgstr "Lưu vào bàn phím"
 
@@ -94,99 +98,99 @@ msgstr "Lưu vào bàn phím"
 msgid "Read"
 msgstr "Đọc"
 
-#: crates/ui/src/header.rs:77 crates/ui/src/window.rs:273
+#: crates/ui/src/header.rs:77 crates/ui/src/window.rs:291
 msgid "Read from Keyboard"
 msgstr "Đọc từ bàn phím"
 
-#: crates/ui/src/header.rs:145
+#: crates/ui/src/header.rs:146
 msgid "Not Connected"
 msgstr "Không được kết nối"
 
-#: crates/ui/src/header.rs:145
+#: crates/ui/src/header.rs:146
 msgid "Connect the keyboard via USB."
 msgstr "Hãy kết nối bàn phím qua USB."
 
-#: crates/ui/src/header.rs:147 crates/ui/src/names.rs:275
+#: crates/ui/src/header.rs:148 crates/ui/src/names.rs:276
 msgid "Access to the keyboard is needed"
 msgstr "Cần quyền truy cập bàn phím"
 
-#: crates/ui/src/header.rs:148
+#: crates/ui/src/header.rs:149
 msgid "Add the udev rule for this keyboard, then plug it in again."
 msgstr "Hãy thêm quy tắc udev cho bàn phím này rồi cắm lại."
 
-#: crates/ui/src/header.rs:150
+#: crates/ui/src/header.rs:151
 msgid "The keyboard couldn’t be opened"
 msgstr "Không thể mở bàn phím"
 
-#: crates/ui/src/header.rs:153
+#: crates/ui/src/header.rs:154
 msgid "Asking the keyboard what it is…"
 msgstr "Đang hỏi loại bàn phím…"
 
-#: crates/ui/src/header.rs:154
+#: crates/ui/src/header.rs:155
 msgid "Reading…"
 msgstr "Đang đọc…"
 
-#: crates/ui/src/header.rs:155
+#: crates/ui/src/header.rs:156
 msgid "Saving…"
 msgstr "Đang lưu…"
 
-#: crates/ui/src/header.rs:156
+#: crates/ui/src/header.rs:157
 msgid "Simulated Keyboard"
 msgstr "Bàn phím mô phỏng"
 
-#: crates/ui/src/header.rs:157
+#: crates/ui/src/header.rs:158
 msgid "Connected"
 msgstr "Đã kết nối"
 
-#: crates/ui/src/header.rs:160 crates/ui/src/names.rs:295 crates/ui/src/names.rs:297
+#: crates/ui/src/header.rs:161 crates/ui/src/names.rs:296 crates/ui/src/names.rs:298
 msgid "%@ · %@"
 msgstr "%@ · %@"
 
-#: crates/ui/src/header.rs:183 crates/ui/src/inspector.rs:112
+#: crates/ui/src/header.rs:184 crates/ui/src/inspector.rs:112
 msgid "Layer %lld"
 msgstr "Lớp %lld"
 
-#: crates/ui/src/header.rs:227
+#: crates/ui/src/header.rs:228
 msgid "Not provided by the keyboard"
 msgstr "Bàn phím không cung cấp"
 
-#: crates/ui/src/header.rs:236
+#: crates/ui/src/header.rs:237
 msgid "Name"
 msgstr "Tên"
 
-#: crates/ui/src/header.rs:237
+#: crates/ui/src/header.rs:238
 msgid "Manufacturer"
 msgstr "Nhà sản xuất"
 
-#: crates/ui/src/header.rs:238
+#: crates/ui/src/header.rs:239
 msgid "Serial Number"
 msgstr "Số sê-ri"
 
-#: crates/ui/src/header.rs:240
+#: crates/ui/src/header.rs:241
 msgid "Chip"
 msgstr "Chip"
 
-#: crates/ui/src/header.rs:242
+#: crates/ui/src/header.rs:243
 msgid "Firmware"
 msgstr "Chương trình cơ sở"
 
-#: crates/ui/src/header.rs:262
+#: crates/ui/src/header.rs:263
 msgid "Power"
 msgstr "Nguồn"
 
-#: crates/ui/src/header.rs:271
+#: crates/ui/src/header.rs:272
 msgid "Interfaces"
 msgstr "Giao diện"
 
-#: crates/ui/src/header.rs:273 crates/ui/src/names.rs:146
+#: crates/ui/src/header.rs:274 crates/ui/src/names.rs:146
 msgid "Configuration Channel"
 msgstr "Kênh cấu hình"
 
-#: crates/ui/src/header.rs:274
+#: crates/ui/src/header.rs:275
 msgid "Commands"
 msgstr "Bộ lệnh"
 
-#: crates/ui/src/inspector.rs:37 crates/ui/src/names.rs:210 crates/ui/src/pages.rs:694
+#: crates/ui/src/inspector.rs:37 crates/ui/src/names.rs:211 crates/ui/src/pages.rs:694
 msgid "Select a key or knob."
 msgstr "Hãy chọn phím hoặc núm xoay."
 
@@ -194,7 +198,7 @@ msgstr "Hãy chọn phím hoặc núm xoay."
 msgid "Clear"
 msgstr "Xóa"
 
-#: crates/ui/src/inspector.rs:45 crates/ui/src/window.rs:277
+#: crates/ui/src/inspector.rs:45 crates/ui/src/window.rs:295
 msgid "Clear Layer"
 msgstr "Xóa lớp"
 
@@ -238,7 +242,7 @@ msgstr "Mở rộng tất cả"
 msgid "No packets yet."
 msgstr "Chưa có gói tin nào."
 
-#: crates/ui/src/log_window.rs:76 crates/ui/src/window.rs:280
+#: crates/ui/src/log_window.rs:76 crates/ui/src/window.rs:298
 msgid "Device Log"
 msgstr "Nhật ký thiết bị"
 
@@ -250,7 +254,7 @@ msgstr "Gói tin: %lld"
 msgid "Expand"
 msgstr "Mở rộng"
 
-#: crates/ui/src/log_window.rs:197 crates/ui/src/names.rs:314
+#: crates/ui/src/log_window.rs:197 crates/ui/src/names.rs:315
 msgid "%lld bytes"
 msgstr "%lld byte"
 
@@ -551,190 +555,190 @@ msgid "Delay"
 msgstr "Độ trễ"
 
 #: crates/ui/src/names.rs:202
+msgid "Saved to the simulator — nothing was written to a keyboard."
+msgstr "Đã lưu vào trình mô phỏng — không ghi gì vào bàn phím."
+
+#: crates/ui/src/names.rs:203
 msgid "Saved to the keyboard."
 msgstr "Đã lưu vào bàn phím."
 
-#: crates/ui/src/names.rs:203
+#: crates/ui/src/names.rs:204
 msgid "Read from the keyboard."
 msgstr "Đã đọc từ bàn phím."
 
-#: crates/ui/src/names.rs:204
+#: crates/ui/src/names.rs:205
 msgid "Nothing to save — no key has changed."
 msgstr "Không có gì để lưu — chưa có phím nào thay đổi."
 
-#: crates/ui/src/names.rs:205
+#: crates/ui/src/names.rs:206
 msgid "The keyboard couldn’t be asked what it is."
 msgstr "Không thể hỏi loại bàn phím."
 
-#: crates/ui/src/names.rs:206
+#: crates/ui/src/names.rs:207
 msgid "Reading from the keyboard failed."
 msgstr "Không thể đọc từ bàn phím."
 
-#: crates/ui/src/names.rs:207 crates/ui/src/names.rs:277
+#: crates/ui/src/names.rs:208 crates/ui/src/names.rs:278
 msgid "Writing to the keyboard failed (%@)."
 msgstr "Không thể ghi vào bàn phím (%@)."
 
-#: crates/ui/src/names.rs:208
+#: crates/ui/src/names.rs:209
 msgid "The keyboard is no longer connected."
 msgstr "Bàn phím không còn được kết nối."
 
-#: crates/ui/src/names.rs:209
+#: crates/ui/src/names.rs:210
 msgid "A key holds up to %lld presses."
 msgstr "Mỗi phím chứa tối đa %lld lần nhấn."
 
-#: crates/ui/src/names.rs:212
+#: crates/ui/src/names.rs:213
 msgid "Modifiers alone make the key a modifier key, so they can’t go with other presses."
 msgstr "Chỉ phím bổ trợ sẽ biến phím thành phím bổ trợ, nên không thể đi cùng các lần nhấn khác."
 
-#: crates/ui/src/names.rs:214
+#: crates/ui/src/names.rs:215
 msgid "Only keys 1–%lld have a color. Select one of them."
 msgstr "Chỉ phím 1–%lld có màu. Hãy chọn một trong số đó."
 
-#: crates/ui/src/names.rs:215
+#: crates/ui/src/names.rs:216
 msgid "This keyboard can’t do that."
 msgstr "Bàn phím này không làm được việc đó."
 
-#: crates/ui/src/names.rs:225
+#: crates/ui/src/names.rs:226
 msgid "Media Key %@"
 msgstr "Phím đa phương tiện %@"
 
-#: crates/ui/src/names.rs:234
+#: crates/ui/src/names.rs:235
 msgid "Enter"
 msgstr "Enter"
 
-#: crates/ui/src/names.rs:235
+#: crates/ui/src/names.rs:236
 msgid "Escape"
 msgstr "Escape"
 
-#: crates/ui/src/names.rs:236
+#: crates/ui/src/names.rs:237
 msgid "Backspace"
 msgstr "Backspace"
 
-#: crates/ui/src/names.rs:237
+#: crates/ui/src/names.rs:238
 msgid "Tab"
 msgstr "Tab"
 
-#: crates/ui/src/names.rs:238
+#: crates/ui/src/names.rs:239
 msgid "Space"
 msgstr "Phím cách"
 
-#: crates/ui/src/names.rs:239
+#: crates/ui/src/names.rs:240
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: crates/ui/src/names.rs:240
+#: crates/ui/src/names.rs:241
 msgid "Menu Key"
 msgstr "Phím Menu"
 
-#: crates/ui/src/names.rs:241
+#: crates/ui/src/names.rs:242
 msgid "Print Screen"
 msgstr "In Màn hình"
 
-#: crates/ui/src/names.rs:242
+#: crates/ui/src/names.rs:243
 msgid "Scroll Lock"
 msgstr "Khóa Cuộn"
 
-#: crates/ui/src/names.rs:243
+#: crates/ui/src/names.rs:244
 msgid "Insert"
 msgstr "Insert"
 
-#: crates/ui/src/names.rs:244
+#: crates/ui/src/names.rs:245
 msgid "Home"
 msgstr "Home"
 
-#: crates/ui/src/names.rs:245
+#: crates/ui/src/names.rs:246
 msgid "Page Up"
 msgstr "Page Up"
 
-#: crates/ui/src/names.rs:246
+#: crates/ui/src/names.rs:247
 msgid "Delete"
 msgstr "Delete"
 
-#: crates/ui/src/names.rs:247
+#: crates/ui/src/names.rs:248
 msgid "End"
 msgstr "End"
 
-#: crates/ui/src/names.rs:248
+#: crates/ui/src/names.rs:249
 msgid "Page Down"
 msgstr "Page Down"
 
-#: crates/ui/src/names.rs:249
+#: crates/ui/src/names.rs:250
 msgid "Right Arrow"
 msgstr "Mũi tên phải"
 
-#: crates/ui/src/names.rs:250
+#: crates/ui/src/names.rs:251
 msgid "Left Arrow"
 msgstr "Mũi tên trái"
 
-#: crates/ui/src/names.rs:251
+#: crates/ui/src/names.rs:252
 msgid "Down Arrow"
 msgstr "Mũi tên xuống"
 
-#: crates/ui/src/names.rs:252
+#: crates/ui/src/names.rs:253
 msgid "Up Arrow"
 msgstr "Mũi tên lên"
 
-#: crates/ui/src/names.rs:253
+#: crates/ui/src/names.rs:254
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#: crates/ui/src/names.rs:254
+#: crates/ui/src/names.rs:255
 msgid "Keypad Enter"
 msgstr "Enter (bàn phím số)"
 
-#: crates/ui/src/names.rs:264
+#: crates/ui/src/names.rs:265
 msgid "Keypad %@"
 msgstr "Bàn phím số %@"
 
-#: crates/ui/src/names.rs:266
+#: crates/ui/src/names.rs:267
 msgid "Non-US Key %@ %@"
 msgstr "Phím ngoài bố cục Mỹ %1$@ %2$@"
 
-#: crates/ui/src/names.rs:273
+#: crates/ui/src/names.rs:274
 msgid "Looking for the keyboard"
 msgstr "Đang tìm bàn phím"
 
-#: crates/ui/src/names.rs:274
+#: crates/ui/src/names.rs:275
 msgid "Connected to %@, interface %lld"
 msgstr "Đã kết nối với %1$@, giao diện %2$lld"
 
-#: crates/ui/src/names.rs:276
+#: crates/ui/src/names.rs:277
 msgid "The keyboard couldn’t be opened (%@)."
 msgstr "Không thể mở bàn phím (%@)."
 
-#: crates/ui/src/names.rs:278
+#: crates/ui/src/names.rs:279
 msgid "Simulated keyboard: %@"
 msgstr "Bàn phím mô phỏng: %@"
 
-#: crates/ui/src/names.rs:293 crates/ui/src/names.rs:313 crates/ui/src/names.rs:321
+#: crates/ui/src/names.rs:294 crates/ui/src/names.rs:314 crates/ui/src/names.rs:322
 msgid "Report ID %lld"
 msgstr "ID báo cáo %lld"
 
-#: crates/ui/src/names.rs:295
+#: crates/ui/src/names.rs:296
 msgid "Keys: %lld · Knobs: %lld · Type %lld"
 msgstr "Phím: %1$lld · Núm xoay: %2$lld · Loại %3$lld"
 
-#: crates/ui/src/names.rs:306 crates/ui/src/window.rs:390
-msgid "Simulator"
-msgstr "Trình mô phỏng"
-
-#: crates/ui/src/names.rs:308
+#: crates/ui/src/names.rs:309
 msgid "Interface %lld · %@ · %@ · %@"
 msgstr "Giao diện %1$lld · %2$@ · %3$@ · %4$@"
 
-#: crates/ui/src/names.rs:321
+#: crates/ui/src/names.rs:322
 msgid "8890 Packets · %@"
 msgstr "Gói tin 8890 · %@"
 
-#: crates/ui/src/names.rs:322
+#: crates/ui/src/names.rs:323
 msgid "884x · Standard Firmware (Type 10)"
 msgstr "884x · Chương trình cơ sở chuẩn (loại 10)"
 
-#: crates/ui/src/names.rs:323
+#: crates/ui/src/names.rs:324
 msgid "884x · Legacy Firmware"
 msgstr "884x · Chương trình cơ sở cũ"
 
-#: crates/ui/src/names.rs:324
+#: crates/ui/src/names.rs:325
 msgid "884x · Doesn’t Answer Identification"
 msgstr "884x · Không trả lời loại bàn phím"
 
@@ -850,7 +854,7 @@ msgstr "Giao diện"
 msgid "UI"
 msgstr "UI"
 
-#: crates/ui/src/preferences.rs:62 crates/ui/src/window.rs:284
+#: crates/ui/src/preferences.rs:62 crates/ui/src/window.rs:302
 msgid "Preferences"
 msgstr "Tùy chỉnh"
 
@@ -890,42 +894,54 @@ msgstr "Để sau"
 msgid "Relaunch Now"
 msgstr "Khởi chạy lại ngay bây giờ"
 
-#: crates/ui/src/window.rs:63
+#: crates/ui/src/window.rs:68
 msgid "Keys appear here once the keyboard is connected."
 msgstr "Các phím sẽ xuất hiện ở đây khi bạn kết nối bàn phím."
 
-#: crates/ui/src/window.rs:76 crates/ui/src/window.rs:279
+#: crates/ui/src/window.rs:81 crates/ui/src/window.rs:297
 msgid "Shape…"
 msgstr "Hình dạng…"
 
-#: crates/ui/src/window.rs:119
+#: crates/ui/src/window.rs:134
 msgid "Download"
 msgstr "Tải về"
 
-#: crates/ui/src/window.rs:277
+#: crates/ui/src/window.rs:295
 msgid "Clear Key"
 msgstr "Xóa phím"
 
-#: crates/ui/src/window.rs:286
+#: crates/ui/src/window.rs:304
 msgid "Check for Updates…"
 msgstr "Kiểm tra bản cập nhật…"
 
-#: crates/ui/src/window.rs:288
+#: crates/ui/src/window.rs:306
 msgid "About %@"
 msgstr "Giới thiệu về %@"
 
-#: crates/ui/src/window.rs:339
+#: crates/ui/src/window.rs:357
 msgid "%@ is up to date."
 msgstr "%@ đã là phiên bản mới nhất."
 
-#: crates/ui/src/window.rs:340
+#: crates/ui/src/window.rs:358
 msgid "Couldn’t check for updates."
 msgstr "Không thể kiểm tra bản cập nhật."
 
-#: crates/ui/src/window.rs:347
+#: crates/ui/src/window.rs:365
 msgid "%1$@ %2$@ is available."
 msgstr "Đã có %1$@ %2$@."
 
-#: crates/ui/src/window.rs:375
+#: crates/ui/src/window.rs:390
 msgid "Keyboard on USB"
 msgstr "Bàn phím qua USB"
+
+#: crates/ui/src/window.rs:531
+msgid "Simulator in use"
+msgstr "Đang dùng trình mô phỏng"
+
+#: crates/ui/src/window.rs:534
+msgid "This isn't a real keyboard. Nothing you save here is written to any keyboard."
+msgstr "Đây không phải bàn phím thật. Những gì bạn lưu ở đây sẽ không được ghi vào bàn phím nào."
+
+#: crates/ui/src/window.rs:542
+msgid "Back to the Keyboard on USB"
+msgstr "Quay lại bàn phím qua USB"

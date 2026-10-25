@@ -132,10 +132,11 @@ impl Header {
         let editor = &self.editor;
         let status = editor.status();
         let activity = editor.activity();
-        for class in ["connected", "identifying", "permission", "disconnected"] {
+        for class in ["connected", "simulated", "identifying", "permission", "disconnected"] {
             self.dot.remove_css_class(class);
         }
         self.dot.add_css_class(match &status {
+            ConnectionStatus::Connected { is_simulated: true, .. } => "simulated",
             ConnectionStatus::Connected { is_identified: true, .. } => "connected",
             ConnectionStatus::Connected { .. } => "identifying",
             ConnectionStatus::NeedsPermission => "permission",

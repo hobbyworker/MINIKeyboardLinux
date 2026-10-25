@@ -1,5 +1,5 @@
-//! Keyboards that exist only in the app, for trying every keyboard without owning it (debug builds). They
-//! take the same reports a real one does, through the same codecs, and answer as their firmware would.
+//! Keyboards that exist only in the app, for trying every keyboard without owning it. They take the same
+//! reports a real one does, through the same codecs, and answer as their firmware would.
 
 use std::cell::RefCell;
 use std::collections::{HashMap, VecDeque};

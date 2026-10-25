@@ -89,6 +89,7 @@ button.canvas-control .caption {
 }
 
 .status-dot.connected { background-color: @success_color; }
+.status-dot.simulated { background-color: #c2410c; }
 .status-dot.identifying { background-color: @warning_color; }
 .status-dot.permission { background-color: @warning_color; }
 .status-dot.disconnected { background-color: @error_color; }
@@ -130,4 +131,25 @@ button.canvas-control .caption {
 
 .unsaved {
   color: @warning_color;
+}
+
+/* The simulator, said loudly — nothing saved then reaches a keyboard: a bar across the window, and a badge on the
+   keyboard's top edge (canvas.rs). One orange, in both light and dark, with white on it. */
+.simulator-bar {
+  background-color: #c2410c;
+  color: white;
+  padding: 10px 16px 10px 20px;
+}
+
+.simulator-bar .title {
+  font-weight: 800;
+  font-size: 1.15em;
+}
+
+.simulator-badge {
+  background-color: #c2410c;
+  color: white;
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 3px 12px 5px 12px;
 }

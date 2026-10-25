@@ -30,7 +30,7 @@ pub struct EditorDependencies {
     pub choose_layout: ChooseLayoutUseCase,
     pub read_keyboard: ReadKeyboardUseCase,
     pub save_keyboard: SaveKeyboardUseCase,
-    /// The simulator's switch, in debug builds.
+    /// The simulator's switch.
     pub keyboard_source: Option<KeyboardSourceUseCase>,
 }
 
@@ -59,7 +59,7 @@ pub(crate) struct State {
     pub(crate) selection: Option<ControlId>,
     /// Modifiers picked for the next key.
     pub(crate) held: Modifiers,
-    /// The keyboard on USB, or a simulated one (debug builds).
+    /// The keyboard on USB, or a simulated one.
     pub(crate) source: KeyboardSource,
 }
 
@@ -374,7 +374,8 @@ impl EditorModel {
             match result {
                 Ok(SaveOutcome::Saved(saved)) => {
                     state.configuration = saved;
-                    state.show(Notice::Saved);
+                    let simulated = matches!(state.source, KeyboardSource::Simulated(_));
+                    state.show(Notice::Saved { simulated });
                 }
                 Ok(SaveOutcome::NothingToSave) => state.show(Notice::NothingToSave),
                 Err(KeyboardDeviceError::WriteFailed { code }) => state.show(Notice::WriteFailed(code)),
@@ -536,7 +537,7 @@ impl EditorModel {
         self.deps.keyboard_source.is_some()
     }
 
-    /// Every keyboard the simulator plays, when it is wired in (debug builds).
+    /// Every keyboard the simulator plays, when it is wired in.
     pub fn simulator_choices(&self) -> Vec<SimulatorChoice> {
         if self.deps.keyboard_source.is_none() {
             return vec![];

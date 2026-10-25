@@ -76,13 +76,13 @@ pub enum DeviceLogEvent {
     WriteFailed {
         code: i32,
     },
-    /// A simulated keyboard took the place of the one on USB (debug builds).
+    /// A simulated keyboard took the place of the one on USB.
     Simulated {
         model_id: String,
     },
 }
 
-/// Which keyboard the app talks to: the one on USB, or one that exists only in the app (debug builds).
+/// Which keyboard the app talks to: the one on USB, or one that exists only in the app.
 #[derive(Clone, Debug, Default, PartialEq, Eq, Hash)]
 pub enum KeyboardSource {
     #[default]

@@ -29,7 +29,10 @@ pub enum Activity {
 /// A message that comes and goes.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum Notice {
-    Saved,
+    /// Saved; to a simulated keyboard when `simulated` — nothing went to a real one.
+    Saved {
+        simulated: bool,
+    },
     ReadComplete,
     NothingToSave,
     IdentifyFailed,
@@ -46,12 +49,16 @@ pub enum Notice {
 
 impl Notice {
     pub fn is_error(self) -> bool {
-        !matches!(self, Self::Saved | Self::ReadComplete | Self::NothingToSave)
+        !matches!(self, Self::Saved { .. } | Self::ReadComplete | Self::NothingToSave)
     }
 
     /// How long it stays.
     pub fn lifetime(self) -> Duration {
-        if self.is_error() { Duration::from_secs(6) } else { Duration::from_millis(2500) }
+        match self {
+            _ if self.is_error() => Duration::from_secs(6),
+            Self::Saved { simulated: true } => Duration::from_secs(4),
+            _ => Duration::from_millis(2500),
+        }
     }
 }
 
