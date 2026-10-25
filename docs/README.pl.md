@@ -17,6 +17,8 @@ każdego klawisza i każdej akcji pokrętła (obrót w lewo, naciśnięcie, obr�
 naciśnięcia klawiszy, klawisz multimedialny lub akcję myszy, a także podświetlenie klawiatury. To linuksowy
 odpowiednik aplikacji na macOS opartej na tych samych regułach; obie używają tych samych poleceń.
 
+<p align="center"><img src="../.github/devices.png" width="560" alt="Dwie małe klawiatury makr USB: sześć klawiszy i pokrętło, dwanaście klawiszy i dwa pokrętła"></p>
+
 | Klawiatura | Układ | Odczyt | Opóźnienie | Podświetlenie | Sprawdzono |
 |---|---|---|---|---|---|
 | `1189:8890` | ustawiasz go sam — klawisze (do 12), klawisze w rzędzie, pokrętła (do 2) | nie | nie | trzy tryby | tak — 6 klawiszy i pokrętło |

@@ -18,6 +18,8 @@ define en las capas 1–3 pulsaciones de teclas, una tecla multimedia o una acci
 iluminación del teclado. Es la versión para Linux de una app para macOS creada con las mismas reglas, y usa los
 mismos comandos.
 
+<p align="center"><img src="../.github/devices.png" width="560" alt="Dos pequeños teclados de macros USB: seis teclas y un botón giratorio, doce teclas y dos botones giratorios"></p>
+
 | Teclado | Disposición | Lectura | Demora | Iluminación | Probado |
 |---|---|---|---|---|---|
 | `1189:8890` | la defines tú — teclas (hasta 12), teclas por fila, botones giratorios (hasta 2) | no | no | tres modos | sí — 6 teclas y un botón giratorio |

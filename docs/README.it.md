@@ -17,6 +17,8 @@ una sola manopola fino a 21 tasti, con al massimo quattro manopole. Per ogni azi
 un’azione del mouse, oltre all’illuminazione della tastiera. È la versione per Linux di un’app per macOS costruita
 sulle stesse regole, e usa gli stessi comandi.
 
+<p align="center"><img src="../.github/devices.png" width="560" alt="Due piccole tastiere macro USB: sei tasti e una manopola, dodici tasti e due manopole"></p>
+
 | Tastiera | Disposizione | Lettura | Ritardo | Illuminazione | Provata |
 |---|---|---|---|---|---|
 | `1189:8890` | la decidi tu – tasti (fino a 12), tasti per riga, manopole (fino a 2) | no | nessuno | tre modalità | sì – 6 tasti e una manopola |

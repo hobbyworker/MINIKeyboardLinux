@@ -17,6 +17,8 @@ touche ou d’un bouton rotatif (rotation à gauche, appui, rotation à droite),
 frappes, une touche multimédia ou une action de la souris, ainsi que l’éclairage du clavier. C’est la version Linux
 d’une app macOS construite selon les mêmes règles, et elle utilise les mêmes commandes.
 
+<p align="center"><img src="../.github/devices.png" width="560" alt="Deux petits claviers de macros USB : six touches et un bouton rotatif, douze touches et deux boutons rotatifs"></p>
+
 | Clavier | Disposition | Lecture | Délai | Éclairage | Testé |
 |---|---|---|---|---|---|
 | `1189:8890` | définie par vous – touches (jusqu’à 12), touches par rangée, boutons rotatifs (jusqu’à 2) | non | aucun | trois modes | oui – 6 touches et un bouton rotatif |

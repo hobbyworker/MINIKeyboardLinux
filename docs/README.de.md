@@ -17,6 +17,8 @@ Drehknopfs (nach links drehen, drücken, nach rechts drehen) legt sie auf den Eb
 Multimedia-Taste oder eine Mausaktion fest, außerdem die Beleuchtung der Tastatur. Sie ist das Linux-Gegenstück zu
 einer macOS-App, die nach denselben Regeln gebaut ist, und verwendet dieselben Befehle.
 
+<p align="center"><img src="../.github/devices.png" width="560" alt="Zwei kleine USB-Makrotastaturen: sechs Tasten und ein Drehknopf, zwölf Tasten und zwei Drehknöpfe"></p>
+
 | Tastatur | Anordnung | Auslesen | Verzögerung | Beleuchtung | Getestet |
 |---|---|---|---|---|---|
 | `1189:8890` | legst du fest – Tasten (bis zu 12), Tasten pro Reihe, Drehknöpfe (bis zu 2) | nein | keine | drei Modi | ja – 6 Tasten und ein Drehknopf |

@@ -16,6 +16,8 @@ cho đến bản 21 phím, với tối đa bốn núm xoay. Với từng phím v
 sang phải), bạn có thể gán thao tác nhấn phím, phím đa phương tiện hoặc tác vụ chuột cho lớp 1–3, và đặt cả đèn của bàn
 phím. Đây là phiên bản Linux của một ứng dụng macOS được làm theo cùng các quy tắc, và dùng cùng các lệnh.
 
+<p align="center"><img src="../.github/devices.png" width="560" alt="Hai bàn phím macro USB nhỏ: 6 phím và 1 núm xoay, 12 phím và 2 núm xoay"></p>
+
 | Bàn phím | Bố cục | Đọc lại | Độ trễ | Đèn | Thử thực tế |
 |---|---|---|---|---|---|
 | `1189:8890` | bạn tự đặt — phím (tối đa 12), số phím mỗi hàng, núm xoay (tối đa 2) | không | không có | ba chế độ | đã thử — 6 phím, 1 núm xoay |
