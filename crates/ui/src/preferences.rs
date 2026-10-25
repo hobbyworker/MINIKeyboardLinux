@@ -1,5 +1,5 @@
-//! Preferences — the automatic update check (in a build with a feed), the interface language, and light or dark —
-//! and About.
+//! Preferences — what the app sends a keyboard and the automatic update check (in a build with a feed), the interface
+//! language, and light or dark — and About.
 
 use std::rc::Rc;
 
@@ -60,7 +60,24 @@ pub fn preferences_dialog(
     let page = adw::PreferencesPage::builder().title(t("UI")).icon_name("applications-graphics-symbolic").build();
     page.add(&group);
     let dialog = adw::PreferencesDialog::builder().title(t("Preferences")).build();
-    // General holds only the update check, so a build without a feed leaves it out (as the macOS app does).
+    // General: what the app sends a keyboard, and the update check in a build with a feed (as the macOS app does).
+    let general = adw::PreferencesPage::builder().title(t("General")).icon_name("emblem-system-symbolic").build();
+    {
+        let repeat = adw::SwitchRow::builder()
+            .title(t("Prevent key repeat after changing the lighting"))
+            .active(choices.prevent_lighting_key_repeat)
+            .build();
+        let settings = settings.clone();
+        repeat.connect_active_notify(move |row| {
+            settings.update(|choices| choices.prevent_lighting_key_repeat = row.is_active());
+        });
+        let keyboard = adw::PreferencesGroup::builder()
+            .title(gtk::glib::markup_escape_text(&t("Keyboard")))
+            .description(gtk::glib::markup_escape_text(&t("After its lighting is saved, the 1189:8890 keyboard repeats a key's first stroke without end when the key is pressed (its maker's software does the same). With this on, the app sends one more save after the lighting to stop that; the keys stay as they were. Off, the app sends just what the maker's software sends.")))
+            .build();
+        keyboard.add(&repeat);
+        general.add(&keyboard);
+    }
     if app.update_feed.is_some() {
         let check = adw::SwitchRow::builder()
             .title(t("Check for updates automatically"))
@@ -70,10 +87,9 @@ pub fn preferences_dialog(
         check.connect_active_notify(move |row| settings.update(|choices| choices.check_for_updates = row.is_active()));
         let updates = adw::PreferencesGroup::new();
         updates.add(&check);
-        let general = adw::PreferencesPage::builder().title(t("General")).icon_name("emblem-system-symbolic").build();
         general.add(&updates);
-        dialog.add(&general);
     }
+    dialog.add(&general);
     dialog.add(&page);
 
     {

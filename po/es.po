@@ -474,7 +474,7 @@ msgstr "Azul"
 msgid "Purple"
 msgstr "Morado"
 
-#: crates/ui/src/names.rs:143
+#: crates/ui/src/names.rs:143 crates/ui/src/preferences.rs:75
 msgid "Keyboard"
 msgstr "Teclado"
 
@@ -854,27 +854,35 @@ msgstr "UI"
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: crates/ui/src/preferences.rs:66
-msgid "Check for updates automatically"
-msgstr "Buscar actualizaciones automáticamente"
-
-#: crates/ui/src/preferences.rs:73
+#: crates/ui/src/preferences.rs:64
 msgid "General"
 msgstr "General"
 
-#: crates/ui/src/preferences.rs:108
+#: crates/ui/src/preferences.rs:67
+msgid "Prevent key repeat after changing the lighting"
+msgstr "Evitar la repetición de teclas tras cambiar la iluminación"
+
+#: crates/ui/src/preferences.rs:76
+msgid "After its lighting is saved, the 1189:8890 keyboard repeats a key's first stroke without end when the key is pressed (its maker's software does the same). With this on, the app sends one more save after the lighting to stop that; the keys stay as they were. Off, the app sends just what the maker's software sends."
+msgstr "Después de guardar la iluminación, el teclado 1189:8890 repite sin parar el primer carácter de una tecla al pulsarla (el software del fabricante hace lo mismo). Si está activado, la app envía una orden de guardado más después de la iluminación para evitarlo; la configuración de las teclas no cambia. Si está desactivado, la app envía solo lo mismo que el software del fabricante."
+
+#: crates/ui/src/preferences.rs:83
+msgid "Check for updates automatically"
+msgstr "Buscar actualizaciones automáticamente"
+
+#: crates/ui/src/preferences.rs:124
 msgid "Language Changed"
 msgstr "Se ha cambiado el idioma"
 
-#: crates/ui/src/preferences.rs:109
+#: crates/ui/src/preferences.rs:125
 msgid "%@ needs to relaunch to apply the change."
 msgstr "%@ debe reiniciarse para aplicar el cambio."
 
-#: crates/ui/src/preferences.rs:111
+#: crates/ui/src/preferences.rs:127
 msgid "Later"
 msgstr "Más tarde"
 
-#: crates/ui/src/preferences.rs:111
+#: crates/ui/src/preferences.rs:127
 msgid "Relaunch Now"
 msgstr "Reiniciar ahora"
 

@@ -134,6 +134,12 @@ Nelle **Preferenze** (Ctrl+,) scegli la lingua dell’interfaccia (una delle 13,
 chiaro o scuro; in una build con un feed degli aggiornamenti, la loro pagina Generali contiene la ricerca automatica
 degli aggiornamenti. In **Informazioni su MINIKeyboard** trovi la versione e le licenze open source.
 
+In **Preferenze ▸ Generali ▸ Tastiera**, **Evita la ripetizione dei tasti dopo aver cambiato l’illuminazione** è
+attivo per impostazione predefinita. Dopo il salvataggio dell’illuminazione, il firmware della `1189:8890` ripete
+all’infinito il primo carattere di un tasto (il software del produttore fa lo stesso), quindi l’app invia un ulteriore
+comando di salvataggio, senza tasti, dopo l’illuminazione. Se lo disattivi, l’app invia solo ciò che invia il software
+del produttore. Questa tastiera, inoltre, dimentica l’illuminazione quando la scolleghi.
+
 ## Struttura
 
 Le regole stanno in crate le cui dipendenze puntano solo verso l’interno: uno strato che cerca di raggiungere

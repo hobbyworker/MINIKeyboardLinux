@@ -72,14 +72,30 @@ fn mouse() {
     );
 }
 
+/// With the setting off, just what the vendor's tool sends.
 #[test]
-fn k8890_lighting() {
+fn k8890_lighting_as_the_vendors_tool() {
     assert_eq!(
-        k8890::download_lighting(2, 0, 3),
+        k8890::download_lighting(2, 0, 3, false),
         vec![
             vec![0xA1, 0x01, 0, 0, 0, 0, 0, 0],
             vec![0xB0, 0x18, 0x02, 0, 0, 0, 0, 0],
             vec![0xAA, 0xA1, 0, 0, 0, 0, 0, 0]
+        ]
+    );
+}
+
+/// The lights, their save, and a save with no key in it (it ends the key repeat the lights' save starts).
+#[test]
+fn k8890_lighting() {
+    assert_eq!(
+        k8890::download_lighting(2, 0, 3, true),
+        vec![
+            vec![0xA1, 0x01, 0, 0, 0, 0, 0, 0],
+            vec![0xB0, 0x18, 0x02, 0, 0, 0, 0, 0],
+            vec![0xAA, 0xA1, 0, 0, 0, 0, 0, 0],
+            vec![0xA1, 0x01, 0, 0, 0, 0, 0, 0],
+            vec![0xAA, 0xAA, 0, 0, 0, 0, 0, 0]
         ]
     );
 }
@@ -303,12 +319,14 @@ fn k8890_plan() {
         payloads,
         vec![
             vec![0xA1, 1, 0, 0, 0, 0, 0, 0],
+            vec![0xB0, 0x18, 1, 0, 0, 0, 0, 0],
+            vec![0xAA, 0xA1, 0, 0, 0, 0, 0, 0],
+            vec![0xA1, 1, 0, 0, 0, 0, 0, 0],
+            vec![0xAA, 0xAA, 0, 0, 0, 0, 0, 0],
+            vec![0xA1, 1, 0, 0, 0, 0, 0, 0],
             vec![15, 0x11, 1, 0, 0, 0, 0, 0],
             vec![15, 0x11, 1, 1, 0, 0x04, 0, 0],
             vec![0xAA, 0xAA, 0, 0, 0, 0, 0, 0],
-            vec![0xA1, 1, 0, 0, 0, 0, 0, 0],
-            vec![0xB0, 0x18, 1, 0, 0, 0, 0, 0],
-            vec![0xAA, 0xA1, 0, 0, 0, 0, 0, 0],
         ]
     );
 }

@@ -40,10 +40,17 @@ pub fn download(
     Ok(packets)
 }
 
-pub fn download_lighting(mode: u8, layer: usize, report_id: u8) -> Vec<Vec<u8>> {
+/// The lights and their save — and, with `ends_key_repeat`, a save with no key in it. After `AA A1` the keyboard
+/// repeats a key's first stroke without end, until the next key save or until it is plugged in again (the vendor's
+/// tool does the same); the bare `AA AA` ends that and leaves the keys as they were.
+pub fn download_lighting(mode: u8, layer: usize, report_id: u8, ends_key_repeat: bool) -> Vec<Vec<u8>> {
     let mut packets = layer_switch(layer, report_id);
     packets.push(pad(&[0xB0, type_byte(Kind::Lighting, layer, report_id), mode]));
     packets.push(pad(&[0xAA, 0xA1]));
+    if ends_key_repeat {
+        packets.extend(layer_switch(layer, report_id));
+        packets.push(pad(&[0xAA, 0xAA]));
+    }
     packets
 }
 

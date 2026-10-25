@@ -474,7 +474,7 @@ msgstr "Blu"
 msgid "Purple"
 msgstr "Viola"
 
-#: crates/ui/src/names.rs:143
+#: crates/ui/src/names.rs:143 crates/ui/src/preferences.rs:75
 msgid "Keyboard"
 msgstr "Tastiera"
 
@@ -854,27 +854,35 @@ msgstr "UI"
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: crates/ui/src/preferences.rs:66
-msgid "Check for updates automatically"
-msgstr "Cerca aggiornamenti automaticamente"
-
-#: crates/ui/src/preferences.rs:73
+#: crates/ui/src/preferences.rs:64
 msgid "General"
 msgstr "Generali"
 
-#: crates/ui/src/preferences.rs:108
+#: crates/ui/src/preferences.rs:67
+msgid "Prevent key repeat after changing the lighting"
+msgstr "Evita la ripetizione dei tasti dopo aver cambiato l’illuminazione"
+
+#: crates/ui/src/preferences.rs:76
+msgid "After its lighting is saved, the 1189:8890 keyboard repeats a key's first stroke without end when the key is pressed (its maker's software does the same). With this on, the app sends one more save after the lighting to stop that; the keys stay as they were. Off, the app sends just what the maker's software sends."
+msgstr "Dopo il salvataggio dell’illuminazione, la tastiera 1189:8890 ripete all’infinito il primo carattere di un tasto quando lo premi (il software del produttore fa lo stesso). Se attivo, l’app invia un ulteriore comando di salvataggio dopo l’illuminazione per evitarlo; le impostazioni dei tasti non cambiano. Se disattivo, l’app invia solo ciò che invia il software del produttore."
+
+#: crates/ui/src/preferences.rs:83
+msgid "Check for updates automatically"
+msgstr "Cerca aggiornamenti automaticamente"
+
+#: crates/ui/src/preferences.rs:124
 msgid "Language Changed"
 msgstr "Lingua modificata"
 
-#: crates/ui/src/preferences.rs:109
+#: crates/ui/src/preferences.rs:125
 msgid "%@ needs to relaunch to apply the change."
 msgstr "%@ deve essere riaperto per applicare la modifica."
 
-#: crates/ui/src/preferences.rs:111
+#: crates/ui/src/preferences.rs:127
 msgid "Later"
 msgstr "Più tardi"
 
-#: crates/ui/src/preferences.rs:111
+#: crates/ui/src/preferences.rs:127
 msgid "Relaunch Now"
 msgstr "Riapri ora"
 

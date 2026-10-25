@@ -26,20 +26,31 @@ impl WritePlan {
         commands: CommandSet,
         layout: &KeyboardLayout,
     ) -> Result<Self, KeyboardDeviceError> {
+        Self::with_lighting_repeat_guard(configuration, commands, layout, true)
+    }
+
+    /// `prevent_lighting_key_repeat`: whether the 1189:8890's lighting save ends with the save that stops its key
+    /// repeat (`k8890::download_lighting`) — a setting, on unless the user turns it off.
+    pub fn with_lighting_repeat_guard(
+        configuration: &KeyboardConfiguration,
+        commands: CommandSet,
+        layout: &KeyboardLayout,
+        prevent_lighting_key_repeat: bool,
+    ) -> Result<Self, KeyboardDeviceError> {
         let mut plan = Self::default();
         let layers = 0..configuration.layer_count();
         match commands {
             CommandSet::Packets { report_id } => {
-                // One key at a time, each saved on its own (`Download_Click`).
+                // The lights, then one key at a time, each saved on its own (`Download_Click`).
                 for layer in layers {
-                    for (control, action) in changes(configuration, layer, layout) {
-                        let Some(number) = numbers::k8890_number(control) else { continue };
-                        plan.append(k8890::download(number, action, layer, report_id)?);
-                    }
                     if configuration.layers()[layer].lighting_changed()
                         && let Some(LayerLighting::Mode(mode)) = configuration.lighting(layer)
                     {
-                        plan.append(k8890::download_lighting(*mode, layer, report_id));
+                        plan.append(k8890::download_lighting(*mode, layer, report_id, prevent_lighting_key_repeat));
+                    }
+                    for (control, action) in changes(configuration, layer, layout) {
+                        let Some(number) = numbers::k8890_number(control) else { continue };
+                        plan.append(k8890::download(number, action, layer, report_id)?);
                     }
                 }
             }

@@ -474,7 +474,7 @@ msgstr "ブルー"
 msgid "Purple"
 msgstr "パープル"
 
-#: crates/ui/src/names.rs:143
+#: crates/ui/src/names.rs:143 crates/ui/src/preferences.rs:75
 msgid "Keyboard"
 msgstr "キーボード"
 
@@ -854,27 +854,35 @@ msgstr "UI"
 msgid "Preferences"
 msgstr "設定"
 
-#: crates/ui/src/preferences.rs:66
-msgid "Check for updates automatically"
-msgstr "アップデートを自動的に確認"
-
-#: crates/ui/src/preferences.rs:73
+#: crates/ui/src/preferences.rs:64
 msgid "General"
 msgstr "一般"
 
-#: crates/ui/src/preferences.rs:108
+#: crates/ui/src/preferences.rs:67
+msgid "Prevent key repeat after changing the lighting"
+msgstr "ライティング変更後のキーの連続入力を防ぐ"
+
+#: crates/ui/src/preferences.rs:76
+msgid "After its lighting is saved, the 1189:8890 keyboard repeats a key's first stroke without end when the key is pressed (its maker's software does the same). With this on, the app sends one more save after the lighting to stop that; the keys stay as they were. Off, the app sends just what the maker's software sends."
+msgstr "1189:8890 キーボードは、ライティングを保存したあとにキーを押すと、最初の文字が止まらずに繰り返し入力されます（メーカーのソフトウェアでも同じです）。オンにすると、ライティングを保存したあとにもう一度保存コマンドを送ってこれを防ぎます。キーの設定は変わりません。オフにすると、メーカーのソフトウェアと同じ内容だけを送ります。"
+
+#: crates/ui/src/preferences.rs:83
+msgid "Check for updates automatically"
+msgstr "アップデートを自動的に確認"
+
+#: crates/ui/src/preferences.rs:124
 msgid "Language Changed"
 msgstr "言語が変更されました"
 
-#: crates/ui/src/preferences.rs:109
+#: crates/ui/src/preferences.rs:125
 msgid "%@ needs to relaunch to apply the change."
 msgstr "変更を適用するには、%@を再起動する必要があります。"
 
-#: crates/ui/src/preferences.rs:111
+#: crates/ui/src/preferences.rs:127
 msgid "Later"
 msgstr "あとで"
 
-#: crates/ui/src/preferences.rs:111
+#: crates/ui/src/preferences.rs:127
 msgid "Relaunch Now"
 msgstr "今すぐ再起動"
 

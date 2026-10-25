@@ -474,7 +474,7 @@ msgstr "Bleu"
 msgid "Purple"
 msgstr "Violet"
 
-#: crates/ui/src/names.rs:143
+#: crates/ui/src/names.rs:143 crates/ui/src/preferences.rs:75
 msgid "Keyboard"
 msgstr "Clavier"
 
@@ -854,27 +854,35 @@ msgstr "UI"
 msgid "Preferences"
 msgstr "Préférences"
 
-#: crates/ui/src/preferences.rs:66
-msgid "Check for updates automatically"
-msgstr "Rechercher les mises à jour automatiquement"
-
-#: crates/ui/src/preferences.rs:73
+#: crates/ui/src/preferences.rs:64
 msgid "General"
 msgstr "Général"
 
-#: crates/ui/src/preferences.rs:108
+#: crates/ui/src/preferences.rs:67
+msgid "Prevent key repeat after changing the lighting"
+msgstr "Empêcher la répétition des touches après un changement d’éclairage"
+
+#: crates/ui/src/preferences.rs:76
+msgid "After its lighting is saved, the 1189:8890 keyboard repeats a key's first stroke without end when the key is pressed (its maker's software does the same). With this on, the app sends one more save after the lighting to stop that; the keys stay as they were. Off, the app sends just what the maker's software sends."
+msgstr "Après l’enregistrement de l’éclairage, le clavier 1189:8890 répète sans fin le premier caractère d’une touche lorsqu’on appuie dessus (le logiciel du fabricant fait de même). Activé, l’app envoie une commande d’enregistrement supplémentaire après l’éclairage pour l’empêcher ; les réglages des touches ne changent pas. Désactivé, l’app envoie uniquement ce qu’envoie le logiciel du fabricant."
+
+#: crates/ui/src/preferences.rs:83
+msgid "Check for updates automatically"
+msgstr "Rechercher les mises à jour automatiquement"
+
+#: crates/ui/src/preferences.rs:124
 msgid "Language Changed"
 msgstr "Langue modifiée"
 
-#: crates/ui/src/preferences.rs:109
+#: crates/ui/src/preferences.rs:125
 msgid "%@ needs to relaunch to apply the change."
 msgstr "%@ doit être relancé pour appliquer ce changement."
 
-#: crates/ui/src/preferences.rs:111
+#: crates/ui/src/preferences.rs:127
 msgid "Later"
 msgstr "Plus tard"
 
-#: crates/ui/src/preferences.rs:111
+#: crates/ui/src/preferences.rs:127
 msgid "Relaunch Now"
 msgstr "Relancer maintenant"
 

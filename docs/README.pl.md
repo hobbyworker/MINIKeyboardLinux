@@ -135,6 +135,12 @@ wszystkie odpowiedzi.
 jasny lub ciemny; w kompilacji z kanałem uaktualnień na ich stronie Ogólne jest też automatyczne sprawdzanie
 uaktualnień. Polecenie **O programie MINIKeyboard** pokazuje wersję i licencje open source.
 
+Opcja **Zapobiegaj powtarzaniu klawiszy po zmianie podświetlenia** (**Preferencje ▸ Ogólne ▸ Klawiatura**) jest
+domyślnie włączona. Oprogramowanie układowe `1189:8890` po zachowaniu podświetlenia bez końca powtarza pierwszy znak
+klawisza (oprogramowanie producenta działa tak samo), dlatego aplikacja po podświetleniu wysyła jeszcze jedno
+polecenie zapisu, bez żadnego klawisza. Gdy opcja jest wyłączona, aplikacja wysyła tylko to, co oprogramowanie
+producenta. Ta klawiatura zapomina też podświetlenie po odłączeniu.
+
 ## Struktura
 
 Reguły znajdują się w crate’ach, których zależności są skierowane tylko do środka — warstwa sięgająca na zewnątrz się

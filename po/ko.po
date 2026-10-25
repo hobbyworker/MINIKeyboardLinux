@@ -474,7 +474,7 @@ msgstr "파란색"
 msgid "Purple"
 msgstr "보라색"
 
-#: crates/ui/src/names.rs:143
+#: crates/ui/src/names.rs:143 crates/ui/src/preferences.rs:75
 msgid "Keyboard"
 msgstr "키보드"
 
@@ -854,27 +854,35 @@ msgstr "UI"
 msgid "Preferences"
 msgstr "기본 설정"
 
-#: crates/ui/src/preferences.rs:66
-msgid "Check for updates automatically"
-msgstr "업데이트 자동 확인"
-
-#: crates/ui/src/preferences.rs:73
+#: crates/ui/src/preferences.rs:64
 msgid "General"
 msgstr "일반"
 
-#: crates/ui/src/preferences.rs:108
+#: crates/ui/src/preferences.rs:67
+msgid "Prevent key repeat after changing the lighting"
+msgstr "조명을 바꾼 뒤 키 반복 막기"
+
+#: crates/ui/src/preferences.rs:76
+msgid "After its lighting is saved, the 1189:8890 keyboard repeats a key's first stroke without end when the key is pressed (its maker's software does the same). With this on, the app sends one more save after the lighting to stop that; the keys stay as they were. Off, the app sends just what the maker's software sends."
+msgstr "1189:8890 키보드는 조명을 저장한 뒤 키를 누르면 첫 글자가 끝없이 반복됩니다 (제조사 프로그램도 같습니다). 켜 두면 조명을 저장한 다음 저장 명령을 한 번 더 보내 이를 막습니다. 키 설정은 바뀌지 않습니다. 끄면 제조사 프로그램과 똑같이 보냅니다."
+
+#: crates/ui/src/preferences.rs:83
+msgid "Check for updates automatically"
+msgstr "업데이트 자동 확인"
+
+#: crates/ui/src/preferences.rs:124
 msgid "Language Changed"
 msgstr "언어가 변경되었습니다"
 
-#: crates/ui/src/preferences.rs:109
+#: crates/ui/src/preferences.rs:125
 msgid "%@ needs to relaunch to apply the change."
 msgstr "변경 사항을 적용하려면 %@를 다시 실행해야 합니다."
 
-#: crates/ui/src/preferences.rs:111
+#: crates/ui/src/preferences.rs:127
 msgid "Later"
 msgstr "나중에"
 
-#: crates/ui/src/preferences.rs:111
+#: crates/ui/src/preferences.rs:127
 msgid "Relaunch Now"
 msgstr "지금 다시 실행"
 

@@ -60,7 +60,12 @@ fn main() -> gtk::glib::ExitCode {
     let log = datalayer::DeviceLogStore::new();
     let profiles: Rc<dyn LayoutProfileRepository> =
         Rc::new(datalayer::FileLayoutProfiles::new(config.join("layouts.json")));
-    let (connection, device, keyboard_source) = connect(&log);
+    // Preferences ▸ General ▸ Keyboard, asked at every write.
+    let prevents_lighting_key_repeat: Rc<dyn Fn() -> bool> = {
+        let settings = settings.clone();
+        Rc::new(move || settings.choices().prevent_lighting_key_repeat)
+    };
+    let (connection, device, keyboard_source) = connect(&log, prevents_lighting_key_repeat);
 
     let editor = EditorModel::new(EditorDependencies {
         observe_connection: ObserveConnectionUseCase::new(connection.clone()),
@@ -82,19 +87,25 @@ type Repositories =
 /// The keyboard on USB or a simulated one, switched from the Simulator menu. `MINIKEYBOARD_SIMULATED_KEYBOARD`
 /// starts on a simulated keyboard (a `SimulatedModel` ID, e.g. `8890-3`).
 #[cfg(debug_assertions)]
-fn connect(log: &datalayer::DeviceLogStore) -> Repositories {
+fn connect(log: &datalayer::DeviceLogStore, prevents_lighting_key_repeat: Rc<dyn Fn() -> bool>) -> Repositories {
     let initial = std::env::var("MINIKEYBOARD_SIMULATED_KEYBOARD")
         .ok()
         .and_then(|id| domain::SimulatedModel::all().into_iter().find(|model| model.id() == id))
         .map_or(domain::KeyboardSource::Hardware, domain::KeyboardSource::Simulated);
     let source = Rc::new(datalayer::KeyboardSourceSwitch::new(log.clone(), initial));
-    let device = Rc::new(datalayer::KeyboardDevice::new(source.clone(), log.clone()));
+    let device = Rc::new(
+        datalayer::KeyboardDevice::new(source.clone(), log.clone())
+            .with_lighting_repeat_guard(prevents_lighting_key_repeat),
+    );
     (source.clone(), device, Some(KeyboardSourceUseCase::new(source)))
 }
 
 #[cfg(not(debug_assertions))]
-fn connect(log: &datalayer::DeviceLogStore) -> Repositories {
+fn connect(log: &datalayer::DeviceLogStore, prevents_lighting_key_repeat: Rc<dyn Fn() -> bool>) -> Repositories {
     let hardware = Rc::new(datalayer::HardwareConnection::start(log.clone()));
-    let device = Rc::new(datalayer::KeyboardDevice::new(hardware.clone(), log.clone()));
+    let device = Rc::new(
+        datalayer::KeyboardDevice::new(hardware.clone(), log.clone())
+            .with_lighting_repeat_guard(prevents_lighting_key_repeat),
+    );
     (hardware, device, None)
 }

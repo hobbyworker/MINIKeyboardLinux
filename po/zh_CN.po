@@ -474,7 +474,7 @@ msgstr "蓝色"
 msgid "Purple"
 msgstr "紫色"
 
-#: crates/ui/src/names.rs:143
+#: crates/ui/src/names.rs:143 crates/ui/src/preferences.rs:75
 msgid "Keyboard"
 msgstr "键盘"
 
@@ -854,27 +854,35 @@ msgstr "UI"
 msgid "Preferences"
 msgstr "首选项"
 
-#: crates/ui/src/preferences.rs:66
-msgid "Check for updates automatically"
-msgstr "自动检查更新"
-
-#: crates/ui/src/preferences.rs:73
+#: crates/ui/src/preferences.rs:64
 msgid "General"
 msgstr "通用"
 
-#: crates/ui/src/preferences.rs:108
+#: crates/ui/src/preferences.rs:67
+msgid "Prevent key repeat after changing the lighting"
+msgstr "更改灯光后防止按键重复"
+
+#: crates/ui/src/preferences.rs:76
+msgid "After its lighting is saved, the 1189:8890 keyboard repeats a key's first stroke without end when the key is pressed (its maker's software does the same). With this on, the app sends one more save after the lighting to stop that; the keys stay as they were. Off, the app sends just what the maker's software sends."
+msgstr "1189:8890 键盘在保存灯光后，按下按键时第一个字符会不停地重复（厂商软件也是如此）。开启后，应用会在保存灯光后再发送一次保存命令来防止这种情况，按键设置不会改变。关闭后，应用只发送与厂商软件相同的内容。"
+
+#: crates/ui/src/preferences.rs:83
+msgid "Check for updates automatically"
+msgstr "自动检查更新"
+
+#: crates/ui/src/preferences.rs:124
 msgid "Language Changed"
 msgstr "语言已更改"
 
-#: crates/ui/src/preferences.rs:109
+#: crates/ui/src/preferences.rs:125
 msgid "%@ needs to relaunch to apply the change."
 msgstr "要应用更改，需要重启 %@。"
 
-#: crates/ui/src/preferences.rs:111
+#: crates/ui/src/preferences.rs:127
 msgid "Later"
 msgstr "稍后"
 
-#: crates/ui/src/preferences.rs:111
+#: crates/ui/src/preferences.rs:127
 msgid "Relaunch Now"
 msgstr "立即重启"
 

@@ -27,11 +27,20 @@ pub struct Choices {
     pub key_arrangement: Option<String>,
     /// Whether a build with an update feed looks at it by itself — at launch and once a day.
     pub check_for_updates: bool,
+    /// Whether the 1189:8890's lighting save ends with the save that stops its key repeat (the vendor's tool doesn't
+    /// send it).
+    pub prevent_lighting_key_repeat: bool,
 }
 
 impl Default for Choices {
     fn default() -> Self {
-        Self { language: None, appearance: Appearance::default(), key_arrangement: None, check_for_updates: true }
+        Self {
+            language: None,
+            appearance: Appearance::default(),
+            key_arrangement: None,
+            check_for_updates: true,
+            prevent_lighting_key_repeat: true,
+        }
     }
 }
 

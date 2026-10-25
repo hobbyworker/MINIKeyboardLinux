@@ -473,7 +473,7 @@ msgstr ""
 msgid "Purple"
 msgstr ""
 
-#: crates/ui/src/names.rs:143
+#: crates/ui/src/names.rs:143 crates/ui/src/preferences.rs:75
 msgid "Keyboard"
 msgstr ""
 
@@ -853,27 +853,35 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
-#: crates/ui/src/preferences.rs:66
-msgid "Check for updates automatically"
-msgstr ""
-
-#: crates/ui/src/preferences.rs:73
+#: crates/ui/src/preferences.rs:64
 msgid "General"
 msgstr ""
 
-#: crates/ui/src/preferences.rs:108
+#: crates/ui/src/preferences.rs:67
+msgid "Prevent key repeat after changing the lighting"
+msgstr ""
+
+#: crates/ui/src/preferences.rs:76
+msgid "After its lighting is saved, the 1189:8890 keyboard repeats a key's first stroke without end when the key is pressed (its maker's software does the same). With this on, the app sends one more save after the lighting to stop that; the keys stay as they were. Off, the app sends just what the maker's software sends."
+msgstr ""
+
+#: crates/ui/src/preferences.rs:83
+msgid "Check for updates automatically"
+msgstr ""
+
+#: crates/ui/src/preferences.rs:124
 msgid "Language Changed"
 msgstr ""
 
-#: crates/ui/src/preferences.rs:109
+#: crates/ui/src/preferences.rs:125
 msgid "%@ needs to relaunch to apply the change."
 msgstr ""
 
-#: crates/ui/src/preferences.rs:111
+#: crates/ui/src/preferences.rs:127
 msgid "Later"
 msgstr ""
 
-#: crates/ui/src/preferences.rs:111
+#: crates/ui/src/preferences.rs:127
 msgid "Relaunch Now"
 msgstr ""
 

@@ -23,6 +23,9 @@ pub struct KeyboardDevice {
     identify_timeout: Duration,
     reply_timeout: Duration,
     pause: Pause,
+    /// Whether a lighting save on the 1189:8890 ends with the save that stops its key repeat — asked at every
+    /// write, so a change in Preferences applies at once (`k8890::download_lighting`).
+    prevents_lighting_key_repeat: Rc<dyn Fn() -> bool>,
 }
 
 impl KeyboardDevice {
@@ -39,7 +42,14 @@ impl KeyboardDevice {
         reply_timeout: Duration,
         pause: Pause,
     ) -> Self {
-        Self { channels, log, identify_timeout, reply_timeout, pause }
+        Self { channels, log, identify_timeout, reply_timeout, pause, prevents_lighting_key_repeat: Rc::new(|| true) }
+    }
+
+    /// Where the device asks, at every write, whether to stop the 1189:8890's key repeat after a lighting save.
+    #[must_use]
+    pub fn with_lighting_repeat_guard(mut self, prevents: Rc<dyn Fn() -> bool>) -> Self {
+        self.prevents_lighting_key_repeat = prevents;
+        self
     }
 
     fn channel(&self) -> Result<Rc<dyn ReportChannel>, KeyboardDeviceError> {
@@ -107,7 +117,12 @@ impl KeyboardDevice {
         commands: CommandSet,
         layout: &KeyboardLayout,
     ) -> Result<(), KeyboardDeviceError> {
-        let plan = WritePlan::new(configuration, commands, layout)?;
+        let plan = WritePlan::with_lighting_repeat_guard(
+            configuration,
+            commands,
+            layout,
+            (self.prevents_lighting_key_repeat)(),
+        )?;
         let channel = self.channel()?;
         for step in plan.steps {
             self.send(&step.payload, channel.as_ref()).await?;
