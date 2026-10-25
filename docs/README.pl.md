@@ -103,12 +103,13 @@ odczytuje ten kanał RSS przy uruchomieniu i raz dziennie — chyba że w Prefer
 prowadzący do strony pobierania nowej wersji. Rozpowszechniane kompilacje aplikacji z tego nie korzystają —
 uaktualnienia dostarcza im Flatpak — więc nie mają ani tej pozycji menu, ani tego ustawienia.
 
-Kompilacje Debug mają podmenu **Symulator**, w którym wypróbujesz aplikację bez danej klawiatury: wybierz `1189:8890`
-z dowolnym ID raportu, klawiaturę o dowolnym układzie z jednym z dwóch rodzajów oprogramowania sprzętowego albo taką,
-która nie podaje swojego typu, a aplikacja zachowa się tak, jakby klawiatura była podłączona — z tymi samymi
-poleceniami, bez wysyłania czegokolwiek przez USB. Ze zmienną `MINIKEYBOARD_SIMULATED_KEYBOARD` (na przykład `8890-3`)
-aplikacja od razu uruchamia się z wybraną klawiaturą. **Dziennik urządzenia** pokazuje wszystkie zapisane raporty i
-wszystkie odpowiedzi.
+Podmenu **Symulator** pozwala wypróbować aplikację bez danej klawiatury: wybierz `1189:8890`, układ z nowszym
+oprogramowaniem sprzętowym albo klawiaturę, która nie podaje swojego typu, a aplikacja zachowa się tak, jakby klawiatura
+była podłączona — z tymi samymi poleceniami, bez wysyłania czegokolwiek przez USB. Gdy symulator jest w użyciu, mówi o tym
+pomarańczowy pasek u góry okna, a **Wróć do klawiatury przez USB** przywraca prawdziwą klawiaturę. Kompilacje Debug
+oferują każdy rodzaj (pozostałe ID raportu `1189:8890`, starsze oprogramowanie sprzętowe), a ze zmienną
+`MINIKEYBOARD_SIMULATED_KEYBOARD` (na przykład `8890-3`) aplikacja od razu uruchamia się z wybraną klawiaturą.
+**Dziennik urządzenia** pokazuje wszystkie zapisane raporty i wszystkie odpowiedzi.
 
 ## Korzystanie
 

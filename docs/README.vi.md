@@ -98,10 +98,11 @@ khởi chạy và mỗi ngày một lần — trừ khi bạn tắt **Tự độ
 **Kiểm tra bản cập nhật…**, rồi hiện một biểu ngữ dẫn đến trang tải xuống của phiên bản mới. Các bản build do chính ứng
 dụng phát hành không dùng tính năng này — bản cập nhật đến qua Flatpak — nên không có mục menu lẫn thiết lập đó.
 
-Bản build Debug có menu con **Trình mô phỏng** để dùng thử ứng dụng mà không cần bàn phím đó. Chọn `1189:8890` với ID
-báo cáo bất kỳ, một bố cục bất kỳ của một trong hai chương trình cơ sở, hoặc bàn phím không cho biết loại, ứng dụng sẽ
-hoạt động như thể bàn phím đang được cắm vào — với cùng các lệnh, không có gì được gửi qua USB.
-`MINIKEYBOARD_SIMULATED_KEYBOARD` (ví dụ `8890-3`) khởi động ứng dụng với bàn phím đó. Trong **Nhật ký thiết bị**, bạn
+Menu con **Trình mô phỏng** giúp dùng thử ứng dụng mà không cần bàn phím đó. Chọn `1189:8890`, một bố cục của chương
+trình cơ sở mới, hoặc bàn phím không cho biết loại, ứng dụng sẽ hoạt động như thể bàn phím đang được cắm vào — với cùng
+các lệnh, không có gì được gửi qua USB. Trong lúc dùng, thanh màu cam ở đầu cửa sổ cho biết điều đó, và **Quay lại bàn
+phím qua USB** để trở lại. Bản build Debug cho chọn mọi loại (các ID báo cáo khác của `1189:8890`, chương trình cơ sở cũ),
+và `MINIKEYBOARD_SIMULATED_KEYBOARD` (ví dụ `8890-3`) khởi động ứng dụng với bàn phím đó. Trong **Nhật ký thiết bị**, bạn
 có thể xem mọi báo cáo đã ghi và mọi phản hồi nhận được.
 
 ## Cách dùng

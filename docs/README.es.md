@@ -104,11 +104,12 @@ Preferencias— y también al pulsar **Buscar actualizaciones…**, y muestra un
 de la versión nueva. Las compilaciones propias de la app no lo usan —sus actualizaciones las trae Flatpak—, así que
 no tienen ese elemento de menú ni ese ajuste.
 
-Las compilaciones Debug tienen un submenú **Simulador** para probar la app sin el teclado en cuestión: elige un
-`1189:8890` con cualquier ID de informe, un teclado con cualquier disposición en cualquiera de los dos firmwares o
-uno que no indique su tipo, y la app actúa como si estuviera conectado, con los mismos comandos y sin enviar nada
-por USB. Con `MINIKEYBOARD_SIMULATED_KEYBOARD` (por ejemplo, `8890-3`), la app arranca con ese teclado.
-**Registro del dispositivo** muestra todos los informes escritos y todas las respuestas.
+El submenú **Simulador** permite probar la app sin el teclado en cuestión: elige un `1189:8890`, una disposición del
+firmware más reciente o un teclado que no indique su tipo, y la app actúa como si estuviera conectado, con los mismos
+comandos y sin enviar nada por USB. Mientras se usa, una barra naranja en la parte superior de la ventana lo indica, y
+**Volver al teclado por USB** vuelve atrás. Las compilaciones Debug ofrecen todos los tipos (los otros ID de informe del
+`1189:8890` y el firmware antiguo), y con `MINIKEYBOARD_SIMULATED_KEYBOARD` (por ejemplo, `8890-3`) la app arranca con
+ese teclado. **Registro del dispositivo** muestra todos los informes escritos y todas las respuestas.
 
 ## Uso
 

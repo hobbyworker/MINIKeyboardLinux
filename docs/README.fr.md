@@ -105,11 +105,12 @@ L’app peut aussi signaler elle-même les nouvelles versions : une compilation 
 version. Les compilations distribuées de l’app ne l’utilisent pas – leurs mises à jour arrivent par Flatpak –, si bien
 qu’elles n’ont ni cet élément de menu ni ce réglage.
 
-Les compilations Debug comportent un sous-menu **Simulateur** pour essayer l’app sans le clavier concerné : choisissez
-un `1189:8890` avec n’importe quel ID de rapport, un clavier de n’importe quelle disposition avec l’un ou l’autre
-programme interne, ou un clavier qui n’indique pas son type, et l’app se comporte comme s’il était branché – avec les
-mêmes commandes, sans que rien ne parte vers l’USB. `MINIKEYBOARD_SIMULATED_KEYBOARD` (par exemple `8890-3`) la fait
-démarrer directement avec l’un d’eux. **Journal de l’appareil** affiche chaque rapport écrit et chaque réponse.
+Le sous-menu **Simulateur** permet d’essayer l’app sans le clavier concerné : choisissez un `1189:8890`, une disposition
+du programme interne récent ou un clavier qui n’indique pas son type, et l’app se comporte comme s’il était branché – avec
+les mêmes commandes, sans que rien ne parte vers l’USB. Tant qu’il est utilisé, une barre orange en haut de la fenêtre le
+signale, et **Revenir au clavier en USB** permet de revenir. Les compilations Debug proposent tous les types (les autres
+ID de rapport du `1189:8890`, l’ancien programme interne), et `MINIKEYBOARD_SIMULATED_KEYBOARD` (par exemple `8890-3`) la
+fait démarrer directement avec l’un d’eux. **Journal de l’appareil** affiche chaque rapport écrit et chaque réponse.
 
 ## Utilisation
 

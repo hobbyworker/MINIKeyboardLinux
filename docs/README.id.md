@@ -103,11 +103,13 @@ dan juga saat **Periksa Pembaruan…** diklik, lalu menampilkan banner yang meng
 Build yang dirilis aplikasi ini sendiri tidak memakainya — pembaruannya diambil oleh Flatpak — sehingga tidak punya
 item menu maupun pengaturan itu.
 
-Build Debug memiliki submenu **Simulator** untuk mencoba aplikasi tanpa papan ketik tersebut. Pilih `1189:8890` dengan
-ID laporan mana pun, tata letak apa pun dari kedua firmware, atau papan ketik yang tidak memberi tahu jenisnya, dan
-aplikasi akan bekerja seolah-olah papan ketik itu tercolok — dengan perintah yang sama, tanpa ada yang dikirim ke USB.
-Dengan `MINIKEYBOARD_SIMULATED_KEYBOARD` (misalnya `8890-3`), aplikasi langsung dimulai dengan papan ketik itu. Di
-**Log Perangkat**, Anda bisa melihat semua laporan yang ditulis dan semua jawaban yang diterima.
+Submenu **Simulator** memungkinkan Anda mencoba aplikasi tanpa papan ketik tersebut. Pilih `1189:8890`, tata letak dari
+firmware baru, atau papan ketik yang tidak memberi tahu jenisnya, dan aplikasi akan bekerja seolah-olah papan ketik itu
+tercolok — dengan perintah yang sama, tanpa ada yang dikirim ke USB. Selama digunakan, bilah oranye di bagian atas jendela
+memberi tahu hal itu, dan **Kembali ke papan ketik di USB** mengembalikannya. Build Debug menawarkan semua jenis (ID laporan
+lain dari `1189:8890`, firmware lama), dan dengan `MINIKEYBOARD_SIMULATED_KEYBOARD` (misalnya `8890-3`), aplikasi langsung
+dimulai dengan papan ketik itu. Di **Log Perangkat**, Anda bisa melihat semua laporan yang ditulis dan semua jawaban yang
+diterima.
 
 ## Cara menggunakan
 

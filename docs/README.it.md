@@ -103,11 +103,12 @@ feed RSS all’avvio e una volta al giorno – a meno che nelle Preferenze non s
 porta alla pagina di download della nuova versione. Le build distribuite dell’app non lo usano – i loro aggiornamenti
 arrivano tramite Flatpak –, quindi non hanno né quella voce di menu né quell’impostazione.
 
-Le build Debug hanno un sottomenu **Simulatore** per provare l’app senza la tastiera in questione: scegli una
-`1189:8890` con qualsiasi ID report, una tastiera con qualsiasi disposizione su uno dei due firmware oppure una che
-non indica il proprio tipo, e l’app si comporta come se fosse collegata – con gli stessi comandi, senza che nulla
-passi per l’USB. Con `MINIKEYBOARD_SIMULATED_KEYBOARD` (per esempio `8890-3`) l’app si avvia direttamente con una di
-queste. **Registro dispositivo** mostra ogni report scritto e ogni risposta.
+Il sottomenu **Simulatore** permette di provare l’app senza la tastiera in questione: scegli una `1189:8890`, una
+disposizione del firmware più recente oppure una tastiera che non indica il proprio tipo, e l’app si comporta come se
+fosse collegata – con gli stessi comandi, senza che nulla passi per l’USB. Mentre è in uso, una barra arancione in cima
+alla finestra lo segnala, e **Torna alla tastiera via USB** riporta indietro. Le build Debug offrono ogni tipo (gli altri
+ID report della `1189:8890`, il firmware più vecchio), e con `MINIKEYBOARD_SIMULATED_KEYBOARD` (per esempio `8890-3`)
+l’app si avvia direttamente con una di queste. **Registro dispositivo** mostra ogni report scritto e ogni risposta.
 
 ## Utilizzo
 

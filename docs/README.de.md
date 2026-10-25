@@ -103,11 +103,13 @@ bei **Nach Updates suchen…** und zeigt dann ein Banner an, das zur Download-Se
 der App selbst nutzen das nicht – ihre Updates bringt Flatpak –, daher haben sie weder diesen Menüpunkt noch diese
 Einstellung.
 
-Debug-Builds haben ein Untermenü **Simulator**, mit dem du die App ohne die betreffende Tastatur ausprobieren kannst:
-Wähle eine `1189:8890` mit beliebiger Report-ID, eine Tastatur mit beliebiger Anordnung auf einer der beiden
-Firmware-Varianten oder eine, die ihren Typ nicht angibt – dann verhält sich die App, als wäre sie angeschlossen, mit
-denselben Befehlen, nur dass nichts über USB hinausgeht. Mit `MINIKEYBOARD_SIMULATED_KEYBOARD` (zum Beispiel `8890-3`)
-startet die App gleich mit einer davon. **Geräteprotokoll** zeigt jeden geschriebenen Report und jede Antwort.
+Im Untermenü **Simulator** kannst du die App ohne die betreffende Tastatur ausprobieren: Wähle eine `1189:8890`, eine
+Anordnung auf der neueren Firmware oder eine Tastatur, die ihren Typ nicht angibt – dann verhält sich die App, als wäre
+sie angeschlossen, mit denselben Befehlen, nur dass nichts über USB hinausgeht. Solange eine simulierte Tastatur aktiv ist,
+sagt das ein orangefarbener Balken oben im Fenster, und **Zurück zur Tastatur am USB** kehrt zurück. Debug-Builds bieten
+jede Art an (die anderen Report-IDs der `1189:8890`, die ältere Firmware), und mit `MINIKEYBOARD_SIMULATED_KEYBOARD`
+(zum Beispiel `8890-3`) startet die App gleich mit einer davon. **Geräteprotokoll** zeigt jeden geschriebenen Report und
+jede Antwort.
 
 ## Verwendung
 

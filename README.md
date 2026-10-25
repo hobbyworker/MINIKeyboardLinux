@@ -95,10 +95,12 @@ launch and once a day — unless **Check for updates automatically** is switched
 **Check for Updates…**, and shows a banner that links to the new version's download page. The app's own builds don't
 use it — Flatpak brings their updates — so they have no such menu item or setting.
 
-Debug builds have a **Simulator** submenu for trying the app without the keyboard in question: pick a `1189:8890`
-with any report ID, a keyboard of any layout on either firmware, or one that doesn't say what it is, and the app
-acts as if it were plugged in — through the same commands, nothing going to USB. `MINIKEYBOARD_SIMULATED_KEYBOARD`
-(for example `8890-3`) starts on one. **Device Log** shows every report written and every answer.
+The **Simulator** submenu lets you try the app without the keyboard in question: pick a `1189:8890`, a layout on
+newer firmware, or a keyboard that doesn't say what it is, and the app acts as if it were plugged in — through the same
+commands, nothing going to USB. While one is in use, an orange bar at the top of the window says so, and **Back to the
+Keyboard on USB** returns. Debug builds offer every kind (the `1189:8890`'s other report IDs, older firmware), and
+`MINIKEYBOARD_SIMULATED_KEYBOARD` (for example `8890-3`) starts on one. **Device Log** shows every report written and
+every answer.
 
 ## Using it
 
