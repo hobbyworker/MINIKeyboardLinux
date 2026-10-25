@@ -474,7 +474,7 @@ msgstr "Biru"
 msgid "Purple"
 msgstr "Ungu"
 
-#: crates/ui/src/names.rs:143 crates/ui/src/preferences.rs:75
+#: crates/ui/src/names.rs:143
 msgid "Keyboard"
 msgstr "Papan ketik"
 
@@ -861,6 +861,10 @@ msgstr "Umum"
 #: crates/ui/src/preferences.rs:67
 msgid "Prevent key repeat after changing the lighting"
 msgstr "Cegah pengulangan tombol setelah mengubah pencahayaan"
+
+#: crates/ui/src/preferences.rs:75
+msgid "Firmware Workarounds"
+msgstr "Penanganan bug firmware"
 
 #: crates/ui/src/preferences.rs:76
 msgid "After its lighting is saved, the 1189:8890 keyboard repeats a key's first stroke without end when the key is pressed (its maker's software does the same). With this on, the app sends one more save after the lighting to stop that; the keys stay as they were. Off, the app sends just what the maker's software sends."

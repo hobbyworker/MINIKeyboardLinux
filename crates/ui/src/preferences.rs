@@ -71,12 +71,12 @@ pub fn preferences_dialog(
         repeat.connect_active_notify(move |row| {
             settings.update(|choices| choices.prevent_lighting_key_repeat = row.is_active());
         });
-        let keyboard = adw::PreferencesGroup::builder()
-            .title(gtk::glib::markup_escape_text(&t("Keyboard")))
+        let workarounds = adw::PreferencesGroup::builder()
+            .title(gtk::glib::markup_escape_text(&t("Firmware Workarounds")))
             .description(gtk::glib::markup_escape_text(&t("After its lighting is saved, the 1189:8890 keyboard repeats a key's first stroke without end when the key is pressed (its maker's software does the same). With this on, the app sends one more save after the lighting to stop that; the keys stay as they were. Off, the app sends just what the maker's software sends.")))
             .build();
-        keyboard.add(&repeat);
-        general.add(&keyboard);
+        workarounds.add(&repeat);
+        general.add(&workarounds);
     }
     if app.update_feed.is_some() {
         let check = adw::SwitchRow::builder()

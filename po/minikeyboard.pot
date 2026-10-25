@@ -473,7 +473,7 @@ msgstr ""
 msgid "Purple"
 msgstr ""
 
-#: crates/ui/src/names.rs:143 crates/ui/src/preferences.rs:75
+#: crates/ui/src/names.rs:143
 msgid "Keyboard"
 msgstr ""
 
@@ -859,6 +859,10 @@ msgstr ""
 
 #: crates/ui/src/preferences.rs:67
 msgid "Prevent key repeat after changing the lighting"
+msgstr ""
+
+#: crates/ui/src/preferences.rs:75
+msgid "Firmware Workarounds"
 msgstr ""
 
 #: crates/ui/src/preferences.rs:76

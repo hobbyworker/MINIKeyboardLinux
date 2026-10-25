@@ -60,7 +60,7 @@ fn main() -> gtk::glib::ExitCode {
     let log = datalayer::DeviceLogStore::new();
     let profiles: Rc<dyn LayoutProfileRepository> =
         Rc::new(datalayer::FileLayoutProfiles::new(config.join("layouts.json")));
-    // Preferences ▸ General ▸ Keyboard, asked at every write.
+    // Preferences ▸ General ▸ Firmware Workarounds, asked at every write.
     let prevents_lighting_key_repeat: Rc<dyn Fn() -> bool> = {
         let settings = settings.clone();
         Rc::new(move || settings.choices().prevent_lighting_key_repeat)

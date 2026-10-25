@@ -134,11 +134,11 @@ En **Preferencias** (Ctrl+,) eliges el idioma de la interfaz (uno de los 13 o el
 oscuro. En una compilación con feed de actualizaciones, su página General incluye la búsqueda automática de
 actualizaciones. En **Acerca de MINIKeyboard** ves la versión y las licencias de código abierto.
 
-En **Preferencias ▸ General ▸ Teclado**, **Evitar la repetición de teclas tras cambiar la iluminación** está activado
-de forma predeterminada. El firmware del `1189:8890` repite sin parar el primer carácter de una tecla después de
-guardar la iluminación (el software del fabricante hace lo mismo), así que la app envía una orden de guardado más, sin
-ninguna tecla, después de la iluminación. Si lo desactivas, la app envía solo lo mismo que el software del fabricante.
-Además, este teclado olvida su iluminación al desconectarlo.
+En **Preferencias ▸ General ▸ Soluciones para fallos del firmware**, **Evitar la repetición de teclas tras cambiar la
+iluminación** está activado de forma predeterminada. El firmware del `1189:8890` repite sin parar el primer carácter
+de una tecla después de guardar la iluminación (el software del fabricante hace lo mismo), así que la app envía una
+orden de guardado más, sin ninguna tecla, después de la iluminación. Si lo desactivas, la app envía solo lo mismo que
+el software del fabricante. Además, este teclado olvida su iluminación al desconectarlo.
 
 ## Estructura
 

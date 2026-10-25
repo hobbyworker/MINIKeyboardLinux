@@ -126,10 +126,10 @@ Trong **Tùy chỉnh** (Ctrl+,), bạn chọn ngôn ngữ giao diện (một tro
 và chế độ sáng hoặc tối. Ở bản build có feed cập nhật, trang Chung trong đó có mục tự động kiểm tra bản cập nhật. Trong
 **Giới thiệu về MINIKeyboard**, bạn xem được phiên bản và giấy phép nguồn mở.
 
-Trong **Tùy chỉnh ▸ Chung ▸ Bàn phím**, **Ngăn lặp phím sau khi thay đổi đèn** được bật sẵn. Firmware của `1189:8890`
-lặp lại không ngừng ký tự đầu tiên của phím sau khi lưu đèn (phần mềm của nhà sản xuất cũng vậy), nên ứng dụng gửi
-thêm một lệnh lưu không kèm phím nào sau đèn. Khi tắt, ứng dụng chỉ gửi đúng những gì phần mềm của nhà sản xuất gửi.
-Bàn phím này cũng quên cài đặt đèn khi rút ra.
+Trong **Tùy chỉnh ▸ Chung ▸ Khắc phục lỗi firmware**, **Ngăn lặp phím sau khi thay đổi đèn** được bật sẵn. Firmware
+của `1189:8890` lặp lại không ngừng ký tự đầu tiên của phím sau khi lưu đèn (phần mềm của nhà sản xuất cũng vậy), nên
+ứng dụng gửi thêm một lệnh lưu không kèm phím nào sau đèn. Khi tắt, ứng dụng chỉ gửi đúng những gì phần mềm của nhà
+sản xuất gửi. Bàn phím này cũng quên cài đặt đèn khi rút ra.
 
 ## Cấu trúc
 

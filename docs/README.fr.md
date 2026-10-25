@@ -137,11 +137,11 @@ Dans les **Préférences** (Ctrl+,), vous choisissez la langue de l’interface 
 l’apparence claire ou sombre ; dans une compilation dotée d’un flux de mises à jour, leur page Général propose la
 recherche automatique des mises à jour. **À propos de MINIKeyboard** affiche la version et les licences open source.
 
-Dans **Préférences ▸ Général ▸ Clavier**, **Empêcher la répétition des touches après un changement d’éclairage** est
-activé par défaut. Après l’enregistrement de l’éclairage, le firmware du `1189:8890` répète sans fin le premier
-caractère d’une touche (le logiciel du fabricant fait de même) ; l’app envoie donc une commande d’enregistrement
-supplémentaire, sans touche, après l’éclairage. Désactivé, l’app envoie uniquement ce qu’envoie le logiciel du
-fabricant. Ce clavier oublie aussi son éclairage quand on le débranche.
+Dans **Préférences ▸ Général ▸ Contournements des bogues du firmware**, **Empêcher la répétition des touches après un
+changement d’éclairage** est activé par défaut. Après l’enregistrement de l’éclairage, le firmware du `1189:8890`
+répète sans fin le premier caractère d’une touche (le logiciel du fabricant fait de même) ; l’app envoie donc une
+commande d’enregistrement supplémentaire, sans touche, après l’éclairage. Désactivé, l’app envoie uniquement ce
+qu’envoie le logiciel du fabricant. Ce clavier oublie aussi son éclairage quand on le débranche.
 
 ## Structure
 

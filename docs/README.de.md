@@ -134,11 +134,11 @@ In den **Einstellungen** (Ctrl+,) wählst du die Sprache der Oberfläche (eine d
 oder Dunkel; in einem Build mit Update-Feed findest du dort unter „Allgemein“ die automatische Suche nach Updates.
 Unter **Über „MINIKeyboard“** stehen die Version und die Open-Source-Lizenzen.
 
-**Tastenwiederholung nach dem Ändern der Beleuchtung verhindern** (**Einstellungen ▸ Allgemein ▸ Tastatur**) ist
-standardmäßig aktiviert. Die Firmware der `1189:8890` wiederholt nach dem Sichern der Beleuchtung das erste Zeichen
-einer Taste endlos – die Software des Herstellers verhält sich genauso –, darum sendet die App nach der Beleuchtung
-noch einen Sicherungsbefehl ohne Taste. Ist die Option deaktiviert, sendet die App nur das, was auch die Software des
-Herstellers sendet. Diese Tastatur vergisst ihre Beleuchtung außerdem, wenn man sie absteckt.
+**Tastenwiederholung nach dem Ändern der Beleuchtung verhindern** (**Einstellungen ▸ Allgemein ▸ Firmware-Fehler
+umgehen**) ist standardmäßig aktiviert. Die Firmware der `1189:8890` wiederholt nach dem Sichern der Beleuchtung das
+erste Zeichen einer Taste endlos – die Software des Herstellers verhält sich genauso –, darum sendet die App nach der
+Beleuchtung noch einen Sicherungsbefehl ohne Taste. Ist die Option deaktiviert, sendet die App nur das, was auch die
+Software des Herstellers sendet. Diese Tastatur vergisst ihre Beleuchtung außerdem, wenn man sie absteckt.
 
 ## Aufbau
 

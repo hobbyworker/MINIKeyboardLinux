@@ -133,11 +133,11 @@ Di **Preferensi** (Ctrl+,), Anda memilih bahasa antarmuka (salah satu dari 13 ba
 tampilan terang atau gelap. Pada build yang punya feed pembaruan, halaman Umum-nya berisi pemeriksaan pembaruan
 otomatis. Di **Mengenai MINIKeyboard**, Anda bisa melihat versi dan lisensi sumber terbuka.
 
-Di **Preferensi ▸ Umum ▸ Papan ketik**, **Cegah pengulangan tombol setelah mengubah pencahayaan** aktif secara bawaan.
-Firmware `1189:8890` mengulang karakter pertama sebuah tombol tanpa henti setelah pencahayaannya disimpan (perangkat
-lunak pabrikannya juga begitu), jadi aplikasi mengirim satu perintah simpan lagi, tanpa tombol, setelah pencahayaan.
-Jika dinonaktifkan, aplikasi hanya mengirim hal yang sama dengan perangkat lunak pabrikan. Papan ketik ini juga
-melupakan pencahayaannya saat dicabut.
+Di **Preferensi ▸ Umum ▸ Penanganan bug firmware**, **Cegah pengulangan tombol setelah mengubah pencahayaan** aktif
+secara bawaan. Firmware `1189:8890` mengulang karakter pertama sebuah tombol tanpa henti setelah pencahayaannya
+disimpan (perangkat lunak pabrikannya juga begitu), jadi aplikasi mengirim satu perintah simpan lagi, tanpa tombol,
+setelah pencahayaan. Jika dinonaktifkan, aplikasi hanya mengirim hal yang sama dengan perangkat lunak pabrikan. Papan
+ketik ini juga melupakan pencahayaannya saat dicabut.
 
 ## Struktur
 
