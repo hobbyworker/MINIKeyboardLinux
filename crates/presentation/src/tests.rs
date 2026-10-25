@@ -8,7 +8,7 @@ use domain::{
 };
 
 use crate::choices::{ActionCaption, MediaChoice, ModifierKey, MouseChoice, Rgb};
-use crate::drawing::{LayoutGeometry, LayoutRect};
+use crate::drawing::{self, LayoutGeometry, LayoutRect};
 use crate::packet_text;
 use crate::screen_state::{BoardFace, ChannelPath, Firmware, InfoChannel, InfoCommands, InterfaceRole, KeyboardInfo};
 use crate::state::ActionText;
@@ -30,6 +30,49 @@ fn knobs_are_one_body_each() {
             layout.id
         );
         assert_eq!(geometry.knob_outlines().len(), layout.knob_count(), "{}", layout.id);
+    }
+}
+
+/// The app's layouts with their turns redrawn: one size in a layout, each turn the gap off its knob, none over
+/// another control or out of the body.
+#[test]
+fn turns_are_even_and_clear() {
+    for layout in KeyboardLayout::all().iter().filter(|layout| GridShape::from_id(&layout.id).is_none()) {
+        let geometry = LayoutGeometry::of(layout).unwrap();
+        let turns: Vec<(ControlId, LayoutRect)> = geometry
+            .rects
+            .iter()
+            .filter(|(control, _)| matches!(control, ControlId::Knob(_, part) if *part != domain::KnobPart::Press))
+            .map(|(control, rect)| (*control, *rect))
+            .collect();
+        for (control, turn) in &turns {
+            let name = format!("{} {control:?}", layout.id);
+            assert!((turn.width - turns[0].1.width).abs() < 1e-9 && turn.height == turn.width, "{name}");
+            let ControlId::Knob(number, _) = control else { unreachable!() };
+            let press = geometry.rects[&ControlId::Knob(*number, domain::KnobPart::Press)];
+            let gap = drawing::distance(turn, &press) - press.width / 2.0 - turn.width / 2.0;
+            assert!((gap - drawing::TURN_GAP).abs() < 1e-6, "{name}");
+            for (other, rect) in &geometry.rects {
+                if other == control {
+                    continue;
+                }
+                if let ControlId::Key(_) = other {
+                    let x = turn.mid_x().clamp(rect.x, rect.max_x());
+                    let y = turn.mid_y().clamp(rect.y, rect.max_y());
+                    let reach = (turn.mid_x() - x).hypot(turn.mid_y() - y);
+                    assert!(reach >= turn.width / 2.0, "{name} over {other:?}");
+                } else {
+                    let clear = drawing::distance(turn, rect) >= (turn.width + rect.width) / 2.0 - 1e-6;
+                    assert!(clear, "{name} over {other:?}");
+                }
+            }
+            let frame = geometry.frame;
+            let inside = turn.x >= frame.x
+                && turn.y >= frame.y
+                && turn.max_x() <= frame.max_x()
+                && turn.max_y() <= frame.max_y();
+            assert!(inside, "{name}");
+        }
     }
 }
 

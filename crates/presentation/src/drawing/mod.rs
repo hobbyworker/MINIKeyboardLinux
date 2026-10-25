@@ -41,6 +41,14 @@ impl LayoutRect {
     }
 }
 
+/// Room between a knob and its turns, in the app's layouts' space (a key there is 80 or so).
+pub(crate) const TURN_GAP: f64 = 4.0;
+
+/// How far apart two rectangles' centres are.
+pub(crate) fn distance(a: &LayoutRect, b: &LayoutRect) -> f64 {
+    (a.mid_x() - b.mid_x()).hypot(a.mid_y() - b.mid_y())
+}
+
 #[derive(Clone, Debug, PartialEq)]
 pub(crate) struct LayoutGeometry {
     pub(crate) frame: LayoutRect,
@@ -53,7 +61,38 @@ impl LayoutGeometry {
         if let Some(shape) = GridShape::from_id(&layout.id) {
             return Some(Self::arrangement(&shape));
         }
-        app_geometry::named(&layout.id)
+        app_geometry::named(&layout.id).map(|geometry| geometry.with_even_turns())
+    }
+
+    /// The turns redrawn: all one size, none touching its knob. The original app sizes a knob's turns by the
+    /// knob (0.6 of it), so a big knob's turns grow with it, and puts some over the edge of their knob. Here
+    /// every turn is as large as the layout's smallest — smaller still where one would come closer than
+    /// `TURN_GAP` to its knob — and stands in its original direction from the knob's centre, `TURN_GAP` off the
+    /// knob.
+    pub(crate) fn with_even_turns(&self) -> Self {
+        let turns: Vec<(ControlId, LayoutRect, LayoutRect)> = self
+            .rects
+            .iter()
+            .filter_map(|(control, rect)| match control {
+                ControlId::Knob(number, part) if *part != KnobPart::Press => {
+                    self.rects.get(&ControlId::Knob(*number, KnobPart::Press)).map(|press| (*control, *rect, *press))
+                }
+                _ => None,
+            })
+            .collect();
+        let size = turns
+            .iter()
+            .map(|(_, rect, press)| rect.width.min(2.0 * (distance(rect, press) - press.width / 2.0 - TURN_GAP)))
+            .reduce(f64::min);
+        let Some(size) = size else { return self.clone() };
+        let mut rects = self.rects.clone();
+        for (control, rect, press) in &turns {
+            let scale = (press.width / 2.0 + TURN_GAP + size / 2.0) / distance(rect, press);
+            let x = press.mid_x() + (rect.mid_x() - press.mid_x()) * scale;
+            let y = press.mid_y() + (rect.mid_y() - press.mid_y()) * scale;
+            rects.insert(*control, LayoutRect::new(x - size / 2.0, y - size / 2.0, size, size));
+        }
+        Self { frame: self.frame, rects }
     }
 
     /// The body and every control.
