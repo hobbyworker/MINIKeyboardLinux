@@ -210,8 +210,11 @@ impl EditorModel {
         self.state().is_choosing_layout
     }
 
+    /// Opens or closes the layout sheet — it opens only with a keyboard to choose for.
     pub fn set_choosing_layout(&self, choosing: bool) {
-        self.update(|state| state.is_choosing_layout = choosing);
+        self.update(|state| {
+            state.is_choosing_layout = choosing && state.resolved_layout.is_some() && state.keyboard().is_some();
+        });
     }
 
     pub fn tab(&self) -> EditorTab {
@@ -268,6 +271,8 @@ impl EditorModel {
             state.identification = None;
             state.selection = None;
             state.held = Modifiers::NONE;
+            // A sheet for the keyboard that went goes with it; the next one asks again if it needs to.
+            state.is_choosing_layout = false;
             let Some(keyboard) = state.keyboard() else { return false };
             if Some(keyboard.usb) != previous.map(|previous| previous.usb) {
                 state.resolved_layout = None;
@@ -421,9 +426,11 @@ impl EditorModel {
         self.apply_layout(&shape.layout(), Rotation::from_quarter_turns(quarter_turns));
     }
 
-    /// Whether there is a layout to turn or change.
+    /// Whether there is a layout to turn or change — the connected keyboard's. With none connected the last one is
+    /// still drawn, dimmed, but there is nothing to change it on.
     pub fn has_layout(&self) -> bool {
-        self.state().resolved_layout.is_some()
+        let state = self.state();
+        state.resolved_layout.is_some() && state.keyboard().is_some()
     }
 
     pub fn rotate(&self) {

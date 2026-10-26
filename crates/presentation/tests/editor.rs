@@ -391,6 +391,24 @@ fn unplugging_forgets_the_keyboard() {
     assert_eq!(editor.keyboard_info(), None);
 }
 
+/// Unplugged, the last keyboard is still drawn, but its shape can't be changed — and its sheet goes with it.
+#[test]
+fn unplugged_the_shape_cant_change() {
+    let mut fixture = Fixture::new();
+    fixture.plug(k8890());
+    assert!(fixture.editor.has_layout());
+    assert!(fixture.editor.is_choosing_layout());
+    fixture.connection.sender.try_send(ConnectionState::Searching).unwrap();
+    fixture.settle();
+    let editor = &fixture.editor;
+    assert!(editor.drawing().is_some());
+    assert!(!editor.has_layout());
+    assert!(!editor.is_choosing_layout());
+    assert_eq!(editor.layout_sheet(), None);
+    editor.set_choosing_layout(true);
+    assert!(!editor.is_choosing_layout());
+}
+
 /// A 884x keyboard that doesn't answer picks one of the app's layouts; rotating turns the drawing.
 #[test]
 fn the_layout_sheet() {
