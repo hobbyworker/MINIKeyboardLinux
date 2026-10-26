@@ -14,7 +14,7 @@ msgstr "Simulador"
 msgid "The keyboard reports its keys and knobs: %@"
 msgstr "El teclado indica sus teclas y botones giratorios: %@"
 
-#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:161 crates/ui/src/header.rs:249
+#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:178 crates/ui/src/header.rs:298
 msgid "Keys: %lld · Knobs: %lld"
 msgstr "Teclas: %1$lld · Botones giratorios: %2$lld"
 
@@ -70,123 +70,127 @@ msgstr "Copiar"
 msgid "Allow Access to the Keyboard"
 msgstr "Permitir el acceso al teclado"
 
-#: crates/ui/src/header.rs:46 crates/ui/src/header.rs:50 crates/ui/src/header.rs:208
+#: crates/ui/src/header.rs:48 crates/ui/src/header.rs:52 crates/ui/src/header.rs:224
+msgid "Choose a Keyboard"
+msgstr "Elegir un teclado"
+
+#: crates/ui/src/header.rs:55 crates/ui/src/header.rs:59 crates/ui/src/header.rs:257
 msgid "Keyboard Information"
 msgstr "Información del teclado"
 
-#: crates/ui/src/header.rs:51 crates/ui/src/header.rs:52
+#: crates/ui/src/header.rs:60 crates/ui/src/header.rs:61
 msgid "Retry"
 msgstr "Reintentar"
 
-#: crates/ui/src/header.rs:53
+#: crates/ui/src/header.rs:62
 msgid "How to Allow…"
 msgstr "Cómo permitirlo…"
 
-#: crates/ui/src/header.rs:69
+#: crates/ui/src/header.rs:79
 msgid "Main Menu"
 msgstr "Menú principal"
 
-#: crates/ui/src/header.rs:73
+#: crates/ui/src/header.rs:83
 msgid "Save"
 msgstr "Guardar"
 
-#: crates/ui/src/header.rs:73 crates/ui/src/window.rs:291
+#: crates/ui/src/header.rs:83 crates/ui/src/window.rs:291
 msgid "Save to Keyboard"
 msgstr "Guardar en el teclado"
 
-#: crates/ui/src/header.rs:76
+#: crates/ui/src/header.rs:86
 msgid "Read"
 msgstr "Leer"
 
-#: crates/ui/src/header.rs:77 crates/ui/src/window.rs:291
+#: crates/ui/src/header.rs:87 crates/ui/src/window.rs:291
 msgid "Read from Keyboard"
 msgstr "Leer del teclado"
 
-#: crates/ui/src/header.rs:146
+#: crates/ui/src/header.rs:163
 msgid "Not Connected"
 msgstr "Sin conexión"
 
-#: crates/ui/src/header.rs:146
+#: crates/ui/src/header.rs:163
 msgid "Connect the keyboard via USB."
 msgstr "Conecta el teclado por USB."
 
-#: crates/ui/src/header.rs:148 crates/ui/src/names.rs:276
+#: crates/ui/src/header.rs:165 crates/ui/src/names.rs:276
 msgid "Access to the keyboard is needed"
 msgstr "Se necesita acceso al teclado"
 
-#: crates/ui/src/header.rs:149
+#: crates/ui/src/header.rs:166
 msgid "Add the udev rule for this keyboard, then plug it in again."
 msgstr "Añade la regla de udev para este teclado y vuelve a conectarlo."
 
-#: crates/ui/src/header.rs:151
+#: crates/ui/src/header.rs:168
 msgid "The keyboard couldn’t be opened"
 msgstr "No se ha podido abrir el teclado"
 
-#: crates/ui/src/header.rs:154
+#: crates/ui/src/header.rs:171
 msgid "Asking the keyboard what it is…"
 msgstr "Preguntando al teclado qué es…"
 
-#: crates/ui/src/header.rs:155
+#: crates/ui/src/header.rs:172
 msgid "Reading…"
 msgstr "Leyendo…"
 
-#: crates/ui/src/header.rs:156
+#: crates/ui/src/header.rs:173
 msgid "Saving…"
 msgstr "Guardando…"
 
-#: crates/ui/src/header.rs:157
+#: crates/ui/src/header.rs:174
 msgid "Simulated Keyboard"
 msgstr "Teclado simulado"
 
-#: crates/ui/src/header.rs:158
+#: crates/ui/src/header.rs:175
 msgid "Connected"
 msgstr "Conectado"
 
-#: crates/ui/src/header.rs:161 crates/ui/src/names.rs:296 crates/ui/src/names.rs:298
+#: crates/ui/src/header.rs:178 crates/ui/src/names.rs:296 crates/ui/src/names.rs:298
 msgid "%@ · %@"
 msgstr "%@ · %@"
 
-#: crates/ui/src/header.rs:184 crates/ui/src/inspector.rs:112
+#: crates/ui/src/header.rs:202 crates/ui/src/inspector.rs:112
 msgid "Layer %lld"
 msgstr "Capa %lld"
 
-#: crates/ui/src/header.rs:228
+#: crates/ui/src/header.rs:277
 msgid "Not provided by the keyboard"
 msgstr "El teclado no lo indica"
 
-#: crates/ui/src/header.rs:237
+#: crates/ui/src/header.rs:286
 msgid "Name"
 msgstr "Nombre"
 
-#: crates/ui/src/header.rs:238
+#: crates/ui/src/header.rs:287
 msgid "Manufacturer"
 msgstr "Fabricante"
 
-#: crates/ui/src/header.rs:239
+#: crates/ui/src/header.rs:288
 msgid "Serial Number"
 msgstr "Número de serie"
 
-#: crates/ui/src/header.rs:241
+#: crates/ui/src/header.rs:290
 msgid "Chip"
 msgstr "Chip"
 
-#: crates/ui/src/header.rs:243
+#: crates/ui/src/header.rs:292
 msgid "Firmware"
 msgstr "Firmware"
 
-#: crates/ui/src/header.rs:263
+#: crates/ui/src/header.rs:312
 msgid "Power"
 msgstr "Alimentación"
 
-#: crates/ui/src/header.rs:272
+#: crates/ui/src/header.rs:321
 msgid "Interfaces"
 msgstr "Interfaces"
 
-#: crates/ui/src/header.rs:274 crates/ui/src/names.rs:146
+#: crates/ui/src/header.rs:323 crates/ui/src/names.rs:146
 msgid "Configuration Channel"
 msgstr "Canal de configuración"
 
-#: crates/ui/src/header.rs:275
+#: crates/ui/src/header.rs:324
 msgid "Commands"
 msgstr "Comandos"
 
@@ -934,14 +938,14 @@ msgstr "Ya está disponible %1$@ %2$@."
 msgid "Keyboard on USB"
 msgstr "Teclado por USB"
 
-#: crates/ui/src/window.rs:531
+#: crates/ui/src/window.rs:532
 msgid "Simulator in use"
 msgstr "Simulador en uso"
 
-#: crates/ui/src/window.rs:534
+#: crates/ui/src/window.rs:535
 msgid "This isn't a real keyboard. Nothing you save here is written to any keyboard."
 msgstr "No es un teclado real. Lo que guardes aquí no se escribe en ningún teclado."
 
-#: crates/ui/src/window.rs:542
+#: crates/ui/src/window.rs:543
 msgid "Back to the Keyboard on USB"
 msgstr "Volver al teclado por USB"

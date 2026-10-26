@@ -1,4 +1,5 @@
-//! The window's header: the keyboard's state, the layer, and reading and saving.
+//! The window's header: the keyboard's state — with several plugged in, which one is open — the layer, and reading
+//! and saving.
 
 use std::cell::{Cell, RefCell};
 use std::rc::Rc;
@@ -15,6 +16,7 @@ pub struct Header {
     dot: gtk::Box,
     title: gtk::Label,
     detail: gtk::Label,
+    keyboards: gtk::MenuButton,
     pub(crate) info: gtk::MenuButton,
     identify: gtk::Button,
     retry: gtk::Button,
@@ -41,6 +43,13 @@ impl Header {
         detail.add_css_class("dim-label");
         texts.append(&title);
         texts.append(&detail);
+        let keyboards = gtk::MenuButton::builder()
+            .icon_name("pan-down-symbolic")
+            .tooltip_text(t("Choose a Keyboard"))
+            .valign(gtk::Align::Center)
+            .build();
+        keyboards.add_css_class("flat");
+        keyboards.update_property(&[gtk::accessible::Property::Label(&t("Choose a Keyboard"))]);
         let info = gtk::MenuButton::builder()
             .icon_name("help-about-symbolic")
             .tooltip_text(t("Keyboard Information"))
@@ -54,6 +63,7 @@ impl Header {
         let spinner = adw::Spinner::new();
         status.append(&dot);
         status.append(&texts);
+        status.append(&keyboards);
         status.append(&info);
         status.append(&allow);
         status.append(&identify);
@@ -89,6 +99,12 @@ impl Header {
                 popover.set_child(editor.keyboard_info().map(|info| info_view(&info)).as_ref());
             });
         }
+        let popover = gtk::Popover::new();
+        keyboards.set_popover(Some(&popover));
+        {
+            let editor = editor.clone();
+            popover.connect_show(move |popover| popover.set_child(Some(&keyboard_list(&editor, popover))));
+        }
         {
             let editor = editor.clone();
             identify.connect_clicked(move |_| {
@@ -115,6 +131,7 @@ impl Header {
             dot,
             title,
             detail,
+            keyboards,
             info,
             identify,
             retry,
@@ -167,6 +184,7 @@ impl Header {
         self.title.set_label(&title);
         self.detail.set_label(&detail);
         let connected = matches!(status, ConnectionStatus::Connected { .. });
+        self.keyboards.set_visible(!editor.keyboard_choices().is_empty());
         self.info.set_visible(connected && editor.keyboard_info().is_some());
         self.identify.set_visible(
             matches!(status, ConnectionStatus::Connected { is_identified: false, .. }) && activity.is_none(),
@@ -191,6 +209,37 @@ impl Header {
         self.updating.set(false);
         self.read.set_visible(editor.reads_back());
     }
+}
+
+/// The keyboards plugged in, the open one checked; choosing another opens it.
+fn keyboard_list(editor: &Rc<EditorModel>, popover: &gtk::Popover) -> gtk::Box {
+    let list = gtk::Box::builder()
+        .orientation(gtk::Orientation::Vertical)
+        .spacing(6)
+        .margin_top(12)
+        .margin_bottom(12)
+        .margin_start(12)
+        .margin_end(12)
+        .build();
+    let heading = gtk::Label::builder().label(t("Choose a Keyboard")).xalign(0.0).build();
+    heading.add_css_class("heading");
+    list.append(&heading);
+    let mut group: Option<gtk::CheckButton> = None;
+    for choice in editor.keyboard_choices() {
+        let button = gtk::CheckButton::with_label(&choice.title);
+        button.set_group(group.as_ref());
+        button.set_active(choice.is_selected);
+        group.get_or_insert_with(|| button.clone());
+        let (editor, popover) = (editor.clone(), popover.clone());
+        button.connect_toggled(move |button| {
+            if button.is_active() {
+                editor.select_keyboard(&choice.id);
+                popover.popdown();
+            }
+        });
+        list.append(&button);
+    }
+    list
 }
 
 /// What is known about the keyboard plugged in. Nothing is guessed: what the keyboard doesn't say shows as not

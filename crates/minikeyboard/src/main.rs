@@ -65,17 +65,22 @@ fn main() -> gtk::glib::ExitCode {
         let settings = settings.clone();
         Rc::new(move || settings.choices().prevent_lighting_key_repeat)
     };
-    let (connection, device, keyboard_source) = connect(&log, prevents_lighting_key_repeat);
+    let (connection, device, keyboard_source) =
+        connect(&log, config.join("selected-keyboard"), prevents_lighting_key_repeat);
 
     let editor = EditorModel::new(EditorDependencies {
         observe_connection: ObserveConnectionUseCase::new(connection.clone()),
-        retry_connection: RetryConnectionUseCase::new(connection),
+        retry_connection: RetryConnectionUseCase::new(connection.clone()),
         identify_keyboard: IdentifyKeyboardUseCase::new(device.clone()),
         resolve_layout: ResolveLayoutUseCase::new(profiles.clone()),
         choose_layout: ChooseLayoutUseCase::new(profiles),
         read_keyboard: ReadKeyboardUseCase::new(device.clone()),
         save_keyboard: SaveKeyboardUseCase::new(device),
         keyboard_source,
+        attached_keyboards: Some((
+            ObserveAttachedKeyboardsUseCase::new(connection.clone()),
+            SelectKeyboardUseCase::new(connection),
+        )),
     });
     let device_log = DeviceLogModel::new(DeviceLogUseCase::new(Rc::new(log)));
     ui::run(launch, settings, editor, device_log)
@@ -85,8 +90,13 @@ type Repositories =
     (Rc<dyn KeyboardConnectionRepository>, Rc<dyn KeyboardDeviceRepository>, Option<KeyboardSourceUseCase>);
 
 /// The keyboard on USB or a simulated one, switched from the Simulator menu. A debug build starts on a simulated
-/// keyboard when `MINIKEYBOARD_SIMULATED_KEYBOARD` names one (a `SimulatedModel` ID, e.g. `8890-3`).
-fn connect(log: &datalayer::DeviceLogStore, prevents_lighting_key_repeat: Rc<dyn Fn() -> bool>) -> Repositories {
+/// keyboard when `MINIKEYBOARD_SIMULATED_KEYBOARD` names one (a `SimulatedModel` ID, e.g. `8890-3`). The keyboard
+/// on USB chosen last time is kept in `selected_keyboard`.
+fn connect(
+    log: &datalayer::DeviceLogStore,
+    selected_keyboard: PathBuf,
+    prevents_lighting_key_repeat: Rc<dyn Fn() -> bool>,
+) -> Repositories {
     let initial = if cfg!(debug_assertions) {
         std::env::var("MINIKEYBOARD_SIMULATED_KEYBOARD")
             .ok()
@@ -95,7 +105,7 @@ fn connect(log: &datalayer::DeviceLogStore, prevents_lighting_key_repeat: Rc<dyn
     } else {
         domain::KeyboardSource::Hardware
     };
-    let source = Rc::new(datalayer::KeyboardSourceSwitch::new(log.clone(), initial));
+    let source = Rc::new(datalayer::KeyboardSourceSwitch::new(log.clone(), initial, selected_keyboard));
     let device = Rc::new(
         datalayer::KeyboardDevice::new(source.clone(), log.clone())
             .with_lighting_repeat_guard(prevents_lighting_key_repeat),

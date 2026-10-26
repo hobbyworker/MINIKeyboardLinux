@@ -4,6 +4,7 @@
 use std::cell::RefCell;
 use std::collections::{HashMap, VecDeque};
 use std::fmt;
+use std::path::PathBuf;
 use std::rc::Rc;
 use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -11,12 +12,12 @@ use std::time::Duration;
 
 use domain::ports::{KeyboardConnectionRepository, KeyboardSourceRepository, LocalFuture, Updates};
 use domain::{
-    Channel, ConnectedKeyboard, ConnectionState, DeviceLogEvent, KeyColor, KeyboardDeviceError, KeyboardSource,
-    LightingSupport, LogContent, RecordFormat, SimulatedKind, SimulatedModel,
+    AttachedKeyboards, Channel, ConnectedKeyboard, ConnectionState, DeviceLogEvent, KeyColor, KeyboardDeviceError,
+    KeyboardSource, LightingSupport, LogContent, RecordFormat, SimulatedKind, SimulatedModel,
 };
 
 use crate::channel::{Broadcaster, ChannelProvider, ReportChannel, ReportFraming, ready};
-use crate::connection::HardwareConnection;
+use crate::connection::{HardwareConnection, Mirror};
 use crate::log::DeviceLogStore;
 use crate::protocols::k884x;
 
@@ -175,22 +176,28 @@ impl fmt::Debug for SimulatedKeyboard {
 /// real one.
 pub struct KeyboardSourceSwitch {
     log: DeviceLogStore,
+    selected_keyboard: PathBuf,
     source: RefCell<KeyboardSource>,
     hardware: RefCell<Option<HardwareConnection>>,
     simulated: RefCell<HashMap<SimulatedModel, Rc<SimulatedKeyboard>>>,
     state: Broadcaster<ConnectionState>,
+    /// The keyboards on USB to choose from — none while a simulated keyboard is in use.
+    attached: Broadcaster<AttachedKeyboards>,
     /// Whether the hardware connection's states are passed on.
     following_hardware: Arc<AtomicBool>,
 }
 
 impl KeyboardSourceSwitch {
-    pub fn new(log: DeviceLogStore, initial: KeyboardSource) -> Self {
+    /// `selected_keyboard` is where the keyboard on USB chosen last time is kept ([`HardwareConnection::start`]).
+    pub fn new(log: DeviceLogStore, initial: KeyboardSource, selected_keyboard: PathBuf) -> Self {
         let switch = Self {
             log,
+            selected_keyboard,
             source: RefCell::new(KeyboardSource::Hardware),
             hardware: RefCell::default(),
             simulated: RefCell::default(),
             state: Broadcaster::new(ConnectionState::Searching),
+            attached: Broadcaster::new(AttachedKeyboards::default()),
             following_hardware: Arc::new(AtomicBool::new(false)),
         };
         switch.follow(&initial);
@@ -203,15 +210,21 @@ impl KeyboardSourceSwitch {
             KeyboardSource::Hardware => {
                 let mut hardware = self.hardware.borrow_mut();
                 let connection = hardware.get_or_insert_with(|| {
-                    let connection = HardwareConnection::start(self.log.clone());
-                    connection.mirror_into(self.state.clone(), self.following_hardware.clone());
+                    let connection = HardwareConnection::start(self.log.clone(), self.selected_keyboard.clone());
+                    connection.mirror_into(Mirror {
+                        state: self.state.clone(),
+                        attached: self.attached.clone(),
+                        active: self.following_hardware.clone(),
+                    });
                     connection
                 });
                 self.following_hardware.store(true, Ordering::SeqCst);
                 self.state.set(connection.state());
+                self.attached.set(connection.attached());
             }
             KeyboardSource::Simulated(model) => {
                 self.following_hardware.store(false, Ordering::SeqCst);
+                self.attached.set(AttachedKeyboards::default());
                 let keyboard = self.simulated_keyboard(*model);
                 self.state.set(ConnectionState::Connected(keyboard.keyboard()));
             }
@@ -238,6 +251,16 @@ impl KeyboardConnectionRepository for KeyboardSourceSwitch {
     fn retry(&self) {
         if let (KeyboardSource::Hardware, Some(hardware)) = (&*self.source.borrow(), &*self.hardware.borrow()) {
             hardware.retry();
+        }
+    }
+
+    fn attached_keyboards(&self) -> Box<dyn Updates<AttachedKeyboards>> {
+        self.attached.subscribe()
+    }
+
+    fn select_keyboard(&self, id: &str) {
+        if let (KeyboardSource::Hardware, Some(hardware)) = (&*self.source.borrow(), &*self.hardware.borrow()) {
+            hardware.select_keyboard(id);
         }
     }
 }

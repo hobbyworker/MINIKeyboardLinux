@@ -14,7 +14,7 @@ msgstr "模拟器"
 msgid "The keyboard reports its keys and knobs: %@"
 msgstr "键盘告知的按键和旋钮：%@"
 
-#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:161 crates/ui/src/header.rs:249
+#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:178 crates/ui/src/header.rs:298
 msgid "Keys: %lld · Knobs: %lld"
 msgstr "按键 %1$lld 个 · 旋钮 %2$lld 个"
 
@@ -70,123 +70,127 @@ msgstr "拷贝"
 msgid "Allow Access to the Keyboard"
 msgstr "允许访问键盘"
 
-#: crates/ui/src/header.rs:46 crates/ui/src/header.rs:50 crates/ui/src/header.rs:208
+#: crates/ui/src/header.rs:48 crates/ui/src/header.rs:52 crates/ui/src/header.rs:224
+msgid "Choose a Keyboard"
+msgstr "选择键盘"
+
+#: crates/ui/src/header.rs:55 crates/ui/src/header.rs:59 crates/ui/src/header.rs:257
 msgid "Keyboard Information"
 msgstr "键盘信息"
 
-#: crates/ui/src/header.rs:51 crates/ui/src/header.rs:52
+#: crates/ui/src/header.rs:60 crates/ui/src/header.rs:61
 msgid "Retry"
 msgstr "重试"
 
-#: crates/ui/src/header.rs:53
+#: crates/ui/src/header.rs:62
 msgid "How to Allow…"
 msgstr "如何允许…"
 
-#: crates/ui/src/header.rs:69
+#: crates/ui/src/header.rs:79
 msgid "Main Menu"
 msgstr "主菜单"
 
-#: crates/ui/src/header.rs:73
+#: crates/ui/src/header.rs:83
 msgid "Save"
 msgstr "保存"
 
-#: crates/ui/src/header.rs:73 crates/ui/src/window.rs:291
+#: crates/ui/src/header.rs:83 crates/ui/src/window.rs:291
 msgid "Save to Keyboard"
 msgstr "保存到键盘"
 
-#: crates/ui/src/header.rs:76
+#: crates/ui/src/header.rs:86
 msgid "Read"
 msgstr "读取"
 
-#: crates/ui/src/header.rs:77 crates/ui/src/window.rs:291
+#: crates/ui/src/header.rs:87 crates/ui/src/window.rs:291
 msgid "Read from Keyboard"
 msgstr "从键盘读取"
 
-#: crates/ui/src/header.rs:146
+#: crates/ui/src/header.rs:163
 msgid "Not Connected"
 msgstr "未连接"
 
-#: crates/ui/src/header.rs:146
+#: crates/ui/src/header.rs:163
 msgid "Connect the keyboard via USB."
 msgstr "请通过 USB 连接键盘。"
 
-#: crates/ui/src/header.rs:148 crates/ui/src/names.rs:276
+#: crates/ui/src/header.rs:165 crates/ui/src/names.rs:276
 msgid "Access to the keyboard is needed"
 msgstr "需要访问键盘的权限"
 
-#: crates/ui/src/header.rs:149
+#: crates/ui/src/header.rs:166
 msgid "Add the udev rule for this keyboard, then plug it in again."
 msgstr "请为此键盘添加 udev 规则，然后重新插入。"
 
-#: crates/ui/src/header.rs:151
+#: crates/ui/src/header.rs:168
 msgid "The keyboard couldn’t be opened"
 msgstr "无法打开键盘"
 
-#: crates/ui/src/header.rs:154
+#: crates/ui/src/header.rs:171
 msgid "Asking the keyboard what it is…"
 msgstr "正在询问键盘类型…"
 
-#: crates/ui/src/header.rs:155
+#: crates/ui/src/header.rs:172
 msgid "Reading…"
 msgstr "正在读取…"
 
-#: crates/ui/src/header.rs:156
+#: crates/ui/src/header.rs:173
 msgid "Saving…"
 msgstr "正在保存…"
 
-#: crates/ui/src/header.rs:157
+#: crates/ui/src/header.rs:174
 msgid "Simulated Keyboard"
 msgstr "模拟键盘"
 
-#: crates/ui/src/header.rs:158
+#: crates/ui/src/header.rs:175
 msgid "Connected"
 msgstr "已连接"
 
-#: crates/ui/src/header.rs:161 crates/ui/src/names.rs:296 crates/ui/src/names.rs:298
+#: crates/ui/src/header.rs:178 crates/ui/src/names.rs:296 crates/ui/src/names.rs:298
 msgid "%@ · %@"
 msgstr "%@ · %@"
 
-#: crates/ui/src/header.rs:184 crates/ui/src/inspector.rs:112
+#: crates/ui/src/header.rs:202 crates/ui/src/inspector.rs:112
 msgid "Layer %lld"
 msgstr "第 %lld 层"
 
-#: crates/ui/src/header.rs:228
+#: crates/ui/src/header.rs:277
 msgid "Not provided by the keyboard"
 msgstr "键盘未提供"
 
-#: crates/ui/src/header.rs:237
+#: crates/ui/src/header.rs:286
 msgid "Name"
 msgstr "名称"
 
-#: crates/ui/src/header.rs:238
+#: crates/ui/src/header.rs:287
 msgid "Manufacturer"
 msgstr "生产企业"
 
-#: crates/ui/src/header.rs:239
+#: crates/ui/src/header.rs:288
 msgid "Serial Number"
 msgstr "序列号"
 
-#: crates/ui/src/header.rs:241
+#: crates/ui/src/header.rs:290
 msgid "Chip"
 msgstr "芯片"
 
-#: crates/ui/src/header.rs:243
+#: crates/ui/src/header.rs:292
 msgid "Firmware"
 msgstr "固件"
 
-#: crates/ui/src/header.rs:263
+#: crates/ui/src/header.rs:312
 msgid "Power"
 msgstr "电源"
 
-#: crates/ui/src/header.rs:272
+#: crates/ui/src/header.rs:321
 msgid "Interfaces"
 msgstr "接口"
 
-#: crates/ui/src/header.rs:274 crates/ui/src/names.rs:146
+#: crates/ui/src/header.rs:323 crates/ui/src/names.rs:146
 msgid "Configuration Channel"
 msgstr "配置通道"
 
-#: crates/ui/src/header.rs:275
+#: crates/ui/src/header.rs:324
 msgid "Commands"
 msgstr "命令集"
 
@@ -934,14 +938,14 @@ msgstr "%1$@ %2$@ 已发布。"
 msgid "Keyboard on USB"
 msgstr "USB 上的键盘"
 
-#: crates/ui/src/window.rs:531
+#: crates/ui/src/window.rs:532
 msgid "Simulator in use"
 msgstr "正在使用模拟器"
 
-#: crates/ui/src/window.rs:534
+#: crates/ui/src/window.rs:535
 msgid "This isn't a real keyboard. Nothing you save here is written to any keyboard."
 msgstr "这不是真实的键盘。在这里保存的内容不会写入任何键盘。"
 
-#: crates/ui/src/window.rs:542
+#: crates/ui/src/window.rs:543
 msgid "Back to the Keyboard on USB"
 msgstr "返回 USB 上的键盘"

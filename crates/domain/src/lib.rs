@@ -19,7 +19,8 @@ pub use actions::{KeyAction, KeyMacro, KeyStroke, MediaKey, Modifiers, MouseActi
 pub use capabilities::{DelaySupport, KeyboardCapabilities, ReadSupport};
 pub use configuration::{KeyboardConfiguration, Layer};
 pub use connection::{
-    Channel, ConnectedKeyboard, ConnectionState, DeviceDetails, DeviceInterface, KeyboardDeviceError, UsagePair,
+    AttachedKeyboard, AttachedKeyboards, Channel, ConnectedKeyboard, ConnectionState, DeviceDetails, DeviceInterface,
+    KeyboardDeviceError, UsagePair,
 };
 pub use grid::{GridLimits, GridShape};
 pub use keyboards::{CommandSet, KeyboardFamily, KeyboardIdentification, KeyboardIdentity, RecordFormat, UsbIdentity};

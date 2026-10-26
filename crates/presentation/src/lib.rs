@@ -28,8 +28,8 @@ pub use editor::{EditorDependencies, EditorModel};
 pub use screen_state::{
     BindingState, BoardCap, BoardFace, ChannelPath, ConnectionStatus, ControlDrawing, ControlFace, DelayPage, Firmware,
     InfoChannel, InfoCommands, InfoInterface, InterfaceRole, KeyArrangement, KeyColorSelection, KeyGroup, KeyGroupKind,
-    KeyboardDrawing, KeyboardInfo, LayoutChoice, LayoutSheetMode, LayoutSheetState, LightingPage, PressDelay,
-    SelectionState, ShapeDrawing, ShapeItem, SimulatorChoice, SimulatorGroup, SimulatorKind,
+    KeyboardChoice, KeyboardDrawing, KeyboardInfo, LayoutChoice, LayoutSheetMode, LayoutSheetState, LightingPage,
+    PressDelay, SelectionState, ShapeDrawing, ShapeItem, SimulatorChoice, SimulatorGroup, SimulatorKind,
 };
 pub use state::{ActionText, Activity, EditorTab, Notice};
 pub use tables::KeyUsage;

@@ -10,22 +10,25 @@ use domain::ports::{
 };
 use domain::usecases::*;
 use domain::{
-    Channel, CommandSet, ConnectedKeyboard, ConnectionState, KeyAction, KeyColor, KeyboardConfiguration,
-    KeyboardDeviceError, KeyboardFamily, KeyboardIdentity, KeyboardLayout, KnobPart, LayerLighting, LayoutProfile,
-    MediaKey, RecordFormat, UsbIdentity,
+    AttachedKeyboard, AttachedKeyboards, Channel, CommandSet, ConnectedKeyboard, ConnectionState, KeyAction, KeyColor,
+    KeyboardConfiguration, KeyboardDeviceError, KeyboardFamily, KeyboardIdentity, KeyboardLayout, KnobPart,
+    LayerLighting, LayoutProfile, MediaKey, RecordFormat, UsbIdentity,
 };
 use presentation::*;
 
-/// A keyboard that is plugged in when told.
+/// A keyboard that is plugged in when told — and the keyboards plugged in, and the ones chosen.
 struct FakeConnection {
     sender: async_channel::Sender<ConnectionState>,
     receiver: RefCell<Option<async_channel::Receiver<ConnectionState>>>,
+    attached_sender: async_channel::Sender<AttachedKeyboards>,
+    attached_receiver: RefCell<Option<async_channel::Receiver<AttachedKeyboards>>>,
+    selected: RefCell<Vec<String>>,
 }
 
-struct Receiving(async_channel::Receiver<ConnectionState>);
+struct Receiving<T>(async_channel::Receiver<T>);
 
-impl Updates<ConnectionState> for Receiving {
-    fn next(&mut self) -> LocalFuture<'_, Option<ConnectionState>> {
+impl<T> Updates<T> for Receiving<T> {
+    fn next(&mut self) -> LocalFuture<'_, Option<T>> {
         Box::pin(async move { self.0.recv().await.ok() })
     }
 }
@@ -34,7 +37,14 @@ impl FakeConnection {
     fn new() -> Self {
         let (sender, receiver) = async_channel::unbounded();
         sender.try_send(ConnectionState::Searching).unwrap();
-        Self { sender, receiver: RefCell::new(Some(receiver)) }
+        let (attached_sender, attached_receiver) = async_channel::unbounded();
+        Self {
+            sender,
+            receiver: RefCell::new(Some(receiver)),
+            attached_sender,
+            attached_receiver: RefCell::new(Some(attached_receiver)),
+            selected: RefCell::default(),
+        }
     }
 }
 
@@ -44,6 +54,14 @@ impl KeyboardConnectionRepository for FakeConnection {
     }
 
     fn retry(&self) {}
+
+    fn attached_keyboards(&self) -> Box<dyn Updates<AttachedKeyboards>> {
+        Box::new(Receiving(self.attached_receiver.borrow_mut().take().expect("one subscriber")))
+    }
+
+    fn select_keyboard(&self, id: &str) {
+        self.selected.borrow_mut().push(id.to_owned());
+    }
 }
 
 #[derive(Default)]
@@ -128,6 +146,10 @@ impl Fixture {
             read_keyboard: ReadKeyboardUseCase::new(device.clone()),
             save_keyboard: SaveKeyboardUseCase::new(device.clone()),
             keyboard_source: None,
+            attached_keyboards: Some((
+                ObserveAttachedKeyboardsUseCase::new(connection.clone()),
+                SelectKeyboardUseCase::new(connection.clone()),
+            )),
         });
         let pool = LocalPool::new();
         let spawner = pool.spawner();
@@ -407,6 +429,41 @@ fn unplugged_the_shape_cant_change() {
     assert_eq!(editor.layout_sheet(), None);
     editor.set_choosing_layout(true);
     assert!(!editor.is_choosing_layout());
+}
+
+/// With several keyboards plugged in, each is a choice — those with the same USB ID numbered — and choosing one asks
+/// the connection to open it. One keyboard alone is no choice.
+#[test]
+fn several_keyboards_are_choices() {
+    let mut fixture = Fixture::new();
+    let attached = |id: &str, usb: UsbIdentity, location: &str| AttachedKeyboard {
+        id: id.to_owned(),
+        usb,
+        location: location.to_owned(),
+    };
+    let first = attached("a", k8890().usb, "1-1");
+    let second = attached("b", k8890().usb, "1-2");
+    let third = attached("c", k8840().usb, "1-3");
+    let send = |keyboards: Vec<AttachedKeyboard>, selected: &str| AttachedKeyboards {
+        keyboards,
+        selected: Some(selected.to_owned()),
+    };
+    fixture.connection.attached_sender.try_send(send(vec![first.clone()], "a")).unwrap();
+    fixture.settle();
+    assert!(fixture.editor.keyboard_choices().is_empty());
+    fixture.connection.attached_sender.try_send(send(vec![first, second, third], "b")).unwrap();
+    fixture.settle();
+    let choice = |id: &str, title: &str, is_selected: bool| KeyboardChoice {
+        id: id.to_owned(),
+        title: title.to_owned(),
+        is_selected,
+    };
+    assert_eq!(
+        fixture.editor.keyboard_choices(),
+        vec![choice("a", "1189:8890 (1)", false), choice("b", "1189:8890 (2)", true), choice("c", "1189:8840", false)]
+    );
+    fixture.editor.select_keyboard("c");
+    assert_eq!(*fixture.connection.selected.borrow(), vec!["c".to_owned()]);
 }
 
 /// A 884x keyboard that doesn't answer picks one of the app's layouts; rotating turns the drawing.

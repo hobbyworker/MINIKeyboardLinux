@@ -4,7 +4,7 @@
 use std::fs;
 use std::path::{Path, PathBuf};
 
-use domain::{DeviceDetails, DeviceInterface, KeyboardFamily, UsbIdentity};
+use domain::{AttachedKeyboard, DeviceDetails, DeviceInterface, KeyboardFamily, UsbIdentity};
 
 use crate::descriptors;
 
@@ -20,6 +20,8 @@ pub(crate) struct Candidate {
     pub(crate) interface_number: u8,
     pub(crate) device: PathBuf,
     pub(crate) kind: CandidateKind,
+    /// The keyboard it is on.
+    pub(crate) keyboard: AttachedKeyboard,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -37,6 +39,7 @@ pub(crate) fn candidates() -> Vec<Candidate> {
     for device in usb_devices() {
         let Some(usb) = usb_identity(&device) else { continue };
         let Some(family) = KeyboardFamily::of(usb) else { continue };
+        let Some(keyboard) = attached_keyboard(&device, usb) else { continue };
         for interface in interfaces(&device) {
             let Some(number) = hex(&interface, "bInterfaceNumber") else { continue };
             if number != family.configuration_interface() {
@@ -57,6 +60,7 @@ pub(crate) fn candidates() -> Vec<Candidate> {
                             interface_number: number,
                             device: device.clone(),
                             kind: CandidateKind::Usb { bus, address },
+                            keyboard: keyboard.clone(),
                         });
                     }
                 }
@@ -69,6 +73,7 @@ pub(crate) fn candidates() -> Vec<Candidate> {
                             interface_number: number,
                             device: device.clone(),
                             kind: CandidateKind::Hidraw { node },
+                            keyboard: keyboard.clone(),
                         });
                     }
                 }
@@ -78,6 +83,15 @@ pub(crate) fn candidates() -> Vec<Candidate> {
     let order = |candidate: &Candidate| KeyboardFamily::SUPPORTED.iter().position(|usb| *usb == candidate.usb);
     found.sort_by_key(order);
     found
+}
+
+/// The keyboard a USB device is: the port it is plugged into — the device's sysfs name, `<bus>-<port>.<port>…`,
+/// which stays the same when it is plugged into the same port again — and, to tell one plugging from the next,
+/// the address the bus gave it.
+fn attached_keyboard(device: &Path, usb: UsbIdentity) -> Option<AttachedKeyboard> {
+    let location = device.file_name()?.to_string_lossy().into_owned();
+    let address = read_text(&device.join("devnum"))?;
+    Some(AttachedKeyboard { id: format!("{location} {address}"), usb, location })
 }
 
 /// The USB device's first configuration descriptor, with its interfaces and endpoints — the kernel keeps them

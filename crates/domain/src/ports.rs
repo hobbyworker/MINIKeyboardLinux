@@ -10,7 +10,7 @@ use std::pin::Pin;
 
 use crate::actions::KeyAction;
 use crate::configuration::KeyboardConfiguration;
-use crate::connection::{ConnectionState, KeyboardDeviceError};
+use crate::connection::{AttachedKeyboards, ConnectionState, KeyboardDeviceError};
 use crate::keyboards::{CommandSet, KeyboardIdentity, RecordFormat, UsbIdentity};
 use crate::layout::{ControlId, KeyboardLayout};
 use crate::lighting::LayerLighting;
@@ -25,6 +25,23 @@ pub trait Updates<T> {
     fn next(&mut self) -> LocalFuture<'_, Option<T>>;
 }
 
+/// One value, then no more.
+#[derive(Debug)]
+pub struct Once<T>(Option<T>);
+
+impl<T> Once<T> {
+    pub fn new(value: T) -> Self {
+        Self(Some(value))
+    }
+}
+
+impl<T: 'static> Updates<T> for Once<T> {
+    fn next(&mut self) -> LocalFuture<'_, Option<T>> {
+        let value = self.0.take();
+        Box::pin(async move { value })
+    }
+}
+
 /// Finding the keyboard and keeping its configuration interface open.
 pub trait KeyboardConnectionRepository {
     /// The current state, then every change.
@@ -32,6 +49,15 @@ pub trait KeyboardConnectionRepository {
 
     /// Looks for the keyboard again — after access was given, or another app let go of it.
     fn retry(&self);
+
+    /// The supported keyboards plugged in and the one the app opens, then every change. A connection with one
+    /// keyboard only — a simulated one — has no others to choose from.
+    fn attached_keyboards(&self) -> Box<dyn Updates<AttachedKeyboards>> {
+        Box::new(Once::new(AttachedKeyboards::default()))
+    }
+
+    /// Opens another of the keyboards plugged in, in place of the one open now, and keeps it for next time.
+    fn select_keyboard(&self, _id: &str) {}
 }
 
 /// The actions one layer holds, by control.

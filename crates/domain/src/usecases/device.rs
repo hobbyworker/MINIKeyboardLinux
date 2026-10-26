@@ -3,7 +3,7 @@ use std::rc::Rc;
 
 use crate::capabilities::{KeyboardCapabilities, ReadSupport};
 use crate::configuration::KeyboardConfiguration;
-use crate::connection::{ConnectedKeyboard, ConnectionState, KeyboardDeviceError};
+use crate::connection::{AttachedKeyboards, ConnectedKeyboard, ConnectionState, KeyboardDeviceError};
 use crate::keyboards::{CommandSet, KeyboardFamily, KeyboardIdentification, RecordFormat};
 use crate::layout::KeyboardLayout;
 use crate::lighting::LightingSupport;
@@ -25,6 +25,38 @@ impl ObserveConnectionUseCase {
 
     pub fn execute(&self) -> Box<dyn Updates<ConnectionState>> {
         self.repository.connection_states()
+    }
+}
+
+/// Follows the supported keyboards plugged in and the one the app opens.
+#[derive(Clone)]
+pub struct ObserveAttachedKeyboardsUseCase {
+    repository: Rc<dyn KeyboardConnectionRepository>,
+}
+
+impl ObserveAttachedKeyboardsUseCase {
+    pub fn new(repository: Rc<dyn KeyboardConnectionRepository>) -> Self {
+        Self { repository }
+    }
+
+    pub fn execute(&self) -> Box<dyn Updates<AttachedKeyboards>> {
+        self.repository.attached_keyboards()
+    }
+}
+
+/// Opens another of the keyboards plugged in.
+#[derive(Clone)]
+pub struct SelectKeyboardUseCase {
+    repository: Rc<dyn KeyboardConnectionRepository>,
+}
+
+impl SelectKeyboardUseCase {
+    pub fn new(repository: Rc<dyn KeyboardConnectionRepository>) -> Self {
+        Self { repository }
+    }
+
+    pub fn execute(&self, id: &str) {
+        self.repository.select_keyboard(id);
     }
 }
 
@@ -224,6 +256,8 @@ macro_rules! opaque_debug {
 
 opaque_debug!(
     ObserveConnectionUseCase,
+    ObserveAttachedKeyboardsUseCase,
+    SelectKeyboardUseCase,
     RetryConnectionUseCase,
     IdentifyKeyboardUseCase,
     ReadKeyboardUseCase,

@@ -28,6 +28,25 @@ pub struct ConnectedKeyboard {
     pub details: Option<DeviceDetails>,
 }
 
+/// A supported keyboard plugged in — one the app can open. Several can be plugged in; the app opens one at a time.
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+pub struct AttachedKeyboard {
+    /// Which keyboard it is while it stays plugged in.
+    pub id: String,
+    pub usb: UsbIdentity,
+    /// Where it is plugged in — a USB port path. These keyboards carry no serial number, so this is what tells two
+    /// with the same USB ID apart, and what finds the one chosen last time again.
+    pub location: String,
+}
+
+/// The supported keyboards plugged in, in the order the app looks at them, and the one it opens.
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct AttachedKeyboards {
+    pub keyboards: Vec<AttachedKeyboard>,
+    /// The one open, being opened or that failed to open; `None` when none is plugged in.
+    pub selected: Option<String>,
+}
+
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 pub enum ConnectionState {
     Searching,

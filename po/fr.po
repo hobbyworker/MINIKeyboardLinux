@@ -14,7 +14,7 @@ msgstr "Simulateur"
 msgid "The keyboard reports its keys and knobs: %@"
 msgstr "Le clavier indique ses touches et boutons rotatifs : %@"
 
-#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:161 crates/ui/src/header.rs:249
+#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:178 crates/ui/src/header.rs:298
 msgid "Keys: %lld · Knobs: %lld"
 msgstr "Touches : %1$lld · Boutons rotatifs : %2$lld"
 
@@ -70,123 +70,127 @@ msgstr "Copier"
 msgid "Allow Access to the Keyboard"
 msgstr "Autoriser l’accès au clavier"
 
-#: crates/ui/src/header.rs:46 crates/ui/src/header.rs:50 crates/ui/src/header.rs:208
+#: crates/ui/src/header.rs:48 crates/ui/src/header.rs:52 crates/ui/src/header.rs:224
+msgid "Choose a Keyboard"
+msgstr "Choisir un clavier"
+
+#: crates/ui/src/header.rs:55 crates/ui/src/header.rs:59 crates/ui/src/header.rs:257
 msgid "Keyboard Information"
 msgstr "Informations sur le clavier"
 
-#: crates/ui/src/header.rs:51 crates/ui/src/header.rs:52
+#: crates/ui/src/header.rs:60 crates/ui/src/header.rs:61
 msgid "Retry"
 msgstr "Réessayer"
 
-#: crates/ui/src/header.rs:53
+#: crates/ui/src/header.rs:62
 msgid "How to Allow…"
 msgstr "Comment autoriser…"
 
-#: crates/ui/src/header.rs:69
+#: crates/ui/src/header.rs:79
 msgid "Main Menu"
 msgstr "Menu principal"
 
-#: crates/ui/src/header.rs:73
+#: crates/ui/src/header.rs:83
 msgid "Save"
 msgstr "Enregistrer"
 
-#: crates/ui/src/header.rs:73 crates/ui/src/window.rs:291
+#: crates/ui/src/header.rs:83 crates/ui/src/window.rs:291
 msgid "Save to Keyboard"
 msgstr "Enregistrer sur le clavier"
 
-#: crates/ui/src/header.rs:76
+#: crates/ui/src/header.rs:86
 msgid "Read"
 msgstr "Lire"
 
-#: crates/ui/src/header.rs:77 crates/ui/src/window.rs:291
+#: crates/ui/src/header.rs:87 crates/ui/src/window.rs:291
 msgid "Read from Keyboard"
 msgstr "Lire depuis le clavier"
 
-#: crates/ui/src/header.rs:146
+#: crates/ui/src/header.rs:163
 msgid "Not Connected"
 msgstr "Non connecté"
 
-#: crates/ui/src/header.rs:146
+#: crates/ui/src/header.rs:163
 msgid "Connect the keyboard via USB."
 msgstr "Connectez le clavier en USB."
 
-#: crates/ui/src/header.rs:148 crates/ui/src/names.rs:276
+#: crates/ui/src/header.rs:165 crates/ui/src/names.rs:276
 msgid "Access to the keyboard is needed"
 msgstr "L’accès au clavier est requis"
 
-#: crates/ui/src/header.rs:149
+#: crates/ui/src/header.rs:166
 msgid "Add the udev rule for this keyboard, then plug it in again."
 msgstr "Ajoutez la règle udev de ce clavier, puis rebranchez-le."
 
-#: crates/ui/src/header.rs:151
+#: crates/ui/src/header.rs:168
 msgid "The keyboard couldn’t be opened"
 msgstr "Impossible d’ouvrir le clavier"
 
-#: crates/ui/src/header.rs:154
+#: crates/ui/src/header.rs:171
 msgid "Asking the keyboard what it is…"
 msgstr "Interrogation du clavier…"
 
-#: crates/ui/src/header.rs:155
+#: crates/ui/src/header.rs:172
 msgid "Reading…"
 msgstr "Lecture…"
 
-#: crates/ui/src/header.rs:156
+#: crates/ui/src/header.rs:173
 msgid "Saving…"
 msgstr "Enregistrement…"
 
-#: crates/ui/src/header.rs:157
+#: crates/ui/src/header.rs:174
 msgid "Simulated Keyboard"
 msgstr "Clavier simulé"
 
-#: crates/ui/src/header.rs:158
+#: crates/ui/src/header.rs:175
 msgid "Connected"
 msgstr "Connecté"
 
-#: crates/ui/src/header.rs:161 crates/ui/src/names.rs:296 crates/ui/src/names.rs:298
+#: crates/ui/src/header.rs:178 crates/ui/src/names.rs:296 crates/ui/src/names.rs:298
 msgid "%@ · %@"
 msgstr "%@ · %@"
 
-#: crates/ui/src/header.rs:184 crates/ui/src/inspector.rs:112
+#: crates/ui/src/header.rs:202 crates/ui/src/inspector.rs:112
 msgid "Layer %lld"
 msgstr "Couche %lld"
 
-#: crates/ui/src/header.rs:228
+#: crates/ui/src/header.rs:277
 msgid "Not provided by the keyboard"
 msgstr "Non indiqué par le clavier"
 
-#: crates/ui/src/header.rs:237
+#: crates/ui/src/header.rs:286
 msgid "Name"
 msgstr "Nom"
 
-#: crates/ui/src/header.rs:238
+#: crates/ui/src/header.rs:287
 msgid "Manufacturer"
 msgstr "Fabricant"
 
-#: crates/ui/src/header.rs:239
+#: crates/ui/src/header.rs:288
 msgid "Serial Number"
 msgstr "Numéro de série"
 
-#: crates/ui/src/header.rs:241
+#: crates/ui/src/header.rs:290
 msgid "Chip"
 msgstr "Puce"
 
-#: crates/ui/src/header.rs:243
+#: crates/ui/src/header.rs:292
 msgid "Firmware"
 msgstr "Programme interne"
 
-#: crates/ui/src/header.rs:263
+#: crates/ui/src/header.rs:312
 msgid "Power"
 msgstr "Alimentation"
 
-#: crates/ui/src/header.rs:272
+#: crates/ui/src/header.rs:321
 msgid "Interfaces"
 msgstr "Interfaces"
 
-#: crates/ui/src/header.rs:274 crates/ui/src/names.rs:146
+#: crates/ui/src/header.rs:323 crates/ui/src/names.rs:146
 msgid "Configuration Channel"
 msgstr "Canal de configuration"
 
-#: crates/ui/src/header.rs:275
+#: crates/ui/src/header.rs:324
 msgid "Commands"
 msgstr "Commandes"
 
@@ -934,14 +938,14 @@ msgstr "%1$@ %2$@ est disponible."
 msgid "Keyboard on USB"
 msgstr "Clavier en USB"
 
-#: crates/ui/src/window.rs:531
+#: crates/ui/src/window.rs:532
 msgid "Simulator in use"
 msgstr "Simulateur en cours d’utilisation"
 
-#: crates/ui/src/window.rs:534
+#: crates/ui/src/window.rs:535
 msgid "This isn't a real keyboard. Nothing you save here is written to any keyboard."
 msgstr "Ce n’est pas un vrai clavier. Ce que vous enregistrez ici n’est écrit sur aucun clavier."
 
-#: crates/ui/src/window.rs:542
+#: crates/ui/src/window.rs:543
 msgid "Back to the Keyboard on USB"
 msgstr "Revenir au clavier en USB"

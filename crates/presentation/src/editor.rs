@@ -1,18 +1,21 @@
 use std::cell::{Ref, RefCell};
 use std::fmt;
 use std::future::Future;
+use std::pin::Pin;
 use std::rc::{Rc, Weak};
+use std::task::Poll;
 
 use domain::usecases::{
     AppendStrokeUseCase, ChooseLayoutUseCase, ClearUseCase, EditOutcome, EditTarget, IdentifyKeyboardUseCase,
-    KeyboardSourceUseCase, ObserveConnectionUseCase, ReadKeyboardUseCase, RemoveLastStrokeUseCase,
-    ResolveLayoutUseCase, RetryConnectionUseCase, SaveKeyboardUseCase, SaveOutcome, SetActionUseCase,
-    SetKeyDelayUseCase, SetLightingUseCase, SetPressDelayUseCase,
+    KeyboardSourceUseCase, ObserveAttachedKeyboardsUseCase, ObserveConnectionUseCase, ReadKeyboardUseCase,
+    RemoveLastStrokeUseCase, ResolveLayoutUseCase, RetryConnectionUseCase, SaveKeyboardUseCase, SaveOutcome,
+    SelectKeyboardUseCase, SetActionUseCase, SetKeyDelayUseCase, SetLightingUseCase, SetPressDelayUseCase,
 };
 use domain::{
-    ConnectedKeyboard, ConnectionState, ControlId, DelaySupport, GridShape, KeyAction, KeyColor, KeyStroke,
-    KeyboardCapabilities, KeyboardConfiguration, KeyboardDeviceError, KeyboardIdentification, KeyboardLayout,
-    KeyboardSource, LayerLighting, LightingSupport, Modifiers, ReadSupport, ResolvedLayout, Rotation, SimulatedModel,
+    AttachedKeyboards, ConnectedKeyboard, ConnectionState, ControlId, DelaySupport, GridShape, KeyAction, KeyColor,
+    KeyStroke, KeyboardCapabilities, KeyboardConfiguration, KeyboardDeviceError, KeyboardIdentification,
+    KeyboardLayout, KeyboardSource, LayerLighting, LightingSupport, Modifiers, ReadSupport, ResolvedLayout, Rotation,
+    SimulatedModel,
 };
 
 use crate::choices::{ControlRef, LedColor, MediaChoice, ModifierKey, MouseChoice, Rgb};
@@ -32,6 +35,8 @@ pub struct EditorDependencies {
     pub save_keyboard: SaveKeyboardUseCase,
     /// The simulator's switch.
     pub keyboard_source: Option<KeyboardSourceUseCase>,
+    /// The keyboards plugged in, and choosing which one is open.
+    pub attached_keyboards: Option<(ObserveAttachedKeyboardsUseCase, SelectKeyboardUseCase)>,
 }
 
 /// The main window's state and what the user does in it: the keyboard connected, its layout, the layer, key
@@ -61,6 +66,8 @@ pub(crate) struct State {
     pub(crate) held: Modifiers,
     /// The keyboard on USB, or a simulated one.
     pub(crate) source: KeyboardSource,
+    /// The keyboards on USB and the one open.
+    pub(crate) attached: AttachedKeyboards,
 }
 
 impl State {
@@ -150,6 +157,7 @@ impl EditorModel {
                 selection: None,
                 held: Modifiers::NONE,
                 source: KeyboardSource::Hardware,
+                attached: AttachedKeyboards::default(),
             }),
             deps,
             listeners: RefCell::default(),
@@ -175,7 +183,8 @@ impl EditorModel {
         result
     }
 
-    /// Follows the keyboard until the model goes away; one that comes is identified at once.
+    /// Follows the keyboard, and the keyboards plugged in, until the model goes away; one that comes is identified
+    /// at once.
     pub fn run(self: &Rc<Self>) -> impl Future<Output = ()> + 'static {
         let model: Weak<Self> = Rc::downgrade(self);
         if let Some(source) = &self.deps.keyboard_source {
@@ -183,12 +192,24 @@ impl EditorModel {
             self.update(|state| state.source = current);
         }
         let mut states = self.deps.observe_connection.execute();
-        async move {
-            while let Some(state) = states.next().await {
-                let Some(model) = model.upgrade() else { return };
-                model.connection_changed(state).await;
+        let connection = {
+            let model = model.clone();
+            async move {
+                while let Some(state) = states.next().await {
+                    let Some(model) = model.upgrade() else { return };
+                    model.connection_changed(state).await;
+                }
             }
-        }
+        };
+        let mut attached = self.deps.attached_keyboards.as_ref().map(|(observe, _)| observe.execute());
+        let keyboards = async move {
+            let Some(attached) = &mut attached else { return };
+            while let Some(keyboards) = attached.next().await {
+                let Some(model) = model.upgrade() else { return };
+                model.update(|state| state.attached = keyboards);
+            }
+        };
+        both(connection, keyboards)
     }
 
     // State the views read
@@ -286,6 +307,13 @@ impl EditorModel {
 
     pub fn retry_connection(&self) {
         self.deps.retry_connection.execute();
+    }
+
+    /// Opens another of the keyboards plugged in. The connection reports "searching" first, as after re-plugging.
+    pub fn select_keyboard(&self, id: &str) {
+        if let Some((_, select)) = &self.deps.attached_keyboards {
+            select.execute(id);
+        }
     }
 
     /// Settles the keyboard's commands and layout, then reads it if it reads back on its own.
@@ -590,6 +618,22 @@ impl EditorModel {
             self.dismiss_notice();
         }
     }
+}
+
+/// Runs two futures together until both are done.
+fn both(
+    first: impl Future<Output = ()> + 'static,
+    second: impl Future<Output = ()> + 'static,
+) -> impl Future<Output = ()> + 'static {
+    let mut futures: [Option<Pin<Box<dyn Future<Output = ()>>>>; 2] = [Some(Box::pin(first)), Some(Box::pin(second))];
+    std::future::poll_fn(move |context| {
+        for slot in &mut futures {
+            if slot.as_mut().is_some_and(|future| future.as_mut().poll(context).is_ready()) {
+                *slot = None;
+            }
+        }
+        if futures.iter().all(Option::is_none) { Poll::Ready(()) } else { Poll::Pending }
+    })
 }
 
 impl fmt::Debug for EditorModel {

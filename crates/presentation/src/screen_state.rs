@@ -487,6 +487,15 @@ pub enum SimulatorKind {
     },
 }
 
+/// One of the keyboards plugged in, to choose which the app opens.
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+pub struct KeyboardChoice {
+    pub id: String,
+    /// Its USB ID, numbered by port when several have the same one.
+    pub title: String,
+    pub is_selected: bool,
+}
+
 /// A keyboard the simulator can play.
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 pub struct SimulatorChoice {

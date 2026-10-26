@@ -5,8 +5,9 @@ mod editing;
 mod layout;
 
 pub use device::{
-    DeviceLogUseCase, IdentifyKeyboardUseCase, KeyboardSourceUseCase, ObserveConnectionUseCase, ReadKeyboardUseCase,
-    ReadOutcome, RetryConnectionUseCase, SaveKeyboardUseCase, SaveOutcome,
+    DeviceLogUseCase, IdentifyKeyboardUseCase, KeyboardSourceUseCase, ObserveAttachedKeyboardsUseCase,
+    ObserveConnectionUseCase, ReadKeyboardUseCase, ReadOutcome, RetryConnectionUseCase, SaveKeyboardUseCase,
+    SaveOutcome, SelectKeyboardUseCase,
 };
 pub use editing::{
     AppendStrokeUseCase, ClearUseCase, EditOutcome, EditTarget, RemoveLastStrokeUseCase, SetActionUseCase,

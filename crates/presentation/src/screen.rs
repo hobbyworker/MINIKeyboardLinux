@@ -10,8 +10,8 @@ use crate::drawing::LayoutGeometry;
 use crate::editor::EditorModel;
 use crate::screen_state::{
     BindingState, BoardCap, BoardFace, ConnectionStatus, ControlDrawing, ControlFace, DelayPage, KeyArrangement,
-    KeyColorSelection, KeyGroup, KeyGroupKind, KeyboardDrawing, KeyboardInfo, LayoutChoice, LayoutSheetMode,
-    LayoutSheetState, LightingPage, PressDelay, SelectionState, ShapeDrawing,
+    KeyColorSelection, KeyGroup, KeyGroupKind, KeyboardChoice, KeyboardDrawing, KeyboardInfo, LayoutChoice,
+    LayoutSheetMode, LayoutSheetState, LightingPage, PressDelay, SelectionState, ShapeDrawing,
 };
 use crate::state::{ActionText, EditorTab};
 use crate::tables::{KeyUsage, places};
@@ -41,6 +41,30 @@ impl EditorModel {
     pub fn keyboard_info(&self) -> Option<KeyboardInfo> {
         let state = self.state();
         state.keyboard().map(|keyboard| KeyboardInfo::of(keyboard, state.identification.as_ref()))
+    }
+
+    /// The keyboards plugged in, to choose which is open — only when there is more than one.
+    pub fn keyboard_choices(&self) -> Vec<KeyboardChoice> {
+        let state = self.state();
+        let attached = &state.attached;
+        if attached.keyboards.len() < 2 {
+            return vec![];
+        }
+        let mut seen = std::collections::HashMap::new();
+        attached
+            .keyboards
+            .iter()
+            .map(|keyboard| {
+                let same_id = attached.keyboards.iter().filter(|other| other.usb == keyboard.usb).count();
+                let number = seen.entry(keyboard.usb).and_modify(|number| *number += 1).or_insert(1);
+                let title = if same_id > 1 { format!("{} ({number})", keyboard.usb) } else { keyboard.usb.to_string() };
+                KeyboardChoice {
+                    id: keyboard.id.clone(),
+                    title,
+                    is_selected: attached.selected.as_ref() == Some(&keyboard.id),
+                }
+            })
+            .collect()
     }
 
     // The keyboard
