@@ -177,14 +177,14 @@ Zéro avertissement : c’est la règle. Les avertissements sont corrigés, pas 
 
 ## Limites
 
-- L’écriture n’a été essayée jusqu’ici que sur un seul clavier, un `1189:8890` à six touches et un bouton rotatif,
-  sous Fedora. Les autres claviers sont écrits comme l’app de leur fabricant les écrit – les commandes sont celles de
-  l’app macOS, octet pour octet, et des tests les figent –, mais aucun n’a encore été essayé sur un vrai clavier, pas
-  plus que le chemin qui y mène (hidraw).
+- L’écriture a été essayée jusqu’ici sur deux claviers, sous Fedora : un `1189:8890` à six touches et un bouton
+  rotatif, et un `514C:8850` à douze touches et deux boutons rotatifs, au programme interne récent, ouvert par hidraw.
+  Les autres claviers sont écrits comme l’app de leur fabricant les écrit – les commandes sont celles de l’app macOS,
+  octet pour octet, et des tests les figent –, mais aucun n’a encore été essayé sur un vrai clavier.
 - Le `1189:8890` et les claviers qui n’indiquent pas leur type ne peuvent pas communiquer leurs réglages ; seuls ceux
   définis dans l’app sont donc affichés.
-- Un seul clavier à la fois. Si plusieurs sont branchés, l’app prend le premier qu’elle trouve – un `1189:8890` en
-  priorité.
+- Un seul clavier ouvert à la fois. Si plusieurs sont branchés, le bouton à côté de l’état de connexion choisit lequel
+  ; l’app ouvre celui choisi la dernière fois, sinon le premier qu’elle trouve – un `1189:8890` en priorité.
 - Le déplacement de la souris et le glissement ne sont pas proposés.
 
 ## Licence

@@ -174,13 +174,14 @@ Zero avvisi è il requisito. Gli avvisi si correggono, non si disattivano.
 
 ## Limiti
 
-- Finora la scrittura è stata provata su una sola tastiera, una `1189:8890` con sei tasti e una manopola, su Fedora.
-  Le altre tastiere vengono scritte come le scrive l’app del loro produttore – i comandi sono quelli dell’app per
-  macOS, byte per byte, e i test li fissano –, ma nessuna è stata ancora provata su una tastiera reale, e nemmeno la
-  via per raggiungerle (hidraw).
+- Finora la scrittura è stata provata su due tastiere, su Fedora: una `1189:8890` con sei tasti e una manopola e una
+  `514C:8850` con dodici tasti e due manopole, con firmware recente, aperta tramite hidraw. Le altre tastiere vengono
+  scritte come le scrive l’app del loro produttore – i comandi sono quelli dell’app per macOS, byte per byte, e i test
+  li fissano –, ma nessuna è stata ancora provata su una tastiera reale.
 - La `1189:8890` e le tastiere che non indicano il proprio tipo non possono riferire le loro impostazioni, quindi si
   vede solo ciò che è stato impostato nell’app.
-- Una tastiera alla volta. Se ne sono collegate diverse, l’app prende la prima che trova – prima una `1189:8890`.
+- Una tastiera aperta alla volta. Se ne sono collegate diverse, il pulsante accanto allo stato della connessione
+  sceglie quale; l’app apre quella scelta l’ultima volta, altrimenti la prima che trova – prima una `1189:8890`.
 - Lo spostamento del mouse e il trascinamento non sono disponibili.
 
 ## Licenza

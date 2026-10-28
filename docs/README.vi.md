@@ -164,13 +164,14 @@ Tiêu chuẩn là không có cảnh báo nào. Cảnh báo được sửa chứ 
 
 ## Hạn chế
 
-- Đến nay, việc ghi mới được kiểm tra trên một bàn phím là `1189:8890` có 6 phím và 1 núm xoay, trên Fedora. Các bàn
-  phím còn lại được ghi đúng theo cách ứng dụng của nhà sản xuất ghi — các lệnh giống hệt lệnh của ứng dụng macOS đến
-  từng byte và được kiểm thử giữ đúng, nhưng chưa bàn phím nào được thử trên thiết bị thật, và đường ghi đến chúng
-  (hidraw) cũng chưa.
+- Đến nay, việc ghi đã được kiểm tra trên hai bàn phím, trên Fedora: `1189:8890` có 6 phím và 1 núm xoay, và
+  `514C:8850` có 12 phím và 2 núm xoay, chạy chương trình cơ sở mới, được mở qua hidraw. Các bàn phím còn lại được ghi
+  đúng theo cách ứng dụng của nhà sản xuất ghi — các lệnh giống hệt lệnh của ứng dụng macOS đến từng byte và được kiểm
+  thử giữ đúng, nhưng chưa bàn phím nào được thử trên thiết bị thật.
 - `1189:8890` và các bàn phím không cho biết loại không báo lại thiết lập hiện tại, nên chỉ thấy được những gì đã đặt
   trong ứng dụng.
-- Mỗi lần chỉ một bàn phím. Nếu cắm nhiều bàn phím, ứng dụng dùng bàn phím tìm thấy đầu tiên — `1189:8890` được ưu tiên.
+- Mỗi lần chỉ mở một bàn phím. Nếu cắm nhiều bàn phím, nút bên cạnh trạng thái kết nối dùng để chọn; ứng dụng mở bàn
+  phím đã chọn lần trước, nếu không thì bàn phím tìm thấy đầu tiên — `1189:8890` được ưu tiên.
 - Không hỗ trợ di chuyển chuột và kéo thả.
 
 ## Giấy phép

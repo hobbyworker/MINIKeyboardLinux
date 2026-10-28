@@ -173,13 +173,14 @@ Zero avisos é o padrão. Avisos são corrigidos, não desativados.
 
 ## Limitações
 
-- Até agora, a gravação só foi testada em um teclado, um `1189:8890` com seis teclas e um botão giratório, no
-  Fedora. Os demais teclados são gravados como o app do fabricante os grava — os comandos são os do app para macOS,
-  byte a byte, e os testes os fixam —, mas nenhum deles foi testado em um teclado real ainda, nem o caminho até eles
-  (hidraw).
+- Até agora, a gravação foi testada em dois teclados, no Fedora: um `1189:8890` com seis teclas e um botão giratório e
+  um `514C:8850` com doze teclas e dois botões giratórios, com firmware novo, aberto pelo hidraw. Os demais teclados
+  são gravados como o app do fabricante os grava — os comandos são os do app para macOS, byte a byte, e os testes os
+  fixam —, mas nenhum deles foi testado em um teclado real ainda.
 - O `1189:8890` e os teclados que não informam o tipo não conseguem informar a configuração atual, então o app
   mostra só o que foi definido nele.
-- Um teclado por vez. Com vários conectados, o app usa o primeiro que encontrar — um `1189:8890` primeiro.
+- Um teclado aberto por vez. Com vários conectados, o botão ao lado do status da conexão escolhe qual; o app abre o
+  escolhido da última vez ou, se não houver, o primeiro que encontrar — um `1189:8890` primeiro.
 - Não há ações para mover o mouse nem para arrastar.
 
 ## Licença

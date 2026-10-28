@@ -175,14 +175,15 @@ Zero ostrzeżeń to standard. Ostrzeżenia się poprawia, a nie wyłącza.
 
 ## Ograniczenia
 
-- Zapis sprawdzono dotąd tylko na jednej klawiaturze — `1189:8890` z sześcioma klawiszami i pokrętłem — w Fedorze.
-  Pozostałe klawiatury są zapisywane tak, jak robi to aplikacja ich producenta: polecenia są bajt w bajt takie same
-  jak w aplikacji na macOS i pilnują ich testy, ale żadnej z nich nie sprawdzono jeszcze na prawdziwej klawiaturze,
-  podobnie jak samej drogi do nich (hidraw).
+- Zapis sprawdzono dotąd na dwóch klawiaturach w Fedorze: `1189:8890` z sześcioma klawiszami i pokrętłem oraz
+  `514C:8850` z dwunastoma klawiszami i dwoma pokrętłami, z nowszym oprogramowaniem sprzętowym, otwieraną przez
+  hidraw. Pozostałe klawiatury są zapisywane tak, jak robi to aplikacja ich producenta: polecenia są bajt w bajt takie
+  same jak w aplikacji na macOS i pilnują ich testy, ale żadnej z nich nie sprawdzono jeszcze na prawdziwej
+  klawiaturze.
 - Klawiatura `1189:8890` i klawiatury, które nie podają swojego typu, nie przekazują swoich bieżących ustawień, więc
   aplikacja pokazuje tylko to, co w niej ustawiono.
-- Jedna klawiatura naraz. Jeśli podłączonych jest kilka, aplikacja używa pierwszej znalezionej — w pierwszej
-  kolejności `1189:8890`.
+- Naraz otwarta jest jedna klawiatura. Jeśli podłączonych jest kilka, przycisk obok stanu połączenia wybiera którą;
+  aplikacja otwiera ostatnio wybraną, a jeśli takiej nie ma, pierwszą znalezioną — w pierwszej kolejności `1189:8890`.
 - Nie ma akcji ruchu myszy ani przeciągania.
 
 ## Licencja
