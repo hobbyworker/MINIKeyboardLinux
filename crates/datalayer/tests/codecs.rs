@@ -121,8 +121,11 @@ fn standard_media_and_mouse() {
     assert!(media[3] == 2 && media[5] == 2 && media[8] == 0x24 && media[11] == 0x02);
     assert_eq!(records::decode(&media, RecordFormat::Standard), Some(KeyAction::Media(MediaKey::WEB_BACK)));
     let mouse = records::standard(&KeyAction::Mouse(MouseAction::ControlWheelUp), 1, 0).unwrap();
-    assert!(mouse[3] == 3 && mouse[5] == 4 && mouse[8] == 0xF1 && mouse[11] == 0 && mouse[20] == 0x01);
+    assert!(mouse[3] == 3 && mouse[4] == 1 && mouse[5] == 4 && mouse[8] == 0xF1 && mouse[11] == 0 && mouse[20] == 0x01);
     assert_eq!(records::decode(&mouse, RecordFormat::Standard), Some(KeyAction::Mouse(MouseAction::ControlWheelUp)));
+    let mut gesture = mouse.clone();
+    gesture[4] = 4;
+    assert_eq!(records::decode(&gesture, RecordFormat::Standard), None);
 }
 
 #[test]

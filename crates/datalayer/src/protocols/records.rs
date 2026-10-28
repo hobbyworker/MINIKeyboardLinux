@@ -88,6 +88,8 @@ pub fn standard(action: &KeyAction, record_id: u8, layer: usize) -> Result<Vec<u
         }
         KeyAction::Mouse(mouse) => {
             record[3] = Kind::Mouse as u8;
+            // 1 for a mouse action; the cross-platform app's 2025-06 builds put 4 here for a gesture.
+            record[4] = 1;
             record[5] = 4;
             record[8] = modifier_codes(mouse.modifiers()).first().copied().unwrap_or(0);
             record[11] = mouse.buttons();
@@ -256,6 +258,8 @@ pub fn decode(record: &[u8], format: RecordFormat) -> Option<KeyAction> {
             };
             Some(if usage == 0 { KeyAction::Unassigned } else { KeyAction::Media(MediaKey(usage)) })
         }
+        // A gesture (4 in byte 4), which the app doesn't make, isn't read as a mouse action.
+        Kind::Mouse if standard && byte(4) == 4 => None,
         Kind::Mouse if standard => mouse(byte(11), byte(20), modifiers_of_code(byte(8)).unwrap_or_default()),
         Kind::Mouse => {
             let held = Modifiers::from_bits(byte(10)).members().next().unwrap_or_default();
