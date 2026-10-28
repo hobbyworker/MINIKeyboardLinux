@@ -199,7 +199,7 @@ fn answers() {
         Some(LayerLighting::PerKey { mode: 4, colors: vec![KeyColor::new(9, 9, 9); 16] })
     );
     assert_eq!(k884x::read_records(0, RecordFormat::Standard), Some(vec![0xFA, 25, 0, 1]));
-    assert_eq!(k884x::read_records(2, RecordFormat::Legacy), Some(vec![0xFA, 15, 3, 3]));
+    assert_eq!(k884x::read_records(2, RecordFormat::Legacy), Some(vec![0xFA, 0x18, 0, 3]));
     assert_eq!(k884x::read_records(0, RecordFormat::Unidentified), None);
 }
 

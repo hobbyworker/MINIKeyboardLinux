@@ -21,6 +21,7 @@ fn usb_identity_prints_as_hex() {
 #[test]
 fn identity_picks_the_record_format() {
     assert_eq!(KeyboardIdentity::new(6, 1, 10).record_format(), RecordFormat::Standard);
+    assert_eq!(KeyboardIdentity::new(12, 2, 11).record_format(), RecordFormat::Standard);
     assert_eq!(KeyboardIdentity::new(6, 1, 0).record_format(), RecordFormat::Legacy);
     assert_eq!(KeyboardIdentity::new(6, 1, 1).record_format(), RecordFormat::Legacy);
 }

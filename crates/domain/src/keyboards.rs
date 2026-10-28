@@ -99,8 +99,9 @@ pub enum CommandSet {
 pub struct KeyboardIdentity {
     pub key_count: u8,
     pub knob_count: u8,
-    /// 10 for the standard record format, anything else for the legacy one. On a keyboard of four keys and a
-    /// knob it also picks between two layouts.
+    /// 10 for the standard record format — and 11, a twelve-key keyboard (514C:8850) that stores and reads standard
+    /// records though the cross-platform app takes it for legacy — anything else for the legacy one. On a keyboard of
+    /// four keys and a knob it also picks between two layouts.
     pub kind: u8,
 }
 
@@ -110,7 +111,7 @@ impl KeyboardIdentity {
     }
 
     pub const fn record_format(&self) -> RecordFormat {
-        if self.kind == 10 { RecordFormat::Standard } else { RecordFormat::Legacy }
+        if self.kind == 10 || self.kind == 11 { RecordFormat::Standard } else { RecordFormat::Legacy }
     }
 }
 

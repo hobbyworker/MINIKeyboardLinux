@@ -18,13 +18,15 @@ pub const IDENTIFY: [u8; 3] = [0xFB, 0xFB, 0xFB];
 pub const COMMIT: [u8; 3] = [0xFD, 0xFE, 0xFF];
 pub const COMMIT_PAUSE: Duration = Duration::from_millis(200);
 
-/// `FA <records> <knob records> <layer + 1>` — the standard format reads 25 records, the legacy one 15 keys
-/// and 3 knobs (`Read_CurKeyBoard_Data`, `Read_configuration_clicked`).
+/// `FA <records> <knob records> <layer + 1>` — the standard format reads its 25 records (`Read_CurKeyBoard_Data`), the
+/// legacy one all 24 — 15 keys, then 3 knobs of 3 — as `FA 18 00`. The cross-platform app asks `FA 0F 03`
+/// (`Read_configuration_clicked`) and waits for 24, but a legacy keyboard answers as many records as the first number
+/// says (514C:8850, type 11: 15). Counted either way, `FA 18 00` comes to 24.
 pub fn read_records(layer: usize, format: RecordFormat) -> Option<Vec<u8>> {
     let layer = layer_byte(layer + 1);
     match format {
         RecordFormat::Standard => Some(vec![0xFA, 25, 0, layer]),
-        RecordFormat::Legacy => Some(vec![0xFA, 15, 3, layer]),
+        RecordFormat::Legacy => Some(vec![0xFA, 24, 0, layer]),
         RecordFormat::Unidentified => None,
     }
 }
