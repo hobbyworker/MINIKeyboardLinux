@@ -6,7 +6,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt_BR\n"
 
-#: crates/ui/src/canvas.rs:200 crates/ui/src/names.rs:307 crates/ui/src/window.rs:421
+#: crates/ui/src/canvas.rs:200 crates/ui/src/names.rs:307 crates/ui/src/window.rs:425
 msgid "Simulator"
 msgstr "Simulador"
 
@@ -14,7 +14,7 @@ msgstr "Simulador"
 msgid "The keyboard reports its keys and knobs: %@"
 msgstr "O teclado informa suas teclas e botões giratórios: %@"
 
-#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:178 crates/ui/src/header.rs:298
+#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:178 crates/ui/src/header.rs:299
 msgid "Keys: %lld · Knobs: %lld"
 msgstr "Teclas: %1$lld · Botões giratórios: %2$lld"
 
@@ -30,11 +30,11 @@ msgstr "A forma real também não é conhecida. Defina quantas teclas e botões 
 msgid "Pick the shape that matches the keyboard, then rotate it to match how it sits in front of you."
 msgstr "Escolha a forma correspondente ao teclado e gire-a para ficar como o teclado está na sua frente."
 
-#: crates/ui/src/dialogs.rs:170 crates/ui/src/window.rs:76 crates/ui/src/window.rs:297
+#: crates/ui/src/dialogs.rs:170 crates/ui/src/window.rs:78 crates/ui/src/window.rs:300
 msgid "Rotate"
 msgstr "Girar"
 
-#: crates/ui/src/dialogs.rs:173
+#: crates/ui/src/dialogs.rs:173 crates/ui/src/window.rs:540
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -70,11 +70,11 @@ msgstr "Copiar"
 msgid "Allow Access to the Keyboard"
 msgstr "Permitir acesso ao teclado"
 
-#: crates/ui/src/header.rs:48 crates/ui/src/header.rs:52 crates/ui/src/header.rs:224
+#: crates/ui/src/header.rs:48 crates/ui/src/header.rs:52 crates/ui/src/header.rs:225
 msgid "Choose a Keyboard"
 msgstr "Escolher um Teclado"
 
-#: crates/ui/src/header.rs:55 crates/ui/src/header.rs:59 crates/ui/src/header.rs:257
+#: crates/ui/src/header.rs:55 crates/ui/src/header.rs:59 crates/ui/src/header.rs:258
 msgid "Keyboard Information"
 msgstr "Informações do teclado"
 
@@ -94,7 +94,7 @@ msgstr "Menu principal"
 msgid "Save"
 msgstr "Salvar"
 
-#: crates/ui/src/header.rs:83 crates/ui/src/window.rs:291
+#: crates/ui/src/header.rs:83 crates/ui/src/window.rs:294
 msgid "Save to Keyboard"
 msgstr "Salvar no Teclado"
 
@@ -102,7 +102,7 @@ msgstr "Salvar no Teclado"
 msgid "Read"
 msgstr "Ler"
 
-#: crates/ui/src/header.rs:87 crates/ui/src/window.rs:291
+#: crates/ui/src/header.rs:87 crates/ui/src/window.rs:294
 msgid "Read from Keyboard"
 msgstr "Ler do Teclado"
 
@@ -150,47 +150,47 @@ msgstr "Conectado"
 msgid "%@ · %@"
 msgstr "%@ · %@"
 
-#: crates/ui/src/header.rs:202 crates/ui/src/inspector.rs:112
+#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:112
 msgid "Layer %lld"
 msgstr "Camada %lld"
 
-#: crates/ui/src/header.rs:277
+#: crates/ui/src/header.rs:278
 msgid "Not provided by the keyboard"
 msgstr "Não informado pelo teclado"
 
-#: crates/ui/src/header.rs:286
+#: crates/ui/src/header.rs:287
 msgid "Name"
 msgstr "Nome"
 
-#: crates/ui/src/header.rs:287
+#: crates/ui/src/header.rs:288
 msgid "Manufacturer"
 msgstr "Fabricante"
 
-#: crates/ui/src/header.rs:288
+#: crates/ui/src/header.rs:289
 msgid "Serial Number"
 msgstr "Número de série"
 
-#: crates/ui/src/header.rs:290
+#: crates/ui/src/header.rs:291
 msgid "Chip"
 msgstr "Chip"
 
-#: crates/ui/src/header.rs:292
+#: crates/ui/src/header.rs:293
 msgid "Firmware"
 msgstr "Firmware"
 
-#: crates/ui/src/header.rs:312
+#: crates/ui/src/header.rs:313
 msgid "Power"
 msgstr "Alimentação"
 
-#: crates/ui/src/header.rs:321
+#: crates/ui/src/header.rs:322
 msgid "Interfaces"
 msgstr "Interfaces"
 
-#: crates/ui/src/header.rs:323 crates/ui/src/names.rs:146
+#: crates/ui/src/header.rs:324 crates/ui/src/names.rs:146
 msgid "Configuration Channel"
 msgstr "Canal de configuração"
 
-#: crates/ui/src/header.rs:324
+#: crates/ui/src/header.rs:325
 msgid "Commands"
 msgstr "Comandos"
 
@@ -202,7 +202,7 @@ msgstr "Selecione uma tecla ou um botão giratório."
 msgid "Clear"
 msgstr "Limpar"
 
-#: crates/ui/src/inspector.rs:45 crates/ui/src/window.rs:295
+#: crates/ui/src/inspector.rs:45 crates/ui/src/window.rs:298
 msgid "Clear Layer"
 msgstr "Limpar Camada"
 
@@ -246,7 +246,7 @@ msgstr "Expandir Tudo"
 msgid "No packets yet."
 msgstr "Ainda não há pacotes."
 
-#: crates/ui/src/log_window.rs:76 crates/ui/src/window.rs:298
+#: crates/ui/src/log_window.rs:76 crates/ui/src/window.rs:301
 msgid "Device Log"
 msgstr "Registro do Dispositivo"
 
@@ -858,7 +858,7 @@ msgstr "Aparência"
 msgid "UI"
 msgstr "UI"
 
-#: crates/ui/src/preferences.rs:62 crates/ui/src/window.rs:302
+#: crates/ui/src/preferences.rs:62 crates/ui/src/window.rs:305
 msgid "Preferences"
 msgstr "Preferências"
 
@@ -898,54 +898,66 @@ msgstr "Depois"
 msgid "Relaunch Now"
 msgstr "Reabrir Agora"
 
-#: crates/ui/src/window.rs:68
+#: crates/ui/src/window.rs:70
 msgid "Keys appear here once the keyboard is connected."
 msgstr "As teclas aparecerão aqui quando você conectar o teclado."
 
-#: crates/ui/src/window.rs:81 crates/ui/src/window.rs:297
+#: crates/ui/src/window.rs:83 crates/ui/src/window.rs:300
 msgid "Shape…"
 msgstr "Forma…"
 
-#: crates/ui/src/window.rs:134
+#: crates/ui/src/window.rs:136
 msgid "Download"
 msgstr "Baixar"
 
-#: crates/ui/src/window.rs:295
+#: crates/ui/src/window.rs:298
 msgid "Clear Key"
 msgstr "Limpar Tecla"
 
-#: crates/ui/src/window.rs:304
+#: crates/ui/src/window.rs:307
 msgid "Check for Updates…"
 msgstr "Buscar Atualizações…"
 
-#: crates/ui/src/window.rs:306
+#: crates/ui/src/window.rs:309
 msgid "About %@"
 msgstr "Sobre o App %@"
 
-#: crates/ui/src/window.rs:357
+#: crates/ui/src/window.rs:360
 msgid "%@ is up to date."
 msgstr "O %@ está atualizado."
 
-#: crates/ui/src/window.rs:358
+#: crates/ui/src/window.rs:361
 msgid "Couldn’t check for updates."
 msgstr "Não foi possível buscar atualizações."
 
-#: crates/ui/src/window.rs:365
+#: crates/ui/src/window.rs:368
 msgid "%1$@ %2$@ is available."
 msgstr "O %1$@ %2$@ está disponível."
 
-#: crates/ui/src/window.rs:390
+#: crates/ui/src/window.rs:394
 msgid "Keyboard on USB"
 msgstr "Teclado via USB"
 
-#: crates/ui/src/window.rs:532
+#: crates/ui/src/window.rs:537
+msgid "Switch Keyboards?"
+msgstr "Trocar de Teclado?"
+
+#: crates/ui/src/window.rs:538
+msgid "Changes you haven’t saved will be lost."
+msgstr "As alterações não salvas serão perdidas."
+
+#: crates/ui/src/window.rs:540
+msgid "Switch"
+msgstr "Trocar"
+
+#: crates/ui/src/window.rs:576
 msgid "Simulator in use"
 msgstr "Simulador em uso"
 
-#: crates/ui/src/window.rs:535
+#: crates/ui/src/window.rs:579
 msgid "This isn't a real keyboard. Nothing you save here is written to any keyboard."
 msgstr "Este não é um teclado de verdade. O que você salvar aqui não é gravado em nenhum teclado."
 
-#: crates/ui/src/window.rs:543
+#: crates/ui/src/window.rs:587
 msgid "Back to the Keyboard on USB"
 msgstr "Voltar ao teclado via USB"

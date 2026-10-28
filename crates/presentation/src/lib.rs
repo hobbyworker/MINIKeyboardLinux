@@ -31,5 +31,5 @@ pub use screen_state::{
     KeyboardChoice, KeyboardDrawing, KeyboardInfo, LayoutChoice, LayoutSheetMode, LayoutSheetState, LightingPage,
     PressDelay, SelectionState, ShapeDrawing, ShapeItem, SimulatorChoice, SimulatorGroup, SimulatorKind,
 };
-pub use state::{ActionText, Activity, EditorTab, Notice};
+pub use state::{ActionText, Activity, EditorTab, Notice, PendingSwitch};
 pub use tables::KeyUsage;

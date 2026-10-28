@@ -6,7 +6,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: id\n"
 
-#: crates/ui/src/canvas.rs:200 crates/ui/src/names.rs:307 crates/ui/src/window.rs:421
+#: crates/ui/src/canvas.rs:200 crates/ui/src/names.rs:307 crates/ui/src/window.rs:425
 msgid "Simulator"
 msgstr "Simulator"
 
@@ -14,7 +14,7 @@ msgstr "Simulator"
 msgid "The keyboard reports its keys and knobs: %@"
 msgstr "Papan ketik memberi tahu tombol dan kenopnya: %@"
 
-#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:178 crates/ui/src/header.rs:298
+#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:178 crates/ui/src/header.rs:299
 msgid "Keys: %lld · Knobs: %lld"
 msgstr "Tombol: %1$lld · Kenop: %2$lld"
 
@@ -30,11 +30,11 @@ msgstr "Bentuk sebenarnya juga tidak diketahui. Atur jumlah tombol dan kenop ser
 msgid "Pick the shape that matches the keyboard, then rotate it to match how it sits in front of you."
 msgstr "Pilih bentuk yang sesuai dengan papan ketik, lalu putar hingga sama dengan posisinya di depan Anda."
 
-#: crates/ui/src/dialogs.rs:170 crates/ui/src/window.rs:76 crates/ui/src/window.rs:297
+#: crates/ui/src/dialogs.rs:170 crates/ui/src/window.rs:78 crates/ui/src/window.rs:300
 msgid "Rotate"
 msgstr "Putar"
 
-#: crates/ui/src/dialogs.rs:173
+#: crates/ui/src/dialogs.rs:173 crates/ui/src/window.rs:540
 msgid "Cancel"
 msgstr "Batalkan"
 
@@ -70,11 +70,11 @@ msgstr "Salin"
 msgid "Allow Access to the Keyboard"
 msgstr "Izinkan akses ke papan ketik"
 
-#: crates/ui/src/header.rs:48 crates/ui/src/header.rs:52 crates/ui/src/header.rs:224
+#: crates/ui/src/header.rs:48 crates/ui/src/header.rs:52 crates/ui/src/header.rs:225
 msgid "Choose a Keyboard"
 msgstr "Pilih Papan Ketik"
 
-#: crates/ui/src/header.rs:55 crates/ui/src/header.rs:59 crates/ui/src/header.rs:257
+#: crates/ui/src/header.rs:55 crates/ui/src/header.rs:59 crates/ui/src/header.rs:258
 msgid "Keyboard Information"
 msgstr "Informasi papan ketik"
 
@@ -94,7 +94,7 @@ msgstr "Menu Utama"
 msgid "Save"
 msgstr "Simpan"
 
-#: crates/ui/src/header.rs:83 crates/ui/src/window.rs:291
+#: crates/ui/src/header.rs:83 crates/ui/src/window.rs:294
 msgid "Save to Keyboard"
 msgstr "Simpan ke Papan Ketik"
 
@@ -102,7 +102,7 @@ msgstr "Simpan ke Papan Ketik"
 msgid "Read"
 msgstr "Baca"
 
-#: crates/ui/src/header.rs:87 crates/ui/src/window.rs:291
+#: crates/ui/src/header.rs:87 crates/ui/src/window.rs:294
 msgid "Read from Keyboard"
 msgstr "Baca dari Papan Ketik"
 
@@ -150,47 +150,47 @@ msgstr "Terhubung"
 msgid "%@ · %@"
 msgstr "%@ · %@"
 
-#: crates/ui/src/header.rs:202 crates/ui/src/inspector.rs:112
+#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:112
 msgid "Layer %lld"
 msgstr "Lapisan %lld"
 
-#: crates/ui/src/header.rs:277
+#: crates/ui/src/header.rs:278
 msgid "Not provided by the keyboard"
 msgstr "Tidak diberikan oleh papan ketik"
 
-#: crates/ui/src/header.rs:286
+#: crates/ui/src/header.rs:287
 msgid "Name"
 msgstr "Nama"
 
-#: crates/ui/src/header.rs:287
+#: crates/ui/src/header.rs:288
 msgid "Manufacturer"
 msgstr "Produsen"
 
-#: crates/ui/src/header.rs:288
+#: crates/ui/src/header.rs:289
 msgid "Serial Number"
 msgstr "Nomor seri"
 
-#: crates/ui/src/header.rs:290
+#: crates/ui/src/header.rs:291
 msgid "Chip"
 msgstr "Chip"
 
-#: crates/ui/src/header.rs:292
+#: crates/ui/src/header.rs:293
 msgid "Firmware"
 msgstr "Firmware"
 
-#: crates/ui/src/header.rs:312
+#: crates/ui/src/header.rs:313
 msgid "Power"
 msgstr "Daya"
 
-#: crates/ui/src/header.rs:321
+#: crates/ui/src/header.rs:322
 msgid "Interfaces"
 msgstr "Antarmuka"
 
-#: crates/ui/src/header.rs:323 crates/ui/src/names.rs:146
+#: crates/ui/src/header.rs:324 crates/ui/src/names.rs:146
 msgid "Configuration Channel"
 msgstr "Saluran konfigurasi"
 
-#: crates/ui/src/header.rs:324
+#: crates/ui/src/header.rs:325
 msgid "Commands"
 msgstr "Perintah"
 
@@ -202,7 +202,7 @@ msgstr "Pilih tombol atau kenop."
 msgid "Clear"
 msgstr "Bersihkan"
 
-#: crates/ui/src/inspector.rs:45 crates/ui/src/window.rs:295
+#: crates/ui/src/inspector.rs:45 crates/ui/src/window.rs:298
 msgid "Clear Layer"
 msgstr "Bersihkan Lapisan"
 
@@ -246,7 +246,7 @@ msgstr "Luaskan Semua"
 msgid "No packets yet."
 msgstr "Belum ada paket."
 
-#: crates/ui/src/log_window.rs:76 crates/ui/src/window.rs:298
+#: crates/ui/src/log_window.rs:76 crates/ui/src/window.rs:301
 msgid "Device Log"
 msgstr "Log Perangkat"
 
@@ -858,7 +858,7 @@ msgstr "Tampilan"
 msgid "UI"
 msgstr "UI"
 
-#: crates/ui/src/preferences.rs:62 crates/ui/src/window.rs:302
+#: crates/ui/src/preferences.rs:62 crates/ui/src/window.rs:305
 msgid "Preferences"
 msgstr "Preferensi"
 
@@ -898,54 +898,66 @@ msgstr "Nanti"
 msgid "Relaunch Now"
 msgstr "Luncurkan Ulang Sekarang"
 
-#: crates/ui/src/window.rs:68
+#: crates/ui/src/window.rs:70
 msgid "Keys appear here once the keyboard is connected."
 msgstr "Tombol akan muncul di sini setelah papan ketik terhubung."
 
-#: crates/ui/src/window.rs:81 crates/ui/src/window.rs:297
+#: crates/ui/src/window.rs:83 crates/ui/src/window.rs:300
 msgid "Shape…"
 msgstr "Bentuk…"
 
-#: crates/ui/src/window.rs:134
+#: crates/ui/src/window.rs:136
 msgid "Download"
 msgstr "Unduh"
 
-#: crates/ui/src/window.rs:295
+#: crates/ui/src/window.rs:298
 msgid "Clear Key"
 msgstr "Bersihkan Tombol"
 
-#: crates/ui/src/window.rs:304
+#: crates/ui/src/window.rs:307
 msgid "Check for Updates…"
 msgstr "Periksa Pembaruan…"
 
-#: crates/ui/src/window.rs:306
+#: crates/ui/src/window.rs:309
 msgid "About %@"
 msgstr "Mengenai %@"
 
-#: crates/ui/src/window.rs:357
+#: crates/ui/src/window.rs:360
 msgid "%@ is up to date."
 msgstr "%@ sudah versi terbaru."
 
-#: crates/ui/src/window.rs:358
+#: crates/ui/src/window.rs:361
 msgid "Couldn’t check for updates."
 msgstr "Tidak dapat memeriksa pembaruan."
 
-#: crates/ui/src/window.rs:365
+#: crates/ui/src/window.rs:368
 msgid "%1$@ %2$@ is available."
 msgstr "%1$@ %2$@ sudah tersedia."
 
-#: crates/ui/src/window.rs:390
+#: crates/ui/src/window.rs:394
 msgid "Keyboard on USB"
 msgstr "Papan ketik di USB"
 
-#: crates/ui/src/window.rs:532
+#: crates/ui/src/window.rs:537
+msgid "Switch Keyboards?"
+msgstr "Ganti Papan Ketik?"
+
+#: crates/ui/src/window.rs:538
+msgid "Changes you haven’t saved will be lost."
+msgstr "Perubahan yang belum disimpan akan hilang."
+
+#: crates/ui/src/window.rs:540
+msgid "Switch"
+msgstr "Ganti"
+
+#: crates/ui/src/window.rs:576
 msgid "Simulator in use"
 msgstr "Simulator sedang digunakan"
 
-#: crates/ui/src/window.rs:535
+#: crates/ui/src/window.rs:579
 msgid "This isn't a real keyboard. Nothing you save here is written to any keyboard."
 msgstr "Ini bukan papan ketik sungguhan. Apa pun yang Anda simpan di sini tidak ditulis ke papan ketik mana pun."
 
-#: crates/ui/src/window.rs:543
+#: crates/ui/src/window.rs:587
 msgid "Back to the Keyboard on USB"
 msgstr "Kembali ke papan ketik di USB"

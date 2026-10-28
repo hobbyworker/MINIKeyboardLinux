@@ -6,13 +6,14 @@ use futures::executor::{LocalPool, LocalSpawner};
 use futures::task::LocalSpawnExt;
 
 use domain::ports::{
-    KeyboardConnectionRepository, KeyboardDeviceRepository, LayerActions, LayoutProfileRepository, LocalFuture, Updates,
+    KeyboardConnectionRepository, KeyboardDeviceRepository, KeyboardSourceRepository, LayerActions,
+    LayoutProfileRepository, LocalFuture, Updates,
 };
 use domain::usecases::*;
 use domain::{
     AttachedKeyboard, AttachedKeyboards, Channel, CommandSet, ConnectedKeyboard, ConnectionState, KeyAction, KeyColor,
-    KeyboardConfiguration, KeyboardDeviceError, KeyboardFamily, KeyboardIdentity, KeyboardLayout, KnobPart,
-    LayerLighting, LayoutProfile, MediaKey, RecordFormat, UsbIdentity,
+    KeyboardConfiguration, KeyboardDeviceError, KeyboardFamily, KeyboardIdentity, KeyboardLayout, KeyboardSource,
+    KnobPart, LayerLighting, LayoutProfile, MediaKey, RecordFormat, UsbIdentity,
 };
 use presentation::*;
 
@@ -64,21 +65,55 @@ impl KeyboardConnectionRepository for FakeConnection {
     }
 }
 
+/// A keyboard that answers as it is told to, when its gates let it.
 #[derive(Default)]
 struct FakeDevice {
     identity: Cell<Option<KeyboardIdentity>>,
+    fail_identity: Cell<Option<KeyboardDeviceError>>,
     actions: RefCell<LayerActions>,
     fail_write: Cell<Option<KeyboardDeviceError>>,
     writes: RefCell<Vec<KeyboardConfiguration>>,
     reads: Cell<usize>,
+    /// Holds the answer to "who are you".
+    identity_gate: Gate,
+    /// Holds reads and writes.
+    transfer_gate: Gate,
+}
+
+#[derive(Default)]
+struct Gate(RefCell<Option<async_channel::Receiver<()>>>);
+
+impl Gate {
+    /// Holds what passes from now until the sender returned is dropped.
+    fn hold(&self) -> async_channel::Sender<()> {
+        let (sender, receiver) = async_channel::bounded(1);
+        *self.0.borrow_mut() = Some(receiver);
+        sender
+    }
+
+    /// Waits while the gate holds.
+    async fn pass(&self) {
+        let held = self.0.borrow().clone();
+        if let Some(held) = held {
+            let _ = held.recv().await;
+        }
+    }
 }
 
 impl KeyboardDeviceRepository for FakeDevice {
+    /// The answer when asked, given when the gate lets it.
     fn ask_identity(&self) -> LocalFuture<'_, Result<Option<KeyboardIdentity>, KeyboardDeviceError>> {
-        let identity = self.identity.get();
-        Box::pin(async move { Ok(identity) })
+        let answer = match self.fail_identity.get() {
+            Some(error) => Err(error),
+            None => Ok(self.identity.get()),
+        };
+        Box::pin(async move {
+            self.identity_gate.pass().await;
+            answer
+        })
     }
 
+    /// The actions the keyboard holds when the gate lets the read through.
     fn read_actions<'a>(
         &'a self,
         _: usize,
@@ -86,8 +121,10 @@ impl KeyboardDeviceRepository for FakeDevice {
         _: &'a KeyboardLayout,
     ) -> LocalFuture<'a, Result<LayerActions, KeyboardDeviceError>> {
         self.reads.set(self.reads.get() + 1);
-        let actions = self.actions.borrow().clone();
-        Box::pin(async move { Ok(actions) })
+        Box::pin(async move {
+            self.transfer_gate.pass().await;
+            Ok(self.actions.borrow().clone())
+        })
     }
 
     fn read_lighting(&self, _: usize) -> LocalFuture<'_, Result<LayerLighting, KeyboardDeviceError>> {
@@ -101,6 +138,7 @@ impl KeyboardDeviceRepository for FakeDevice {
         _: &'a KeyboardLayout,
     ) -> LocalFuture<'a, Result<(), KeyboardDeviceError>> {
         Box::pin(async move {
+            self.transfer_gate.pass().await;
             if let Some(error) = self.fail_write.get() {
                 return Err(error);
             }
@@ -123,10 +161,25 @@ impl LayoutProfileRepository for Profiles {
     }
 }
 
+/// The simulator's switch, and the keyboards chosen through it.
+#[derive(Default)]
+struct FakeSource(RefCell<Vec<KeyboardSource>>);
+
+impl KeyboardSourceRepository for FakeSource {
+    fn current(&self) -> KeyboardSource {
+        self.0.borrow().last().cloned().unwrap_or(KeyboardSource::Hardware)
+    }
+
+    fn select(&self, source: KeyboardSource) {
+        self.0.borrow_mut().push(source);
+    }
+}
+
 struct Fixture {
     connection: Rc<FakeConnection>,
     device: Rc<FakeDevice>,
     profiles: Rc<Profiles>,
+    source: Rc<FakeSource>,
     editor: Rc<EditorModel>,
     pool: LocalPool,
     spawner: LocalSpawner,
@@ -137,6 +190,7 @@ impl Fixture {
         let connection = Rc::new(FakeConnection::new());
         let device = Rc::new(FakeDevice::default());
         let profiles = Rc::new(Profiles::default());
+        let source = Rc::new(FakeSource::default());
         let editor = EditorModel::new(EditorDependencies {
             observe_connection: ObserveConnectionUseCase::new(connection.clone()),
             retry_connection: RetryConnectionUseCase::new(connection.clone()),
@@ -145,7 +199,7 @@ impl Fixture {
             choose_layout: ChooseLayoutUseCase::new(profiles.clone()),
             read_keyboard: ReadKeyboardUseCase::new(device.clone()),
             save_keyboard: SaveKeyboardUseCase::new(device.clone()),
-            keyboard_source: None,
+            keyboard_source: Some(KeyboardSourceUseCase::new(source.clone())),
             attached_keyboards: Some((
                 ObserveAttachedKeyboardsUseCase::new(connection.clone()),
                 SelectKeyboardUseCase::new(connection.clone()),
@@ -154,13 +208,22 @@ impl Fixture {
         let pool = LocalPool::new();
         let spawner = pool.spawner();
         spawner.spawn_local(editor.run()).unwrap();
-        let mut fixture = Self { connection, device, profiles, editor, pool, spawner };
+        let mut fixture = Self { connection, device, profiles, source, editor, pool, spawner };
         fixture.settle();
         fixture
     }
 
     fn plug(&mut self, keyboard: ConnectedKeyboard) {
         self.connection.sender.try_send(ConnectionState::Connected(keyboard)).unwrap();
+        self.settle();
+    }
+
+    /// The keyboard goes, and with `next` another comes in its place.
+    fn replug(&mut self, next: Option<ConnectedKeyboard>) {
+        self.connection.sender.try_send(ConnectionState::Searching).unwrap();
+        if let Some(next) = next {
+            self.connection.sender.try_send(ConnectionState::Connected(next)).unwrap();
+        }
         self.settle();
     }
 
@@ -176,6 +239,11 @@ impl Fixture {
     fn save(&mut self) {
         let editor = self.editor.clone();
         self.run(async move { editor.save().await });
+    }
+
+    fn read(&mut self) {
+        let editor = self.editor.clone();
+        self.run(async move { editor.read().await });
     }
 }
 
@@ -212,6 +280,10 @@ const C: u8 = 0x06;
 
 fn control(drawing: &KeyboardDrawing, control: ControlRef) -> &ControlDrawing {
     drawing.controls.iter().find(|drawn| drawn.control == control).unwrap()
+}
+
+fn caption(editor: &EditorModel, key: u8) -> ActionCaption {
+    control(&editor.drawing().unwrap(), ControlRef::key(key)).caption.clone()
 }
 
 #[test]
@@ -514,4 +586,175 @@ fn a_notice_goes_only_when_it_is_still_shown() {
     editor.expire_notice(editor.notice_serial());
     assert_eq!(editor.notice(), None);
     let _ = KnobPart::Press;
+}
+
+/// A read the keyboard changes under is dropped — what came after the change came from the next keyboard — and a
+/// keyboard that came meanwhile, passed over while the read was under way, is identified once it ends.
+#[test]
+fn a_read_across_a_keyboard_change_is_dropped() {
+    let mut fixture = Fixture::new();
+    let holding = |key: u8, media: MediaKey| [(domain::ControlId::Key(key), KeyAction::Media(media))].into();
+    fixture.device.identity.set(Some(KeyboardIdentity::new(6, 1, 10)));
+    *fixture.device.actions.borrow_mut() = holding(2, MediaKey::MUTE);
+    fixture.plug(k8840());
+
+    // Unplugged during a read: what was there before stays.
+    let transfers = fixture.device.transfer_gate.hold();
+    fixture.read();
+    assert_eq!(fixture.editor.activity(), Some(Activity::Reading));
+    *fixture.device.actions.borrow_mut() = holding(3, MediaKey::PLAY_PAUSE);
+    fixture.replug(None);
+    drop(transfers);
+    fixture.settle();
+    let editor = &fixture.editor;
+    assert_eq!(editor.activity(), None);
+    assert_eq!(editor.notice(), Some(Notice::KeyboardGone));
+    assert_eq!(caption(editor, 2), ActionCaption::Media(MediaChoice::Mute));
+    assert_ne!(caption(editor, 3), ActionCaption::Media(MediaChoice::PlayPause));
+    editor.dismiss_notice();
+
+    // Plugged in again, then swapped for another of its USB ID during a read.
+    fixture.plug(k8840());
+    assert_eq!(caption(&fixture.editor, 3), ActionCaption::Media(MediaChoice::PlayPause));
+    let transfers = fixture.device.transfer_gate.hold();
+    fixture.read();
+    let identity = fixture.device.identity_gate.hold();
+    *fixture.device.actions.borrow_mut() = holding(4, MediaKey::VOLUME_UP);
+    fixture.replug(Some(k8840()));
+    assert!(matches!(fixture.editor.status(), ConnectionStatus::Connected { is_identified: false, .. }));
+    assert_eq!(fixture.editor.activity(), Some(Activity::Reading));
+    drop(transfers);
+    fixture.settle();
+    assert_eq!(fixture.editor.notice(), Some(Notice::KeyboardGone));
+    assert_eq!(fixture.editor.activity(), Some(Activity::Identifying));
+    drop(identity);
+    fixture.settle();
+    let editor = &fixture.editor;
+    assert!(editor.is_ready());
+    assert_eq!(caption(editor, 4), ActionCaption::Media(MediaChoice::VolumeUp));
+}
+
+/// An identification the keyboard changes under is dropped, even when the next keyboard looks the same — two of one
+/// USB ID do — and the next one is asked in its turn.
+#[test]
+fn an_identification_across_a_keyboard_change_is_dropped() {
+    let mut fixture = Fixture::new();
+    fixture.device.fail_identity.set(Some(KeyboardDeviceError::NoReply));
+    fixture.plug(k8840());
+    assert_eq!(fixture.editor.notice(), Some(Notice::IdentifyFailed));
+
+    // Asked again, it is swapped for another of its USB ID before it answers.
+    fixture.device.fail_identity.set(None);
+    fixture.device.identity.set(Some(KeyboardIdentity::new(6, 1, 10)));
+    let identity = fixture.device.identity_gate.hold();
+    let editor = fixture.editor.clone();
+    fixture.run(async move { editor.identify().await });
+    assert_eq!(fixture.editor.activity(), Some(Activity::Identifying));
+    fixture.device.identity.set(Some(KeyboardIdentity::new(9, 2, 10)));
+    fixture.replug(Some(k8840()));
+    drop(identity);
+    fixture.settle();
+    let editor = &fixture.editor;
+    assert_eq!(editor.notice(), Some(Notice::KeyboardGone));
+    assert!(editor.is_ready());
+    assert_eq!(
+        editor.status(),
+        ConnectionStatus::Connected {
+            usb: "1189:8840".into(),
+            keys: Some(9),
+            knobs: Some(2),
+            is_identified: true,
+            is_simulated: false
+        }
+    );
+}
+
+/// A save the keyboard goes during says so, and leaves the changes to save.
+#[test]
+fn a_save_across_a_keyboard_change_is_not_saved() {
+    let mut fixture = Fixture::new();
+    fixture.plug(k8890());
+    fixture.editor.set_lighting_mode(1);
+    let transfers = fixture.device.transfer_gate.hold();
+    fixture.save();
+    assert_eq!(fixture.editor.activity(), Some(Activity::Saving));
+    fixture.replug(None);
+    drop(transfers);
+    fixture.settle();
+    let editor = &fixture.editor;
+    assert_eq!(editor.activity(), None);
+    assert_eq!(editor.notice(), Some(Notice::KeyboardGone));
+    assert!(editor.has_unsaved_changes());
+}
+
+/// While the keyboard is being read, no other is opened and the simulator stays as it is.
+#[test]
+fn no_switching_while_busy() {
+    let mut fixture = Fixture::new();
+    fixture.device.identity.set(Some(KeyboardIdentity::new(6, 1, 10)));
+    fixture.plug(k8840());
+    assert!(fixture.editor.can_switch_keyboard());
+    let transfers = fixture.device.transfer_gate.hold();
+    fixture.read();
+    let editor = &fixture.editor;
+    assert!(!editor.can_switch_keyboard());
+    let simulated = editor.simulator_choices()[0].id.clone();
+    editor.select_keyboard("b");
+    editor.select_simulator(Some(&simulated));
+    assert!(fixture.connection.selected.borrow().is_empty());
+    assert!(fixture.source.0.borrow().is_empty());
+    assert_eq!(editor.active_simulator_id(), None);
+    assert_eq!(editor.pending_switch(), None);
+
+    drop(transfers);
+    fixture.settle();
+    let editor = &fixture.editor;
+    assert!(editor.can_switch_keyboard());
+    editor.select_keyboard("b");
+    assert_eq!(*fixture.connection.selected.borrow(), vec!["b".to_owned()]);
+    editor.select_simulator(Some(&simulated));
+    assert_eq!(editor.active_simulator_id(), Some(simulated));
+}
+
+/// With changes not saved, a switch waits for the user to agree to lose them; without, nothing is asked.
+#[test]
+fn switching_with_unsaved_changes_asks_first() {
+    let mut fixture = Fixture::new();
+    fixture.plug(k8890());
+    let editor = &fixture.editor;
+    editor.select_keyboard("b");
+    assert_eq!(editor.pending_switch(), None);
+    assert_eq!(*fixture.connection.selected.borrow(), vec!["b".to_owned()]);
+
+    editor.set_lighting_mode(1);
+    editor.select_keyboard("c");
+    assert_eq!(editor.pending_switch(), Some(PendingSwitch::Keyboard("c".into())));
+    editor.cancel_switch();
+    assert_eq!(editor.pending_switch(), None);
+    assert!(editor.is_ready() && editor.has_unsaved_changes());
+    assert_eq!(*fixture.connection.selected.borrow(), vec!["b".to_owned()]);
+    editor.select_keyboard("c");
+    editor.confirm_switch();
+    assert_eq!(editor.pending_switch(), None);
+    assert_eq!(*fixture.connection.selected.borrow(), vec!["b".to_owned(), "c".to_owned()]);
+
+    // The simulator the same way; back to where it is already, nothing is asked.
+    editor.select_simulator(None);
+    assert_eq!(editor.pending_switch(), None);
+    let simulated = editor.simulator_choices()[0].id.clone();
+    editor.select_simulator(Some(&simulated));
+    assert_eq!(editor.pending_switch(), Some(PendingSwitch::Simulator(Some(simulated.clone()))));
+    editor.cancel_switch();
+    assert_eq!(editor.active_simulator_id(), None);
+    assert!(fixture.source.0.borrow().is_empty());
+    editor.select_simulator(Some(&simulated));
+    editor.confirm_switch();
+    assert_eq!(editor.active_simulator_id(), Some(simulated));
+    assert_eq!(fixture.source.0.borrow().len(), 1);
+
+    // A keyboard that goes takes the question with it.
+    editor.select_keyboard("d");
+    assert!(editor.pending_switch().is_some());
+    fixture.replug(None);
+    assert_eq!(fixture.editor.pending_switch(), None);
 }

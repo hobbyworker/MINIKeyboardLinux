@@ -26,6 +26,15 @@ pub enum Activity {
     Saving,
 }
 
+/// A switch to another keyboard the user asked for, waiting for them to agree to lose the changes not saved.
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+pub enum PendingSwitch {
+    /// One of the keyboards plugged in, by its ID.
+    Keyboard(String),
+    /// A simulated keyboard by its ID, or `None` for the keyboard on USB.
+    Simulator(Option<String>),
+}
+
 /// A message that comes and goes.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum Notice {

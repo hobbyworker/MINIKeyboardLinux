@@ -13,7 +13,9 @@ const USB_DEVICES: &str = "/sys/bus/usb/devices";
 /// A place to write the configuration.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub(crate) struct Candidate {
-    /// What stays the same while the keyboard is plugged in: the interface's sysfs path, and the hidraw device.
+    /// What stays the same while the keyboard is plugged in: the interface's sysfs path, the address the bus gave
+    /// this plugging — so a keyboard plugged in again, even between two looks, is a new place to write — and the
+    /// hidraw device.
     pub(crate) entry: String,
     pub(crate) usb: UsbIdentity,
     pub(crate) family: KeyboardFamily,
@@ -39,20 +41,20 @@ pub(crate) fn candidates() -> Vec<Candidate> {
     for device in usb_devices() {
         let Some(usb) = usb_identity(&device) else { continue };
         let Some(family) = KeyboardFamily::of(usb) else { continue };
-        let Some(keyboard) = attached_keyboard(&device, usb) else { continue };
+        let Some(address) = read_text(&device.join("devnum")) else { continue };
+        let Some(keyboard) = attached_keyboard(&device, usb, &address) else { continue };
         for interface in interfaces(&device) {
             let Some(number) = hex(&interface, "bInterfaceNumber") else { continue };
             if number != family.configuration_interface() {
                 continue;
             }
-            let entry = interface.to_string_lossy().into_owned();
+            let entry = format!("{} {address}", interface.display());
             match family {
                 KeyboardFamily::K8890 => {
                     let is_hid = hex(&interface, "bInterfaceClass") == Some(3)
                         && hex(&interface, "bInterfaceSubClass") == Some(0);
                     let bus = decimal(&device, "busnum");
-                    let address = decimal(&device, "devnum");
-                    if let (true, Some(bus), Some(address)) = (is_hid, bus, address) {
+                    if let (true, Some(bus), Ok(address)) = (is_hid, bus, address.parse::<u8>()) {
                         found.push(Candidate {
                             entry,
                             usb,
@@ -87,10 +89,9 @@ pub(crate) fn candidates() -> Vec<Candidate> {
 
 /// The keyboard a USB device is: the port it is plugged into — the device's sysfs name, `<bus>-<port>.<port>…`,
 /// which stays the same when it is plugged into the same port again — and, to tell one plugging from the next,
-/// the address the bus gave it.
-fn attached_keyboard(device: &Path, usb: UsbIdentity) -> Option<AttachedKeyboard> {
+/// the address the bus gave it (`devnum`).
+fn attached_keyboard(device: &Path, usb: UsbIdentity, address: &str) -> Option<AttachedKeyboard> {
     let location = device.file_name()?.to_string_lossy().into_owned();
-    let address = read_text(&device.join("devnum"))?;
     Some(AttachedKeyboard { id: format!("{location} {address}"), usb, location })
 }
 

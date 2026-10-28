@@ -40,6 +40,8 @@ pub struct MainWindow {
     panel: ActionPanel,
     inspector: Inspector,
     layout_dialog: Rc<RefCell<Option<adw::Dialog>>>,
+    /// "Switch keyboards?", while the editor has a switch that would lose changes not saved.
+    switch_dialog: Rc<RefCell<Option<adw::AlertDialog>>>,
     shown_notice: Cell<u64>,
     toast: RefCell<Option<adw::Toast>>,
     actions: RefCell<Vec<(&'static str, gio::SimpleAction)>>,
@@ -165,6 +167,7 @@ impl MainWindow {
             panel,
             inspector,
             layout_dialog: Rc::default(),
+            switch_dialog: Rc::default(),
             shown_notice: Cell::new(0),
             toast: RefCell::default(),
             actions: RefCell::default(),
@@ -376,7 +379,8 @@ impl MainWindow {
             action.connect_activate(move |action, parameter| {
                 let Some(id) = parameter.and_then(|parameter| parameter.get::<String>()) else { return };
                 editor.select_simulator((!id.is_empty()).then_some(id.as_str()));
-                action.set_state(&id.to_variant());
+                // The one in use: a switch that waits for an answer, or isn't made, leaves it as it was.
+                action.set_state(&editor.active_simulator_id().unwrap_or_default().to_variant());
             });
         }
         self.window.add_action(&action);
@@ -440,6 +444,7 @@ impl MainWindow {
         self.update_actions();
         self.update_notice();
         self.update_layout_dialog();
+        self.update_switch_dialog();
     }
 
     fn update_actions(&self) {
@@ -456,6 +461,8 @@ impl MainWindow {
             });
         }
         if let Some(simulator) = self.simulator.borrow().as_ref() {
+            // The Simulator menu's items, and the simulator bar's way back to the keyboard on USB.
+            simulator.set_enabled(editor.can_switch_keyboard());
             simulator.set_state(&editor.active_simulator_id().unwrap_or_default().to_variant());
         }
     }
@@ -515,6 +522,43 @@ impl MainWindow {
                 let dialog = self.layout_dialog.borrow_mut().take();
                 if let Some(dialog) = dialog {
                     dialog.force_close();
+                }
+            }
+            _ => {}
+        }
+    }
+
+    /// The question before a switch that would lose changes not saved: up while the editor has one waiting.
+    fn update_switch_dialog(&self) {
+        let open = self.switch_dialog.borrow().is_some();
+        match (self.editor.pending_switch().is_some(), open) {
+            (true, false) => {
+                let alert = adw::AlertDialog::builder()
+                    .heading(t("Switch Keyboards?"))
+                    .body(t("Changes you haven’t saved will be lost."))
+                    .build();
+                alert.add_responses(&[("cancel", &t("Cancel")), ("switch", &t("Switch"))]);
+                alert.set_response_appearance("switch", adw::ResponseAppearance::Destructive);
+                alert.set_default_response(Some("cancel"));
+                alert.set_close_response("cancel");
+                {
+                    let (editor, stored) = (self.editor.clone(), self.switch_dialog.clone());
+                    alert.connect_response(None, move |_, response| {
+                        stored.borrow_mut().take();
+                        if response == "switch" {
+                            editor.confirm_switch();
+                        } else {
+                            editor.cancel_switch();
+                        }
+                    });
+                }
+                *self.switch_dialog.borrow_mut() = Some(alert.clone());
+                alert.present(Some(&self.window));
+            }
+            (false, true) => {
+                let alert = self.switch_dialog.borrow_mut().take();
+                if let Some(alert) = alert {
+                    alert.force_close();
                 }
             }
             _ => {}

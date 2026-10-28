@@ -6,7 +6,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_TW\n"
 
-#: crates/ui/src/canvas.rs:200 crates/ui/src/names.rs:307 crates/ui/src/window.rs:421
+#: crates/ui/src/canvas.rs:200 crates/ui/src/names.rs:307 crates/ui/src/window.rs:425
 msgid "Simulator"
 msgstr "模擬器"
 
@@ -14,7 +14,7 @@ msgstr "模擬器"
 msgid "The keyboard reports its keys and knobs: %@"
 msgstr "鍵盤告知的按鍵和旋鈕：%@"
 
-#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:178 crates/ui/src/header.rs:298
+#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:178 crates/ui/src/header.rs:299
 msgid "Keys: %lld · Knobs: %lld"
 msgstr "按鍵 %1$lld 個 · 旋鈕 %2$lld 個"
 
@@ -30,11 +30,11 @@ msgstr "實際形狀也無法得知。請設定按鍵和旋鈕的數量以及每
 msgid "Pick the shape that matches the keyboard, then rotate it to match how it sits in front of you."
 msgstr "請選擇與鍵盤相同的形狀，再將它旋轉成與擺放方向一致。"
 
-#: crates/ui/src/dialogs.rs:170 crates/ui/src/window.rs:76 crates/ui/src/window.rs:297
+#: crates/ui/src/dialogs.rs:170 crates/ui/src/window.rs:78 crates/ui/src/window.rs:300
 msgid "Rotate"
 msgstr "旋轉"
 
-#: crates/ui/src/dialogs.rs:173
+#: crates/ui/src/dialogs.rs:173 crates/ui/src/window.rs:540
 msgid "Cancel"
 msgstr "取消"
 
@@ -70,11 +70,11 @@ msgstr "拷貝"
 msgid "Allow Access to the Keyboard"
 msgstr "允許存取鍵盤"
 
-#: crates/ui/src/header.rs:48 crates/ui/src/header.rs:52 crates/ui/src/header.rs:224
+#: crates/ui/src/header.rs:48 crates/ui/src/header.rs:52 crates/ui/src/header.rs:225
 msgid "Choose a Keyboard"
 msgstr "選擇鍵盤"
 
-#: crates/ui/src/header.rs:55 crates/ui/src/header.rs:59 crates/ui/src/header.rs:257
+#: crates/ui/src/header.rs:55 crates/ui/src/header.rs:59 crates/ui/src/header.rs:258
 msgid "Keyboard Information"
 msgstr "鍵盤資訊"
 
@@ -94,7 +94,7 @@ msgstr "主選單"
 msgid "Save"
 msgstr "儲存"
 
-#: crates/ui/src/header.rs:83 crates/ui/src/window.rs:291
+#: crates/ui/src/header.rs:83 crates/ui/src/window.rs:294
 msgid "Save to Keyboard"
 msgstr "儲存到鍵盤"
 
@@ -102,7 +102,7 @@ msgstr "儲存到鍵盤"
 msgid "Read"
 msgstr "讀取"
 
-#: crates/ui/src/header.rs:87 crates/ui/src/window.rs:291
+#: crates/ui/src/header.rs:87 crates/ui/src/window.rs:294
 msgid "Read from Keyboard"
 msgstr "從鍵盤讀取"
 
@@ -150,47 +150,47 @@ msgstr "已連線"
 msgid "%@ · %@"
 msgstr "%@ · %@"
 
-#: crates/ui/src/header.rs:202 crates/ui/src/inspector.rs:112
+#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:112
 msgid "Layer %lld"
 msgstr "第 %lld 層"
 
-#: crates/ui/src/header.rs:277
+#: crates/ui/src/header.rs:278
 msgid "Not provided by the keyboard"
 msgstr "鍵盤未提供"
 
-#: crates/ui/src/header.rs:286
+#: crates/ui/src/header.rs:287
 msgid "Name"
 msgstr "名稱"
 
-#: crates/ui/src/header.rs:287
+#: crates/ui/src/header.rs:288
 msgid "Manufacturer"
 msgstr "製造商"
 
-#: crates/ui/src/header.rs:288
+#: crates/ui/src/header.rs:289
 msgid "Serial Number"
 msgstr "序號"
 
-#: crates/ui/src/header.rs:290
+#: crates/ui/src/header.rs:291
 msgid "Chip"
 msgstr "晶片"
 
-#: crates/ui/src/header.rs:292
+#: crates/ui/src/header.rs:293
 msgid "Firmware"
 msgstr "韌體"
 
-#: crates/ui/src/header.rs:312
+#: crates/ui/src/header.rs:313
 msgid "Power"
 msgstr "電源"
 
-#: crates/ui/src/header.rs:321
+#: crates/ui/src/header.rs:322
 msgid "Interfaces"
 msgstr "介面"
 
-#: crates/ui/src/header.rs:323 crates/ui/src/names.rs:146
+#: crates/ui/src/header.rs:324 crates/ui/src/names.rs:146
 msgid "Configuration Channel"
 msgstr "設定通道"
 
-#: crates/ui/src/header.rs:324
+#: crates/ui/src/header.rs:325
 msgid "Commands"
 msgstr "命令集"
 
@@ -202,7 +202,7 @@ msgstr "請選擇按鍵或旋鈕。"
 msgid "Clear"
 msgstr "清除"
 
-#: crates/ui/src/inspector.rs:45 crates/ui/src/window.rs:295
+#: crates/ui/src/inspector.rs:45 crates/ui/src/window.rs:298
 msgid "Clear Layer"
 msgstr "清除層"
 
@@ -246,7 +246,7 @@ msgstr "展開全部"
 msgid "No packets yet."
 msgstr "尚無封包。"
 
-#: crates/ui/src/log_window.rs:76 crates/ui/src/window.rs:298
+#: crates/ui/src/log_window.rs:76 crates/ui/src/window.rs:301
 msgid "Device Log"
 msgstr "裝置日誌"
 
@@ -858,7 +858,7 @@ msgstr "外觀"
 msgid "UI"
 msgstr "UI"
 
-#: crates/ui/src/preferences.rs:62 crates/ui/src/window.rs:302
+#: crates/ui/src/preferences.rs:62 crates/ui/src/window.rs:305
 msgid "Preferences"
 msgstr "偏好設定"
 
@@ -898,54 +898,66 @@ msgstr "稍後"
 msgid "Relaunch Now"
 msgstr "立即重新啟動"
 
-#: crates/ui/src/window.rs:68
+#: crates/ui/src/window.rs:70
 msgid "Keys appear here once the keyboard is connected."
 msgstr "連接鍵盤後，按鍵會顯示在這裡。"
 
-#: crates/ui/src/window.rs:81 crates/ui/src/window.rs:297
+#: crates/ui/src/window.rs:83 crates/ui/src/window.rs:300
 msgid "Shape…"
 msgstr "形狀…"
 
-#: crates/ui/src/window.rs:134
+#: crates/ui/src/window.rs:136
 msgid "Download"
 msgstr "下載"
 
-#: crates/ui/src/window.rs:295
+#: crates/ui/src/window.rs:298
 msgid "Clear Key"
 msgstr "清除按鍵"
 
-#: crates/ui/src/window.rs:304
+#: crates/ui/src/window.rs:307
 msgid "Check for Updates…"
 msgstr "檢查更新…"
 
-#: crates/ui/src/window.rs:306
+#: crates/ui/src/window.rs:309
 msgid "About %@"
 msgstr "關於%@"
 
-#: crates/ui/src/window.rs:357
+#: crates/ui/src/window.rs:360
 msgid "%@ is up to date."
 msgstr "%@ 已是最新版本。"
 
-#: crates/ui/src/window.rs:358
+#: crates/ui/src/window.rs:361
 msgid "Couldn’t check for updates."
 msgstr "無法檢查更新。"
 
-#: crates/ui/src/window.rs:365
+#: crates/ui/src/window.rs:368
 msgid "%1$@ %2$@ is available."
 msgstr "%1$@ %2$@ 已推出。"
 
-#: crates/ui/src/window.rs:390
+#: crates/ui/src/window.rs:394
 msgid "Keyboard on USB"
 msgstr "USB 上的鍵盤"
 
-#: crates/ui/src/window.rs:532
+#: crates/ui/src/window.rs:537
+msgid "Switch Keyboards?"
+msgstr "要切換鍵盤嗎？"
+
+#: crates/ui/src/window.rs:538
+msgid "Changes you haven’t saved will be lost."
+msgstr "未儲存的變更將會遺失。"
+
+#: crates/ui/src/window.rs:540
+msgid "Switch"
+msgstr "切換"
+
+#: crates/ui/src/window.rs:576
 msgid "Simulator in use"
 msgstr "正在使用模擬器"
 
-#: crates/ui/src/window.rs:535
+#: crates/ui/src/window.rs:579
 msgid "This isn't a real keyboard. Nothing you save here is written to any keyboard."
 msgstr "這不是真實的鍵盤。在這裡儲存的內容不會寫入任何鍵盤。"
 
-#: crates/ui/src/window.rs:543
+#: crates/ui/src/window.rs:587
 msgid "Back to the Keyboard on USB"
 msgstr "返回 USB 上的鍵盤"

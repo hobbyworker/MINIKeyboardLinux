@@ -185,6 +185,7 @@ impl Header {
         self.detail.set_label(&detail);
         let connected = matches!(status, ConnectionStatus::Connected { .. });
         self.keyboards.set_visible(!editor.keyboard_choices().is_empty());
+        self.keyboards.set_sensitive(editor.can_switch_keyboard());
         self.info.set_visible(connected && editor.keyboard_info().is_some());
         self.identify.set_visible(
             matches!(status, ConnectionStatus::Connected { is_identified: false, .. }) && activity.is_none(),

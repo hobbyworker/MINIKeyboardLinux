@@ -20,7 +20,7 @@ use domain::{
 
 use crate::choices::{ControlRef, LedColor, MediaChoice, ModifierKey, MouseChoice, Rgb};
 use crate::screen_state::SimulatorChoice;
-use crate::state::{Activity, EditorTab, Notice};
+use crate::state::{Activity, EditorTab, Notice, PendingSwitch};
 use crate::tables::KeyUsage;
 
 /// The use cases the editor works through, wired in by the composition root.
@@ -68,6 +68,10 @@ pub(crate) struct State {
     pub(crate) source: KeyboardSource,
     /// The keyboards on USB and the one open.
     pub(crate) attached: AttachedKeyboards,
+    /// Counts up with each change of keyboard — to another, or to none — so work that ran across one can tell.
+    pub(crate) connection_serial: u64,
+    /// A switch the user asked for that would lose the changes not saved, until they agree or not.
+    pub(crate) pending_switch: Option<PendingSwitch>,
 }
 
 impl State {
@@ -98,6 +102,11 @@ impl State {
 
     pub(crate) fn reads_back(&self) -> bool {
         self.capabilities().is_some_and(|capabilities| capabilities.reading() != ReadSupport::Never)
+    }
+
+    /// Changes not saved that the keyboard open could still take — a switch to another loses them.
+    fn has_changes_to_lose(&self) -> bool {
+        self.keyboard().is_some() && self.identification.is_some() && self.configuration.has_unsaved_changes()
     }
 
     pub(crate) fn action(&self, control: ControlId) -> Option<&KeyAction> {
@@ -158,6 +167,8 @@ impl EditorModel {
                 held: Modifiers::NONE,
                 source: KeyboardSource::Hardware,
                 attached: AttachedKeyboards::default(),
+                connection_serial: 0,
+                pending_switch: None,
             }),
             deps,
             listeners: RefCell::default(),
@@ -289,6 +300,8 @@ impl EditorModel {
             if state.keyboard() == previous.as_ref() {
                 return false;
             }
+            state.connection_serial += 1;
+            state.pending_switch = None;
             state.identification = None;
             state.selection = None;
             state.held = Modifiers::NONE;
@@ -309,24 +322,89 @@ impl EditorModel {
         self.deps.retry_connection.execute();
     }
 
-    /// Opens another of the keyboards plugged in. The connection reports "searching" first, as after re-plugging.
+    /// Opens another of the keyboards plugged in — not while work with the open one is under way, and with changes
+    /// not saved only once the user agrees ([`pending_switch`](Self::pending_switch)). The connection reports
+    /// "searching" first, as after re-plugging.
     pub fn select_keyboard(&self, id: &str) {
-        if let Some((_, select)) = &self.deps.attached_keyboards {
-            select.execute(id);
+        if self.deps.attached_keyboards.is_none() || self.state().attached.selected.as_deref() == Some(id) {
+            return;
+        }
+        self.request_switch(PendingSwitch::Keyboard(id.to_owned()));
+    }
+
+    /// Whether another keyboard can be opened, or the simulator switched: not while work with the keyboard is under
+    /// way.
+    pub fn can_switch_keyboard(&self) -> bool {
+        self.state().activity.is_none()
+    }
+
+    /// The switch waiting for the user to agree to lose the changes not saved.
+    pub fn pending_switch(&self) -> Option<PendingSwitch> {
+        self.state().pending_switch.clone()
+    }
+
+    /// Makes the switch the user was asked about, dropping the changes not saved.
+    pub fn confirm_switch(&self) {
+        let Some(switch) = self.state().pending_switch.clone() else { return };
+        self.update(|state| state.pending_switch = None);
+        if self.can_switch_keyboard() {
+            self.switch(switch);
+        }
+    }
+
+    /// Forgets the switch the user was asked about; the keyboard and its changes stay.
+    pub fn cancel_switch(&self) {
+        if self.state().pending_switch.is_some() {
+            self.update(|state| state.pending_switch = None);
+        }
+    }
+
+    /// A switch the user asked for: at once, or with changes the keyboard open could still take, once they agree.
+    fn request_switch(&self, switch: PendingSwitch) {
+        if !self.can_switch_keyboard() {
+            return;
+        }
+        if self.state().has_changes_to_lose() {
+            self.update(|state| state.pending_switch = Some(switch));
+        } else {
+            self.switch(switch);
+        }
+    }
+
+    /// Opens the keyboard the switch names; the connection then reports it as it comes.
+    fn switch(&self, switch: PendingSwitch) {
+        match switch {
+            PendingSwitch::Keyboard(id) => {
+                if let Some((_, select)) = &self.deps.attached_keyboards {
+                    select.execute(&id);
+                }
+            }
+            PendingSwitch::Simulator(id) => {
+                let (Some(keyboard_source), Some(new)) = (&self.deps.keyboard_source, source_named(id.as_deref()))
+                else {
+                    return;
+                };
+                keyboard_source.select(new.clone());
+                self.update(|state| state.source = new);
+            }
         }
     }
 
     /// Settles the keyboard's commands and layout, then reads it if it reads back on its own.
     pub async fn identify(&self) {
-        let keyboard = {
+        let (keyboard, serial) = {
             let state = self.state();
             match (state.keyboard(), state.identification, state.activity) {
-                (Some(keyboard), None, None) => keyboard.clone(),
+                (Some(keyboard), None, None) => (keyboard.clone(), state.connection_serial),
                 _ => return,
             }
         };
         self.update(|state| state.activity = Some(Activity::Identifying));
-        let identified = match self.deps.identify_keyboard.execute(&keyboard).await {
+        let identified = self.deps.identify_keyboard.execute(&keyboard).await;
+        if self.keyboard_changed_since(serial).await {
+            return;
+        }
+        let identified = match identified {
             Ok(identified) => identified,
             Err(_) => {
                 self.update(|state| {
@@ -339,9 +417,6 @@ impl EditorModel {
         let resolve_layout = &self.deps.resolve_layout;
         let read_now = self.update(|state| {
             state.activity = None;
-            if state.keyboard() != Some(&keyboard) {
-                return false;
-            }
             state.identification = Some(identified);
             let capabilities = KeyboardCapabilities::new(identified.commands);
             let resolved = resolve_layout.execute(&keyboard, &identified);
@@ -359,6 +434,21 @@ impl EditorModel {
         }
     }
 
+    /// When work that began at `serial` ends: whether the keyboard changed meanwhile. If it did, the work's result is
+    /// to be dropped — the activity ends here, telling the user the keyboard went — and the keyboard there now, passed
+    /// over while the work was under way, is identified.
+    async fn keyboard_changed_since(&self, serial: u64) -> bool {
+        if self.state().connection_serial == serial {
+            return false;
+        }
+        self.update(|state| {
+            state.activity = None;
+            state.show(Notice::KeyboardGone);
+        });
+        Box::pin(self.identify()).await;
+        true
+    }
+
     // Reading and saving
 
     pub async fn read(&self) {
@@ -366,16 +456,19 @@ impl EditorModel {
     }
 
     async fn read_with(&self, announce: bool) {
-        let (configuration, capabilities, layout) = {
+        let (configuration, capabilities, layout, serial) = {
             let state = self.state();
             let (Some(capabilities), Some(resolved)) = (state.capabilities(), &state.resolved_layout) else { return };
             if !(state.is_ready() && state.reads_back()) {
                 return;
             }
-            (state.configuration.clone(), capabilities, resolved.layout.clone())
+            (state.configuration.clone(), capabilities, resolved.layout.clone(), state.connection_serial)
         };
         self.update(|state| state.activity = Some(Activity::Reading));
         let outcome = self.deps.read_keyboard.execute(configuration, capabilities, &layout).await;
+        if self.keyboard_changed_since(serial).await {
+            return;
+        }
         self.update(|state| {
             state.activity = None;
             state.configuration = outcome.configuration;
@@ -388,13 +481,13 @@ impl EditorModel {
     }
 
     pub async fn save(&self) {
-        let (configuration, capabilities, layout) = {
+        let (configuration, capabilities, layout, serial) = {
             let state = self.state();
             let (Some(capabilities), Some(resolved)) = (state.capabilities(), &state.resolved_layout) else { return };
             if !state.is_ready() {
                 return;
             }
-            (state.configuration.clone(), capabilities, resolved.layout.clone())
+            (state.configuration.clone(), capabilities, resolved.layout.clone(), state.connection_serial)
         };
         if !configuration.has_unsaved_changes() {
             self.update(|state| state.show(Notice::NothingToSave));
@@ -402,6 +495,9 @@ impl EditorModel {
         }
         self.update(|state| state.activity = Some(Activity::Saving));
         let result = self.deps.save_keyboard.execute(&configuration, capabilities, &layout).await;
+        if self.keyboard_changed_since(serial).await {
+            return;
+        }
         self.update(|state| {
             state.activity = None;
             match result {
@@ -588,22 +684,18 @@ impl EditorModel {
         }
     }
 
-    /// Switches to a simulated keyboard, or with `None` to the keyboard on USB. The switch reports "searching"
-    /// first, so the window starts over as after re-plugging.
+    /// Switches to a simulated keyboard, or with `None` to the keyboard on USB — not while work with the keyboard is
+    /// under way, and with changes not saved only once the user agrees. The switch reports "searching" first, so the
+    /// window starts over as after re-plugging.
     pub fn select_simulator(&self, id: Option<&str>) {
-        let Some(keyboard_source) = &self.deps.keyboard_source else { return };
-        let new = match id {
-            Some(id) => match SimulatedModel::all().into_iter().find(|model| model.id() == id) {
-                Some(model) => KeyboardSource::Simulated(model),
-                None => return,
-            },
-            None => KeyboardSource::Hardware,
-        };
+        if self.deps.keyboard_source.is_none() {
+            return;
+        }
+        let Some(new) = source_named(id) else { return };
         if new == self.state().source {
             return;
         }
-        keyboard_source.select(new.clone());
-        self.update(|state| state.source = new);
+        self.request_switch(PendingSwitch::Simulator(id.map(str::to_owned)));
     }
 
     // Notices
@@ -617,6 +709,14 @@ impl EditorModel {
         if self.state().notice_serial == serial && self.state().notice.is_some() {
             self.dismiss_notice();
         }
+    }
+}
+
+/// The simulated keyboard a simulator choice's ID names, or with `None` the keyboard on USB.
+fn source_named(id: Option<&str>) -> Option<KeyboardSource> {
+    match id {
+        Some(id) => SimulatedModel::all().into_iter().find(|model| model.id() == id).map(KeyboardSource::Simulated),
+        None => Some(KeyboardSource::Hardware),
     }
 }
 
