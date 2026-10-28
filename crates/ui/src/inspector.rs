@@ -4,7 +4,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 use adw::prelude::*;
-use presentation::{ActionCaption, BindingState, EditorModel, SelectionState};
+use presentation::{ActionCaption, BindingState, EditorModel, EditorTab, SelectionState};
 
 use crate::i18n::{t, tf};
 use crate::names::{caption_text, control_title, media_icon, media_title, mouse_icon, mouse_title};
@@ -89,6 +89,10 @@ impl Inspector {
         let ready = editor.is_ready();
         self.clear_key.set_sensitive(ready && editor.selected_control().is_some());
         self.clear_layer.set_sensitive(ready);
+        // They clear what keys and knobs do, not their lights, so the lighting page goes without them.
+        let lighting = editor.tab() == EditorTab::Lighting;
+        self.clear_key.set_visible(!lighting);
+        self.clear_layer.set_visible(!lighting);
         if editor.has_unsaved_changes() {
             self.unsaved.set_label(&format!("● {}", t("Unsaved changes")));
             self.unsaved.add_css_class("unsaved");
