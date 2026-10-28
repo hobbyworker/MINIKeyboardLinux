@@ -1,19 +1,19 @@
 use std::cell::{Cell, RefCell};
-use std::collections::HashMap;
+use std::collections::{BTreeSet, HashMap};
 use std::rc::Rc;
 
 use futures::executor::{LocalPool, LocalSpawner};
 use futures::task::LocalSpawnExt;
 
 use domain::ports::{
-    KeyboardConnectionRepository, KeyboardDeviceRepository, KeyboardSourceRepository, LayerActions,
+    KeyboardConnectionRepository, KeyboardDeviceRepository, KeyboardSourceRepository, LayerActions, LayerRead,
     LayoutProfileRepository, LocalFuture, Updates,
 };
 use domain::usecases::*;
 use domain::{
-    AttachedKeyboard, AttachedKeyboards, Channel, CommandSet, ConnectedKeyboard, ConnectionState, KeyAction, KeyColor,
-    KeyboardConfiguration, KeyboardDeviceError, KeyboardFamily, KeyboardIdentity, KeyboardLayout, KeyboardSource,
-    KnobPart, LayerLighting, LayoutProfile, MediaKey, RecordFormat, UsbIdentity,
+    AttachedKeyboard, AttachedKeyboards, Channel, CommandSet, ConnectedKeyboard, ConnectionState, ControlId, KeyAction,
+    KeyColor, KeyboardConfiguration, KeyboardDeviceError, KeyboardFamily, KeyboardIdentity, KeyboardLayout,
+    KeyboardSource, KnobPart, LayerLighting, LayoutProfile, MediaKey, RecordFormat, UsbIdentity,
 };
 use presentation::*;
 
@@ -71,6 +71,9 @@ struct FakeDevice {
     identity: Cell<Option<KeyboardIdentity>>,
     fail_identity: Cell<Option<KeyboardDeviceError>>,
     actions: RefCell<LayerActions>,
+    /// Controls whose answers don't come, on every layer.
+    unread: RefCell<BTreeSet<ControlId>>,
+    fail_reads: Cell<Option<KeyboardDeviceError>>,
     fail_write: Cell<Option<KeyboardDeviceError>>,
     writes: RefCell<Vec<KeyboardConfiguration>>,
     reads: Cell<usize>,
@@ -119,12 +122,22 @@ impl KeyboardDeviceRepository for FakeDevice {
         _: usize,
         _: RecordFormat,
         _: &'a KeyboardLayout,
-    ) -> LocalFuture<'a, Result<LayerActions, KeyboardDeviceError>> {
+    ) -> LocalFuture<'a, Result<LayerRead, KeyboardDeviceError>> {
         self.reads.set(self.reads.get() + 1);
         Box::pin(async move {
             self.transfer_gate.pass().await;
-            Ok(self.actions.borrow().clone())
+            if let Some(error) = self.fail_reads.get() {
+                return Err(error);
+            }
+            let unread = self.unread.borrow().clone();
+            let mut actions = self.actions.borrow().clone();
+            actions.retain(|control, _| !unread.contains(control));
+            Ok(LayerRead { actions, unread })
         })
+    }
+
+    fn stored_form(&self, action: &KeyAction, _: RecordFormat) -> Option<KeyAction> {
+        Some(action.clone())
     }
 
     fn read_lighting(&self, _: usize) -> LocalFuture<'_, Result<LayerLighting, KeyboardDeviceError>> {
@@ -757,4 +770,119 @@ fn switching_with_unsaved_changes_asks_first() {
     assert!(editor.pending_switch().is_some());
     fixture.replug(None);
     assert_eq!(fixture.editor.pending_switch(), None);
+}
+
+/// A read whose answers stop part-way says some controls couldn't be read — on connecting too, where a read that
+/// went well says nothing.
+#[test]
+fn a_read_that_misses_controls_says_so() {
+    let mut fixture = Fixture::new();
+    fixture.device.identity.set(Some(KeyboardIdentity::new(6, 1, 10)));
+    *fixture.device.actions.borrow_mut() = [(ControlId::Key(2), KeyAction::Media(MediaKey::MUTE))].into();
+    *fixture.device.unread.borrow_mut() = [ControlId::Key(3)].into();
+    fixture.plug(k8840());
+    assert!(fixture.editor.is_ready());
+    assert_eq!(fixture.editor.notice(), Some(Notice::ReadIncomplete));
+    assert_eq!(caption(&fixture.editor, 2), ActionCaption::Media(MediaChoice::Mute));
+
+    fixture.device.unread.borrow_mut().clear();
+    fixture.read();
+    assert_eq!(fixture.editor.notice(), Some(Notice::ReadComplete));
+    fixture.device.fail_reads.set(Some(KeyboardDeviceError::NoReply));
+    fixture.read();
+    assert_eq!(fixture.editor.notice(), Some(Notice::ReadFailed));
+}
+
+/// A save to a keyboard that reads back says what reading back found; a change that reads back otherwise stays to be
+/// saved.
+#[test]
+fn a_save_says_what_reading_back_found() {
+    let mut fixture = Fixture::new();
+    fixture.device.identity.set(Some(KeyboardIdentity::new(6, 1, 10)));
+    fixture.plug(k8840());
+    fixture.editor.select(ControlRef::key(1));
+    fixture.editor.assign_media(MediaChoice::Mute);
+    *fixture.device.actions.borrow_mut() = [(ControlId::Key(1), KeyAction::Media(MediaKey::MUTE))].into();
+    fixture.save();
+    assert_eq!(fixture.editor.notice(), Some(Notice::Saved { simulated: false }));
+    assert!(!fixture.editor.has_unsaved_changes());
+
+    // The keyboard still holds Mute.
+    fixture.editor.assign_media(MediaChoice::VolumeUp);
+    fixture.save();
+    let editor = &fixture.editor;
+    assert_eq!(editor.notice(), Some(Notice::SavedDiffers));
+    assert!(editor.has_unsaved_changes());
+    assert!(control(&editor.drawing().unwrap(), ControlRef::key(1)).is_changed);
+    assert_eq!(caption(editor, 1), ActionCaption::Media(MediaChoice::VolumeUp));
+
+    fixture.device.fail_reads.set(Some(KeyboardDeviceError::NoReply));
+    fixture.save();
+    assert_eq!(fixture.editor.notice(), Some(Notice::SavedUnchecked));
+    assert!(!fixture.editor.has_unsaved_changes());
+    assert_eq!(fixture.device.writes.borrow().len(), 3);
+}
+
+/// A keyboard that answers with a type the app doesn't know is handled by the rule as before — from 12 up standard,
+/// below 10 legacy — said to be untested once it is connected and read, in place of what the read said, for longer
+/// than an error, and marked so in its information.
+#[test]
+fn an_untested_type_is_told_once_connected() {
+    let mut fixture = Fixture::new();
+    fixture.device.identity.set(Some(KeyboardIdentity::new(12, 2, 12)));
+    fixture.plug(k8840());
+    let editor = &fixture.editor;
+    assert!(editor.is_ready() && fixture.device.reads.get() > 0);
+    assert_eq!(editor.notice(), Some(Notice::UntestedFirmware(12)));
+    assert!(Notice::UntestedFirmware(12).lifetime() > Notice::ReadFailed.lifetime());
+    let info = editor.keyboard_info().unwrap();
+    assert_eq!(info.firmware, Firmware::Reported { kind: 12, keys: 12, knobs: 2, is_known: false });
+    assert_eq!(info.commands, InfoCommands::Standard);
+    fixture.read();
+    assert_eq!(fixture.editor.notice(), Some(Notice::ReadComplete));
+
+    // Below 10 it is legacy; its read on connecting misses a control, but the untested type is what's said.
+    *fixture.device.unread.borrow_mut() = [ControlId::Key(3)].into();
+    fixture.device.identity.set(Some(KeyboardIdentity::new(12, 2, 2)));
+    fixture.replug(Some(k8840()));
+    let editor = &fixture.editor;
+    assert!(editor.is_ready());
+    assert_eq!(editor.notice(), Some(Notice::UntestedFirmware(2)));
+    assert_eq!(editor.keyboard_info().unwrap().commands, InfoCommands::Legacy);
+    fixture.device.unread.borrow_mut().clear();
+
+    // A type the app knows says nothing of the kind.
+    fixture.editor.dismiss_notice();
+    fixture.device.identity.set(Some(KeyboardIdentity::new(12, 2, 11)));
+    fixture.replug(Some(k8840()));
+    let editor = &fixture.editor;
+    assert!(editor.is_ready());
+    assert_eq!(editor.notice(), None);
+    let info = editor.keyboard_info().unwrap();
+    assert_eq!(info.firmware, Firmware::Reported { kind: 11, keys: 12, knobs: 2, is_known: true });
+    assert_eq!(info.commands, InfoCommands::Standard);
+}
+
+/// Every keyboard that says what it is is read as soon as it connects — legacy firmware as well as standard; one that
+/// doesn't answer isn't read at all.
+#[test]
+fn identified_keyboards_are_read_on_connecting() {
+    let mut fixture = Fixture::new();
+    fixture.device.identity.set(Some(KeyboardIdentity::new(6, 1, 0)));
+    *fixture.device.actions.borrow_mut() = [(ControlId::Key(2), KeyAction::Media(MediaKey::MUTE))].into();
+    fixture.plug(k8840());
+    let editor = &fixture.editor;
+    assert!(editor.is_ready() && editor.reads_back());
+    assert_eq!(fixture.device.reads.get(), 3);
+    assert_eq!(editor.keyboard_info().unwrap().commands, InfoCommands::Legacy);
+    assert_eq!(caption(editor, 2), ActionCaption::Media(MediaChoice::Mute));
+    // A read on connecting that went well says nothing.
+    assert_eq!(editor.notice(), None);
+
+    fixture.device.identity.set(None);
+    fixture.replug(Some(k8840()));
+    let editor = &fixture.editor;
+    assert!(editor.is_ready() && !editor.reads_back());
+    assert_eq!(editor.keyboard_info().unwrap().commands, InfoCommands::Unidentified);
+    assert_eq!(fixture.device.reads.get(), 3);
 }

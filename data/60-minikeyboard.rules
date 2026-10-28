@@ -1,4 +1,4 @@
 # Lets the signed-in user configure the supported USB macro keyboards.
 SUBSYSTEM=="usb", ATTR{idVendor}=="1189", ATTR{idProduct}=="8890", TAG+="uaccess"
-KERNEL=="hidraw*", ATTRS{idVendor}=="1189", ATTRS{idProduct}=="8842|8840|8830|8831|8832|8833|8850", TAG+="uaccess"
+KERNEL=="hidraw*", ATTRS{idVendor}=="1189", ATTRS{idProduct}=="8842|8840|8830|8831|8832|8833|8850|8851", TAG+="uaccess"
 KERNEL=="hidraw*", ATTRS{idVendor}=="514c", ATTRS{idProduct}=="8842|8840|8830|8831|8832|8833|8850|8851", TAG+="uaccess"

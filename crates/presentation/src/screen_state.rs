@@ -294,11 +294,13 @@ pub struct KeyboardInfo {
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 pub enum Firmware {
-    /// What a 884x keyboard answered: the type, keys and knobs.
+    /// What a 884x keyboard answered: the type, keys and knobs, and whether the app knows the type — one it doesn't
+    /// hasn't been tested yet.
     Reported {
         kind: u8,
         keys: u8,
         knobs: u8,
+        is_known: bool,
     },
     /// `bcdDevice`, "1.02".
     Release(String),
@@ -362,7 +364,12 @@ impl KeyboardInfo {
     pub(crate) fn of(keyboard: &ConnectedKeyboard, identification: Option<&KeyboardIdentification>) -> Self {
         let details = keyboard.details.as_ref();
         let firmware = if let Some(identity) = identification.and_then(|identification| identification.identity) {
-            Firmware::Reported { kind: identity.kind, keys: identity.key_count, knobs: identity.knob_count }
+            Firmware::Reported {
+                kind: identity.kind,
+                keys: identity.key_count,
+                knobs: identity.knob_count,
+                is_known: identity.is_known_kind(),
+            }
         } else if let Some(release) = details.map(|details| details.device_release).filter(|release| *release != 0) {
             Firmware::Release(format!("{:X}.{:02X}", release >> 8, release & 0xFF))
         } else {

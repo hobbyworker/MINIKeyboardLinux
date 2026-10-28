@@ -1,10 +1,10 @@
 use std::cell::{Cell, RefCell};
-use std::collections::{HashMap, VecDeque};
+use std::collections::{BTreeMap, BTreeSet, HashMap, VecDeque};
 use std::rc::Rc;
 
 use futures_executor::block_on;
 
-use domain::ports::{KeyboardDeviceRepository, LayerActions, LocalFuture};
+use domain::ports::{KeyboardDeviceRepository, LayerActions, LayerRead, LocalFuture};
 use domain::usecases::*;
 use domain::*;
 
@@ -210,11 +210,19 @@ fn reading_replaces_what_the_app_had() {
 #[derive(Default)]
 struct FakeDevice {
     identities: RefCell<VecDeque<Result<Option<KeyboardIdentity>, KeyboardDeviceError>>>,
+    /// What every layer holds, all of it read…
     actions: RefCell<LayerActions>,
+    /// …but where a layer is here, what reading it gives.
+    layer_reads: RefCell<HashMap<usize, Result<LayerRead, KeyboardDeviceError>>>,
     lighting: Option<LayerLighting>,
     fail_write: Cell<Option<KeyboardDeviceError>>,
     asked: Cell<usize>,
     writes: RefCell<Vec<KeyboardConfiguration>>,
+    /// Actions its records can't hold.
+    unstorable: RefCell<Vec<KeyAction>>,
+    /// The layers asked for their actions, and for their lights, in order.
+    action_reads: RefCell<Vec<usize>>,
+    lighting_reads: RefCell<Vec<usize>>,
 }
 
 impl FakeDevice {
@@ -234,15 +242,27 @@ impl KeyboardDeviceRepository for FakeDevice {
 
     fn read_actions<'a>(
         &'a self,
-        _layer: usize,
+        layer: usize,
         _format: RecordFormat,
         _layout: &'a KeyboardLayout,
-    ) -> LocalFuture<'a, Result<LayerActions, KeyboardDeviceError>> {
-        let actions = self.actions.borrow().clone();
-        Box::pin(async move { Ok(actions) })
+    ) -> LocalFuture<'a, Result<LayerRead, KeyboardDeviceError>> {
+        self.action_reads.borrow_mut().push(layer);
+        let read = self
+            .layer_reads
+            .borrow()
+            .get(&layer)
+            .cloned()
+            .unwrap_or_else(|| Ok(LayerRead { actions: self.actions.borrow().clone(), unread: BTreeSet::new() }));
+        Box::pin(async move { read })
     }
 
-    fn read_lighting(&self, _layer: usize) -> LocalFuture<'_, Result<LayerLighting, KeyboardDeviceError>> {
+    /// As written: the fake's records hold every action as it is, but those it can't hold.
+    fn stored_form(&self, action: &KeyAction, _format: RecordFormat) -> Option<KeyAction> {
+        (!self.unstorable.borrow().contains(action)).then(|| action.clone())
+    }
+
+    fn read_lighting(&self, layer: usize) -> LocalFuture<'_, Result<LayerLighting, KeyboardDeviceError>> {
+        self.lighting_reads.borrow_mut().push(layer);
         let lighting = self.lighting_result();
         Box::pin(async move { Ok(lighting) })
     }
@@ -353,8 +373,11 @@ fn saving_marks_the_changes_saved() {
     let mut configuration = KeyboardConfiguration::new(3);
     assert_eq!(block_on(save.execute(&configuration, capabilities, layout)), Ok(SaveOutcome::NothingToSave));
     configuration.set(KeyAction::Media(MediaKey::MUTE), KEY1, 0);
-    let Ok(SaveOutcome::Saved(saved)) = block_on(save.execute(&configuration, capabilities, layout)) else {
-        panic!("not saved")
+    *device.actions.borrow_mut() = HashMap::from([(KEY1, KeyAction::Media(MediaKey::MUTE))]);
+    let Ok(SaveOutcome::Saved(saved, SaveCheck::Matched)) =
+        block_on(save.execute(&configuration, capabilities, layout))
+    else {
+        panic!("not saved and matched")
     };
     assert!(!saved.has_unsaved_changes());
     assert_eq!(saved.action(KEY1, 0), Some(&KeyAction::Media(MediaKey::MUTE)));
@@ -365,4 +388,191 @@ fn saving_marks_the_changes_saved() {
         block_on(save.execute(&configuration, capabilities, layout)),
         Err(KeyboardDeviceError::WriteFailed { code: 7 })
     );
+}
+
+const KEY2: ControlId = ControlId::Key(2);
+const KEY3: ControlId = ControlId::Key(3);
+
+/// A layer whose answers stop part-way keeps what came, and the read goes on to the next layers; the controls that
+/// didn't come are listed by layer.
+#[test]
+fn a_short_layer_doesnt_stop_the_read() {
+    let device = Rc::new(FakeDevice::default());
+    *device.actions.borrow_mut() = HashMap::from([(KEY1, KeyAction::Media(MediaKey::MUTE))]);
+    let short = LayerRead {
+        actions: HashMap::from([(KEY1, KeyAction::Media(MediaKey::VOLUME_UP))]),
+        unread: BTreeSet::from([KEY2, KEY3]),
+    };
+    device.layer_reads.borrow_mut().insert(0, Ok(short));
+    let layout = KeyboardLayout::named("6add1").unwrap();
+    let mut configuration = KeyboardConfiguration::new(3);
+    configuration.set(KeyAction::Media(MediaKey::STOP), KEY2, 0);
+    let read = ReadKeyboardUseCase::new(device.clone());
+    let outcome = block_on(read.execute(configuration, KeyboardCapabilities::new(LEGACY), layout));
+    assert_eq!(outcome.error, None);
+    assert_eq!(*device.action_reads.borrow(), vec![0, 1, 2]);
+    assert_eq!(outcome.unread, BTreeMap::from([(0, BTreeSet::from([KEY2, KEY3]))]));
+    assert_eq!(outcome.configuration.action(KEY1, 0), Some(&KeyAction::Media(MediaKey::VOLUME_UP)));
+    assert_eq!(outcome.configuration.action(KEY1, 2), Some(&KeyAction::Media(MediaKey::MUTE)));
+    // What didn't come stays as it was — changed, if it was.
+    assert_eq!(outcome.configuration.action(KEY2, 0), Some(&KeyAction::Media(MediaKey::STOP)));
+    assert!(outcome.configuration.is_changed(KEY2, 0));
+}
+
+/// An error still ends the read, with the layers before it applied.
+#[test]
+fn a_failed_layer_stops_the_read() {
+    let device = Rc::new(FakeDevice::default());
+    *device.actions.borrow_mut() = HashMap::from([(KEY1, KeyAction::Media(MediaKey::MUTE))]);
+    device.layer_reads.borrow_mut().insert(1, Err(KeyboardDeviceError::NoReply));
+    let layout = KeyboardLayout::named("6add1").unwrap();
+    let read = ReadKeyboardUseCase::new(device.clone());
+    let outcome = block_on(read.execute(KeyboardConfiguration::new(3), KeyboardCapabilities::new(STANDARD), layout));
+    assert_eq!(outcome.error, Some(KeyboardDeviceError::NoReply));
+    assert_eq!(*device.action_reads.borrow(), vec![0, 1]);
+    assert!(device.lighting_reads.borrow().is_empty());
+    assert_eq!(outcome.configuration.action(KEY1, 0), Some(&KeyAction::Media(MediaKey::MUTE)));
+    assert_eq!(outcome.configuration.action(KEY1, 2), None);
+    assert!(outcome.unread.is_empty());
+}
+
+fn saved_outcome(outcome: Result<SaveOutcome, KeyboardDeviceError>) -> (KeyboardConfiguration, SaveCheck) {
+    match outcome {
+        Ok(SaveOutcome::Saved(configuration, check)) => (configuration, check),
+        other => panic!("not saved: {other:?}"),
+    }
+}
+
+/// After the write, each layer with changed controls is read back; what reads back as written is saved.
+#[test]
+fn a_save_that_reads_back_as_written_matches() {
+    let device = Rc::new(FakeDevice::default());
+    *device.actions.borrow_mut() =
+        HashMap::from([(KEY1, KeyAction::Media(MediaKey::MUTE)), (KEY2, KeyAction::Mouse(MouseAction::LeftClick))]);
+    let layout = KeyboardLayout::named("6add1").unwrap();
+    let mut configuration = KeyboardConfiguration::new(3);
+    configuration.set(KeyAction::Media(MediaKey::MUTE), KEY1, 0);
+    configuration.set(KeyAction::Mouse(MouseAction::LeftClick), KEY2, 2);
+    let save = SaveKeyboardUseCase::new(device.clone());
+    let (saved, check) =
+        saved_outcome(block_on(save.execute(&configuration, KeyboardCapabilities::new(LEGACY), layout)));
+    assert_eq!(check, SaveCheck::Matched);
+    assert!(!saved.has_unsaved_changes());
+    assert_eq!(*device.action_reads.borrow(), vec![0, 2]);
+    // Legacy lights don't read back.
+    assert!(device.lighting_reads.borrow().is_empty());
+}
+
+/// A control that reads back otherwise stays changed, with the user's action, to be saved again; the rest are saved.
+#[test]
+fn a_save_that_reads_back_otherwise_differs() {
+    let device = Rc::new(FakeDevice::default());
+    *device.actions.borrow_mut() =
+        HashMap::from([(KEY1, KeyAction::Media(MediaKey::MUTE)), (KEY2, KeyAction::Unassigned)]);
+    let layout = KeyboardLayout::named("6add1").unwrap();
+    let mut configuration = KeyboardConfiguration::new(3);
+    configuration.set(KeyAction::Media(MediaKey::MUTE), KEY1, 0);
+    configuration.set(KeyAction::Media(MediaKey::STOP), KEY2, 0);
+    // Neither read nor unread: outside the read, so not compared.
+    configuration.set(KeyAction::Media(MediaKey::STOP), KEY3, 0);
+    let save = SaveKeyboardUseCase::new(device.clone());
+    let (saved, check) =
+        saved_outcome(block_on(save.execute(&configuration, KeyboardCapabilities::new(STANDARD), layout)));
+    assert_eq!(
+        check,
+        SaveCheck::Differs { controls: BTreeMap::from([(0, BTreeSet::from([KEY2]))]), lighting: BTreeSet::new() }
+    );
+    assert!(!saved.is_changed(KEY1, 0) && !saved.is_changed(KEY3, 0));
+    assert!(saved.is_changed(KEY2, 0));
+    assert_eq!(saved.action(KEY2, 0), Some(&KeyAction::Media(MediaKey::STOP)));
+    assert!(saved.has_unsaved_changes());
+}
+
+/// A read-back that fails, leaves a written control unread, or meets an action the records can't hold can't tell —
+/// the save still stands.
+#[test]
+fn a_save_that_cant_be_read_back_is_unchecked() {
+    let layout = KeyboardLayout::named("6add1").unwrap();
+    let mut configuration = KeyboardConfiguration::new(3);
+    configuration.set(KeyAction::Media(MediaKey::MUTE), KEY1, 0);
+    configuration.set(KeyAction::Media(MediaKey::MUTE), KEY1, 1);
+    let capabilities = KeyboardCapabilities::new(STANDARD);
+
+    let device = Rc::new(FakeDevice::default());
+    *device.actions.borrow_mut() = HashMap::from([(KEY1, KeyAction::Media(MediaKey::MUTE))]);
+    device.layer_reads.borrow_mut().insert(1, Err(KeyboardDeviceError::NoReply));
+    let (saved, check) =
+        saved_outcome(block_on(SaveKeyboardUseCase::new(device.clone()).execute(&configuration, capabilities, layout)));
+    assert_eq!(check, SaveCheck::CouldNotCheck);
+    assert!(!saved.has_unsaved_changes());
+    assert_eq!(*device.action_reads.borrow(), vec![0, 1]);
+
+    let device = Rc::new(FakeDevice::default());
+    *device.actions.borrow_mut() = HashMap::from([(KEY1, KeyAction::Media(MediaKey::MUTE))]);
+    let unread = LayerRead { actions: HashMap::new(), unread: BTreeSet::from([KEY1]) };
+    device.layer_reads.borrow_mut().insert(0, Ok(unread));
+    let (saved, check) =
+        saved_outcome(block_on(SaveKeyboardUseCase::new(device).execute(&configuration, capabilities, layout)));
+    assert_eq!(check, SaveCheck::CouldNotCheck);
+    assert!(!saved.has_unsaved_changes());
+
+    let device = Rc::new(FakeDevice::default());
+    *device.actions.borrow_mut() = HashMap::from([(KEY1, KeyAction::Media(MediaKey::MUTE))]);
+    device.unstorable.borrow_mut().push(KeyAction::Media(MediaKey::MUTE));
+    let (_, check) =
+        saved_outcome(block_on(SaveKeyboardUseCase::new(device).execute(&configuration, capabilities, layout)));
+    assert_eq!(check, SaveCheck::CouldNotCheck);
+}
+
+/// On a keyboard that reads back, a save with nothing to compare — legacy lights alone, which don't read back —
+/// matches.
+#[test]
+fn a_save_with_nothing_to_compare_matches() {
+    let device = Rc::new(FakeDevice::default());
+    let layout = KeyboardLayout::named("6add1").unwrap();
+    let mut configuration = KeyboardConfiguration::new(3);
+    configuration.set_lighting(LayerLighting::ColorMode { color: LightColor::Blue, mode: 3 }, 1);
+    let save = SaveKeyboardUseCase::new(device.clone());
+    let (saved, check) =
+        saved_outcome(block_on(save.execute(&configuration, KeyboardCapabilities::new(LEGACY), layout)));
+    assert_eq!(check, SaveCheck::Matched);
+    assert!(!saved.has_unsaved_changes());
+    assert!(device.action_reads.borrow().is_empty() && device.lighting_reads.borrow().is_empty());
+}
+
+/// Keyboards that don't read back — the 8890, and a 884x that doesn't answer — aren't asked anything after a save.
+#[test]
+fn keyboards_that_dont_read_back_are_not_checked() {
+    let layout = KeyboardLayout::named("6add1").unwrap();
+    let mut configuration = KeyboardConfiguration::new(3);
+    configuration.set(KeyAction::Media(MediaKey::MUTE), KEY1, 0);
+    configuration.set_lighting(LayerLighting::ColorMode { color: LightColor::Red, mode: 1 }, 0);
+    for commands in [K8890, CommandSet::Records(RecordFormat::Unidentified)] {
+        let device = Rc::new(FakeDevice::default());
+        let save = SaveKeyboardUseCase::new(device.clone());
+        let (saved, check) =
+            saved_outcome(block_on(save.execute(&configuration, KeyboardCapabilities::new(commands), layout)));
+        assert_eq!(check, SaveCheck::NotChecked);
+        assert!(!saved.has_unsaved_changes());
+        assert!(device.action_reads.borrow().is_empty() && device.lighting_reads.borrow().is_empty());
+    }
+}
+
+/// On a keyboard that reads lights back, each layer whose lights changed is read back; lights that differ stay
+/// changed. Layers whose lights didn't change aren't read.
+#[test]
+fn per_key_lights_that_read_back_otherwise_differ() {
+    let device = Rc::new(FakeDevice::default());
+    let layout = KeyboardLayout::named("6add1").unwrap();
+    let mut configuration = KeyboardConfiguration::new(3);
+    configuration.set_lighting(device.lighting_result(), 0);
+    configuration.set_lighting(LayerLighting::PerKey { mode: 4, colors: KeyColor::DEFAULT_KEY_COLORS.to_vec() }, 2);
+    let save = SaveKeyboardUseCase::new(device.clone());
+    let (saved, check) =
+        saved_outcome(block_on(save.execute(&configuration, KeyboardCapabilities::new(STANDARD), layout)));
+    assert_eq!(check, SaveCheck::Differs { controls: BTreeMap::new(), lighting: BTreeSet::from([2]) });
+    assert_eq!(*device.lighting_reads.borrow(), vec![0, 2]);
+    assert!(device.action_reads.borrow().is_empty());
+    assert!(!saved.layers()[0].lighting_changed());
+    assert!(saved.layers()[2].lighting_changed());
 }

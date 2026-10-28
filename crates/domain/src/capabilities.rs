@@ -27,10 +27,8 @@ pub enum DelaySupport {
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum ReadSupport {
     Never,
-    /// Asked as soon as it is connected, as the cross-platform app does.
+    /// Asked as soon as it is connected, as the cross-platform app does, and again whenever the user asks.
     OnConnect,
-    /// Asked only when the user asks.
-    OnRequest,
 }
 
 impl KeyboardCapabilities {
@@ -116,8 +114,7 @@ impl KeyboardCapabilities {
 
     pub fn reading(&self) -> ReadSupport {
         match self.commands {
-            CommandSet::Records(RecordFormat::Standard) => ReadSupport::OnConnect,
-            CommandSet::Records(RecordFormat::Legacy) => ReadSupport::OnRequest,
+            CommandSet::Records(RecordFormat::Standard | RecordFormat::Legacy) => ReadSupport::OnConnect,
             CommandSet::Packets { .. } | CommandSet::Records(RecordFormat::Unidentified) => ReadSupport::Never,
         }
     }

@@ -1,4 +1,4 @@
-use std::collections::{BTreeSet, HashMap};
+use std::collections::{BTreeMap, BTreeSet, HashMap};
 
 use crate::actions::KeyAction;
 use crate::layout::ControlId;
@@ -14,6 +14,11 @@ pub struct Layer {
 }
 
 impl Layer {
+    /// The controls whose actions are to be written on the next save.
+    pub fn changed_controls(&self) -> &BTreeSet<ControlId> {
+        &self.changed_controls
+    }
+
     pub fn lighting_changed(&self) -> bool {
         self.lighting_changed
     }
@@ -92,6 +97,16 @@ impl KeyboardConfiguration {
         for layer in &mut self.layers {
             layer.changed_controls.clear();
             layer.lighting_changed = false;
+        }
+    }
+
+    /// Everything was written, but the keyboard holds `controls` (by layer) and the lights of the layers in
+    /// `lighting` otherwise: those stay changed, with the values set here, to be saved again.
+    pub fn mark_saved_except(&mut self, controls: &BTreeMap<usize, BTreeSet<ControlId>>, lighting: &BTreeSet<usize>) {
+        for (index, layer) in self.layers.iter_mut().enumerate() {
+            let differing = controls.get(&index);
+            layer.changed_controls.retain(|control| differing.is_some_and(|differing| differing.contains(control)));
+            layer.lighting_changed &= lighting.contains(&index);
         }
     }
 }

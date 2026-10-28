@@ -6,7 +6,7 @@ mod layout;
 
 pub use device::{
     DeviceLogUseCase, IdentifyKeyboardUseCase, KeyboardSourceUseCase, ObserveAttachedKeyboardsUseCase,
-    ObserveConnectionUseCase, ReadKeyboardUseCase, ReadOutcome, RetryConnectionUseCase, SaveKeyboardUseCase,
+    ObserveConnectionUseCase, ReadKeyboardUseCase, ReadOutcome, RetryConnectionUseCase, SaveCheck, SaveKeyboardUseCase,
     SaveOutcome, SelectKeyboardUseCase,
 };
 pub use editing::{

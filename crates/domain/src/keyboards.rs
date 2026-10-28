@@ -37,19 +37,15 @@ pub enum KeyboardFamily {
 impl KeyboardFamily {
     pub const K8890_USB: UsbIdentity = UsbIdentity::new(0x1189, 0x8890);
 
-    /// Every keyboard the app looks for, in the order it looks. The cross-platform app looks for the first
-    /// seven product IDs under vendor 1189 and all eight under 514C.
-    pub const SUPPORTED: [UsbIdentity; 16] = {
+    /// Every keyboard the app looks for, in the order it looks: the 1189:8890, then the eight product IDs the
+    /// cross-platform app looks for under vendor 1189, then the same eight under 514C.
+    pub const SUPPORTED: [UsbIdentity; 17] = {
         const PRODUCTS: [u16; 8] = [0x8842, 0x8840, 0x8830, 0x8831, 0x8832, 0x8833, 0x8850, 0x8851];
-        let mut all = [Self::K8890_USB; 16];
+        let mut all = [Self::K8890_USB; 17];
         let mut index = 0;
-        while index < 7 {
-            all[1 + index] = UsbIdentity::new(0x1189, PRODUCTS[index]);
-            index += 1;
-        }
-        index = 0;
         while index < 8 {
-            all[8 + index] = UsbIdentity::new(0x514C, PRODUCTS[index]);
+            all[1 + index] = UsbIdentity::new(0x1189, PRODUCTS[index]);
+            all[9 + index] = UsbIdentity::new(0x514C, PRODUCTS[index]);
             index += 1;
         }
         all
@@ -74,11 +70,11 @@ impl KeyboardFamily {
 /// How a 884x keyboard stores a key's action.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum RecordFormat {
-    /// Firmware that answers identification with type 10: `FD` records of three-byte entries — a delay and a
-    /// code, every modifier an entry of its own. They read back.
+    /// Firmware that answers identification with type 10 or above: `FD` records of three-byte entries — a delay
+    /// and a code, every modifier an entry of its own. They read back.
     Standard,
-    /// Firmware that answers with any other type: `FD` records of (modifier, key) pairs and one delay for the
-    /// whole key. They read back when asked.
+    /// Firmware that answers with a type below 10: `FD` records of (modifier, key) pairs and one delay for the
+    /// whole key. They read back.
     Legacy,
     /// A keyboard that does not answer identification: `FE` records of (modifier, key) pairs, written the way
     /// keyboards of the 1189:8840 kind are known to take them. Nothing reads back.
@@ -99,9 +95,8 @@ pub enum CommandSet {
 pub struct KeyboardIdentity {
     pub key_count: u8,
     pub knob_count: u8,
-    /// 10 for the standard record format — and 11, a twelve-key keyboard (514C:8850) that stores and reads standard
-    /// records though the cross-platform app takes it for legacy — anything else for the legacy one. On a keyboard of
-    /// four keys and a knob it also picks between two layouts.
+    /// 10 or above for the standard record format, below 10 for the legacy one, as the cross-platform app tells them
+    /// apart. On a keyboard of four keys and a knob it also picks between two layouts.
     pub kind: u8,
 }
 
@@ -111,7 +106,14 @@ impl KeyboardIdentity {
     }
 
     pub const fn record_format(&self) -> RecordFormat {
-        if self.kind == 10 || self.kind == 11 { RecordFormat::Standard } else { RecordFormat::Legacy }
+        if self.kind >= 10 { RecordFormat::Standard } else { RecordFormat::Legacy }
+    }
+
+    /// Whether the type is one the app knows: 0 and 1, which the cross-platform app tells two layouts of four keys
+    /// and a knob apart by, 10 for its standard firmware, and 11, the 514C:8850 seen to work. Any other is handled by
+    /// the same rule — 12 and above as standard — but nothing says it behaves as that rule expects.
+    pub const fn is_known_kind(&self) -> bool {
+        matches!(self.kind, 0 | 1 | 10 | 11)
     }
 }
 

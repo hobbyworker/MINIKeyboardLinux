@@ -6,7 +6,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ko\n"
 
-#: crates/ui/src/canvas.rs:200 crates/ui/src/names.rs:307 crates/ui/src/window.rs:425
+#: crates/ui/src/canvas.rs:200 crates/ui/src/names.rs:314 crates/ui/src/window.rs:425
 msgid "Simulator"
 msgstr "시뮬레이터"
 
@@ -114,7 +114,7 @@ msgstr "연결 안 됨"
 msgid "Connect the keyboard via USB."
 msgstr "USB로 키보드를 연결하세요."
 
-#: crates/ui/src/header.rs:165 crates/ui/src/names.rs:276
+#: crates/ui/src/header.rs:165 crates/ui/src/names.rs:283
 msgid "Access to the keyboard is needed"
 msgstr "키보드에 접근할 권한이 필요합니다"
 
@@ -146,7 +146,7 @@ msgstr "시뮬레이터 키보드"
 msgid "Connected"
 msgstr "연결됨"
 
-#: crates/ui/src/header.rs:178 crates/ui/src/names.rs:296 crates/ui/src/names.rs:298
+#: crates/ui/src/header.rs:178 crates/ui/src/names.rs:303 crates/ui/src/names.rs:305
 msgid "%@ · %@"
 msgstr "%@ · %@"
 
@@ -178,23 +178,27 @@ msgstr "칩"
 msgid "Firmware"
 msgstr "펌웨어"
 
-#: crates/ui/src/header.rs:313
+#: crates/ui/src/header.rs:304
+msgid "Not tested yet"
+msgstr "아직 시험하지 못함"
+
+#: crates/ui/src/header.rs:319
 msgid "Power"
 msgstr "전원"
 
-#: crates/ui/src/header.rs:322
+#: crates/ui/src/header.rs:328
 msgid "Interfaces"
 msgstr "인터페이스"
 
-#: crates/ui/src/header.rs:324 crates/ui/src/names.rs:146
+#: crates/ui/src/header.rs:330 crates/ui/src/names.rs:146
 msgid "Configuration Channel"
 msgstr "설정 통로"
 
-#: crates/ui/src/header.rs:325
+#: crates/ui/src/header.rs:331
 msgid "Commands"
 msgstr "명령 체계"
 
-#: crates/ui/src/inspector.rs:37 crates/ui/src/names.rs:211 crates/ui/src/pages.rs:694
+#: crates/ui/src/inspector.rs:37 crates/ui/src/names.rs:218 crates/ui/src/pages.rs:694
 msgid "Select a key or knob."
 msgstr "키 또는 노브를 선택하세요."
 
@@ -258,7 +262,7 @@ msgstr "패킷 %lld개"
 msgid "Expand"
 msgstr "펼치기"
 
-#: crates/ui/src/log_window.rs:197 crates/ui/src/names.rs:315
+#: crates/ui/src/log_window.rs:197 crates/ui/src/names.rs:322
 msgid "%lld bytes"
 msgstr "%lld바이트"
 
@@ -567,182 +571,198 @@ msgid "Saved to the keyboard."
 msgstr "키보드에 저장했습니다."
 
 #: crates/ui/src/names.rs:204
+msgid "Saved, but some keys or knobs read back differently. Those changes stay unsaved."
+msgstr "저장했지만 다시 읽어 보니 일부 키와 노브가 다릅니다. 그 변경 사항은 저장하지 않은 것으로 남겨 둡니다."
+
+#: crates/ui/src/names.rs:205
+msgid "Saved, but the keyboard couldn’t be read back to check."
+msgstr "저장했지만 키보드에서 다시 읽어 확인하지는 못했습니다."
+
+#: crates/ui/src/names.rs:206
 msgid "Read from the keyboard."
 msgstr "키보드에서 읽었습니다."
 
-#: crates/ui/src/names.rs:205
+#: crates/ui/src/names.rs:207
 msgid "Nothing to save — no key has changed."
 msgstr "바뀐 키가 없어 저장할 것이 없습니다."
 
-#: crates/ui/src/names.rs:206
+#: crates/ui/src/names.rs:208
 msgid "The keyboard couldn’t be asked what it is."
 msgstr "키보드에 종류를 물을 수 없었습니다."
 
-#: crates/ui/src/names.rs:207
+#: crates/ui/src/names.rs:209
 msgid "Reading from the keyboard failed."
 msgstr "키보드에서 읽지 못했습니다."
 
-#: crates/ui/src/names.rs:208 crates/ui/src/names.rs:278
+#: crates/ui/src/names.rs:210
+msgid "Some keys or knobs couldn’t be read. They’re shown as before."
+msgstr "일부 키와 노브를 읽지 못했습니다. 그 자리는 전과 같이 보입니다."
+
+#: crates/ui/src/names.rs:211
+msgid "This keyboard’s firmware (type %lld) hasn’t been tested yet. If keys read or save wrong, please report it with the device log."
+msgstr "이 키보드의 펌웨어(종류 %lld)는 아직 시험해 보지 못했습니다. 키를 읽거나 저장한 것이 이상하면 장치 기록과 함께 알려 주세요."
+
+#: crates/ui/src/names.rs:215 crates/ui/src/names.rs:285
 msgid "Writing to the keyboard failed (%@)."
 msgstr "키보드에 쓰지 못했습니다(%@)."
 
-#: crates/ui/src/names.rs:209
+#: crates/ui/src/names.rs:216
 msgid "The keyboard is no longer connected."
 msgstr "키보드가 더 이상 연결되어 있지 않습니다."
 
-#: crates/ui/src/names.rs:210
+#: crates/ui/src/names.rs:217
 msgid "A key holds up to %lld presses."
 msgstr "키 하나에 입력은 %lld개까지 넣을 수 있습니다."
 
-#: crates/ui/src/names.rs:213
+#: crates/ui/src/names.rs:220
 msgid "Modifiers alone make the key a modifier key, so they can’t go with other presses."
 msgstr "보조 키만 넣으면 그 키가 보조 키가 되므로, 다른 입력과 함께 넣을 수 없습니다."
 
-#: crates/ui/src/names.rs:215
+#: crates/ui/src/names.rs:222
 msgid "Only keys 1–%lld have a color. Select one of them."
 msgstr "색은 키 1–%lld에만 있습니다. 그중 하나를 선택하세요."
 
-#: crates/ui/src/names.rs:216
+#: crates/ui/src/names.rs:223
 msgid "This keyboard can’t do that."
 msgstr "이 키보드는 그 기능을 지원하지 않습니다."
 
-#: crates/ui/src/names.rs:226
+#: crates/ui/src/names.rs:233
 msgid "Media Key %@"
 msgstr "미디어 키 %@"
 
-#: crates/ui/src/names.rs:235
+#: crates/ui/src/names.rs:242
 msgid "Enter"
 msgstr "Enter"
 
-#: crates/ui/src/names.rs:236
+#: crates/ui/src/names.rs:243
 msgid "Escape"
 msgstr "Escape"
 
-#: crates/ui/src/names.rs:237
+#: crates/ui/src/names.rs:244
 msgid "Backspace"
 msgstr "백스페이스"
 
-#: crates/ui/src/names.rs:238
+#: crates/ui/src/names.rs:245
 msgid "Tab"
 msgstr "Tab"
 
-#: crates/ui/src/names.rs:239
+#: crates/ui/src/names.rs:246
 msgid "Space"
 msgstr "스페이스"
 
-#: crates/ui/src/names.rs:240
+#: crates/ui/src/names.rs:247
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: crates/ui/src/names.rs:241
+#: crates/ui/src/names.rs:248
 msgid "Menu Key"
 msgstr "메뉴 키"
 
-#: crates/ui/src/names.rs:242
+#: crates/ui/src/names.rs:249
 msgid "Print Screen"
 msgstr "화면 프린트"
 
-#: crates/ui/src/names.rs:243
+#: crates/ui/src/names.rs:250
 msgid "Scroll Lock"
 msgstr "Scroll Lock"
 
-#: crates/ui/src/names.rs:244
+#: crates/ui/src/names.rs:251
 msgid "Insert"
 msgstr "Insert"
 
-#: crates/ui/src/names.rs:245
+#: crates/ui/src/names.rs:252
 msgid "Home"
 msgstr "Home"
 
-#: crates/ui/src/names.rs:246
+#: crates/ui/src/names.rs:253
 msgid "Page Up"
 msgstr "Page Up"
 
-#: crates/ui/src/names.rs:247
+#: crates/ui/src/names.rs:254
 msgid "Delete"
 msgstr "Delete"
 
-#: crates/ui/src/names.rs:248
+#: crates/ui/src/names.rs:255
 msgid "End"
 msgstr "End"
 
-#: crates/ui/src/names.rs:249
+#: crates/ui/src/names.rs:256
 msgid "Page Down"
 msgstr "Page Down"
 
-#: crates/ui/src/names.rs:250
+#: crates/ui/src/names.rs:257
 msgid "Right Arrow"
 msgstr "오른쪽 화살표"
 
-#: crates/ui/src/names.rs:251
+#: crates/ui/src/names.rs:258
 msgid "Left Arrow"
 msgstr "왼쪽 화살표"
 
-#: crates/ui/src/names.rs:252
+#: crates/ui/src/names.rs:259
 msgid "Down Arrow"
 msgstr "아래쪽 화살표"
 
-#: crates/ui/src/names.rs:253
+#: crates/ui/src/names.rs:260
 msgid "Up Arrow"
 msgstr "위쪽 화살표"
 
-#: crates/ui/src/names.rs:254
+#: crates/ui/src/names.rs:261
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#: crates/ui/src/names.rs:255
+#: crates/ui/src/names.rs:262
 msgid "Keypad Enter"
 msgstr "키패드 Enter"
 
-#: crates/ui/src/names.rs:265
+#: crates/ui/src/names.rs:272
 msgid "Keypad %@"
 msgstr "키패드 %@"
 
-#: crates/ui/src/names.rs:267
+#: crates/ui/src/names.rs:274
 msgid "Non-US Key %@ %@"
 msgstr "미국 외 배열의 %1$@ %2$@ 키"
 
-#: crates/ui/src/names.rs:274
+#: crates/ui/src/names.rs:281
 msgid "Looking for the keyboard"
 msgstr "키보드를 찾는 중"
 
-#: crates/ui/src/names.rs:275
+#: crates/ui/src/names.rs:282
 msgid "Connected to %@, interface %lld"
 msgstr "%1$@에 연결됨, 인터페이스 %2$lld"
 
-#: crates/ui/src/names.rs:277
+#: crates/ui/src/names.rs:284
 msgid "The keyboard couldn’t be opened (%@)."
 msgstr "키보드를 열지 못했습니다(%@)."
 
-#: crates/ui/src/names.rs:279
+#: crates/ui/src/names.rs:286
 msgid "Simulated keyboard: %@"
 msgstr "시뮬레이터 키보드: %@"
 
-#: crates/ui/src/names.rs:294 crates/ui/src/names.rs:314 crates/ui/src/names.rs:322
+#: crates/ui/src/names.rs:301 crates/ui/src/names.rs:321 crates/ui/src/names.rs:329
 msgid "Report ID %lld"
 msgstr "리포트 ID %lld"
 
-#: crates/ui/src/names.rs:296
+#: crates/ui/src/names.rs:303
 msgid "Keys: %lld · Knobs: %lld · Type %lld"
 msgstr "키 %1$lld개 · 노브 %2$lld개 · 종류 %3$lld"
 
-#: crates/ui/src/names.rs:309
+#: crates/ui/src/names.rs:316
 msgid "Interface %lld · %@ · %@ · %@"
 msgstr "인터페이스 %1$lld · %2$@ · %3$@ · %4$@"
 
-#: crates/ui/src/names.rs:322
+#: crates/ui/src/names.rs:329
 msgid "8890 Packets · %@"
 msgstr "8890 패킷 · %@"
 
-#: crates/ui/src/names.rs:323
-msgid "884x · Standard Firmware (Type 10)"
-msgstr "884x · 표준 펌웨어 (종류 10)"
+#: crates/ui/src/names.rs:330
+msgid "884x · Standard Firmware"
+msgstr "884x · 표준 펌웨어"
 
-#: crates/ui/src/names.rs:324
+#: crates/ui/src/names.rs:331
 msgid "884x · Legacy Firmware"
 msgstr "884x · 옛 펌웨어"
 
-#: crates/ui/src/names.rs:325
+#: crates/ui/src/names.rs:332
 msgid "884x · Doesn’t Answer Identification"
 msgstr "884x · 종류에 답하지 않음"
 

@@ -5,12 +5,21 @@ fn supported_keyboards() {
     assert_eq!(KeyboardFamily::of(UsbIdentity::new(0x1189, 0x8890)), Some(KeyboardFamily::K8890));
     assert_eq!(KeyboardFamily::of(UsbIdentity::new(0x1189, 0x8840)), Some(KeyboardFamily::K884x));
     assert_eq!(KeyboardFamily::of(UsbIdentity::new(0x514C, 0x8851)), Some(KeyboardFamily::K884x));
-    // The cross-platform app looks for 8851 under 514C only.
-    assert_eq!(KeyboardFamily::of(UsbIdentity::new(0x1189, 0x8851)), None);
+    assert_eq!(KeyboardFamily::of(UsbIdentity::new(0x1189, 0x8851)), Some(KeyboardFamily::K884x));
     assert_eq!(KeyboardFamily::of(UsbIdentity::new(0x05AC, 0x8890)), None);
-    assert_eq!(KeyboardFamily::SUPPORTED.len(), 16);
-    let unique: std::collections::HashSet<_> = KeyboardFamily::SUPPORTED.iter().collect();
-    assert_eq!(unique.len(), 16);
+    assert_eq!(KeyboardFamily::of(UsbIdentity::new(0x1189, 0x8841)), None);
+}
+
+/// The 1189:8890, then the eight products under 1189, then the same eight under 514C — the order the app looks in.
+#[test]
+fn supported_keyboards_in_order() {
+    const PRODUCTS: [u16; 8] = [0x8842, 0x8840, 0x8830, 0x8831, 0x8832, 0x8833, 0x8850, 0x8851];
+    let expected: Vec<UsbIdentity> = std::iter::once(KeyboardFamily::K8890_USB)
+        .chain(PRODUCTS.map(|product| UsbIdentity::new(0x1189, product)))
+        .chain(PRODUCTS.map(|product| UsbIdentity::new(0x514C, product)))
+        .collect();
+    assert_eq!(KeyboardFamily::SUPPORTED.to_vec(), expected);
+    assert_eq!(KeyboardFamily::SUPPORTED.len(), 17);
 }
 
 #[test]
@@ -20,10 +29,26 @@ fn usb_identity_prints_as_hex() {
 
 #[test]
 fn identity_picks_the_record_format() {
-    assert_eq!(KeyboardIdentity::new(6, 1, 10).record_format(), RecordFormat::Standard);
-    assert_eq!(KeyboardIdentity::new(12, 2, 11).record_format(), RecordFormat::Standard);
-    assert_eq!(KeyboardIdentity::new(6, 1, 0).record_format(), RecordFormat::Legacy);
-    assert_eq!(KeyboardIdentity::new(6, 1, 1).record_format(), RecordFormat::Legacy);
+    for kind in [10, 11, 12, 255] {
+        assert_eq!(KeyboardIdentity::new(6, 1, kind).record_format(), RecordFormat::Standard, "type {kind}");
+    }
+    for kind in [0, 1, 9] {
+        assert_eq!(KeyboardIdentity::new(6, 1, kind).record_format(), RecordFormat::Legacy, "type {kind}");
+    }
+}
+
+/// The types the app knows — the cross-platform app's 0, 1 and 10, and 11 seen on a keyboard — and others it handles
+/// by the same rule without having seen them.
+#[test]
+fn known_types() {
+    for kind in [0, 1, 10, 11] {
+        assert!(KeyboardIdentity::new(12, 2, kind).is_known_kind(), "type {kind}");
+    }
+    for kind in [2, 9, 12, 0xFF] {
+        assert!(!KeyboardIdentity::new(12, 2, kind).is_known_kind(), "type {kind}");
+    }
+    // From 12 up standard, but untested all the same.
+    assert_eq!(KeyboardIdentity::new(12, 2, 12).record_format(), RecordFormat::Standard);
 }
 
 fn capabilities(commands: CommandSet) -> KeyboardCapabilities {
@@ -76,7 +101,7 @@ fn what_each_keyboard_does() {
     assert_eq!(capabilities(STANDARD).lighting(), LightingSupport::PerKeyColor { modes: 0..=5, keys: 16 });
     assert_eq!(capabilities(LEGACY).lighting(), LightingSupport::ColorAndMode { modes: 0..=5 });
     assert_eq!(capabilities(STANDARD).reading(), ReadSupport::OnConnect);
-    assert_eq!(capabilities(LEGACY).reading(), ReadSupport::OnRequest);
+    assert_eq!(capabilities(LEGACY).reading(), ReadSupport::OnConnect);
     assert_eq!(capabilities(K8890).reading(), ReadSupport::Never);
     assert_eq!(capabilities(UNIDENTIFIED).reading(), ReadSupport::Never);
 }

@@ -292,7 +292,7 @@ fn info_view(info: &KeyboardInfo) -> gtk::Box {
     add(
         &t("Firmware"),
         match &info.firmware {
-            Firmware::Reported { kind, keys, knobs } => {
+            Firmware::Reported { kind, keys, knobs, is_known } => {
                 let column = gtk::Box::new(gtk::Orientation::Vertical, 2);
                 column.append(&text(&kind.to_string()));
                 let detail =
@@ -300,6 +300,12 @@ fn info_view(info: &KeyboardInfo) -> gtk::Box {
                 detail.add_css_class("caption");
                 detail.add_css_class("dim-label");
                 column.append(&detail);
+                if !is_known {
+                    let untested = gtk::Label::builder().label(t("Not tested yet")).xalign(0.0).build();
+                    untested.add_css_class("caption");
+                    untested.add_css_class("warning");
+                    column.append(&untested);
+                }
                 column.upcast()
             }
             Firmware::Release(release) => text(release),

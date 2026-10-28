@@ -21,8 +21,8 @@ counterpart of a macOS app built on the same rules, and speaks the same commands
 | Keyboard | Layout | Reads back | Waits | Lighting | Tried |
 |---|---|---|---|---|---|
 | `1189:8890` | arranged by you — keys (up to 12), keys per row, knobs (up to 2) | no | no | three modes | yes — 6 keys and a knob |
-| vendor `1189` or `514C`, product `8840` · `8842` · `8830`–`8833` · `8850` (and `514C:8851`), newer firmware | from what the keyboard says — 26 layouts | when connected | before each press | a mode, and a colour for each of keys 1–16 | no |
-| the same, older firmware | from what the keyboard says | when you ask | one per key | a colour and a mode | no |
+| vendor `1189` or `514C`, product `8840` · `8842` · `8830`–`8833` · `8850` · `8851`, newer firmware | from what the keyboard says — 26 layouts | when connected | before each press | a mode, and a colour for each of keys 1–16 | yes — `514C:8850`, 12 keys and 2 knobs |
+| the same, older firmware | from what the keyboard says | when connected | one per key | a colour and a mode | no |
 | the same, not saying what it is | chosen by you — 26 layouts | no | no | a colour and a mode | no |
 
 The `1189:8890` is the keyboard the vendor's Windows tool "MINI KeyBoard" works with; the others are the ones the
@@ -116,8 +116,8 @@ every answer.
 
 ## Using it
 
-1. Connect the keyboard over USB. The app finds it, and asks a keyboard of the second kind what it is; one with
-   newer firmware is read at once.
+1. Connect the keyboard over USB. The app finds it, and asks a keyboard of the second kind what it is; one that
+   answers is read at once.
 2. A keyboard that doesn't say its shape asks for its layout the first time — one of the vendor app's layouts, or
    for the `1189:8890` its keys, keys per row and knobs — and how it sits in front of you. The app remembers both
    for that USB ID. **Shape…** and **Rotate** (Ctrl+T) change them later; a keyboard that said its shape only

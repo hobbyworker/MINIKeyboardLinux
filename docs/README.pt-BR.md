@@ -22,8 +22,8 @@ para Linux de um app para macOS feito com as mesmas regras, e usa os mesmos coma
 | Teclado | Disposição | Leitura | Atraso | Iluminação | Testado |
 |---|---|---|---|---|---|
 | `1189:8890` | definida por você — teclas (até 12), teclas por fileira, botões giratórios (até 2) | não | não | três modos | sim — 6 teclas e um botão giratório |
-| fabricante `1189` ou `514C`, produto `8840` · `8842` · `8830`–`8833` · `8850` (e `514C:8851`), firmware novo | conforme o que o teclado informa — 26 disposições | ao conectar | antes de cada toque | um modo e uma cor para cada uma das teclas 1–16 | não |
-| os mesmos, firmware antigo | conforme o que o teclado informa | quando você pede | um por tecla | uma cor e um modo | não |
+| fabricante `1189` ou `514C`, produto `8840` · `8842` · `8830`–`8833` · `8850` · `8851`, firmware novo | conforme o que o teclado informa — 26 disposições | ao conectar | antes de cada toque | um modo e uma cor para cada uma das teclas 1–16 | sim — `514C:8850`, 12 teclas e 2 botões giratórios |
+| os mesmos, firmware antigo | conforme o que o teclado informa | ao conectar | um por tecla | uma cor e um modo | não |
 | os mesmos, sem informar o tipo | escolhida por você — 26 disposições | não | não | uma cor e um modo | não |
 
 O `1189:8890` é o teclado com que trabalha a ferramenta de configuração para Windows do fabricante, “MINI KeyBoard”;
@@ -124,8 +124,8 @@ teclado. **Registro do Dispositivo** mostra todos os relatórios gravados e toda
 
 ## Como usar
 
-1. Conecte o teclado por USB. O app o encontra e, se ele for do segundo tipo, pergunta qual é o teclado; se tiver
-   firmware novo, já o lê na hora.
+1. Conecte o teclado por USB. O app o encontra e, se ele for do segundo tipo, pergunta qual é o teclado; se
+   ele responder, já o lê na hora.
 2. Na primeira vez, para um teclado que não informa a forma, você define a disposição — uma das disposições do app
    do fabricante ou, no `1189:8890`, o número de teclas, de teclas por fileira e de botões giratórios — e a posição
    em que ele fica na sua frente. O app guarda as duas coisas para aquele ID USB. Depois, você pode mudá-las com

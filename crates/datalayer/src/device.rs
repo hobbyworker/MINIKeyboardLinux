@@ -2,10 +2,10 @@ use std::fmt;
 use std::rc::Rc;
 use std::time::Duration;
 
-use domain::ports::{KeyboardDeviceRepository, LayerActions, LocalFuture};
+use domain::ports::{KeyboardDeviceRepository, LayerActions, LayerRead, LocalFuture};
 use domain::{
-    CommandSet, DeviceLogEvent, KeyboardConfiguration, KeyboardDeviceError, KeyboardIdentity, KeyboardLayout,
-    LayerLighting, LogContent, RecordFormat,
+    CommandSet, DeviceLogEvent, KeyAction, KeyboardConfiguration, KeyboardDeviceError, KeyboardIdentity,
+    KeyboardLayout, LayerLighting, LogContent, RecordFormat,
 };
 
 use crate::channel::{ChannelProvider, ReportChannel, sleep};
@@ -80,19 +80,28 @@ impl KeyboardDevice {
         k884x::identity(&reply).map(Some).ok_or(KeyboardDeviceError::InvalidReply)
     }
 
+    /// Records 1… in order, until the format's count — or until answers stop, after the first: a keyboard with fewer
+    /// controls may send fewer. A control in those records whose answer didn't come, or holds a kind the app doesn't
+    /// know, is unread; one beyond them is outside the read, neither read nor unread.
     async fn read_actions(
         &self,
         layer: usize,
         format: RecordFormat,
         layout: &KeyboardLayout,
-    ) -> Result<LayerActions, KeyboardDeviceError> {
+    ) -> Result<LayerRead, KeyboardDeviceError> {
         let request = k884x::read_records(layer, format).ok_or(KeyboardDeviceError::Unsupported)?;
         let channel = self.channel()?;
         channel.discard_pending_replies();
         self.send(&request, channel.as_ref()).await?;
+        let count = k884x::read_reply_count(format);
         let mut actions = LayerActions::new();
-        for record_id in 1..=k884x::read_reply_count(format) {
-            let reply = self.reply(channel.as_ref(), self.reply_timeout).await.ok_or(KeyboardDeviceError::NoReply)?;
+        for record_id in 1..=count {
+            let Some(reply) = self.reply(channel.as_ref(), self.reply_timeout).await else {
+                if record_id == 1 {
+                    return Err(KeyboardDeviceError::NoReply);
+                }
+                break;
+            };
             let record_id = u8::try_from(record_id).expect("at most 25 records");
             if let Some(control) = numbers::control_in_record(record_id, layout)
                 && let Some(action) = records::decode(k884x::record(&reply), format)
@@ -100,7 +109,16 @@ impl KeyboardDevice {
                 actions.insert(control, action);
             }
         }
-        Ok(actions)
+        let unread = layout
+            .controls
+            .iter()
+            .copied()
+            .filter(|control| {
+                numbers::record(*control, layout).is_some_and(|record| usize::from(record) <= count)
+                    && !actions.contains_key(control)
+            })
+            .collect();
+        Ok(LayerRead { actions, unread })
     }
 
     async fn read_lighting(&self, layer: usize) -> Result<LayerLighting, KeyboardDeviceError> {
@@ -144,8 +162,12 @@ impl KeyboardDeviceRepository for KeyboardDevice {
         layer: usize,
         format: RecordFormat,
         layout: &'a KeyboardLayout,
-    ) -> LocalFuture<'a, Result<LayerActions, KeyboardDeviceError>> {
+    ) -> LocalFuture<'a, Result<LayerRead, KeyboardDeviceError>> {
         Box::pin(self.read_actions(layer, format, layout))
+    }
+
+    fn stored_form(&self, action: &KeyAction, format: RecordFormat) -> Option<KeyAction> {
+        records::stored_form(action, format)
     }
 
     fn read_lighting(&self, layer: usize) -> LocalFuture<'_, Result<LayerLighting, KeyboardDeviceError>> {

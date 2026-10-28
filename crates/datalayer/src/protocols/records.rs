@@ -186,6 +186,15 @@ pub fn modifiers_of_code(code: u8) -> Option<Modifiers> {
     (0xF1..=0xF8).contains(&code).then(|| Modifiers::from_bits(1 << (code - 0xF1)))
 }
 
+/// What a record of `format` gives back of `action` once written — encoded, then decoded as a read decodes it.
+/// `None` when the format can't hold it, or doesn't read back (the `FE` form).
+pub fn stored_form(action: &KeyAction, format: RecordFormat) -> Option<KeyAction> {
+    if format == RecordFormat::Unidentified {
+        return None;
+    }
+    decode(&encode(action, 1, 0, format).ok()?, format)
+}
+
 // Decoding
 
 /// The action a record the keyboard reported stores, or `None` for a kind the app doesn't know.

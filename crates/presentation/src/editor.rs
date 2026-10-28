@@ -8,7 +8,7 @@ use std::task::Poll;
 use domain::usecases::{
     AppendStrokeUseCase, ChooseLayoutUseCase, ClearUseCase, EditOutcome, EditTarget, IdentifyKeyboardUseCase,
     KeyboardSourceUseCase, ObserveAttachedKeyboardsUseCase, ObserveConnectionUseCase, ReadKeyboardUseCase,
-    RemoveLastStrokeUseCase, ResolveLayoutUseCase, RetryConnectionUseCase, SaveKeyboardUseCase, SaveOutcome,
+    RemoveLastStrokeUseCase, ResolveLayoutUseCase, RetryConnectionUseCase, SaveCheck, SaveKeyboardUseCase, SaveOutcome,
     SelectKeyboardUseCase, SetActionUseCase, SetKeyDelayUseCase, SetLightingUseCase, SetPressDelayUseCase,
 };
 use domain::{
@@ -390,7 +390,8 @@ impl EditorModel {
         }
     }
 
-    /// Settles the keyboard's commands and layout, then reads it if it reads back on its own.
+    /// Settles the keyboard's commands and layout, then reads it if it reads back on its own. A keyboard of a type the
+    /// app doesn't know is then said to be untested — in place of what the read said, since it tells what to do.
     pub async fn identify(&self) {
         let (keyboard, serial) = {
             let state = self.state();
@@ -431,6 +432,11 @@ impl EditorModel {
         });
         if read_now {
             self.read_with(false).await;
+        }
+        if let Some(identity) = identified.identity.filter(|identity| !identity.is_known_kind())
+            && self.state().connection_serial == serial
+        {
+            self.update(|state| state.show(Notice::UntestedFirmware(identity.kind)));
         }
     }
 
@@ -474,6 +480,8 @@ impl EditorModel {
             state.configuration = outcome.configuration;
             if outcome.error.is_some() {
                 state.show(Notice::ReadFailed);
+            } else if !outcome.unread.is_empty() {
+                state.show(Notice::ReadIncomplete);
             } else if announce {
                 state.show(Notice::ReadComplete);
             }
@@ -501,10 +509,14 @@ impl EditorModel {
         self.update(|state| {
             state.activity = None;
             match result {
-                Ok(SaveOutcome::Saved(saved)) => {
+                Ok(SaveOutcome::Saved(saved, check)) => {
                     state.configuration = saved;
                     let simulated = matches!(state.source, KeyboardSource::Simulated(_));
-                    state.show(Notice::Saved { simulated });
+                    state.show(match check {
+                        SaveCheck::NotChecked | SaveCheck::Matched => Notice::Saved { simulated },
+                        SaveCheck::Differs { .. } => Notice::SavedDiffers,
+                        SaveCheck::CouldNotCheck => Notice::SavedUnchecked,
+                    });
                 }
                 Ok(SaveOutcome::NothingToSave) => state.show(Notice::NothingToSave),
                 Err(KeyboardDeviceError::WriteFailed { code }) => state.show(Notice::WriteFailed(code)),

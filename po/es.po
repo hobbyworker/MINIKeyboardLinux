@@ -6,7 +6,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
 
-#: crates/ui/src/canvas.rs:200 crates/ui/src/names.rs:307 crates/ui/src/window.rs:425
+#: crates/ui/src/canvas.rs:200 crates/ui/src/names.rs:314 crates/ui/src/window.rs:425
 msgid "Simulator"
 msgstr "Simulador"
 
@@ -114,7 +114,7 @@ msgstr "Sin conexión"
 msgid "Connect the keyboard via USB."
 msgstr "Conecta el teclado por USB."
 
-#: crates/ui/src/header.rs:165 crates/ui/src/names.rs:276
+#: crates/ui/src/header.rs:165 crates/ui/src/names.rs:283
 msgid "Access to the keyboard is needed"
 msgstr "Se necesita acceso al teclado"
 
@@ -146,7 +146,7 @@ msgstr "Teclado simulado"
 msgid "Connected"
 msgstr "Conectado"
 
-#: crates/ui/src/header.rs:178 crates/ui/src/names.rs:296 crates/ui/src/names.rs:298
+#: crates/ui/src/header.rs:178 crates/ui/src/names.rs:303 crates/ui/src/names.rs:305
 msgid "%@ · %@"
 msgstr "%@ · %@"
 
@@ -178,23 +178,27 @@ msgstr "Chip"
 msgid "Firmware"
 msgstr "Firmware"
 
-#: crates/ui/src/header.rs:313
+#: crates/ui/src/header.rs:304
+msgid "Not tested yet"
+msgstr "Aún no probado"
+
+#: crates/ui/src/header.rs:319
 msgid "Power"
 msgstr "Alimentación"
 
-#: crates/ui/src/header.rs:322
+#: crates/ui/src/header.rs:328
 msgid "Interfaces"
 msgstr "Interfaces"
 
-#: crates/ui/src/header.rs:324 crates/ui/src/names.rs:146
+#: crates/ui/src/header.rs:330 crates/ui/src/names.rs:146
 msgid "Configuration Channel"
 msgstr "Canal de configuración"
 
-#: crates/ui/src/header.rs:325
+#: crates/ui/src/header.rs:331
 msgid "Commands"
 msgstr "Comandos"
 
-#: crates/ui/src/inspector.rs:37 crates/ui/src/names.rs:211 crates/ui/src/pages.rs:694
+#: crates/ui/src/inspector.rs:37 crates/ui/src/names.rs:218 crates/ui/src/pages.rs:694
 msgid "Select a key or knob."
 msgstr "Selecciona una tecla o un botón giratorio."
 
@@ -258,7 +262,7 @@ msgstr "Paquetes: %lld"
 msgid "Expand"
 msgstr "Expandir"
 
-#: crates/ui/src/log_window.rs:197 crates/ui/src/names.rs:315
+#: crates/ui/src/log_window.rs:197 crates/ui/src/names.rs:322
 msgid "%lld bytes"
 msgstr "%lld bytes"
 
@@ -567,182 +571,198 @@ msgid "Saved to the keyboard."
 msgstr "Guardado en el teclado."
 
 #: crates/ui/src/names.rs:204
+msgid "Saved, but some keys or knobs read back differently. Those changes stay unsaved."
+msgstr "Guardado, pero al volver a leerlo algunas teclas o botones giratorios son distintos. Esos cambios siguen sin guardar."
+
+#: crates/ui/src/names.rs:205
+msgid "Saved, but the keyboard couldn’t be read back to check."
+msgstr "Guardado, pero no se ha podido volver a leer el teclado para comprobarlo."
+
+#: crates/ui/src/names.rs:206
 msgid "Read from the keyboard."
 msgstr "Leído del teclado."
 
-#: crates/ui/src/names.rs:205
+#: crates/ui/src/names.rs:207
 msgid "Nothing to save — no key has changed."
 msgstr "No hay nada que guardar: no ha cambiado ninguna tecla."
 
-#: crates/ui/src/names.rs:206
+#: crates/ui/src/names.rs:208
 msgid "The keyboard couldn’t be asked what it is."
 msgstr "No se ha podido preguntar al teclado qué es."
 
-#: crates/ui/src/names.rs:207
+#: crates/ui/src/names.rs:209
 msgid "Reading from the keyboard failed."
 msgstr "No se ha podido leer del teclado."
 
-#: crates/ui/src/names.rs:208 crates/ui/src/names.rs:278
+#: crates/ui/src/names.rs:210
+msgid "Some keys or knobs couldn’t be read. They’re shown as before."
+msgstr "No se han podido leer algunas teclas o botones giratorios. Se muestran como antes."
+
+#: crates/ui/src/names.rs:211
+msgid "This keyboard’s firmware (type %lld) hasn’t been tested yet. If keys read or save wrong, please report it with the device log."
+msgstr "El firmware de este teclado (tipo %lld) aún no se ha probado. Si las teclas se leen o se guardan mal, avísanos con el registro del dispositivo."
+
+#: crates/ui/src/names.rs:215 crates/ui/src/names.rs:285
 msgid "Writing to the keyboard failed (%@)."
 msgstr "No se ha podido escribir en el teclado (%@)."
 
-#: crates/ui/src/names.rs:209
+#: crates/ui/src/names.rs:216
 msgid "The keyboard is no longer connected."
 msgstr "El teclado ya no está conectado."
 
-#: crates/ui/src/names.rs:210
+#: crates/ui/src/names.rs:217
 msgid "A key holds up to %lld presses."
 msgstr "Una tecla admite hasta %lld pulsaciones."
 
-#: crates/ui/src/names.rs:213
+#: crates/ui/src/names.rs:220
 msgid "Modifiers alone make the key a modifier key, so they can’t go with other presses."
 msgstr "Solo modificadores convierten la tecla en una tecla de modificación, así que no pueden ir con otras pulsaciones."
 
-#: crates/ui/src/names.rs:215
+#: crates/ui/src/names.rs:222
 msgid "Only keys 1–%lld have a color. Select one of them."
 msgstr "Solo las teclas 1–%lld tienen color. Selecciona una de ellas."
 
-#: crates/ui/src/names.rs:216
+#: crates/ui/src/names.rs:223
 msgid "This keyboard can’t do that."
 msgstr "Este teclado no puede hacer eso."
 
-#: crates/ui/src/names.rs:226
+#: crates/ui/src/names.rs:233
 msgid "Media Key %@"
 msgstr "Tecla multimedia %@"
 
-#: crates/ui/src/names.rs:235
+#: crates/ui/src/names.rs:242
 msgid "Enter"
 msgstr "Intro"
 
-#: crates/ui/src/names.rs:236
+#: crates/ui/src/names.rs:243
 msgid "Escape"
 msgstr "Escape"
 
-#: crates/ui/src/names.rs:237
+#: crates/ui/src/names.rs:244
 msgid "Backspace"
 msgstr "Retroceso"
 
-#: crates/ui/src/names.rs:238
+#: crates/ui/src/names.rs:245
 msgid "Tab"
 msgstr "Tabulador"
 
-#: crates/ui/src/names.rs:239
+#: crates/ui/src/names.rs:246
 msgid "Space"
 msgstr "Espacio"
 
-#: crates/ui/src/names.rs:240
+#: crates/ui/src/names.rs:247
 msgid "Caps Lock"
 msgstr "Bloqueo Mayúsculas"
 
-#: crates/ui/src/names.rs:241
+#: crates/ui/src/names.rs:248
 msgid "Menu Key"
 msgstr "Tecla de menú"
 
-#: crates/ui/src/names.rs:242
+#: crates/ui/src/names.rs:249
 msgid "Print Screen"
 msgstr "Imprimir pantalla"
 
-#: crates/ui/src/names.rs:243
+#: crates/ui/src/names.rs:250
 msgid "Scroll Lock"
 msgstr "Bloquear desplazamiento"
 
-#: crates/ui/src/names.rs:244
+#: crates/ui/src/names.rs:251
 msgid "Insert"
 msgstr "Insert"
 
-#: crates/ui/src/names.rs:245
+#: crates/ui/src/names.rs:252
 msgid "Home"
 msgstr "Inicio"
 
-#: crates/ui/src/names.rs:246
+#: crates/ui/src/names.rs:253
 msgid "Page Up"
 msgstr "Pág. arriba"
 
-#: crates/ui/src/names.rs:247
+#: crates/ui/src/names.rs:254
 msgid "Delete"
 msgstr "Suprimir"
 
-#: crates/ui/src/names.rs:248
+#: crates/ui/src/names.rs:255
 msgid "End"
 msgstr "Fin"
 
-#: crates/ui/src/names.rs:249
+#: crates/ui/src/names.rs:256
 msgid "Page Down"
 msgstr "Pág. abajo"
 
-#: crates/ui/src/names.rs:250
+#: crates/ui/src/names.rs:257
 msgid "Right Arrow"
 msgstr "Flecha derecha"
 
-#: crates/ui/src/names.rs:251
+#: crates/ui/src/names.rs:258
 msgid "Left Arrow"
 msgstr "Flecha izquierda"
 
-#: crates/ui/src/names.rs:252
+#: crates/ui/src/names.rs:259
 msgid "Down Arrow"
 msgstr "Flecha abajo"
 
-#: crates/ui/src/names.rs:253
+#: crates/ui/src/names.rs:260
 msgid "Up Arrow"
 msgstr "Flecha arriba"
 
-#: crates/ui/src/names.rs:254
+#: crates/ui/src/names.rs:261
 msgid "Num Lock"
 msgstr "Bloq Num"
 
-#: crates/ui/src/names.rs:255
+#: crates/ui/src/names.rs:262
 msgid "Keypad Enter"
 msgstr "Intro (teclado numérico)"
 
-#: crates/ui/src/names.rs:265
+#: crates/ui/src/names.rs:272
 msgid "Keypad %@"
 msgstr "Teclado numérico %@"
 
-#: crates/ui/src/names.rs:267
+#: crates/ui/src/names.rs:274
 msgid "Non-US Key %@ %@"
 msgstr "Tecla no estadounidense %1$@ %2$@"
 
-#: crates/ui/src/names.rs:274
+#: crates/ui/src/names.rs:281
 msgid "Looking for the keyboard"
 msgstr "Buscando el teclado"
 
-#: crates/ui/src/names.rs:275
+#: crates/ui/src/names.rs:282
 msgid "Connected to %@, interface %lld"
 msgstr "Conectado a %1$@, interfaz %2$lld"
 
-#: crates/ui/src/names.rs:277
+#: crates/ui/src/names.rs:284
 msgid "The keyboard couldn’t be opened (%@)."
 msgstr "No se ha podido abrir el teclado (%@)."
 
-#: crates/ui/src/names.rs:279
+#: crates/ui/src/names.rs:286
 msgid "Simulated keyboard: %@"
 msgstr "Teclado simulado: %@"
 
-#: crates/ui/src/names.rs:294 crates/ui/src/names.rs:314 crates/ui/src/names.rs:322
+#: crates/ui/src/names.rs:301 crates/ui/src/names.rs:321 crates/ui/src/names.rs:329
 msgid "Report ID %lld"
 msgstr "ID de informe %lld"
 
-#: crates/ui/src/names.rs:296
+#: crates/ui/src/names.rs:303
 msgid "Keys: %lld · Knobs: %lld · Type %lld"
 msgstr "Teclas: %1$lld · Botones giratorios: %2$lld · Tipo %3$lld"
 
-#: crates/ui/src/names.rs:309
+#: crates/ui/src/names.rs:316
 msgid "Interface %lld · %@ · %@ · %@"
 msgstr "Interfaz %1$lld · %2$@ · %3$@ · %4$@"
 
-#: crates/ui/src/names.rs:322
+#: crates/ui/src/names.rs:329
 msgid "8890 Packets · %@"
 msgstr "Paquetes 8890 · %@"
 
-#: crates/ui/src/names.rs:323
-msgid "884x · Standard Firmware (Type 10)"
-msgstr "884x · Firmware estándar (tipo 10)"
+#: crates/ui/src/names.rs:330
+msgid "884x · Standard Firmware"
+msgstr "884x · Firmware estándar"
 
-#: crates/ui/src/names.rs:324
+#: crates/ui/src/names.rs:331
 msgid "884x · Legacy Firmware"
 msgstr "884x · Firmware antiguo"
 
-#: crates/ui/src/names.rs:325
+#: crates/ui/src/names.rs:332
 msgid "884x · Doesn’t Answer Identification"
 msgstr "884x · No responde qué es"
 

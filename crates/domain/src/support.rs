@@ -158,7 +158,7 @@ impl SimulatedModel {
         candidates.iter().find_map(|&(kind, product_id)| {
             let identity = KeyboardIdentity::new(keys, knobs, kind);
             (KeyboardLayout::identified_id(&identity, product_id) == layout.id).then(|| {
-                // 1189:8851 is not among the IDs the app looks for; 514C:8851 is.
+                // 8851 under 514C, the vendor every build of the cross-platform app looks for it under.
                 let vendor = if product_id == 0x8851 { 0x514C } else { 0x1189 };
                 Self { usb: UsbIdentity::new(vendor, product_id), kind: SimulatedKind::Identified(identity) }
             })

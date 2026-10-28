@@ -23,8 +23,8 @@ mismos comandos.
 | Teclado | Disposición | Lectura | Demora | Iluminación | Probado |
 |---|---|---|---|---|---|
 | `1189:8890` | la defines tú — teclas (hasta 12), teclas por fila, botones giratorios (hasta 2) | no | no | tres modos | sí — 6 teclas y un botón giratorio |
-| fabricante `1189` o `514C`, producto `8840` · `8842` · `8830`–`8833` · `8850` (y `514C:8851`), firmware nuevo | según lo que indica el teclado — 26 disposiciones | al conectarlo | antes de cada pulsación | un modo y un color para cada una de las teclas 1–16 | no |
-| los mismos, firmware antiguo | según lo que indica el teclado | cuando lo pides | una por tecla | un color y un modo | no |
+| fabricante `1189` o `514C`, producto `8840` · `8842` · `8830`–`8833` · `8850` · `8851`, firmware nuevo | según lo que indica el teclado — 26 disposiciones | al conectarlo | antes de cada pulsación | un modo y un color para cada una de las teclas 1–16 | sí — `514C:8850`, 12 teclas y 2 botones giratorios |
+| los mismos, firmware antiguo | según lo que indica el teclado | al conectarlo | una por tecla | un color y un modo | no |
 | los mismos, sin indicar su tipo | la eliges tú — 26 disposiciones | no | no | un color y un modo | no |
 
 El `1189:8890` es el teclado con el que trabaja la herramienta de configuración para Windows del fabricante,
@@ -125,8 +125,8 @@ ese teclado. **Registro del dispositivo** muestra todos los informes escritos y 
 
 ## Uso
 
-1. Conecta el teclado por USB. La app lo encuentra y, si es del segundo tipo, le pregunta qué teclado es; si tiene
-   firmware nuevo, lo lee enseguida.
+1. Conecta el teclado por USB. La app lo encuentra y, si es del segundo tipo, le pregunta qué teclado es; si
+   responde, lo lee enseguida.
 2. Si un teclado no indica su forma, la primera vez eliges su disposición —una de las de la app del fabricante o,
    para el `1189:8890`, el número de teclas, de teclas por fila y de botones giratorios— y cómo está colocado delante
    de ti. La app recuerda ambas cosas para ese ID USB. Más adelante puedes cambiarlas con **Forma…** y **Girar**

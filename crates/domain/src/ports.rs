@@ -4,7 +4,7 @@
 //! for time to pass — is a [`LocalFuture`]: whoever drives the main loop polls it, and whoever implements the
 //! port does the waiting elsewhere.
 
-use std::collections::HashMap;
+use std::collections::{BTreeSet, HashMap};
 use std::future::Future;
 use std::pin::Pin;
 
@@ -63,18 +63,32 @@ pub trait KeyboardConnectionRepository {
 /// The actions one layer holds, by control.
 pub type LayerActions = HashMap<ControlId, KeyAction>;
 
+/// What reading one layer brought: the actions that came, and the layout's controls that didn't — their answer
+/// never came, or held a kind of record the app doesn't know. A control in neither is outside the read: its record
+/// is beyond those the request asks for.
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct LayerRead {
+    pub actions: LayerActions,
+    pub unread: BTreeSet<ControlId>,
+}
+
 /// Talking to the open keyboard.
 pub trait KeyboardDeviceRepository {
     /// Asks a 884x keyboard who it is (`FB FB FB`) once. `None` when no answer comes in time.
     fn ask_identity(&self) -> LocalFuture<'_, Result<Option<KeyboardIdentity>, KeyboardDeviceError>>;
 
-    /// The actions one layer holds, for the controls of `layout` — standard and legacy formats only.
+    /// The actions one layer holds, for the controls of `layout` — standard and legacy formats only. Answers that
+    /// stop coming after the first end the read with what came; none at all is [`KeyboardDeviceError::NoReply`].
     fn read_actions<'a>(
         &'a self,
         layer: usize,
         format: RecordFormat,
         layout: &'a KeyboardLayout,
-    ) -> LocalFuture<'a, Result<LayerActions, KeyboardDeviceError>>;
+    ) -> LocalFuture<'a, Result<LayerRead, KeyboardDeviceError>>;
+
+    /// `action` as a record of `format` holds it — written, then read back — or `None` when the format can't hold
+    /// it or doesn't read back. What a read after a save is compared with.
+    fn stored_form(&self, action: &KeyAction, format: RecordFormat) -> Option<KeyAction>;
 
     /// One layer's lights — the standard format only.
     fn read_lighting(&self, layer: usize) -> LocalFuture<'_, Result<LayerLighting, KeyboardDeviceError>>;

@@ -183,6 +183,35 @@ fn cleared() {
     assert_eq!(records::decode(&[0xFD, 2, 1, 9], RecordFormat::Legacy), None);
 }
 
+/// What a record holds of an action, to compare a read after a save with: each kind as written on both formats that
+/// read back — but a legacy record has no wait per press, and the `FE` form reads nothing back.
+#[test]
+fn stored_forms() {
+    let presses = |delay| {
+        keys(vec![
+            KeyStroke::new(Modifiers::CONTROL | Modifiers::RIGHT_SHIFT, 0x06).with_delay(delay),
+            KeyStroke::key(0x28),
+        ])
+    };
+    let every_format = [
+        KeyAction::Unassigned,
+        keys(vec![KeyStroke::new(Modifiers::ALT, 0)]),
+        KeyAction::Media(MediaKey::MY_COMPUTER),
+        KeyAction::Mouse(MouseAction::RightClick),
+        KeyAction::Mouse(MouseAction::ShiftWheelDown),
+    ];
+    for action in every_format.iter().chain([&presses(250)]) {
+        assert_eq!(records::stored_form(action, RecordFormat::Standard).as_ref(), Some(action), "{action:?}");
+    }
+    let waiting =
+        KeyAction::Keys(KeyMacro::with_delay(vec![KeyStroke::new(Modifiers::SHIFT, 0x04), KeyStroke::key(0x05)], 1500));
+    for action in every_format.iter().chain([&presses(0), &waiting]) {
+        assert_eq!(records::stored_form(action, RecordFormat::Legacy).as_ref(), Some(action), "{action:?}");
+    }
+    assert_eq!(records::stored_form(&presses(250), RecordFormat::Legacy), Some(presses(0)));
+    assert_eq!(records::stored_form(&KeyAction::Media(MediaKey::MUTE), RecordFormat::Unidentified), None);
+}
+
 #[test]
 fn legacy_lighting() {
     let record = records::legacy_lighting(LightColor::Blue, 3, 2, records::LEGACY_LENGTH);
@@ -198,8 +227,11 @@ fn answers() {
         k884x::lighting_reply(&reply),
         Some(LayerLighting::PerKey { mode: 4, colors: vec![KeyColor::new(9, 9, 9); 16] })
     );
-    assert_eq!(k884x::read_records(0, RecordFormat::Standard), Some(vec![0xFA, 25, 0, 1]));
-    assert_eq!(k884x::read_records(2, RecordFormat::Legacy), Some(vec![0xFA, 0x18, 0, 3]));
+    // `FA 19 00` and `FA 0F 03`, as the cross-platform app asks: 25 records, and 15 keys then 3 knobs of 3.
+    assert_eq!(k884x::read_records(0, RecordFormat::Standard), Some(vec![0xFA, 0x19, 0x00, 1]));
+    assert_eq!(k884x::read_reply_count(RecordFormat::Standard), 25);
+    assert_eq!(k884x::read_records(2, RecordFormat::Legacy), Some(vec![0xFA, 0x0F, 0x03, 3]));
+    assert_eq!(k884x::read_reply_count(RecordFormat::Legacy), 24);
     assert_eq!(k884x::read_records(0, RecordFormat::Unidentified), None);
 }
 

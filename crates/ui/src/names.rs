@@ -201,10 +201,17 @@ pub fn notice_message(notice: Notice) -> String {
     match notice {
         Notice::Saved { simulated: true } => t("Saved to the simulator — nothing was written to a keyboard."),
         Notice::Saved { simulated: false } => t("Saved to the keyboard."),
+        Notice::SavedDiffers => t("Saved, but some keys or knobs read back differently. Those changes stay unsaved."),
+        Notice::SavedUnchecked => t("Saved, but the keyboard couldn’t be read back to check."),
         Notice::ReadComplete => t("Read from the keyboard."),
         Notice::NothingToSave => t("Nothing to save — no key has changed."),
         Notice::IdentifyFailed => t("The keyboard couldn’t be asked what it is."),
         Notice::ReadFailed => t("Reading from the keyboard failed."),
+        Notice::ReadIncomplete => t("Some keys or knobs couldn’t be read. They’re shown as before."),
+        Notice::UntestedFirmware(kind) => tf(
+            "This keyboard’s firmware (type %lld) hasn’t been tested yet. If keys read or save wrong, please report it with the device log.",
+            &[&kind],
+        ),
         Notice::WriteFailed(code) => tf("Writing to the keyboard failed (%@).", &[&error_code(code)]),
         Notice::KeyboardGone => t("The keyboard is no longer connected."),
         Notice::Full(limit) => tf("A key holds up to %lld presses.", &[&limit]),
@@ -320,7 +327,7 @@ pub fn channel_text(channel: &InfoChannel) -> String {
 pub fn commands_text(commands: InfoCommands) -> String {
     match commands {
         InfoCommands::Packets { report_id } => tf("8890 Packets · %@", &[&tf("Report ID %lld", &[&report_id])]),
-        InfoCommands::Standard => t("884x · Standard Firmware (Type 10)"),
+        InfoCommands::Standard => t("884x · Standard Firmware"),
         InfoCommands::Legacy => t("884x · Legacy Firmware"),
         InfoCommands::Unidentified => t("884x · Doesn’t Answer Identification"),
         InfoCommands::Unknown => "—".to_owned(),

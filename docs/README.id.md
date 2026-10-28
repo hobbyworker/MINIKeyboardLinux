@@ -22,8 +22,8 @@ dari aplikasi macOS yang dibuat dengan aturan yang sama, dan memakai perintah ya
 | Papan ketik | Tata letak | Membaca kembali | Tunda | Pencahayaan | Diuji langsung |
 |---|---|---|---|---|---|
 | `1189:8890` | Anda atur sendiri — tombol (hingga 12), tombol per baris, kenop (hingga 2) | tidak bisa | tidak ada | tiga mode | sudah — 6 tombol, 1 kenop |
-| produsen `1189` atau `514C`, produk `8840` · `8842` · `8830`–`8833` · `8850` (dan `514C:8851`), firmware baru | sesuai yang dilaporkan papan ketik — 26 tata letak | langsung saat terhubung | per tekanan | satu mode, dan warna untuk tombol 1–16 | belum |
-| papan ketik yang sama, firmware lama | sesuai yang dilaporkan papan ketik | saat Anda minta | satu per tombol | warna dan mode | belum |
+| produsen `1189` atau `514C`, produk `8840` · `8842` · `8830`–`8833` · `8850` · `8851`, firmware baru | sesuai yang dilaporkan papan ketik — 26 tata letak | langsung saat terhubung | per tekanan | satu mode, dan warna untuk tombol 1–16 | sudah — `514C:8850`, 12 tombol, 2 kenop |
+| papan ketik yang sama, firmware lama | sesuai yang dilaporkan papan ketik | langsung saat terhubung | satu per tombol | warna dan mode | belum |
 | papan ketik yang sama, tidak memberi tahu jenisnya | Anda pilih sendiri — 26 tata letak | tidak bisa | tidak ada | warna dan mode | belum |
 
 `1189:8890` adalah papan ketik yang ditangani alat pengaturan Windows dari produsen, "MINI KeyBoard"; sisanya adalah
@@ -126,7 +126,7 @@ diterima.
 ## Cara menggunakan
 
 1. Hubungkan papan ketik melalui USB. Aplikasi menemukan papan ketik dan menanyakan jenisnya jika papan ketik itu dari
-   jenis kedua. Jika firmware-nya baru, pengaturannya langsung dibaca.
+   jenis kedua. Jika papan ketik itu menjawab, pengaturannya langsung dibaca.
 2. Untuk papan ketik yang tidak memberi tahu bentuknya, pertama kali Anda menentukan tata letaknya — salah satu tata
    letak aplikasi produsen, atau untuk `1189:8890`, jumlah tombol, tombol per baris, dan kenop — serta arah posisinya
    di depan Anda. Aplikasi mengingatnya untuk setiap ID USB. Nanti Anda bisa mengubahnya dengan **Bentuk…** dan

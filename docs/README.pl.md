@@ -22,8 +22,8 @@ odpowiednik aplikacji na macOS opartej na tych samych regułach; obie używają 
 | Klawiatura | Układ | Odczyt | Opóźnienie | Podświetlenie | Sprawdzono |
 |---|---|---|---|---|---|
 | `1189:8890` | ustawiasz go sam — klawisze (do 12), klawisze w rzędzie, pokrętła (do 2) | nie | nie | trzy tryby | tak — 6 klawiszy i pokrętło |
-| producent `1189` lub `514C`, produkt `8840` · `8842` · `8830`–`8833` · `8850` (oraz `514C:8851`), nowsze oprogramowanie sprzętowe | według tego, co podaje klawiatura — 26 układów | od razu po podłączeniu | przed każdym naciśnięciem | tryb i kolor dla każdego z klawiszy 1–16 | nie |
-| te same, starsze oprogramowanie sprzętowe | według tego, co podaje klawiatura | na żądanie | jedno na klawisz | kolor i tryb | nie |
+| producent `1189` lub `514C`, produkt `8840` · `8842` · `8830`–`8833` · `8850` · `8851`, nowsze oprogramowanie sprzętowe | według tego, co podaje klawiatura — 26 układów | od razu po podłączeniu | przed każdym naciśnięciem | tryb i kolor dla każdego z klawiszy 1–16 | tak — `514C:8850`, 12 klawiszy i 2 pokrętła |
+| te same, starsze oprogramowanie sprzętowe | według tego, co podaje klawiatura | od razu po podłączeniu | jedno na klawisz | kolor i tryb | nie |
 | te same, niepodające swojego typu | wybierasz go sam — 26 układów | nie | nie | kolor i tryb | nie |
 
 `1189:8890` to klawiatura, z którą współpracuje windowsowe narzędzie konfiguracyjne producenta „MINI KeyBoard”;
@@ -125,8 +125,8 @@ oferują każdy rodzaj (pozostałe ID raportu `1189:8890`, starsze oprogramowani
 
 ## Korzystanie
 
-1. Podłącz klawiaturę przez USB. Aplikacja ją znajduje, a klawiaturę drugiego rodzaju pyta, czym jest; taką z nowszym
-   oprogramowaniem sprzętowym od razu odczytuje.
+1. Podłącz klawiaturę przez USB. Aplikacja ją znajduje, a klawiaturę drugiego rodzaju pyta, czym jest; taką, która
+   odpowie, od razu odczytuje.
 2. Dla klawiatury, która nie podaje swojego kształtu, przy pierwszym podłączeniu wybierasz układ — jeden z układów
    aplikacji producenta, a dla `1189:8890` liczbę klawiszy, klawiszy w rzędzie i pokręteł — oraz to, jak leży przed
    tobą. Aplikacja zapamiętuje oba ustawienia dla danego ID USB. Później zmienisz je poleceniami **Kształt…** i

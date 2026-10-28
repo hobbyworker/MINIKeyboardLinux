@@ -42,10 +42,18 @@ pub enum Notice {
     Saved {
         simulated: bool,
     },
+    /// Saved, but some changes read back otherwise; they stay to be saved.
+    SavedDiffers,
+    /// Saved, but what was written couldn't all be read back to compare.
+    SavedUnchecked,
     ReadComplete,
     NothingToSave,
     IdentifyFailed,
     ReadFailed,
+    /// Read, but some controls' answers didn't come; they show what they showed before.
+    ReadIncomplete,
+    /// The keyboard answered with a type the app doesn't know — this one.
+    UntestedFirmware(u8),
     /// The code of the failed write.
     WriteFailed(i32),
     KeyboardGone,
@@ -64,6 +72,7 @@ impl Notice {
     /// How long it stays.
     pub fn lifetime(self) -> Duration {
         match self {
+            Self::UntestedFirmware(_) => Duration::from_secs(10),
             _ if self.is_error() => Duration::from_secs(6),
             Self::Saved { simulated: true } => Duration::from_secs(4),
             _ => Duration::from_millis(2500),

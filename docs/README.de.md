@@ -22,8 +22,8 @@ einer macOS-App, die nach denselben Regeln gebaut ist, und verwendet dieselben B
 | Tastatur | Anordnung | Auslesen | Verzögerung | Beleuchtung | Getestet |
 |---|---|---|---|---|---|
 | `1189:8890` | legst du fest – Tasten (bis zu 12), Tasten pro Reihe, Drehknöpfe (bis zu 2) | nein | keine | drei Modi | ja – 6 Tasten und ein Drehknopf |
-| Hersteller `1189` oder `514C`, Produkt `8840` · `8842` · `8830`–`8833` · `8850` (und `514C:8851`), neuere Firmware | wie die Tastatur sie meldet – 26 Anordnungen | sofort beim Verbinden | vor jedem Tastendruck | ein Modus und eine Farbe für jede der Tasten 1–16 | nein |
-| dieselben, ältere Firmware | wie die Tastatur sie meldet | auf Anfrage | eine pro Taste | eine Farbe und ein Modus | nein |
+| Hersteller `1189` oder `514C`, Produkt `8840` · `8842` · `8830`–`8833` · `8850` · `8851`, neuere Firmware | wie die Tastatur sie meldet – 26 Anordnungen | sofort beim Verbinden | vor jedem Tastendruck | ein Modus und eine Farbe für jede der Tasten 1–16 | ja – `514C:8850`, 12 Tasten und 2 Drehknöpfe |
+| dieselben, ältere Firmware | wie die Tastatur sie meldet | sofort beim Verbinden | eine pro Taste | eine Farbe und ein Modus | nein |
 | dieselben, ohne Angabe ihres Typs | wählst du – 26 Anordnungen | nein | keine | eine Farbe und ein Modus | nein |
 
 Die `1189:8890` ist die Tastatur, mit der das Windows-Tool des Herstellers, „MINI KeyBoard“, arbeitet; die übrigen
@@ -125,8 +125,8 @@ jede Antwort.
 
 ## Verwendung
 
-1. Schließe die Tastatur über USB an. Die App findet sie und fragt eine Tastatur der zweiten Art nach ihrem Typ; eine
-   mit neuerer Firmware wird sofort ausgelesen.
+1. Schließe die Tastatur über USB an. Die App findet sie und fragt eine Tastatur der zweiten Art nach ihrem Typ; eine,
+   die antwortet, wird sofort ausgelesen.
 2. Bei einer Tastatur, die ihre Form nicht angibt, legst du beim ersten Mal die Anordnung fest – eine der Anordnungen
    aus der App des Herstellers, bei der `1189:8890` die Zahl der Tasten, der Tasten pro Reihe und der Drehknöpfe – und
    wie sie vor dir liegt. Die App merkt sich beides für diese USB-ID. Später änderst du das mit **Form…** und

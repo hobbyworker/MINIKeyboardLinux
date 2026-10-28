@@ -22,8 +22,8 @@ d’une app macOS construite selon les mêmes règles, et elle utilise les même
 | Clavier | Disposition | Lecture | Délai | Éclairage | Testé |
 |---|---|---|---|---|---|
 | `1189:8890` | définie par vous – touches (jusqu’à 12), touches par rangée, boutons rotatifs (jusqu’à 2) | non | aucun | trois modes | oui – 6 touches et un bouton rotatif |
-| fabricant `1189` ou `514C`, produit `8840` · `8842` · `8830`–`8833` · `8850` (et `514C:8851`), programme interne récent | selon ce qu’indique le clavier – 26 dispositions | dès la connexion | avant chaque frappe | un mode, et une couleur pour chacune des touches 1–16 | non |
-| les mêmes, ancien programme interne | selon ce qu’indique le clavier | à la demande | un par touche | une couleur et un mode | non |
+| fabricant `1189` ou `514C`, produit `8840` · `8842` · `8830`–`8833` · `8850` · `8851`, programme interne récent | selon ce qu’indique le clavier – 26 dispositions | dès la connexion | avant chaque frappe | un mode, et une couleur pour chacune des touches 1–16 | oui – `514C:8850`, 12 touches et 2 boutons rotatifs |
+| les mêmes, ancien programme interne | selon ce qu’indique le clavier | dès la connexion | un par touche | une couleur et un mode | non |
 | les mêmes, sans indiquer leur type | choisie par vous – 26 dispositions | non | aucun | une couleur et un mode | non |
 
 Le `1189:8890` est le clavier que prend en charge l’outil Windows du fabricant, « MINI KeyBoard » ; les autres sont
@@ -126,8 +126,8 @@ fait démarrer directement avec l’un d’eux. **Journal de l’appareil** affi
 
 ## Utilisation
 
-1. Branchez le clavier en USB. L’app le trouve et, s’il est du second type, lui demande ce qu’il est ; s’il a un
-   programme interne récent, il est lu aussitôt.
+1. Branchez le clavier en USB. L’app le trouve et, s’il est du second type, lui demande ce qu’il est ; s’il
+   répond, il est lu aussitôt.
 2. Pour un clavier qui n’indique pas sa forme, vous choisissez la première fois sa disposition – l’une des
    dispositions de l’app du fabricant ou, pour le `1189:8890`, le nombre de touches, de touches par rangée et de
    boutons rotatifs – et son orientation devant vous. L’app retient les deux pour cet ID USB. **Forme…** et

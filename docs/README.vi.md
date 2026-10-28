@@ -21,8 +21,8 @@ phím. Đây là phiên bản Linux của một ứng dụng macOS được làm
 | Bàn phím | Bố cục | Đọc lại | Độ trễ | Đèn | Thử thực tế |
 |---|---|---|---|---|---|
 | `1189:8890` | bạn tự đặt — phím (tối đa 12), số phím mỗi hàng, núm xoay (tối đa 2) | không | không có | ba chế độ | đã thử — 6 phím, 1 núm xoay |
-| nhà sản xuất `1189` hoặc `514C`, sản phẩm `8840` · `8842` · `8830`–`8833` · `8850` (và `514C:8851`), chương trình cơ sở mới | theo thông tin bàn phím báo — 26 bố cục | ngay khi kết nối | cho từng lần nhấn | một chế độ, và màu cho từng phím 1–16 | chưa |
-| cùng loại bàn phím, chương trình cơ sở cũ | theo thông tin bàn phím báo | khi bạn yêu cầu | mỗi phím một giá trị | màu và chế độ | chưa |
+| nhà sản xuất `1189` hoặc `514C`, sản phẩm `8840` · `8842` · `8830`–`8833` · `8850` · `8851`, chương trình cơ sở mới | theo thông tin bàn phím báo — 26 bố cục | ngay khi kết nối | cho từng lần nhấn | một chế độ, và màu cho từng phím 1–16 | đã thử — `514C:8850`, 12 phím, 2 núm xoay |
+| cùng loại bàn phím, chương trình cơ sở cũ | theo thông tin bàn phím báo | ngay khi kết nối | mỗi phím một giá trị | màu và chế độ | chưa |
 | cùng loại bàn phím, không cho biết loại | bạn tự chọn — 26 bố cục | không | không có | màu và chế độ | chưa |
 
 `1189:8890` là bàn phím mà công cụ cấu hình Windows của nhà sản xuất, "MINI KeyBoard", hỗ trợ; các bàn phím còn lại là
@@ -119,8 +119,8 @@ có thể xem mọi báo cáo đã ghi và mọi phản hồi nhận được.
 
 ## Cách dùng
 
-1. Kết nối bàn phím qua USB. Ứng dụng tìm bàn phím và hỏi loại nếu đó là bàn phím loại thứ hai. Nếu là chương trình cơ
-   sở mới, thiết lập được đọc ngay.
+1. Kết nối bàn phím qua USB. Ứng dụng tìm bàn phím và hỏi loại nếu đó là bàn phím loại thứ hai. Nếu bàn phím trả lời,
+   thiết lập được đọc ngay.
 2. Với bàn phím không cho biết hình dạng, lần đầu bạn chọn bố cục — một trong các bố cục của ứng dụng nhà sản xuất, hoặc
    với `1189:8890` là số phím, số phím mỗi hàng và số núm xoay — cùng hướng đặt bàn phím trước mặt bạn. Ứng dụng ghi nhớ
    theo từng USB ID. Sau này bạn có thể đổi bằng **Hình dạng…** và **Xoay** (Ctrl+T). Bàn phím đã cho biết hình dạng thì

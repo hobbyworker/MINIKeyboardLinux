@@ -22,8 +22,8 @@ sulle stesse regole, e usa gli stessi comandi.
 | Tastiera | Disposizione | Lettura | Ritardo | Illuminazione | Provata |
 |---|---|---|---|---|---|
 | `1189:8890` | la decidi tu – tasti (fino a 12), tasti per riga, manopole (fino a 2) | no | nessuno | tre modalità | sì – 6 tasti e una manopola |
-| produttore `1189` o `514C`, prodotto `8840` · `8842` · `8830`–`8833` · `8850` (e `514C:8851`), firmware più recente | secondo quanto indica la tastiera – 26 disposizioni | subito alla connessione | prima di ogni pressione | una modalità e un colore per ciascuno dei tasti 1–16 | no |
-| le stesse, firmware precedente | secondo quanto indica la tastiera | su richiesta | uno per tasto | un colore e una modalità | no |
+| produttore `1189` o `514C`, prodotto `8840` · `8842` · `8830`–`8833` · `8850` · `8851`, firmware più recente | secondo quanto indica la tastiera – 26 disposizioni | subito alla connessione | prima di ogni pressione | una modalità e un colore per ciascuno dei tasti 1–16 | sì – `514C:8850`, 12 tasti e 2 manopole |
+| le stesse, firmware precedente | secondo quanto indica la tastiera | subito alla connessione | uno per tasto | un colore e una modalità | no |
 | le stesse, senza indicare il proprio tipo | la scegli tu – 26 disposizioni | no | nessuno | un colore e una modalità | no |
 
 La `1189:8890` è la tastiera gestita dallo strumento Windows del produttore, “MINI KeyBoard”; le altre sono quelle che
@@ -124,8 +124,8 @@ l’app si avvia direttamente con una di queste. **Registro dispositivo** mostra
 
 ## Utilizzo
 
-1. Collega la tastiera tramite USB. L’app la trova e, se è del secondo tipo, le chiede che tastiera è; se ha un
-   firmware più recente, viene letta subito.
+1. Collega la tastiera tramite USB. L’app la trova e, se è del secondo tipo, le chiede che tastiera è; se
+   risponde, viene letta subito.
 2. Per una tastiera che non indica la propria forma, la prima volta scegli la disposizione – una di quelle dell’app
    del produttore oppure, per la `1189:8890`, il numero di tasti, di tasti per riga e di manopole – e come è
    posizionata davanti a te. L’app ricorda entrambe le cose per quell’ID USB. In seguito le cambi con **Forma…** e
