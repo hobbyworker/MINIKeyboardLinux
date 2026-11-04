@@ -20,15 +20,15 @@ msgstr "Клавиши: %1$lld · Ручки: %2$lld"
 
 #: crates/ui/src/dialogs.rs:65
 msgid "The keyboard doesn’t say how many keys and knobs it has."
-msgstr "Клавиатура не сообщает, сколько у нее клавиш и ручек."
+msgstr "Клавиатура не сообщает, сколько у неё клавиш и ручек."
 
 #: crates/ui/src/dialogs.rs:68
 msgid "Its real shape isn’t known either. Set how many keys and knobs it has and how many keys are in a row, then rotate it to match how it sits in front of you."
-msgstr "Настоящая форма клавиатуры тоже неизвестна. Укажите, сколько у нее клавиш и ручек и сколько клавиш в ряду, затем поверните ее так же, как она лежит перед вами."
+msgstr "Настоящая форма клавиатуры тоже неизвестна. Укажите, сколько у неё клавиш и ручек и сколько клавиш в ряду, затем поверните её так же, как она лежит перед вами."
 
 #: crates/ui/src/dialogs.rs:72
 msgid "Pick the shape that matches the keyboard, then rotate it to match how it sits in front of you."
-msgstr "Выберите подходящую форму клавиатуры, затем поверните ее так же, как клавиатура лежит перед вами."
+msgstr "Выберите подходящую форму клавиатуры, затем поверните её так же, как клавиатура лежит перед вами."
 
 #: crates/ui/src/dialogs.rs:170 crates/ui/src/window.rs:78 crates/ui/src/window.rs:300
 msgid "Rotate"
@@ -120,7 +120,7 @@ msgstr "Требуется доступ к клавиатуре"
 
 #: crates/ui/src/header.rs:166
 msgid "Add the udev rule for this keyboard, then plug it in again."
-msgstr "Добавьте правило udev для этой клавиатуры, затем подключите ее заново."
+msgstr "Добавьте правило udev для этой клавиатуры, затем подключите её заново."
 
 #: crates/ui/src/header.rs:168
 msgid "The keyboard couldn’t be opened"
@@ -180,7 +180,7 @@ msgstr "Прошивка"
 
 #: crates/ui/src/header.rs:304
 msgid "Not tested yet"
-msgstr "Еще не проверено"
+msgstr "Ещё не проверено"
 
 #: crates/ui/src/header.rs:319
 msgid "Power"
@@ -216,15 +216,15 @@ msgstr "Следующая клавиша с %@"
 
 #: crates/ui/src/inspector.rs:97
 msgid "Unsaved changes"
-msgstr "Несохраненные изменения"
+msgstr "Несохранённые изменения"
 
 #: crates/ui/src/inspector.rs:102
 msgid "No unsaved changes"
-msgstr "Нет несохраненных изменений"
+msgstr "Нет несохранённых изменений"
 
 #: crates/ui/src/inspector.rs:124
 msgid "Not known — this keyboard doesn’t tell what its keys do. Whatever you set here is written when you save."
-msgstr "Неизвестно — эта клавиатура не сообщает, что делают ее клавиши. Все, что вы зададите здесь, будет записано при сохранении."
+msgstr "Неизвестно — эта клавиатура не сообщает, что делают её клавиши. Всё, что вы зададите здесь, будет записано при сохранении."
 
 #: crates/ui/src/inspector.rs:132
 msgid "Nothing"
@@ -376,7 +376,7 @@ msgstr "Веб: назад"
 
 #: crates/ui/src/names.rs:44
 msgid "Web Forward"
-msgstr "Веб: вперед"
+msgstr "Веб: вперёд"
 
 #: crates/ui/src/names.rs:45
 msgid "Web Refresh"
@@ -396,35 +396,35 @@ msgstr "Правая кнопка мыши"
 
 #: crates/ui/src/names.rs:79
 msgid "Mouse wheel Up"
-msgstr "Колесико мыши вверх"
+msgstr "Колёсико мыши вверх"
 
 #: crates/ui/src/names.rs:80
 msgid "Mouse wheel Down"
-msgstr "Колесико мыши вниз"
+msgstr "Колёсико мыши вниз"
 
 #: crates/ui/src/names.rs:81
 msgid "Ctrl + Mouse wheel Up"
-msgstr "Ctrl + колесико мыши вверх"
+msgstr "Ctrl + колёсико мыши вверх"
 
 #: crates/ui/src/names.rs:82
 msgid "Ctrl + Mouse wheel Down"
-msgstr "Ctrl + колесико мыши вниз"
+msgstr "Ctrl + колёсико мыши вниз"
 
 #: crates/ui/src/names.rs:83
 msgid "Shift + Mouse wheel Up"
-msgstr "Shift + колесико мыши вверх"
+msgstr "Shift + колёсико мыши вверх"
 
 #: crates/ui/src/names.rs:84
 msgid "Shift + Mouse wheel Down"
-msgstr "Shift + колесико мыши вниз"
+msgstr "Shift + колёсико мыши вниз"
 
 #: crates/ui/src/names.rs:85
 msgid "Alt + Mouse wheel Up"
-msgstr "Alt + колесико мыши вверх"
+msgstr "Alt + колёсико мыши вверх"
 
 #: crates/ui/src/names.rs:86
 msgid "Alt + Mouse wheel Down"
-msgstr "Alt + колесико мыши вниз"
+msgstr "Alt + колёсико мыши вниз"
 
 #: crates/ui/src/names.rs:105
 msgid "Control"
@@ -468,11 +468,11 @@ msgstr "Оранжевый"
 
 #: crates/ui/src/names.rs:120
 msgid "Yellow"
-msgstr "Желтый"
+msgstr "Жёлтый"
 
 #: crates/ui/src/names.rs:121
 msgid "Green"
-msgstr "Зеленый"
+msgstr "Зелёный"
 
 #: crates/ui/src/names.rs:122
 msgid "Cyan"
@@ -524,7 +524,7 @@ msgstr "Последняя нажатая клавиша продолжает м
 
 #: crates/ui/src/names.rs:165
 msgid "A light runs across the keys in order, in a new color each round."
-msgstr "Огонек по очереди пробегает по клавишам, с каждым кругом меняя цвет."
+msgstr "Огонёк по очереди пробегает по клавишам, с каждым кругом меняя цвет."
 
 #: crates/ui/src/names.rs:180
 msgid "Letters"
@@ -572,7 +572,7 @@ msgstr "Сохранено на клавиатуре."
 
 #: crates/ui/src/names.rs:204
 msgid "Saved, but some keys or knobs read back differently. Those changes stay unsaved."
-msgstr "Сохранено, но при повторном считывании некоторые клавиши или ручки отличаются. Эти изменения остаются несохраненными."
+msgstr "Сохранено, но при повторном считывании некоторые клавиши или ручки отличаются. Эти изменения остаются несохранёнными."
 
 #: crates/ui/src/names.rs:205
 msgid "Saved, but the keyboard couldn’t be read back to check."
@@ -600,7 +600,7 @@ msgstr "Не удалось считать некоторые клавиши и�
 
 #: crates/ui/src/names.rs:211
 msgid "This keyboard’s firmware (type %lld) hasn’t been tested yet. If keys read or save wrong, please report it with the device log."
-msgstr "Прошивка этой клавиатуры (тип %lld) еще не проверялась. Если клавиши неправильно считываются или сохраняются, сообщите об этом, приложив журнал устройства."
+msgstr "Прошивка этой клавиатуры (тип %lld) ещё не проверялась. Если клавиши неправильно считываются или сохраняются, сообщите об этом, приложив журнал устройства."
 
 #: crates/ui/src/names.rs:215 crates/ui/src/names.rs:285
 msgid "Writing to the keyboard failed (%@)."
@@ -740,7 +740,7 @@ msgstr "Клавиатура симулятора: %@"
 
 #: crates/ui/src/names.rs:301 crates/ui/src/names.rs:321 crates/ui/src/names.rs:329
 msgid "Report ID %lld"
-msgstr "ID отчета %lld"
+msgstr "ID отчёта %lld"
 
 #: crates/ui/src/names.rs:303
 msgid "Keys: %lld · Knobs: %lld · Type %lld"
@@ -820,7 +820,7 @@ msgstr "Цвет"
 
 #: crates/ui/src/pages.rs:508 crates/ui/src/pages.rs:572
 msgid "Lighting is set per layer; no key selection is needed."
-msgstr "Подсветка задается для каждого слоя, выбирать клавишу не нужно."
+msgstr "Подсветка задаётся для каждого слоя, выбирать клавишу не нужно."
 
 #: crates/ui/src/pages.rs:539
 msgid "Select one of keys 1–%lld on the keyboard, then pick its color."
@@ -844,7 +844,7 @@ msgstr "Перед отправкой каждого нажатия можно �
 
 #: crates/ui/src/pages.rs:698
 msgid "One wait for the whole key. Its presses stay."
-msgstr "Одно ожидание на всю клавишу. Ее нажатия остаются прежними."
+msgstr "Одно ожидание на всю клавишу. Её нажатия остаются прежними."
 
 #: crates/ui/src/preferences.rs:28
 msgid "Language & Appearance"
@@ -868,7 +868,7 @@ msgstr "Светлое"
 
 #: crates/ui/src/preferences.rs:47
 msgid "Dark"
-msgstr "Темное"
+msgstr "Тёмное"
 
 #: crates/ui/src/preferences.rs:49
 msgid "Appearance"
@@ -896,7 +896,7 @@ msgstr "Обход ошибок прошивки"
 
 #: crates/ui/src/preferences.rs:76
 msgid "After its lighting is saved, the 1189:8890 keyboard repeats a key's first stroke without end when the key is pressed (its maker's software does the same). With this on, the app sends one more save after the lighting to stop that; the keys stay as they were. Off, the app sends just what the maker's software sends."
-msgstr "После сохранения подсветки клавиатура 1189:8890 при нажатии клавиши бесконечно повторяет ее первый символ (с программой производителя происходит то же самое). Если этот параметр включен, приложение после подсветки отправляет еще одну команду сохранения, чтобы это предотвратить; назначения клавиш не меняются. Если он выключен, приложение отправляет только то же, что и программа производителя."
+msgstr "После сохранения подсветки клавиатура 1189:8890 при нажатии клавиши бесконечно повторяет её первый символ (с программой производителя происходит то же самое). Если этот параметр включён, приложение после подсветки отправляет ещё одну команду сохранения, чтобы это предотвратить; назначения клавиш не меняются. Если он выключен, приложение отправляет только то же, что и программа производителя."
 
 #: crates/ui/src/preferences.rs:83
 msgid "Check for updates automatically"
@@ -904,7 +904,7 @@ msgstr "Автоматически проверять наличие обнов�
 
 #: crates/ui/src/preferences.rs:124
 msgid "Language Changed"
-msgstr "Язык изменен"
+msgstr "Язык изменён"
 
 #: crates/ui/src/preferences.rs:125
 msgid "%@ needs to relaunch to apply the change."
@@ -964,7 +964,7 @@ msgstr "Переключить клавиатуру?"
 
 #: crates/ui/src/window.rs:538
 msgid "Changes you haven’t saved will be lost."
-msgstr "Несохраненные изменения будут потеряны."
+msgstr "Несохранённые изменения будут потеряны."
 
 #: crates/ui/src/window.rs:540
 msgid "Switch"
