@@ -18,8 +18,11 @@ mod widgets;
 mod window;
 
 use std::cell::RefCell;
+use std::ffi::OsString;
 use std::path::PathBuf;
+use std::process::Command;
 use std::rc::Rc;
+use std::sync::OnceLock;
 
 use adw::prelude::*;
 use gtk::glib;
@@ -55,6 +58,7 @@ pub struct Launch {
 /// Reads the interface's choices and sets up its language. Call it first — before any other thread starts,
 /// as the language is set in the environment gettext reads.
 pub fn prepare(launch: &Launch) -> Rc<Settings> {
+    INHERITED_LANGUAGE.get_or_init(|| std::env::var_os("LANGUAGE"));
     let settings = Settings::load(&launch.settings_path);
     if let Some(language) = settings.choices().language {
         set_language(&gettext_language(&language));
@@ -63,10 +67,30 @@ pub fn prepare(launch: &Launch) -> Rc<Settings> {
     Rc::new(settings)
 }
 
+/// `LANGUAGE` as the app found it, before a chosen language replaced it.
+static INHERITED_LANGUAGE: OnceLock<Option<OsString>> = OnceLock::new();
+
 #[allow(unsafe_code)]
 fn set_language(language: &str) {
     // SAFETY: called before the app starts any thread, so nothing reads the environment meanwhile.
     unsafe { std::env::set_var("LANGUAGE", language) };
+}
+
+/// Starts the app again, for a new language to take effect.
+fn relaunch() -> bool {
+    let inherited = INHERITED_LANGUAGE.get().cloned().flatten();
+    std::env::current_exe().is_ok_and(|executable| relaunch_command(executable, inherited).spawn().is_ok())
+}
+
+/// The new instance gets `LANGUAGE` as this one found it, not the one a chosen language put in this one's environment
+/// — or Follow System would keep showing the language just left.
+fn relaunch_command(executable: PathBuf, inherited_language: Option<OsString>) -> Command {
+    let mut command = Command::new(executable);
+    match inherited_language {
+        Some(language) => command.env("LANGUAGE", language),
+        None => command.env_remove("LANGUAGE"),
+    };
+    command
 }
 
 /// Runs the app until its last window closes.
@@ -105,4 +129,25 @@ pub fn run(launch: Launch, settings: Rc<Settings>, editor: Rc<EditorModel>, log:
     });
     // The app takes no arguments of GTK's.
     app.run_with_args::<&str>(&[])
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn language_of(command: &Command) -> Option<Option<OsString>> {
+        command.get_envs().find(|(name, _)| *name == "LANGUAGE").map(|(_, value)| value.map(ToOwned::to_owned))
+    }
+
+    #[test]
+    fn a_relaunch_drops_the_language_the_app_set_itself() {
+        let command = relaunch_command(PathBuf::from("/app/bin/minikeyboard"), None);
+        assert_eq!(language_of(&command), Some(None));
+    }
+
+    #[test]
+    fn a_relaunch_keeps_the_language_the_app_was_started_with() {
+        let command = relaunch_command(PathBuf::from("/app/bin/minikeyboard"), Some(OsString::from("ko_KR:ko")));
+        assert_eq!(language_of(&command), Some(Some(OsString::from("ko_KR:ko"))));
+    }
 }

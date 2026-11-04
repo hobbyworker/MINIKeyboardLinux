@@ -133,8 +133,7 @@ fn ask_to_relaunch(window: &adw::ApplicationWindow, name: &str) {
             return;
         }
         // A new instance first, then this one goes; the new one takes the app ID once this has let go.
-        if let Ok(executable) = std::env::current_exe()
-            && std::process::Command::new(executable).spawn().is_ok()
+        if crate::relaunch()
             && let Some(application) = &application
         {
             application.quit();
