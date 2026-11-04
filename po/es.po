@@ -150,7 +150,7 @@ msgstr "Conectado"
 msgid "%@ · %@"
 msgstr "%@ · %@"
 
-#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:112
+#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:116
 msgid "Layer %lld"
 msgstr "Capa %lld"
 
@@ -214,31 +214,31 @@ msgstr "Borrar capa"
 msgid "Next key with %@"
 msgstr "Siguiente tecla con %@"
 
-#: crates/ui/src/inspector.rs:93
+#: crates/ui/src/inspector.rs:97
 msgid "Unsaved changes"
 msgstr "Cambios sin guardar"
 
-#: crates/ui/src/inspector.rs:98
+#: crates/ui/src/inspector.rs:102
 msgid "No unsaved changes"
 msgstr "No hay cambios sin guardar"
 
-#: crates/ui/src/inspector.rs:120
+#: crates/ui/src/inspector.rs:124
 msgid "Not known — this keyboard doesn’t tell what its keys do. Whatever you set here is written when you save."
 msgstr "Desconocido: este teclado no indica qué hacen sus teclas. Lo que configures aquí se escribe al guardar."
 
-#: crates/ui/src/inspector.rs:128
+#: crates/ui/src/inspector.rs:132
 msgid "Nothing"
 msgstr "Nada"
 
-#: crates/ui/src/inspector.rs:156
+#: crates/ui/src/inspector.rs:160
 msgid "Waits %lld ms"
 msgstr "Espera %lld ms"
 
-#: crates/ui/src/inspector.rs:158
+#: crates/ui/src/inspector.rs:162
 msgid "%lld of %lld presses"
 msgstr "%1$lld de %2$lld pulsaciones"
 
-#: crates/ui/src/inspector.rs:161
+#: crates/ui/src/inspector.rs:165
 msgid "Remove Last Press"
 msgstr "Eliminar última pulsación"
 

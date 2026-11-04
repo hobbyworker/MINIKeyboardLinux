@@ -9,7 +9,7 @@
   <a href="../LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow"></a>
 </p>
 
-<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.id.md">Bahasa Indonesia</a> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <a href="README.pl.md">Polski</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.vi.md">Tiếng Việt</a> · <b>简体中文</b> · <a href="README.zh-Hant.md">繁體中文</a></p>
+<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.id.md">Bahasa Indonesia</a> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <a href="README.pl.md">Polski</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.vi.md">Tiếng Việt</a> · <b>简体中文</b> · <a href="README.zh-Hant.md">繁體中文</a></p>
 
 这是一款向小型 USB 宏键盘写入按键设置的 Linux 应用。这类键盘在售的型号从只有一个旋钮到多达 21 个按键不等，旋钮最多 4 个。对于每个按键和旋钮的动作（向左旋转、按下、向右旋转），可以在第 1–3 层设置按键输入、多媒体键或鼠标动作，还可以设置键盘的灯光。它是按同样规则打造的 macOS 应用的 Linux 版，使用相同的命令。
 
@@ -24,13 +24,13 @@
 
 `1189:8890` 是厂商的 Windows 设置工具“MINI KeyBoard”所支持的键盘，其余则是厂商的跨平台应用“MINI_KEYBOARD”会查找的键盘。本应用同时使用这两个工具的命令。第二类键盘大多会告知自己有几个按键和旋钮、使用什么固件，因此应用会照原样绘制厂商应用所绘制的布局；不告知的键盘则采用用户从这些布局中选择的那一种。`1189:8890` 是厂商应用不认识的键盘，它自己的工具也不绘制外形，因此无法得知其实际形状。所以只要设定按键和旋钮的数量以及每行的按键数，应用就会照此绘制出整齐的排列。
 
-应用提供 13 种语言：英语、韩语、日语、中文（简体、繁体）、德语、西班牙语、法语、意大利语、葡萄牙语（巴西）、波兰语、印度尼西亚语和越南语。应用跟随桌面的语言，其他语言则显示为英语。
+应用提供 14 种语言：英语、韩语、日语、中文（简体、繁体）、德语、西班牙语、法语、意大利语、葡萄牙语（巴西、葡萄牙）、波兰语、印度尼西亚语和越南语。应用跟随桌面的语言，其他语言则显示为英语。
 
 本仓库的源代码采用 MIT 许可证。应用图标（`data/icons/` 中的图标以及顶部的图片）采用 CC BY-SA 4.0 许可证（[`LICENSES/CC-BY-SA-4.0.txt`](../LICENSES/CC-BY-SA-4.0.txt)）。
 
 ## macOS、Windows、Linux 和网页
 
-MINIKeyboard 有四个按相同规则制作的版本——相同的命令、相同的 13 种语言。三个应用支持相同的键盘；在浏览器中运行的网页版支持其中除 `1189:8890` 以外的键盘。
+MINIKeyboard 有四个按相同规则制作的版本——相同的命令、相同的 14 种语言。三个应用支持相同的键盘；在浏览器中运行的网页版支持其中除 `1189:8890` 以外的键盘。
 
 | 仓库 | GitHub |
 |---|---|
@@ -94,7 +94,7 @@ make run      # 带翻译的 Debug 构建
    - **延迟**：适用于能记住延迟的固件。
 5. **保存**（Ctrl+S）会写入更改的内容。**读取**（Ctrl+R）会从支持读取的键盘获取当前设置。
 
-在**首选项**（Ctrl+,）中可以选择界面语言（13 种之一，或跟随桌面）以及浅色或深色外观。在有更新源的构建中，其“通用”页面中有自动检查更新的选项。在**关于MINIKeyboard**中可以查看版本和开源许可证。
+在**首选项**（Ctrl+,）中可以选择界面语言（14 种之一，或跟随桌面）以及浅色或深色外观。在有更新源的构建中，其“通用”页面中有自动检查更新的选项。在**关于MINIKeyboard**中可以查看版本和开源许可证。
 
 **首选项 ▸ 通用 ▸ 固件问题规避**中的**更改灯光后防止按键重复**默认开启。`1189:8890` 的固件在保存灯光后会让按键的第一个字符不停重复（厂商软件也是如此），所以应用会在灯光之后再发送一次不含按键的保存命令。关闭后，应用只发送与厂商软件相同的内容。另外，这款键盘拔下后会忘记灯光设置。
 

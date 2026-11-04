@@ -150,7 +150,7 @@ msgstr "Terhubung"
 msgid "%@ · %@"
 msgstr "%@ · %@"
 
-#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:112
+#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:116
 msgid "Layer %lld"
 msgstr "Lapisan %lld"
 
@@ -214,31 +214,31 @@ msgstr "Bersihkan Lapisan"
 msgid "Next key with %@"
 msgstr "Tombol berikutnya dengan %@"
 
-#: crates/ui/src/inspector.rs:93
+#: crates/ui/src/inspector.rs:97
 msgid "Unsaved changes"
 msgstr "Perubahan belum disimpan"
 
-#: crates/ui/src/inspector.rs:98
+#: crates/ui/src/inspector.rs:102
 msgid "No unsaved changes"
 msgstr "Tidak ada perubahan yang belum disimpan"
 
-#: crates/ui/src/inspector.rs:120
+#: crates/ui/src/inspector.rs:124
 msgid "Not known — this keyboard doesn’t tell what its keys do. Whatever you set here is written when you save."
 msgstr "Tidak diketahui — papan ketik ini tidak memberi tahu fungsi tombolnya. Apa pun yang Anda atur di sini ditulis saat disimpan."
 
-#: crates/ui/src/inspector.rs:128
+#: crates/ui/src/inspector.rs:132
 msgid "Nothing"
 msgstr "Tidak ada"
 
-#: crates/ui/src/inspector.rs:156
+#: crates/ui/src/inspector.rs:160
 msgid "Waits %lld ms"
 msgstr "Menunggu %lld md"
 
-#: crates/ui/src/inspector.rs:158
+#: crates/ui/src/inspector.rs:162
 msgid "%lld of %lld presses"
 msgstr "%1$lld dari %2$lld tekanan"
 
-#: crates/ui/src/inspector.rs:161
+#: crates/ui/src/inspector.rs:165
 msgid "Remove Last Press"
 msgstr "Hapus Tekanan Terakhir"
 

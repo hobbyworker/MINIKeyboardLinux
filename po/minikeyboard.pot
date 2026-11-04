@@ -149,7 +149,7 @@ msgstr ""
 msgid "%@ · %@"
 msgstr ""
 
-#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:112
+#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:116
 msgid "Layer %lld"
 msgstr ""
 
@@ -213,31 +213,31 @@ msgstr ""
 msgid "Next key with %@"
 msgstr ""
 
-#: crates/ui/src/inspector.rs:93
+#: crates/ui/src/inspector.rs:97
 msgid "Unsaved changes"
 msgstr ""
 
-#: crates/ui/src/inspector.rs:98
+#: crates/ui/src/inspector.rs:102
 msgid "No unsaved changes"
 msgstr ""
 
-#: crates/ui/src/inspector.rs:120
+#: crates/ui/src/inspector.rs:124
 msgid "Not known — this keyboard doesn’t tell what its keys do. Whatever you set here is written when you save."
 msgstr ""
 
-#: crates/ui/src/inspector.rs:128
+#: crates/ui/src/inspector.rs:132
 msgid "Nothing"
 msgstr ""
 
-#: crates/ui/src/inspector.rs:156
+#: crates/ui/src/inspector.rs:160
 msgid "Waits %lld ms"
 msgstr ""
 
-#: crates/ui/src/inspector.rs:158
+#: crates/ui/src/inspector.rs:162
 msgid "%lld of %lld presses"
 msgstr ""
 
-#: crates/ui/src/inspector.rs:161
+#: crates/ui/src/inspector.rs:165
 msgid "Remove Last Press"
 msgstr ""
 

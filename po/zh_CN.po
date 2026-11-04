@@ -150,7 +150,7 @@ msgstr "已连接"
 msgid "%@ · %@"
 msgstr "%@ · %@"
 
-#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:112
+#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:116
 msgid "Layer %lld"
 msgstr "第 %lld 层"
 
@@ -214,31 +214,31 @@ msgstr "清除层"
 msgid "Next key with %@"
 msgstr "下一个键加 %@"
 
-#: crates/ui/src/inspector.rs:93
+#: crates/ui/src/inspector.rs:97
 msgid "Unsaved changes"
 msgstr "未保存的更改"
 
-#: crates/ui/src/inspector.rs:98
+#: crates/ui/src/inspector.rs:102
 msgid "No unsaved changes"
 msgstr "没有未保存的更改"
 
-#: crates/ui/src/inspector.rs:120
+#: crates/ui/src/inspector.rs:124
 msgid "Not known — this keyboard doesn’t tell what its keys do. Whatever you set here is written when you save."
 msgstr "未知 — 此键盘不会告知按键的功能。在此设置的内容会在保存时写入。"
 
-#: crates/ui/src/inspector.rs:128
+#: crates/ui/src/inspector.rs:132
 msgid "Nothing"
 msgstr "无"
 
-#: crates/ui/src/inspector.rs:156
+#: crates/ui/src/inspector.rs:160
 msgid "Waits %lld ms"
 msgstr "等待 %lld 毫秒"
 
-#: crates/ui/src/inspector.rs:158
+#: crates/ui/src/inspector.rs:162
 msgid "%lld of %lld presses"
 msgstr "已用 %1$lld 个输入，最多 %2$lld 个"
 
-#: crates/ui/src/inspector.rs:161
+#: crates/ui/src/inspector.rs:165
 msgid "Remove Last Press"
 msgstr "删除最后一个输入"
 

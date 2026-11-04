@@ -78,7 +78,7 @@ impl Settings {
 
 /// The languages the app speaks, each in its own script — someone looking for theirs recognises it there.
 /// ⚠️ Must match the translations installed, or the list offers a language that falls back to English.
-pub const LANGUAGES: [(&str, &str); 13] = [
+pub const LANGUAGES: [(&str, &str); 14] = [
     ("en", "English"),
     ("ko", "한국어"),
     ("ja", "日本語"),
@@ -86,6 +86,7 @@ pub const LANGUAGES: [(&str, &str); 13] = [
     ("zh-Hant", "繁體中文"),
     ("es", "Español"),
     ("pt-BR", "Português (Brasil)"),
+    ("pt-PT", "Português (Portugal)"),
     ("fr", "Français"),
     ("de", "Deutsch"),
     ("it", "Italiano"),
@@ -94,11 +95,27 @@ pub const LANGUAGES: [(&str, &str); 13] = [
     ("vi", "Tiếng Việt"),
 ];
 
-/// gettext's name for a language: "pt-BR" → "pt_BR", "zh-Hans" → "zh_CN".
+/// gettext's name for a language: "pt-BR" → "pt_BR", "pt-PT" → "pt" (gettext's own Portuguese is Portugal's),
+/// "zh-Hans" → "zh_CN".
 pub fn gettext_language(code: &str) -> String {
     match code {
+        "pt-PT" => "pt".to_owned(),
         "zh-Hans" => "zh_CN".to_owned(),
         "zh-Hant" => "zh_TW".to_owned(),
         code => code.replace('-', "_"),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn each_language_has_the_name_of_its_po_file() {
+        assert_eq!(gettext_language("pt-BR"), "pt_BR");
+        assert_eq!(gettext_language("pt-PT"), "pt");
+        assert_eq!(gettext_language("zh-Hans"), "zh_CN");
+        assert_eq!(gettext_language("zh-Hant"), "zh_TW");
+        assert_eq!(gettext_language("ko"), "ko");
     }
 }

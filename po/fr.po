@@ -150,7 +150,7 @@ msgstr "Connecté"
 msgid "%@ · %@"
 msgstr "%@ · %@"
 
-#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:112
+#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:116
 msgid "Layer %lld"
 msgstr "Couche %lld"
 
@@ -214,31 +214,31 @@ msgstr "Effacer la couche"
 msgid "Next key with %@"
 msgstr "Touche suivante avec %@"
 
-#: crates/ui/src/inspector.rs:93
+#: crates/ui/src/inspector.rs:97
 msgid "Unsaved changes"
 msgstr "Modifications non enregistrées"
 
-#: crates/ui/src/inspector.rs:98
+#: crates/ui/src/inspector.rs:102
 msgid "No unsaved changes"
 msgstr "Aucune modification non enregistrée"
 
-#: crates/ui/src/inspector.rs:120
+#: crates/ui/src/inspector.rs:124
 msgid "Not known — this keyboard doesn’t tell what its keys do. Whatever you set here is written when you save."
 msgstr "Inconnu : ce clavier n’indique pas ce que font ses touches. Ce que vous réglez ici est écrit à l’enregistrement."
 
-#: crates/ui/src/inspector.rs:128
+#: crates/ui/src/inspector.rs:132
 msgid "Nothing"
 msgstr "Rien"
 
-#: crates/ui/src/inspector.rs:156
+#: crates/ui/src/inspector.rs:160
 msgid "Waits %lld ms"
 msgstr "Attend %lld ms"
 
-#: crates/ui/src/inspector.rs:158
+#: crates/ui/src/inspector.rs:162
 msgid "%lld of %lld presses"
 msgstr "%1$lld frappes sur %2$lld"
 
-#: crates/ui/src/inspector.rs:161
+#: crates/ui/src/inspector.rs:165
 msgid "Remove Last Press"
 msgstr "Supprimer la dernière frappe"
 

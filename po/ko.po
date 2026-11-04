@@ -150,7 +150,7 @@ msgstr "연결됨"
 msgid "%@ · %@"
 msgstr "%@ · %@"
 
-#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:112
+#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:116
 msgid "Layer %lld"
 msgstr "레이어 %lld"
 
@@ -214,31 +214,31 @@ msgstr "레이어 지우기"
 msgid "Next key with %@"
 msgstr "다음 키에 %@"
 
-#: crates/ui/src/inspector.rs:93
+#: crates/ui/src/inspector.rs:97
 msgid "Unsaved changes"
 msgstr "저장하지 않은 변경 사항"
 
-#: crates/ui/src/inspector.rs:98
+#: crates/ui/src/inspector.rs:102
 msgid "No unsaved changes"
 msgstr "저장하지 않은 변경 사항 없음"
 
-#: crates/ui/src/inspector.rs:120
+#: crates/ui/src/inspector.rs:124
 msgid "Not known — this keyboard doesn’t tell what its keys do. Whatever you set here is written when you save."
 msgstr "알 수 없음 — 이 키보드는 키에 무엇이 들어 있는지 알려 주지 않습니다. 여기서 정한 것은 저장할 때 키보드에 씁니다."
 
-#: crates/ui/src/inspector.rs:128
+#: crates/ui/src/inspector.rs:132
 msgid "Nothing"
 msgstr "없음"
 
-#: crates/ui/src/inspector.rs:156
+#: crates/ui/src/inspector.rs:160
 msgid "Waits %lld ms"
 msgstr "%lld ms 지연"
 
-#: crates/ui/src/inspector.rs:158
+#: crates/ui/src/inspector.rs:162
 msgid "%lld of %lld presses"
 msgstr "입력 %1$lld개 / 최대 %2$lld개"
 
-#: crates/ui/src/inspector.rs:161
+#: crates/ui/src/inspector.rs:165
 msgid "Remove Last Press"
 msgstr "마지막 입력 지우기"
 
