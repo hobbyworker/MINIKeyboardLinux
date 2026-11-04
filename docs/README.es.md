@@ -9,7 +9,7 @@
   <a href="../LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow"></a>
 </p>
 
-<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <b>Español</b> · <a href="README.fr.md">Français</a> · <a href="README.id.md">Bahasa Indonesia</a> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <a href="README.pl.md">Polski</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.vi.md">Tiếng Việt</a> · <a href="README.zh-Hans.md">简体中文</a> · <a href="README.zh-Hant.md">繁體中文</a></p>
+<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <b>Español</b> · <a href="README.fr.md">Français</a> · <a href="README.id.md">Bahasa Indonesia</a> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <a href="README.pl.md">Polski</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.ru.md">Русский</a> · <a href="README.th.md">ไทย</a> · <a href="README.vi.md">Tiếng Việt</a> · <a href="README.zh-Hans.md">简体中文</a> · <a href="README.zh-Hant.md">繁體中文</a></p>
 
 Una app para Linux que escribe la configuración de las teclas en pequeños teclados de macros USB. Se venden en
 muchos tamaños: desde los que solo tienen un botón giratorio hasta los de 21 teclas, con hasta cuatro botones
@@ -36,16 +36,16 @@ el `1189:8890` y su propia herramienta no dibuja ninguna forma, así que no se s
 tú indicas cuántas teclas y botones giratorios tiene y cuántas teclas hay en cada fila, y la app los dibuja tal
 cual, bien ordenados.
 
-La app está disponible en 14 idiomas: inglés, coreano, japonés, chino (simplificado y tradicional), alemán, español,
-francés, italiano, portugués (Brasil y Portugal), polaco, indonesio y vietnamita. Sigue el idioma del escritorio; en cualquier
-otro idioma, aparece en inglés.
+La app está disponible en 16 idiomas: inglés, coreano, japonés, chino (simplificado y tradicional), alemán, español,
+francés, italiano, portugués (Brasil y Portugal), polaco, ruso, indonesio, vietnamita y tailandés. Sigue el idioma del
+escritorio; en cualquier otro idioma, aparece en inglés.
 
 El código fuente de este repositorio tiene licencia MIT. El icono de la app —el de `data/icons/` y la imagen de
 arriba— tiene licencia CC BY-SA 4.0 ([`LICENSES/CC-BY-SA-4.0.txt`](../LICENSES/CC-BY-SA-4.0.txt)).
 
 ## macOS, Windows, Linux y la web
 
-MINIKeyboard tiene cuatro ediciones hechas con las mismas reglas: los mismos comandos y los mismos 14 idiomas. Las tres apps admiten los mismos teclados, y la edición web, que funciona en el navegador, todos menos el `1189:8890`.
+MINIKeyboard tiene cuatro ediciones hechas con las mismas reglas: los mismos comandos y los mismos 16 idiomas. Las tres apps admiten los mismos teclados, y la edición web, que funciona en el navegador, todos menos el `1189:8890`.
 
 | Repositorio | GitHub |
 |---|---|
@@ -144,7 +144,7 @@ ese teclado. **Registro del dispositivo** muestra todos los informes escritos y 
 5. **Guardar** (Ctrl+S) escribe lo que ha cambiado. **Leer** (Ctrl+R) trae la configuración actual de los teclados
    que permiten leerla.
 
-En **Preferencias** (Ctrl+,) eliges el idioma de la interfaz (uno de los 14 o el del escritorio) y el modo claro u
+En **Preferencias** (Ctrl+,) eliges el idioma de la interfaz (uno de los 16 o el del escritorio) y el modo claro u
 oscuro. En una compilación con feed de actualizaciones, su página General incluye la búsqueda automática de
 actualizaciones. En **Acerca de MINIKeyboard** ves la versión y las licencias de código abierto.
 

@@ -9,7 +9,7 @@
   <a href="../LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow"></a>
 </p>
 
-<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.id.md">Bahasa Indonesia</a> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <a href="README.pl.md">Polski</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <b>Tiếng Việt</b> · <a href="README.zh-Hans.md">简体中文</a> · <a href="README.zh-Hant.md">繁體中文</a></p>
+<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.id.md">Bahasa Indonesia</a> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <a href="README.pl.md">Polski</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.ru.md">Русский</a> · <a href="README.th.md">ไทย</a> · <b>Tiếng Việt</b> · <a href="README.zh-Hans.md">简体中文</a> · <a href="README.zh-Hant.md">繁體中文</a></p>
 
 Ứng dụng Linux dùng để ghi thiết lập phím vào những bàn phím macro USB cỡ nhỏ — loại được bán từ bản chỉ có một núm xoay
 cho đến bản 21 phím, với tối đa bốn núm xoay. Với từng phím và từng thao tác của núm xoay (xoay sang trái, nhấn, xoay
@@ -33,16 +33,17 @@ cụ. Bàn phím loại thứ hai thường cho biết có bao nhiêu phím, bao
 biết hình dạng thực tế. Vì vậy, bạn chỉ cần đặt số phím, số núm xoay và số phím trên mỗi hàng, ứng dụng sẽ vẽ ra một bố
 cục ngay ngắn đúng như vậy.
 
-Ứng dụng có 14 ngôn ngữ — tiếng Anh, tiếng Hàn, tiếng Nhật, tiếng Trung (Giản thể và Phồn thể), tiếng Đức, tiếng Tây Ban
-Nha, tiếng Pháp, tiếng Ý, tiếng Bồ Đào Nha (Brazil và Bồ Đào Nha), tiếng Ba Lan, tiếng Indonesia và tiếng Việt. Ứng dụng theo ngôn ngữ
-của môi trường desktop; với các ngôn ngữ khác, ứng dụng hiển thị bằng tiếng Anh.
+Ứng dụng có 16 ngôn ngữ — tiếng Anh, tiếng Hàn, tiếng Nhật, tiếng Trung (Giản thể và Phồn thể), tiếng Đức, tiếng Tây
+Ban Nha, tiếng Pháp, tiếng Ý, tiếng Bồ Đào Nha (Brazil và Bồ Đào Nha), tiếng Ba Lan, tiếng Nga, tiếng Indonesia, tiếng
+Việt và tiếng Thái. Ứng dụng theo ngôn ngữ của môi trường desktop; với các ngôn ngữ khác, ứng dụng hiển thị bằng tiếng
+Anh.
 
 Mã nguồn trong kho này được cấp phép MIT. Biểu tượng ứng dụng — trong `data/icons/`, và hình ở đầu trang — được cấp phép
 CC BY-SA 4.0 ([`LICENSES/CC-BY-SA-4.0.txt`](../LICENSES/CC-BY-SA-4.0.txt)).
 
 ## macOS, Windows, Linux và web
 
-MINIKeyboard có bốn phiên bản làm theo cùng quy tắc — cùng lệnh, cùng 14 ngôn ngữ. Ba ứng dụng dùng cùng các bàn phím, còn phiên bản web, chạy trong trình duyệt, dùng tất cả trừ `1189:8890`.
+MINIKeyboard có bốn phiên bản làm theo cùng quy tắc — cùng lệnh, cùng 16 ngôn ngữ. Ba ứng dụng dùng cùng các bàn phím, còn phiên bản web, chạy trong trình duyệt, dùng tất cả trừ `1189:8890`.
 
 | Kho mã | GitHub |
 |---|---|
@@ -136,7 +137,7 @@ có thể xem mọi báo cáo đã ghi và mọi phản hồi nhận được.
    - **Độ trễ** — trên chương trình cơ sở có ghi nhớ độ trễ.
 5. **Lưu** (Ctrl+S) ghi những gì đã thay đổi. **Đọc** (Ctrl+R) lấy thiết lập hiện tại từ bàn phím đọc được.
 
-Trong **Tùy chỉnh** (Ctrl+,), bạn chọn ngôn ngữ giao diện (một trong 14 ngôn ngữ, hoặc ngôn ngữ của môi trường desktop)
+Trong **Tùy chỉnh** (Ctrl+,), bạn chọn ngôn ngữ giao diện (một trong 16 ngôn ngữ, hoặc ngôn ngữ của môi trường desktop)
 và chế độ sáng hoặc tối. Ở bản build có feed cập nhật, trang Chung trong đó có mục tự động kiểm tra bản cập nhật. Trong
 **Giới thiệu về MINIKeyboard**, bạn xem được phiên bản và giấy phép nguồn mở.
 

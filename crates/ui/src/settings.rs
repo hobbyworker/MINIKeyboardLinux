@@ -78,7 +78,7 @@ impl Settings {
 
 /// The languages the app speaks, each in its own script — someone looking for theirs recognises it there.
 /// ⚠️ Must match the translations installed, or the list offers a language that falls back to English.
-pub const LANGUAGES: [(&str, &str); 14] = [
+pub const LANGUAGES: [(&str, &str); 16] = [
     ("en", "English"),
     ("ko", "한국어"),
     ("ja", "日本語"),
@@ -91,8 +91,10 @@ pub const LANGUAGES: [(&str, &str); 14] = [
     ("de", "Deutsch"),
     ("it", "Italiano"),
     ("pl", "Polski"),
+    ("ru", "Русский"),
     ("id", "Bahasa Indonesia"),
     ("vi", "Tiếng Việt"),
+    ("th", "ไทย"),
 ];
 
 /// gettext's name for a language: "pt-BR" → "pt_BR", "pt-PT" → "pt" (gettext's own Portuguese is Portugal's),

@@ -1,0 +1,983 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: minikeyboard\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: th\n"
+
+#: crates/ui/src/canvas.rs:200 crates/ui/src/names.rs:314 crates/ui/src/window.rs:425
+msgid "Simulator"
+msgstr "โปรแกรมจำลอง"
+
+#: crates/ui/src/dialogs.rs:63
+msgid "The keyboard reports its keys and knobs: %@"
+msgstr "แป้นพิมพ์แจ้งจำนวนปุ่มและปุ่มหมุน: %@"
+
+#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:178 crates/ui/src/header.rs:299
+msgid "Keys: %lld · Knobs: %lld"
+msgstr "ปุ่ม: %1$lld · ปุ่มหมุน: %2$lld"
+
+#: crates/ui/src/dialogs.rs:65
+msgid "The keyboard doesn’t say how many keys and knobs it has."
+msgstr "แป้นพิมพ์ไม่ได้บอกจำนวนปุ่มและปุ่มหมุน"
+
+#: crates/ui/src/dialogs.rs:68
+msgid "Its real shape isn’t known either. Set how many keys and knobs it has and how many keys are in a row, then rotate it to match how it sits in front of you."
+msgstr "ไม่ทราบรูปทรงจริงของแป้นพิมพ์เช่นกัน ตั้งจำนวนปุ่มและปุ่มหมุน และจำนวนปุ่มในหนึ่งแถว แล้วหมุนให้ตรงกับแป้นพิมพ์ที่วางอยู่ตรงหน้าคุณ"
+
+#: crates/ui/src/dialogs.rs:72
+msgid "Pick the shape that matches the keyboard, then rotate it to match how it sits in front of you."
+msgstr "เลือกรูปทรงที่ตรงกับแป้นพิมพ์ แล้วหมุนให้ตรงกับแป้นพิมพ์ที่วางอยู่ตรงหน้าคุณ"
+
+#: crates/ui/src/dialogs.rs:170 crates/ui/src/window.rs:78 crates/ui/src/window.rs:300
+msgid "Rotate"
+msgstr "หมุน"
+
+#: crates/ui/src/dialogs.rs:173 crates/ui/src/window.rs:540
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#: crates/ui/src/dialogs.rs:174
+msgid "Done"
+msgstr "เสร็จสิ้น"
+
+#: crates/ui/src/dialogs.rs:189
+msgid "Choose the Keyboard’s Shape"
+msgstr "เลือกรูปทรงของแป้นพิมพ์"
+
+#: crates/ui/src/dialogs.rs:243 crates/ui/src/names.rs:192
+msgid "Keys"
+msgstr "ปุ่ม"
+
+#: crates/ui/src/dialogs.rs:244
+msgid "Keys per row"
+msgstr "ปุ่มต่อแถว"
+
+#: crates/ui/src/dialogs.rs:247
+msgid "Knobs"
+msgstr "ปุ่มหมุน"
+
+#: crates/ui/src/dialogs.rs:348
+msgid "Linux lets an app open a USB keyboard only when a udev rule gives the signed-in user its device. Run these commands in a terminal once — they write %@ — then plug the keyboard in again."
+msgstr "Linux จะให้แอปเปิดแป้นพิมพ์ USB ได้ก็ต่อเมื่อมีกฎ udev ที่มอบอุปกรณ์นั้นให้ผู้ใช้ที่เข้าระบบอยู่ ให้เรียกใช้คำสั่งเหล่านี้ในเทอร์มินัลหนึ่งครั้ง — คำสั่งจะเขียนไฟล์ %@ — แล้วเสียบแป้นพิมพ์ใหม่อีกครั้ง"
+
+#: crates/ui/src/dialogs.rs:371 crates/ui/src/log_window.rs:42
+msgid "Copy"
+msgstr "คัดลอก"
+
+#: crates/ui/src/dialogs.rs:379
+msgid "Allow Access to the Keyboard"
+msgstr "อนุญาตการเข้าถึงแป้นพิมพ์"
+
+#: crates/ui/src/header.rs:48 crates/ui/src/header.rs:52 crates/ui/src/header.rs:225
+msgid "Choose a Keyboard"
+msgstr "เลือกแป้นพิมพ์"
+
+#: crates/ui/src/header.rs:55 crates/ui/src/header.rs:59 crates/ui/src/header.rs:258
+msgid "Keyboard Information"
+msgstr "ข้อมูลแป้นพิมพ์"
+
+#: crates/ui/src/header.rs:60 crates/ui/src/header.rs:61
+msgid "Retry"
+msgstr "ลองอีกครั้ง"
+
+#: crates/ui/src/header.rs:62
+msgid "How to Allow…"
+msgstr "วิธีอนุญาต…"
+
+#: crates/ui/src/header.rs:79
+msgid "Main Menu"
+msgstr "เมนูหลัก"
+
+#: crates/ui/src/header.rs:83
+msgid "Save"
+msgstr "บันทึก"
+
+#: crates/ui/src/header.rs:83 crates/ui/src/window.rs:294
+msgid "Save to Keyboard"
+msgstr "บันทึกลงแป้นพิมพ์"
+
+#: crates/ui/src/header.rs:86
+msgid "Read"
+msgstr "อ่าน"
+
+#: crates/ui/src/header.rs:87 crates/ui/src/window.rs:294
+msgid "Read from Keyboard"
+msgstr "อ่านจากแป้นพิมพ์"
+
+#: crates/ui/src/header.rs:163
+msgid "Not Connected"
+msgstr "ไม่ได้เชื่อมต่อ"
+
+#: crates/ui/src/header.rs:163
+msgid "Connect the keyboard via USB."
+msgstr "เชื่อมต่อแป้นพิมพ์ผ่าน USB"
+
+#: crates/ui/src/header.rs:165 crates/ui/src/names.rs:283
+msgid "Access to the keyboard is needed"
+msgstr "ต้องได้รับสิทธิ์เข้าถึงแป้นพิมพ์"
+
+#: crates/ui/src/header.rs:166
+msgid "Add the udev rule for this keyboard, then plug it in again."
+msgstr "เพิ่มกฎ udev สำหรับแป้นพิมพ์นี้ แล้วเสียบแป้นพิมพ์ใหม่อีกครั้ง"
+
+#: crates/ui/src/header.rs:168
+msgid "The keyboard couldn’t be opened"
+msgstr "ไม่สามารถเปิดแป้นพิมพ์ได้"
+
+#: crates/ui/src/header.rs:171
+msgid "Asking the keyboard what it is…"
+msgstr "กำลังถามประเภทของแป้นพิมพ์…"
+
+#: crates/ui/src/header.rs:172
+msgid "Reading…"
+msgstr "กำลังอ่าน…"
+
+#: crates/ui/src/header.rs:173
+msgid "Saving…"
+msgstr "กำลังบันทึก…"
+
+#: crates/ui/src/header.rs:174
+msgid "Simulated Keyboard"
+msgstr "แป้นพิมพ์จำลอง"
+
+#: crates/ui/src/header.rs:175
+msgid "Connected"
+msgstr "เชื่อมต่ออยู่"
+
+#: crates/ui/src/header.rs:178 crates/ui/src/names.rs:303 crates/ui/src/names.rs:305
+msgid "%@ · %@"
+msgstr "%@ · %@"
+
+#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:116
+msgid "Layer %lld"
+msgstr "เลเยอร์ %lld"
+
+#: crates/ui/src/header.rs:278
+msgid "Not provided by the keyboard"
+msgstr "แป้นพิมพ์ไม่ได้ระบุ"
+
+#: crates/ui/src/header.rs:287
+msgid "Name"
+msgstr "ชื่อ"
+
+#: crates/ui/src/header.rs:288
+msgid "Manufacturer"
+msgstr "ผู้ผลิต"
+
+#: crates/ui/src/header.rs:289
+msgid "Serial Number"
+msgstr "เลขประจำอุปกรณ์"
+
+#: crates/ui/src/header.rs:291
+msgid "Chip"
+msgstr "ชิป"
+
+#: crates/ui/src/header.rs:293
+msgid "Firmware"
+msgstr "เฟิร์มแวร์"
+
+#: crates/ui/src/header.rs:304
+msgid "Not tested yet"
+msgstr "ยังไม่ได้ทดสอบ"
+
+#: crates/ui/src/header.rs:319
+msgid "Power"
+msgstr "พลังงานไฟฟ้า"
+
+#: crates/ui/src/header.rs:328
+msgid "Interfaces"
+msgstr "อินเทอร์เฟซ"
+
+#: crates/ui/src/header.rs:330 crates/ui/src/names.rs:146
+msgid "Configuration Channel"
+msgstr "ช่องทางการตั้งค่า"
+
+#: crates/ui/src/header.rs:331
+msgid "Commands"
+msgstr "ชุดคำสั่ง"
+
+#: crates/ui/src/inspector.rs:37 crates/ui/src/names.rs:218 crates/ui/src/pages.rs:694
+msgid "Select a key or knob."
+msgstr "เลือกปุ่มหรือปุ่มหมุน"
+
+#: crates/ui/src/inspector.rs:44 crates/ui/src/log_window.rs:43
+msgid "Clear"
+msgstr "ล้าง"
+
+#: crates/ui/src/inspector.rs:45 crates/ui/src/window.rs:298
+msgid "Clear Layer"
+msgstr "ล้างเลเยอร์"
+
+#: crates/ui/src/inspector.rs:84
+msgid "Next key with %@"
+msgstr "ปุ่มถัดไปพร้อม %@"
+
+#: crates/ui/src/inspector.rs:97
+msgid "Unsaved changes"
+msgstr "การเปลี่ยนแปลงที่ยังไม่ได้บันทึก"
+
+#: crates/ui/src/inspector.rs:102
+msgid "No unsaved changes"
+msgstr "ไม่มีการเปลี่ยนแปลงที่ยังไม่ได้บันทึก"
+
+#: crates/ui/src/inspector.rs:124
+msgid "Not known — this keyboard doesn’t tell what its keys do. Whatever you set here is written when you save."
+msgstr "ไม่ทราบ — แป้นพิมพ์นี้ไม่ได้บอกว่าปุ่มทำอะไร สิ่งที่คุณตั้งค่าไว้ที่นี่จะถูกเขียนลงแป้นพิมพ์เมื่อบันทึก"
+
+#: crates/ui/src/inspector.rs:132
+msgid "Nothing"
+msgstr "ไม่มี"
+
+#: crates/ui/src/inspector.rs:160
+msgid "Waits %lld ms"
+msgstr "รอ %lld ms"
+
+#: crates/ui/src/inspector.rs:162
+msgid "%lld of %lld presses"
+msgstr "การกด %1$lld จาก %2$lld ครั้ง"
+
+#: crates/ui/src/inspector.rs:165
+msgid "Remove Last Press"
+msgstr "เอาการกดล่าสุดออก"
+
+#: crates/ui/src/log_window.rs:41 crates/ui/src/log_window.rs:259
+msgid "Expand All"
+msgstr "ขยายทั้งหมด"
+
+#: crates/ui/src/log_window.rs:61
+msgid "No packets yet."
+msgstr "ยังไม่มีแพ็คเกต"
+
+#: crates/ui/src/log_window.rs:76 crates/ui/src/window.rs:301
+msgid "Device Log"
+msgstr "ประวัติอุปกรณ์"
+
+#: crates/ui/src/log_window.rs:151
+msgid "Packets: %lld"
+msgstr "แพ็คเกต: %lld"
+
+#: crates/ui/src/log_window.rs:175 crates/ui/src/log_window.rs:268
+msgid "Expand"
+msgstr "ขยาย"
+
+#: crates/ui/src/log_window.rs:197 crates/ui/src/names.rs:322
+msgid "%lld bytes"
+msgstr "%lld ไบต์"
+
+#: crates/ui/src/log_window.rs:259
+msgid "Collapse All"
+msgstr "ยุบทั้งหมด"
+
+#: crates/ui/src/log_window.rs:268
+msgid "Collapse"
+msgstr "ยุบ"
+
+#: crates/ui/src/names.rs:12
+msgid "Key %lld"
+msgstr "ปุ่ม %lld"
+
+#: crates/ui/src/names.rs:13
+msgid "Knob %lld · Rotate left"
+msgstr "ปุ่มหมุน %lld · หมุนซ้าย"
+
+#: crates/ui/src/names.rs:14
+msgid "Knob %lld · Press"
+msgstr "ปุ่มหมุน %lld · กด"
+
+#: crates/ui/src/names.rs:15
+msgid "Knob %lld · Rotate right"
+msgstr "ปุ่มหมุน %lld · หมุนขวา"
+
+#: crates/ui/src/names.rs:16
+msgid "Knob %lld · Press and rotate left"
+msgstr "ปุ่มหมุน %lld · กดค้างแล้วหมุนซ้าย"
+
+#: crates/ui/src/names.rs:18
+msgid "Knob %lld · Press and rotate right"
+msgstr "ปุ่มหมุน %lld · กดค้างแล้วหมุนขวา"
+
+#: crates/ui/src/names.rs:25
+msgid "Play/Pause"
+msgstr "เล่น/หยุดพัก"
+
+#: crates/ui/src/names.rs:26
+msgid "Stop"
+msgstr "หยุด"
+
+#: crates/ui/src/names.rs:27
+msgid "Prev Song"
+msgstr "เพลงก่อนหน้า"
+
+#: crates/ui/src/names.rs:28
+msgid "Next Song"
+msgstr "เพลงถัดไป"
+
+#: crates/ui/src/names.rs:29
+msgid "Mute"
+msgstr "ปิดเสียง"
+
+#: crates/ui/src/names.rs:30
+msgid "Volume+"
+msgstr "เพิ่มเสียง"
+
+#: crates/ui/src/names.rs:31
+msgid "Volume-"
+msgstr "ลดเสียง"
+
+#: crates/ui/src/names.rs:32
+msgid "Brightness+"
+msgstr "เพิ่มความสว่าง"
+
+#: crates/ui/src/names.rs:33
+msgid "Brightness-"
+msgstr "ลดความสว่าง"
+
+#: crates/ui/src/names.rs:34
+msgid "Bass+"
+msgstr "เพิ่มเสียงทุ้ม"
+
+#: crates/ui/src/names.rs:35
+msgid "Bass-"
+msgstr "ลดเสียงทุ้ม"
+
+#: crates/ui/src/names.rs:36
+msgid "Treble+"
+msgstr "เพิ่มเสียงแหลม"
+
+#: crates/ui/src/names.rs:37
+msgid "Treble-"
+msgstr "ลดเสียงแหลม"
+
+#: crates/ui/src/names.rs:38
+msgid "Media Player"
+msgstr "เครื่องเล่นสื่อ"
+
+#: crates/ui/src/names.rs:39
+msgid "Email"
+msgstr "อีเมล"
+
+#: crates/ui/src/names.rs:40
+msgid "Calculator"
+msgstr "เครื่องคิดเลข"
+
+#: crates/ui/src/names.rs:41
+msgid "My Computer"
+msgstr "คอมพิวเตอร์ของฉัน"
+
+#: crates/ui/src/names.rs:42
+msgid "Web Home"
+msgstr "เว็บ: หน้าหลัก"
+
+#: crates/ui/src/names.rs:43
+msgid "Web Back"
+msgstr "เว็บ: ย้อนกลับ"
+
+#: crates/ui/src/names.rs:44
+msgid "Web Forward"
+msgstr "เว็บ: ไปข้างหน้า"
+
+#: crates/ui/src/names.rs:45
+msgid "Web Refresh"
+msgstr "เว็บ: โหลดใหม่"
+
+#: crates/ui/src/names.rs:76
+msgid "Mouse Left"
+msgstr "ปุ่มเมาส์ซ้าย"
+
+#: crates/ui/src/names.rs:77
+msgid "Mouse Centre"
+msgstr "ปุ่มเมาส์กลาง"
+
+#: crates/ui/src/names.rs:78
+msgid "Mouse Right"
+msgstr "ปุ่มเมาส์ขวา"
+
+#: crates/ui/src/names.rs:79
+msgid "Mouse wheel Up"
+msgstr "ล้อเมาส์ขึ้น"
+
+#: crates/ui/src/names.rs:80
+msgid "Mouse wheel Down"
+msgstr "ล้อเมาส์ลง"
+
+#: crates/ui/src/names.rs:81
+msgid "Ctrl + Mouse wheel Up"
+msgstr "Ctrl + ล้อเมาส์ขึ้น"
+
+#: crates/ui/src/names.rs:82
+msgid "Ctrl + Mouse wheel Down"
+msgstr "Ctrl + ล้อเมาส์ลง"
+
+#: crates/ui/src/names.rs:83
+msgid "Shift + Mouse wheel Up"
+msgstr "Shift + ล้อเมาส์ขึ้น"
+
+#: crates/ui/src/names.rs:84
+msgid "Shift + Mouse wheel Down"
+msgstr "Shift + ล้อเมาส์ลง"
+
+#: crates/ui/src/names.rs:85
+msgid "Alt + Mouse wheel Up"
+msgstr "Alt + ล้อเมาส์ขึ้น"
+
+#: crates/ui/src/names.rs:86
+msgid "Alt + Mouse wheel Down"
+msgstr "Alt + ล้อเมาส์ลง"
+
+#: crates/ui/src/names.rs:105
+msgid "Control"
+msgstr "Control"
+
+#: crates/ui/src/names.rs:106
+msgid "Alt"
+msgstr "Alt"
+
+#: crates/ui/src/names.rs:107
+msgid "Shift"
+msgstr "Shift"
+
+#: crates/ui/src/names.rs:108
+msgid "Super"
+msgstr "Super"
+
+#: crates/ui/src/names.rs:109
+msgid "Right Control"
+msgstr "Control ทางด้านขวา"
+
+#: crates/ui/src/names.rs:110
+msgid "Right Alt"
+msgstr "Alt ทางด้านขวา"
+
+#: crates/ui/src/names.rs:111
+msgid "Right Shift"
+msgstr "Shift ทางด้านขวา"
+
+#: crates/ui/src/names.rs:112
+msgid "Right Super"
+msgstr "Super ทางด้านขวา"
+
+#: crates/ui/src/names.rs:118
+msgid "Red"
+msgstr "สีแดง"
+
+#: crates/ui/src/names.rs:119
+msgid "Orange"
+msgstr "สีส้ม"
+
+#: crates/ui/src/names.rs:120
+msgid "Yellow"
+msgstr "สีเหลือง"
+
+#: crates/ui/src/names.rs:121
+msgid "Green"
+msgstr "สีเขียว"
+
+#: crates/ui/src/names.rs:122
+msgid "Cyan"
+msgstr "สีไซอัน"
+
+#: crates/ui/src/names.rs:123
+msgid "Blue"
+msgstr "สีน้ำเงิน"
+
+#: crates/ui/src/names.rs:124
+msgid "Purple"
+msgstr "สีม่วง"
+
+#: crates/ui/src/names.rs:143
+msgid "Keyboard"
+msgstr "แป้นพิมพ์"
+
+#: crates/ui/src/names.rs:144 crates/ui/src/names.rs:194 crates/ui/src/pages.rs:77
+msgid "Mouse"
+msgstr "เมาส์"
+
+#: crates/ui/src/names.rs:145 crates/ui/src/names.rs:193 crates/ui/src/pages.rs:68
+msgid "Multimedia"
+msgstr "มัลติมีเดีย"
+
+#: crates/ui/src/names.rs:147
+msgid "Other"
+msgstr "อื่นๆ"
+
+#: crates/ui/src/names.rs:155
+msgid "Off"
+msgstr "ปิด"
+
+#: crates/ui/src/names.rs:156
+msgid "Blink Last Key"
+msgstr "กะพริบปุ่มล่าสุด"
+
+#: crates/ui/src/names.rs:157
+msgid "Running Light"
+msgstr "ไฟวิ่ง"
+
+#: crates/ui/src/names.rs:158
+msgid "Mode %lld"
+msgstr "โหมด %lld"
+
+#: crates/ui/src/names.rs:164
+msgid "The last key pressed keeps blinking, in a new color with each press."
+msgstr "ปุ่มที่กดล่าสุดจะกะพริบต่อเนื่อง และเปลี่ยนสีทุกครั้งที่กด"
+
+#: crates/ui/src/names.rs:165
+msgid "A light runs across the keys in order, in a new color each round."
+msgstr "แสงไฟวิ่งผ่านปุ่มตามลำดับ และเปลี่ยนสีทุกรอบ"
+
+#: crates/ui/src/names.rs:180
+msgid "Letters"
+msgstr "ตัวอักษร"
+
+#: crates/ui/src/names.rs:181
+msgid "Numbers"
+msgstr "ตัวเลข"
+
+#: crates/ui/src/names.rs:182
+msgid "Editing"
+msgstr "การแก้ไข"
+
+#: crates/ui/src/names.rs:183
+msgid "Symbols"
+msgstr "สัญลักษณ์"
+
+#: crates/ui/src/names.rs:184
+msgid "Function Keys"
+msgstr "ปุ่มฟังก์ชั่น"
+
+#: crates/ui/src/names.rs:185
+msgid "Navigation"
+msgstr "การนำทาง"
+
+#: crates/ui/src/names.rs:186
+msgid "Numpad"
+msgstr "แป้นตัวเลข"
+
+#: crates/ui/src/names.rs:195 crates/ui/src/pages.rs:572
+msgid "LED"
+msgstr "LED"
+
+#: crates/ui/src/names.rs:196 crates/ui/src/pages.rs:685 crates/ui/src/pages.rs:697
+msgid "Delay"
+msgstr "หน่วงเวลา"
+
+#: crates/ui/src/names.rs:202
+msgid "Saved to the simulator — nothing was written to a keyboard."
+msgstr "บันทึกลงโปรแกรมจำลองแล้ว — ไม่ได้เขียนอะไรลงแป้นพิมพ์"
+
+#: crates/ui/src/names.rs:203
+msgid "Saved to the keyboard."
+msgstr "บันทึกลงแป้นพิมพ์แล้ว"
+
+#: crates/ui/src/names.rs:204
+msgid "Saved, but some keys or knobs read back differently. Those changes stay unsaved."
+msgstr "บันทึกแล้ว แต่เมื่ออ่านกลับมา ปุ่มหรือปุ่มหมุนบางปุ่มไม่ตรงกับที่บันทึก การเปลี่ยนแปลงเหล่านั้นจึงยังถือว่าไม่ได้บันทึก"
+
+#: crates/ui/src/names.rs:205
+msgid "Saved, but the keyboard couldn’t be read back to check."
+msgstr "บันทึกแล้ว แต่ไม่สามารถอ่านกลับจากแป้นพิมพ์เพื่อตรวจสอบได้"
+
+#: crates/ui/src/names.rs:206
+msgid "Read from the keyboard."
+msgstr "อ่านจากแป้นพิมพ์แล้ว"
+
+#: crates/ui/src/names.rs:207
+msgid "Nothing to save — no key has changed."
+msgstr "ไม่มีอะไรต้องบันทึก — ไม่มีปุ่มใดเปลี่ยนแปลง"
+
+#: crates/ui/src/names.rs:208
+msgid "The keyboard couldn’t be asked what it is."
+msgstr "ไม่สามารถถามประเภทของแป้นพิมพ์ได้"
+
+#: crates/ui/src/names.rs:209
+msgid "Reading from the keyboard failed."
+msgstr "อ่านจากแป้นพิมพ์ไม่สำเร็จ"
+
+#: crates/ui/src/names.rs:210
+msgid "Some keys or knobs couldn’t be read. They’re shown as before."
+msgstr "อ่านปุ่มหรือปุ่มหมุนบางปุ่มไม่ได้ ส่วนที่อ่านไม่ได้จะแสดงเหมือนเดิม"
+
+#: crates/ui/src/names.rs:211
+msgid "This keyboard’s firmware (type %lld) hasn’t been tested yet. If keys read or save wrong, please report it with the device log."
+msgstr "เฟิร์มแวร์ของแป้นพิมพ์นี้ (ประเภท %lld) ยังไม่ได้ทดสอบ หากอ่านหรือบันทึกปุ่มไม่ถูกต้อง โปรดแจ้งปัญหาพร้อมแนบประวัติอุปกรณ์"
+
+#: crates/ui/src/names.rs:215 crates/ui/src/names.rs:285
+msgid "Writing to the keyboard failed (%@)."
+msgstr "เขียนลงแป้นพิมพ์ไม่สำเร็จ (%@)"
+
+#: crates/ui/src/names.rs:216
+msgid "The keyboard is no longer connected."
+msgstr "แป้นพิมพ์ไม่ได้เชื่อมต่ออยู่แล้ว"
+
+#: crates/ui/src/names.rs:217
+msgid "A key holds up to %lld presses."
+msgstr "ปุ่มหนึ่งปุ่มใส่การกดได้สูงสุด %lld ครั้ง"
+
+#: crates/ui/src/names.rs:220
+msgid "Modifiers alone make the key a modifier key, so they can’t go with other presses."
+msgstr "ถ้าใส่เฉพาะปุ่มปรับค่า ปุ่มนี้จะกลายเป็นปุ่มปรับค่า จึงใส่ร่วมกับการกดอื่นไม่ได้"
+
+#: crates/ui/src/names.rs:222
+msgid "Only keys 1–%lld have a color. Select one of them."
+msgstr "มีเพียงปุ่ม 1–%lld ที่มีสี เลือกปุ่มใดปุ่มหนึ่งในนั้น"
+
+#: crates/ui/src/names.rs:223
+msgid "This keyboard can’t do that."
+msgstr "แป้นพิมพ์นี้ไม่รองรับการทำงานนี้"
+
+#: crates/ui/src/names.rs:233
+msgid "Media Key %@"
+msgstr "ปุ่มสื่อ %@"
+
+#: crates/ui/src/names.rs:242
+msgid "Enter"
+msgstr "Enter"
+
+#: crates/ui/src/names.rs:243
+msgid "Escape"
+msgstr "Escape"
+
+#: crates/ui/src/names.rs:244
+msgid "Backspace"
+msgstr "Backspace"
+
+#: crates/ui/src/names.rs:245
+msgid "Tab"
+msgstr "Tab"
+
+#: crates/ui/src/names.rs:246
+msgid "Space"
+msgstr "Space"
+
+#: crates/ui/src/names.rs:247
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+#: crates/ui/src/names.rs:248
+msgid "Menu Key"
+msgstr "ปุ่มเมนู"
+
+#: crates/ui/src/names.rs:249
+msgid "Print Screen"
+msgstr "Print Screen"
+
+#: crates/ui/src/names.rs:250
+msgid "Scroll Lock"
+msgstr "Scroll Lock"
+
+#: crates/ui/src/names.rs:251
+msgid "Insert"
+msgstr "Insert"
+
+#: crates/ui/src/names.rs:252
+msgid "Home"
+msgstr "Home"
+
+#: crates/ui/src/names.rs:253
+msgid "Page Up"
+msgstr "Page Up"
+
+#: crates/ui/src/names.rs:254
+msgid "Delete"
+msgstr "Delete"
+
+#: crates/ui/src/names.rs:255
+msgid "End"
+msgstr "End"
+
+#: crates/ui/src/names.rs:256
+msgid "Page Down"
+msgstr "Page Down"
+
+#: crates/ui/src/names.rs:257
+msgid "Right Arrow"
+msgstr "ลูกศรชี้ขวา"
+
+#: crates/ui/src/names.rs:258
+msgid "Left Arrow"
+msgstr "ลูกศรชี้ซ้าย"
+
+#: crates/ui/src/names.rs:259
+msgid "Down Arrow"
+msgstr "ลูกศรชี้ลง"
+
+#: crates/ui/src/names.rs:260
+msgid "Up Arrow"
+msgstr "ลูกศรชี้ขึ้น"
+
+#: crates/ui/src/names.rs:261
+msgid "Num Lock"
+msgstr "Num Lock"
+
+#: crates/ui/src/names.rs:262
+msgid "Keypad Enter"
+msgstr "แป้นตัวเลข Enter"
+
+#: crates/ui/src/names.rs:272
+msgid "Keypad %@"
+msgstr "แป้นตัวเลข %@"
+
+#: crates/ui/src/names.rs:274
+msgid "Non-US Key %@ %@"
+msgstr "ปุ่ม %1$@ %2$@ ของแป้นพิมพ์ที่ไม่ใช่แบบสหรัฐฯ"
+
+#: crates/ui/src/names.rs:281
+msgid "Looking for the keyboard"
+msgstr "กำลังค้นหาแป้นพิมพ์"
+
+#: crates/ui/src/names.rs:282
+msgid "Connected to %@, interface %lld"
+msgstr "เชื่อมต่อกับ %1$@ อินเทอร์เฟซ %2$lld"
+
+#: crates/ui/src/names.rs:284
+msgid "The keyboard couldn’t be opened (%@)."
+msgstr "ไม่สามารถเปิดแป้นพิมพ์ได้ (%@)"
+
+#: crates/ui/src/names.rs:286
+msgid "Simulated keyboard: %@"
+msgstr "แป้นพิมพ์จำลอง: %@"
+
+#: crates/ui/src/names.rs:301 crates/ui/src/names.rs:321 crates/ui/src/names.rs:329
+msgid "Report ID %lld"
+msgstr "Report ID %lld"
+
+#: crates/ui/src/names.rs:303
+msgid "Keys: %lld · Knobs: %lld · Type %lld"
+msgstr "ปุ่ม: %1$lld · ปุ่มหมุน: %2$lld · ประเภท %3$lld"
+
+#: crates/ui/src/names.rs:316
+msgid "Interface %lld · %@ · %@ · %@"
+msgstr "อินเทอร์เฟซ %1$lld · %2$@ · %3$@ · %4$@"
+
+#: crates/ui/src/names.rs:329
+msgid "8890 Packets · %@"
+msgstr "แพ็คเกต 8890 · %@"
+
+#: crates/ui/src/names.rs:330
+msgid "884x · Standard Firmware"
+msgstr "884x · เฟิร์มแวร์มาตรฐาน"
+
+#: crates/ui/src/names.rs:331
+msgid "884x · Legacy Firmware"
+msgstr "884x · เฟิร์มแวร์รุ่นเก่า"
+
+#: crates/ui/src/names.rs:332
+msgid "884x · Doesn’t Answer Identification"
+msgstr "884x · ไม่ตอบเมื่อถามประเภท"
+
+#: crates/ui/src/pages.rs:69
+msgid "A media key replaces what the key did."
+msgstr "ปุ่มสื่อจะแทนที่สิ่งที่ปุ่มเคยทำ"
+
+#: crates/ui/src/pages.rs:78
+msgid "A mouse action replaces what the key did."
+msgstr "การทำงานของเมาส์จะแทนที่สิ่งที่ปุ่มเคยทำ"
+
+#: crates/ui/src/pages.rs:187
+msgid "Key Layout"
+msgstr "การเรียงปุ่ม"
+
+#: crates/ui/src/pages.rs:188
+msgid "Modifiers Only"
+msgstr "ปุ่มปรับค่าเท่านั้น"
+
+#: crates/ui/src/pages.rs:189
+msgid "Makes the key hold these modifiers, as a modifier key does."
+msgstr "ทำให้ปุ่มนี้กดปุ่มปรับค่าเหล่านี้ค้างไว้ เช่นเดียวกับปุ่มปรับค่า"
+
+#: crates/ui/src/pages.rs:262
+msgid "Modifiers apply to the next key."
+msgstr "ปุ่มปรับค่าจะใช้กับปุ่มถัดไป"
+
+#: crates/ui/src/pages.rs:264
+msgid "Modifiers apply to the next key. A key holds up to %lld presses, each modifier counting as one."
+msgstr "ปุ่มปรับค่าจะใช้กับปุ่มถัดไป ปุ่มหนึ่งปุ่มใส่การกดได้สูงสุด %lld ครั้ง โดยนับปุ่มปรับค่าแต่ละปุ่มเป็นหนึ่งครั้ง"
+
+#: crates/ui/src/pages.rs:269
+msgid "Modifiers apply to the next key. A key holds up to %lld presses."
+msgstr "ปุ่มปรับค่าจะใช้กับปุ่มถัดไป ปุ่มหนึ่งปุ่มใส่การกดได้สูงสุด %lld ครั้ง"
+
+#: crates/ui/src/pages.rs:333
+msgid "This keyboard doesn’t take this key."
+msgstr "แป้นพิมพ์นี้ไม่รองรับปุ่มนี้"
+
+#: crates/ui/src/pages.rs:354
+msgid "More Keys"
+msgstr "ปุ่มอื่นๆ"
+
+#: crates/ui/src/pages.rs:370
+msgid "Modifiers"
+msgstr "ปุ่มปรับค่า"
+
+#: crates/ui/src/pages.rs:387
+msgid "Shift Symbols"
+msgstr "สัญลักษณ์ที่ใช้ Shift"
+
+#: crates/ui/src/pages.rs:504 crates/ui/src/pages.rs:540
+msgid "Color"
+msgstr "สี"
+
+#: crates/ui/src/pages.rs:508 crates/ui/src/pages.rs:572
+msgid "Lighting is set per layer; no key selection is needed."
+msgstr "แสงไฟตั้งค่าแยกตามเลเยอร์ จึงไม่ต้องเลือกปุ่ม"
+
+#: crates/ui/src/pages.rs:539
+msgid "Select one of keys 1–%lld on the keyboard, then pick its color."
+msgstr "เลือกปุ่มใดปุ่มหนึ่งจากปุ่ม 1–%lld บนแป้นพิมพ์ แล้วเลือกสีของปุ่ม"
+
+#: crates/ui/src/pages.rs:585
+msgid "Effect"
+msgstr "เอฟเฟ็กต์"
+
+#: crates/ui/src/pages.rs:668
+msgid "The selected key has no presses."
+msgstr "ปุ่มที่เลือกยังไม่มีการกด"
+
+#: crates/ui/src/pages.rs:672
+msgid "Press %lld"
+msgstr "การกดครั้งที่ %lld"
+
+#: crates/ui/src/pages.rs:684
+msgid "Each press can wait before it is sent. Give the key its presses on the Keys page first."
+msgstr "ตั้งให้การกดแต่ละครั้งรอก่อนส่งได้ ใส่การกดให้ปุ่มในหน้า “ปุ่ม” ก่อน"
+
+#: crates/ui/src/pages.rs:698
+msgid "One wait for the whole key. Its presses stay."
+msgstr "รอครั้งเดียวสำหรับทั้งปุ่ม การกดของปุ่มยังอยู่เหมือนเดิม"
+
+#: crates/ui/src/preferences.rs:28
+msgid "Language & Appearance"
+msgstr "ภาษาและรูปแบบ"
+
+#: crates/ui/src/preferences.rs:29
+msgid "The base language is English. You can follow the system language or choose one yourself."
+msgstr "ภาษาพื้นฐานคือภาษาอังกฤษ คุณสามารถใช้ภาษาของระบบหรือเลือกภาษาเองได้"
+
+#: crates/ui/src/preferences.rs:35 crates/ui/src/preferences.rs:47
+msgid "Follow System"
+msgstr "ตามระบบ"
+
+#: crates/ui/src/preferences.rs:37
+msgid "Language"
+msgstr "ภาษา"
+
+#: crates/ui/src/preferences.rs:47
+msgid "Light"
+msgstr "สว่าง"
+
+#: crates/ui/src/preferences.rs:47
+msgid "Dark"
+msgstr "มืด"
+
+#: crates/ui/src/preferences.rs:49
+msgid "Appearance"
+msgstr "รูปแบบ"
+
+#: crates/ui/src/preferences.rs:60
+msgid "UI"
+msgstr "UI"
+
+#: crates/ui/src/preferences.rs:62 crates/ui/src/window.rs:305
+msgid "Preferences"
+msgstr "ปรับแต่ง"
+
+#: crates/ui/src/preferences.rs:64
+msgid "General"
+msgstr "ทั่วไป"
+
+#: crates/ui/src/preferences.rs:67
+msgid "Prevent key repeat after changing the lighting"
+msgstr "ป้องกันการกดปุ่มซ้ำหลังเปลี่ยนแสงไฟ"
+
+#: crates/ui/src/preferences.rs:75
+msgid "Firmware Workarounds"
+msgstr "วิธีเลี่ยงข้อบกพร่องของเฟิร์มแวร์"
+
+#: crates/ui/src/preferences.rs:76
+msgid "After its lighting is saved, the 1189:8890 keyboard repeats a key's first stroke without end when the key is pressed (its maker's software does the same). With this on, the app sends one more save after the lighting to stop that; the keys stay as they were. Off, the app sends just what the maker's software sends."
+msgstr "หลังบันทึกแสงไฟ แป้นพิมพ์ 1189:8890 จะพิมพ์อักขระแรกของปุ่มซ้ำไม่หยุดเมื่อกดปุ่มนั้น (ซอฟต์แวร์ของผู้ผลิตก็เป็นเช่นนี้) เมื่อเปิด แอปจะส่งคำสั่งบันทึกอีกหนึ่งครั้งหลังแสงไฟเพื่อป้องกันปัญหานี้ โดยการตั้งค่าปุ่มจะไม่เปลี่ยน เมื่อปิด แอปจะส่งเฉพาะสิ่งที่ซอฟต์แวร์ของผู้ผลิตส่ง"
+
+#: crates/ui/src/preferences.rs:83
+msgid "Check for updates automatically"
+msgstr "ตรวจหารายการอัปเดตโดยอัตโนมัติ"
+
+#: crates/ui/src/preferences.rs:124
+msgid "Language Changed"
+msgstr "เปลี่ยนภาษาแล้ว"
+
+#: crates/ui/src/preferences.rs:125
+msgid "%@ needs to relaunch to apply the change."
+msgstr "ต้องเปิดใช้ %@ อีกครั้งเพื่อให้การเปลี่ยนแปลงมีผล"
+
+#: crates/ui/src/preferences.rs:127
+msgid "Later"
+msgstr "ภายหลัง"
+
+#: crates/ui/src/preferences.rs:127
+msgid "Relaunch Now"
+msgstr "เปิดใช้อีกครั้งตอนนี้"
+
+#: crates/ui/src/window.rs:70
+msgid "Keys appear here once the keyboard is connected."
+msgstr "ปุ่มจะแสดงที่นี่เมื่อเชื่อมต่อแป้นพิมพ์"
+
+#: crates/ui/src/window.rs:83 crates/ui/src/window.rs:300
+msgid "Shape…"
+msgstr "รูปทรง…"
+
+#: crates/ui/src/window.rs:136
+msgid "Download"
+msgstr "ดาวน์โหลด"
+
+#: crates/ui/src/window.rs:298
+msgid "Clear Key"
+msgstr "ล้างปุ่ม"
+
+#: crates/ui/src/window.rs:307
+msgid "Check for Updates…"
+msgstr "ตรวจหารายการอัปเดต…"
+
+#: crates/ui/src/window.rs:309
+msgid "About %@"
+msgstr "เกี่ยวกับ %@"
+
+#: crates/ui/src/window.rs:360
+msgid "%@ is up to date."
+msgstr "%@ เป็นเวอร์ชั่นล่าสุดแล้ว"
+
+#: crates/ui/src/window.rs:361
+msgid "Couldn’t check for updates."
+msgstr "ไม่สามารถตรวจหารายการอัปเดตได้"
+
+#: crates/ui/src/window.rs:368
+msgid "%1$@ %2$@ is available."
+msgstr "มี %1$@ %2$@ ให้ดาวน์โหลดแล้ว"
+
+#: crates/ui/src/window.rs:394
+msgid "Keyboard on USB"
+msgstr "แป้นพิมพ์ที่เชื่อมต่อผ่าน USB"
+
+#: crates/ui/src/window.rs:537
+msgid "Switch Keyboards?"
+msgstr "สลับแป้นพิมพ์หรือไม่"
+
+#: crates/ui/src/window.rs:538
+msgid "Changes you haven’t saved will be lost."
+msgstr "การเปลี่ยนแปลงที่คุณยังไม่ได้บันทึกจะหายไป"
+
+#: crates/ui/src/window.rs:540
+msgid "Switch"
+msgstr "สลับ"
+
+#: crates/ui/src/window.rs:576
+msgid "Simulator in use"
+msgstr "กำลังใช้โปรแกรมจำลอง"
+
+#: crates/ui/src/window.rs:579
+msgid "This isn't a real keyboard. Nothing you save here is written to any keyboard."
+msgstr "นี่ไม่ใช่แป้นพิมพ์จริง สิ่งที่คุณบันทึกที่นี่จะไม่ถูกเขียนลงแป้นพิมพ์ใดๆ"
+
+#: crates/ui/src/window.rs:587
+msgid "Back to the Keyboard on USB"
+msgstr "กลับไปใช้แป้นพิมพ์ที่เชื่อมต่อผ่าน USB"

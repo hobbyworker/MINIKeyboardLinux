@@ -9,7 +9,7 @@
   <a href="../LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow"></a>
 </p>
 
-<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.id.md">Bahasa Indonesia</a> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <a href="README.pl.md">Polski</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.vi.md">Tiếng Việt</a> · <a href="README.zh-Hans.md">简体中文</a> · <b>繁體中文</b></p>
+<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.id.md">Bahasa Indonesia</a> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <a href="README.pl.md">Polski</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.ru.md">Русский</a> · <a href="README.th.md">ไทย</a> · <a href="README.vi.md">Tiếng Việt</a> · <a href="README.zh-Hans.md">简体中文</a> · <b>繁體中文</b></p>
 
 這是一款將按鍵設定寫入小型 USB 巨集鍵盤的 Linux App。這類鍵盤在市面上從只有一個旋鈕到多達 21 個按鍵都有，旋鈕最多 4 個。可以為每個按鍵和旋鈕的動作（向左旋轉、按下、向右旋轉）在第 1–3 層設定按鍵輸入、多媒體鍵或滑鼠動作，也可以設定鍵盤的燈光。它是依相同規則打造的 macOS App 的 Linux 版，使用相同的指令。
 
@@ -24,13 +24,13 @@
 
 `1189:8890` 是廠商的 Windows 設定工具「MINI KeyBoard」所支援的鍵盤，其餘則是廠商的跨平台 App「MINI_KEYBOARD」會尋找的鍵盤。本 App 兩種工具的指令都會使用。第二類鍵盤大多會告知自己有幾個按鍵和旋鈕、使用哪種韌體，因此 App 會照樣繪製廠商 App 所繪製的佈局；不告知的鍵盤則採用使用者從這些佈局中選擇的那一種。`1189:8890` 是廠商 App 不認得的鍵盤，它自己的工具也不繪製外形，因此無從得知實際形狀。所以只要設定按鍵和旋鈕的數量以及每列的按鍵數，App 就會照此繪製出整齊的排列。
 
-App 提供 14 種語言：英文、韓文、日文、中文（簡體、繁體）、德文、西班牙文、法文、義大利文、葡萄牙文（巴西、葡萄牙）、波蘭文、印尼文和越南文。App 會依照桌面的語言顯示，其他語言則顯示英文。
+App 提供 16 種語言：英文、韓文、日文、中文（簡體、繁體）、德文、西班牙文、法文、義大利文、葡萄牙文（巴西、葡萄牙）、波蘭文、俄文、印尼文、越南文和泰文。App 會依照桌面的語言顯示，其他語言則顯示英文。
 
 本儲存庫的原始碼採用 MIT 授權條款。App 圖像（`data/icons/` 中的圖像以及最上方的圖片）採用 CC BY-SA 4.0 授權條款（[`LICENSES/CC-BY-SA-4.0.txt`](../LICENSES/CC-BY-SA-4.0.txt)）。
 
 ## macOS、Windows、Linux 和網頁
 
-MINIKeyboard 有四個依相同規則製作的版本——相同的指令、相同的 14 種語言。三個 App 支援相同的鍵盤；在瀏覽器中執行的網頁版支援其中除 `1189:8890` 以外的鍵盤。
+MINIKeyboard 有四個依相同規則製作的版本——相同的指令、相同的 16 種語言。三個 App 支援相同的鍵盤；在瀏覽器中執行的網頁版支援其中除 `1189:8890` 以外的鍵盤。
 
 | 儲存庫 | GitHub |
 |---|---|
@@ -94,7 +94,7 @@ App 也可以自己告知新版本：提供了 `MINIKEYBOARD_UPDATE_FEED` 的建
    - **延遲**：適用於會記住延遲的韌體。
 5. **儲存**（Ctrl+S）會寫入變更的內容。**讀取**（Ctrl+R）會從支援讀取的鍵盤取得目前的設定。
 
-在**偏好設定**（Ctrl+,）中可以選擇介面語言（14 種之一，或跟隨桌面）以及淺色或深色。在有更新來源的建置中，其「一般」頁面有自動檢查更新的選項。在**關於MINIKeyboard**中可以查看版本和開放原始碼授權。
+在**偏好設定**（Ctrl+,）中可以選擇介面語言（16 種之一，或跟隨桌面）以及淺色或深色。在有更新來源的建置中，其「一般」頁面有自動檢查更新的選項。在**關於MINIKeyboard**中可以查看版本和開放原始碼授權。
 
 **偏好設定 ▸ 一般 ▸ 韌體問題規避**中的**變更燈光後防止按鍵重複**預設為開啟。`1189:8890` 的韌體在儲存燈光後，會讓按鍵的第一個字元不停重複（廠商軟體也一樣），所以 App 會在燈光之後再送出一次不含按鍵的儲存指令。關閉後，App 只會送出與廠商軟體相同的內容。另外，這款鍵盤拔掉後會忘記燈光設定。
 

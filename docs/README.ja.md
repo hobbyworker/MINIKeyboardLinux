@@ -9,7 +9,7 @@
   <a href="../LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow"></a>
 </p>
 
-<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.id.md">Bahasa Indonesia</a> · <a href="README.it.md">Italiano</a> · <b>日本語</b> · <a href="README.pl.md">Polski</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.vi.md">Tiếng Việt</a> · <a href="README.zh-Hans.md">简体中文</a> · <a href="README.zh-Hant.md">繁體中文</a></p>
+<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.id.md">Bahasa Indonesia</a> · <a href="README.it.md">Italiano</a> · <b>日本語</b> · <a href="README.pl.md">Polski</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.ru.md">Русский</a> · <a href="README.th.md">ไทย</a> · <a href="README.vi.md">Tiếng Việt</a> · <a href="README.zh-Hans.md">简体中文</a> · <a href="README.zh-Hant.md">繁體中文</a></p>
 
 小さなUSBマクロキーボードにキー設定を書き込むLinuxアプリです。ノブが1つだけのものからキーが21個あるものまで、ノブは最大4つという構成で売られているキーボードが対象です。キーとノブの操作（反時計回りに回す・押す・時計回りに回す）ごとに、レイヤー1–3にキー入力・マルチメディアキー・マウス操作を割り当て、キーボードのライティングも設定します。同じルールで作られたmacOSアプリのLinux版で、同じコマンドを使います。
 
@@ -24,13 +24,13 @@
 
 `1189:8890`はメーカーのWindows用設定ツール「MINI KeyBoard」が扱うキーボードで、それ以外はメーカーのマルチプラットフォームアプリ「MINI_KEYBOARD」が探すキーボードです。このアプリは両方のツールのコマンドを使います。2つ目のグループのキーボードはたいてい、キーとノブの数やファームウェアの種類を知らせてくるので、メーカーのアプリが描く配列をそのまま描きます。知らせてこないキーボードには、それらの配列の中からユーザーが選んだものを使います。`1189:8890`はメーカーのアプリが知らないキーボードで、専用のツールも形を描かないため、実際の形はわかりません。そこで、キーとノブの数と1列のキー数を決めると、アプリがそのとおりに整った形で描きます。
 
-アプリは14の言語で表示されます：英語・韓国語・日本語・中国語（簡体字・繁体字）・ドイツ語・スペイン語・フランス語・イタリア語・ポルトガル語（ブラジル・ポルトガル）・ポーランド語・インドネシア語・ベトナム語。デスクトップの言語に従い、それ以外の言語では英語で表示されます。
+アプリは16の言語で表示されます：英語・韓国語・日本語・中国語（簡体字・繁体字）・ドイツ語・スペイン語・フランス語・イタリア語・ポルトガル語（ブラジル・ポルトガル）・ポーランド語・ロシア語・インドネシア語・ベトナム語・タイ語。デスクトップの言語に従い、それ以外の言語では英語で表示されます。
 
 このリポジトリのソースはMITライセンスです。アプリアイコン（`data/icons/`のものと冒頭の画像）はCC BY-SA 4.0です（[`LICENSES/CC-BY-SA-4.0.txt`](../LICENSES/CC-BY-SA-4.0.txt)）。
 
 ## macOS・Windows・Linux・Web
 
-MINIKeyboardには、同じルールで作られた4つの版があります。コマンドも、14の言語も同じです。3つのアプリは同じキーボードに対応し、ブラウザで動くWeb版は、そのうち`1189:8890`を除くキーボードに対応します。
+MINIKeyboardには、同じルールで作られた4つの版があります。コマンドも、16の言語も同じです。3つのアプリは同じキーボードに対応し、ブラウザで動くWeb版は、そのうち`1189:8890`を除くキーボードに対応します。
 
 | リポジトリ | GitHub |
 |---|---|
@@ -94,7 +94,7 @@ Rust 1.88以降と、GTK 4・libadwaita 1.7以降・libsoup 3・libusb 1.0の開
    - **遅延**：遅延を記憶するファームウェアで使えます。
 5. **保存**（Ctrl+S）で変更を書き込みます。**読み込む**（Ctrl+R）は、読み込みに対応したキーボードから現在の設定を取得します。
 
-**設定**（Ctrl+,）では、表示言語（14言語のいずれか、またはデスクトップの言語）とライト・ダークを選びます。アップデートのフィードがあるビルドでは、その「一般」ページでアップデートの自動確認を設定できます。**MINIKeyboardについて**で、バージョンとオープンソースライセンスを確認できます。
+**設定**（Ctrl+,）では、表示言語（16言語のいずれか、またはデスクトップの言語）とライト・ダークを選びます。アップデートのフィードがあるビルドでは、その「一般」ページでアップデートの自動確認を設定できます。**MINIKeyboardについて**で、バージョンとオープンソースライセンスを確認できます。
 
 **設定 ▸ 一般 ▸ ファームウェアの不具合への対処**の**ライティング変更後のキーの連続入力を防ぐ**は、初期状態でオンです。`1189:8890` のファームウェアには、ライティングを保存するとキーの最初の文字が止まらずに繰り返されるバグがあるため（メーカーのソフトウェアでも同じです）、アプリはライティングのあとにキーを含まない保存コマンドをもう一度送ります。オフにすると、メーカーのソフトウェアと同じ内容だけを送ります。このキーボードは、抜き差しするとライティングが消えます。
 
