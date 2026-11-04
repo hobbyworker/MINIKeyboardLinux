@@ -47,6 +47,7 @@
   </supports>
 
   <releases>
+    <release version="1.2.4" date="2026-11-04"/>
     <release version="1.2.2" date="2026-11-04"/>
     <release version="1.2.1" date="2026-11-04"/>
     <release version="1.2.0" date="2026-10-28"/>
