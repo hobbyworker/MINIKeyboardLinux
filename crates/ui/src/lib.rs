@@ -62,9 +62,20 @@ pub fn prepare(launch: &Launch) -> Rc<Settings> {
     let settings = Settings::load(&launch.settings_path);
     if let Some(language) = settings.choices().language {
         set_language(&gettext_language(&language));
+    } else if let Some(language) =
+        settings::system_language(std::env::var("LANGUAGE").ok().as_deref(), messages_locale().as_deref())
+    {
+        set_language(&language);
     }
     i18n::init(&launch.text_domain, &launch.locale_dir);
     Rc::new(settings)
+}
+
+/// The locale gettext takes the language of messages from when `LANGUAGE` says nothing.
+fn messages_locale() -> Option<String> {
+    ["LC_ALL", "LC_MESSAGES", "LANG"]
+        .into_iter()
+        .find_map(|name| std::env::var(name).ok().filter(|value| !value.is_empty()))
 }
 
 /// `LANGUAGE` as the app found it, before a chosen language replaced it.

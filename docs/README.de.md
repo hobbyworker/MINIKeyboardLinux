@@ -9,7 +9,7 @@
   <a href="../LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow"></a>
 </p>
 
-<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <b>Deutsch</b> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.id.md">Bahasa Indonesia</a> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <a href="README.pl.md">Polski</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.ru.md">Русский</a> · <a href="README.th.md">ไทย</a> · <a href="README.vi.md">Tiếng Việt</a> · <a href="README.zh-Hans.md">简体中文</a> · <a href="README.zh-Hant.md">繁體中文</a></p>
+<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <b>Deutsch</b> · <a href="README.es.md">Español</a> · <a href="README.es-419.md">Español (Latinoamérica)</a> · <a href="README.fr.md">Français</a> · <a href="README.id.md">Bahasa Indonesia</a> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <a href="README.pl.md">Polski</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.ru.md">Русский</a> · <a href="README.th.md">ไทย</a> · <a href="README.vi.md">Tiếng Việt</a> · <a href="README.zh-Hans.md">简体中文</a> · <a href="README.zh-Hant.md">繁體中文</a></p>
 
 Eine Linux-App, die Tastenbelegungen auf kleine USB-Makrotastaturen schreibt – auf die Modelle, die es vom einzelnen
 Drehknopf bis zu 21 Tasten und mit bis zu vier Drehknöpfen zu kaufen gibt. Für jede Aktion einer Taste oder eines
@@ -35,17 +35,17 @@ kennt die `1189:8890` nicht, und ihr eigenes Tool zeichnet keine Form, daher ist
 gibst an, wie viele Tasten und Drehknöpfe sie hat und wie viele Tasten in einer Reihe liegen, und die App zeichnet
 daraus eine ordentliche Anordnung.
 
-Die App gibt es in 16 Sprachen – Englisch, Koreanisch, Japanisch, Chinesisch (vereinfacht und traditionell), Deutsch,
-Spanisch, Französisch, Italienisch, Portugiesisch (Brasilien und Portugal), Polnisch, Russisch, Indonesisch,
-Vietnamesisch und Thailändisch. Sie folgt der Sprache des Desktops; in allen anderen Sprachen erscheint sie auf
-Englisch.
+Die App gibt es in 17 Sprachen – Englisch, Koreanisch, Japanisch, Chinesisch (vereinfacht und traditionell), Deutsch,
+Spanisch (Spanien und Lateinamerika), Französisch, Italienisch, Portugiesisch (Brasilien und Portugal), Polnisch,
+Russisch, Indonesisch, Vietnamesisch und Thailändisch. Sie folgt der Sprache des Desktops; in allen anderen Sprachen
+erscheint sie auf Englisch.
 
 Der Quellcode in diesem Repository steht unter der MIT-Lizenz. Das App-Symbol – die Dateien in `data/icons/` und das
 Bild ganz oben – steht unter CC BY-SA 4.0 ([`LICENSES/CC-BY-SA-4.0.txt`](../LICENSES/CC-BY-SA-4.0.txt)).
 
 ## macOS, Windows, Linux und das Web
 
-MINIKeyboard gibt es in vier Ausgaben nach denselben Regeln – dieselben Befehle, dieselben 16 Sprachen. Die drei Apps nehmen dieselben Tastaturen, die Web-Ausgabe, die im Browser läuft, alle außer der `1189:8890`.
+MINIKeyboard gibt es in vier Ausgaben nach denselben Regeln – dieselben Befehle, dieselben 17 Sprachen. Die drei Apps nehmen dieselben Tastaturen, die Web-Ausgabe, die im Browser läuft, alle außer der `1189:8890`.
 
 | Repository | GitHub |
 |---|---|
@@ -146,7 +146,7 @@ jede Antwort.
 5. **Sichern** (Ctrl+S) schreibt, was sich geändert hat. **Lesen** (Ctrl+R) holt bei einer Tastatur, die sich auslesen
    lässt, die aktuellen Einstellungen.
 
-In den **Einstellungen** (Ctrl+,) wählst du die Sprache der Oberfläche (eine der 16 oder die des Desktops) und Hell
+In den **Einstellungen** (Ctrl+,) wählst du die Sprache der Oberfläche (eine der 17 oder die des Desktops) und Hell
 oder Dunkel; in einem Build mit Update-Feed findest du dort unter „Allgemein“ die automatische Suche nach Updates.
 Unter **Über „MINIKeyboard“** stehen die Version und die Open-Source-Lizenzen.
 

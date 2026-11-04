@@ -9,7 +9,7 @@
   <a href="../LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow"></a>
 </p>
 
-<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <b>Bahasa Indonesia</b> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <a href="README.pl.md">Polski</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.ru.md">Русский</a> · <a href="README.th.md">ไทย</a> · <a href="README.vi.md">Tiếng Việt</a> · <a href="README.zh-Hans.md">简体中文</a> · <a href="README.zh-Hant.md">繁體中文</a></p>
+<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.es-419.md">Español (Latinoamérica)</a> · <a href="README.fr.md">Français</a> · <b>Bahasa Indonesia</b> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <a href="README.pl.md">Polski</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.ru.md">Русский</a> · <a href="README.th.md">ไทย</a> · <a href="README.vi.md">Tiếng Việt</a> · <a href="README.zh-Hans.md">简体中文</a> · <a href="README.zh-Hant.md">繁體中文</a></p>
 
 Aplikasi Linux untuk menulis pengaturan tombol ke papan ketik makro USB berukuran kecil — papan ketik yang dijual
 mulai dari yang hanya punya satu kenop hingga yang punya 21 tombol, dengan kenop sampai empat buah. Untuk setiap
@@ -34,16 +34,16 @@ tahu memakai salah satu tata letak itu yang Anda pilih. `1189:8890` tidak dikena
 sendiri pun tidak menggambar bentuknya, jadi bentuk aslinya tidak diketahui. Karena itu, cukup tentukan jumlah tombol
 dan kenopnya serta jumlah tombol dalam satu baris, lalu aplikasi akan menggambarnya dengan rapi sesuai angka itu.
 
-Aplikasi ini tersedia dalam 16 bahasa — Inggris, Korea, Jepang, Tionghoa (Sederhana dan Tradisional), Jerman, Spanyol,
-Prancis, Italia, Portugis (Brasil dan Portugal), Polandia, Rusia, Indonesia, Vietnam, dan Thai. Aplikasi mengikuti
-bahasa desktop; untuk bahasa lainnya, aplikasi tampil dalam bahasa Inggris.
+Aplikasi ini tersedia dalam 17 bahasa — Inggris, Korea, Jepang, Tionghoa (Sederhana dan Tradisional), Jerman, Spanyol
+(Spanyol dan Amerika Latin), Prancis, Italia, Portugis (Brasil dan Portugal), Polandia, Rusia, Indonesia, Vietnam, dan
+Thai. Aplikasi mengikuti bahasa desktop; untuk bahasa lainnya, aplikasi tampil dalam bahasa Inggris.
 
 Kode sumber di repositori ini berlisensi MIT. Ikon aplikasi — yang ada di `data/icons/` dan gambar di bagian atas —
 berlisensi CC BY-SA 4.0 ([`LICENSES/CC-BY-SA-4.0.txt`](../LICENSES/CC-BY-SA-4.0.txt)).
 
 ## macOS, Windows, Linux, dan web
 
-MINIKeyboard hadir dalam empat edisi yang dibuat dengan aturan yang sama — perintah yang sama, 16 bahasa yang sama. Ketiga aplikasi menangani papan ketik yang sama, dan edisi web, yang berjalan di browser, menangani semuanya kecuali `1189:8890`.
+MINIKeyboard hadir dalam empat edisi yang dibuat dengan aturan yang sama — perintah yang sama, 17 bahasa yang sama. Ketiga aplikasi menangani papan ketik yang sama, dan edisi web, yang berjalan di browser, menangani semuanya kecuali `1189:8890`.
 
 | Repositori | GitHub |
 |---|---|
@@ -144,7 +144,7 @@ diterima.
 5. **Simpan** (Ctrl+S) menulis perubahan. **Baca** (Ctrl+R) mengambil pengaturan saat ini dari papan ketik yang bisa
    dibaca.
 
-Di **Preferensi** (Ctrl+,), Anda memilih bahasa antarmuka (salah satu dari 16 bahasa, atau bahasa desktop) serta
+Di **Preferensi** (Ctrl+,), Anda memilih bahasa antarmuka (salah satu dari 17 bahasa, atau bahasa desktop) serta
 tampilan terang atau gelap. Pada build yang punya feed pembaruan, halaman Umum-nya berisi pemeriksaan pembaruan
 otomatis. Di **Mengenai MINIKeyboard**, Anda bisa melihat versi dan lisensi sumber terbuka.
 

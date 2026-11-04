@@ -9,7 +9,7 @@
   <a href="../LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow"></a>
 </p>
 
-<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.id.md">Bahasa Indonesia</a> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <b>Polski</b> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.ru.md">Русский</a> · <a href="README.th.md">ไทย</a> · <a href="README.vi.md">Tiếng Việt</a> · <a href="README.zh-Hans.md">简体中文</a> · <a href="README.zh-Hant.md">繁體中文</a></p>
+<p align="center"><a href="../README.md">English</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <a href="README.es.md">Español</a> · <a href="README.es-419.md">Español (Latinoamérica)</a> · <a href="README.fr.md">Français</a> · <a href="README.id.md">Bahasa Indonesia</a> · <a href="README.it.md">Italiano</a> · <a href="README.ja.md">日本語</a> · <b>Polski</b> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.ru.md">Русский</a> · <a href="README.th.md">ไทย</a> · <a href="README.vi.md">Tiếng Việt</a> · <a href="README.zh-Hans.md">简体中文</a> · <a href="README.zh-Hant.md">繁體中文</a></p>
 
 Aplikacja na Linuksa, która zapisuje ustawienia klawiszy w małych klawiaturach makro USB. Takie klawiatury sprzedaje
 się w wielu wersjach: od modeli z jednym pokrętłem po modele z 21 klawiszami, z maksymalnie czterema pokrętłami. Dla
@@ -35,17 +35,17 @@ narzędzie przeznaczone dla tej klawiatury nie rysuje żadnego kształtu, więc 
 Dlatego to ty podajesz, ile ma klawiszy i pokręteł oraz ile klawiszy jest w rzędzie, a aplikacja rysuje je dokładnie
 tak, w równym układzie.
 
-Aplikacja jest dostępna w 16 językach — angielskim, koreańskim, japońskim, chińskim (uproszczonym i tradycyjnym),
-niemieckim, hiszpańskim, francuskim, włoskim, portugalskim (Brazylia i Portugalia), polskim, rosyjskim, indonezyjskim,
-wietnamskim i tajskim — i używa języka ustawionego w środowisku graficznym. W pozostałych językach wyświetla się po
-angielsku.
+Aplikacja jest dostępna w 17 językach — angielskim, koreańskim, japońskim, chińskim (uproszczonym i tradycyjnym),
+niemieckim, hiszpańskim (Hiszpania i Ameryka Łacińska), francuskim, włoskim, portugalskim (Brazylia i Portugalia),
+polskim, rosyjskim, indonezyjskim, wietnamskim i tajskim — i używa języka ustawionego w środowisku graficznym. W
+pozostałych językach wyświetla się po angielsku.
 
 Kod źródłowy w tym repozytorium jest objęty licencją MIT. Ikona aplikacji — ta w `data/icons/` i obraz na górze — jest
 objęta licencją CC BY-SA 4.0 ([`LICENSES/CC-BY-SA-4.0.txt`](../LICENSES/CC-BY-SA-4.0.txt)).
 
 ## macOS, Windows, Linux i przeglądarka
 
-MINIKeyboard ma cztery wydania zbudowane według tych samych zasad — te same polecenia, te same 16 języków. Trzy aplikacje obsługują te same klawiatury, a wydanie webowe, działające w przeglądarce, wszystkie oprócz `1189:8890`.
+MINIKeyboard ma cztery wydania zbudowane według tych samych zasad — te same polecenia, te same 17 języków. Trzy aplikacje obsługują te same klawiatury, a wydanie webowe, działające w przeglądarce, wszystkie oprócz `1189:8890`.
 
 | Repozytorium | GitHub |
 |---|---|
@@ -146,7 +146,7 @@ oferują każdy rodzaj (pozostałe ID raportu `1189:8890`, starsze oprogramowani
 5. **Zachowaj** (Ctrl+S) zapisuje zmiany. **Odczytaj** (Ctrl+R) pobiera bieżące ustawienia z klawiatury, która pozwala
    je odczytać.
 
-**Preferencje** (Ctrl+,) pozwalają wybrać język interfejsu (jeden z 16 lub język środowiska graficznego) oraz tryb
+**Preferencje** (Ctrl+,) pozwalają wybrać język interfejsu (jeden z 17 lub język środowiska graficznego) oraz tryb
 jasny lub ciemny; w kompilacji z kanałem uaktualnień na ich stronie Ogólne jest też automatyczne sprawdzanie
 uaktualnień. Polecenie **O programie MINIKeyboard** pokazuje wersję i licencje open source.
 
