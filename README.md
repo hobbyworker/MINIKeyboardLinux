@@ -9,7 +9,7 @@
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow"></a>
 </p>
 
-<p align="center"><b>English</b> · <a href="docs/README.ko.md">한국어</a> · <a href="docs/README.de.md">Deutsch</a> · <a href="docs/README.es.md">Español</a> · <a href="docs/README.es-419.md">Español (Latinoamérica)</a> · <a href="docs/README.fr.md">Français</a> · <a href="docs/README.id.md">Bahasa Indonesia</a> · <a href="docs/README.it.md">Italiano</a> · <a href="docs/README.ja.md">日本語</a> · <a href="docs/README.pl.md">Polski</a> · <a href="docs/README.pt-BR.md">Português (Brasil)</a> · <a href="docs/README.pt-PT.md">Português (Portugal)</a> · <a href="docs/README.ru.md">Русский</a> · <a href="docs/README.th.md">ไทย</a> · <a href="docs/README.vi.md">Tiếng Việt</a> · <a href="docs/README.zh-Hans.md">简体中文</a> · <a href="docs/README.zh-Hant.md">繁體中文</a></p>
+<p align="center"><b>English</b> · <a href="docs/README.ko.md">한국어</a> · <a href="docs/README.ar.md">العربية</a> · <a href="docs/README.de.md">Deutsch</a> · <a href="docs/README.es.md">Español</a> · <a href="docs/README.es-419.md">Español (Latinoamérica)</a> · <a href="docs/README.fr.md">Français</a> · <a href="docs/README.id.md">Bahasa Indonesia</a> · <a href="docs/README.it.md">Italiano</a> · <a href="docs/README.ja.md">日本語</a> · <a href="docs/README.pl.md">Polski</a> · <a href="docs/README.pt-BR.md">Português (Brasil)</a> · <a href="docs/README.pt-PT.md">Português (Portugal)</a> · <a href="docs/README.ru.md">Русский</a> · <a href="docs/README.th.md">ไทย</a> · <a href="docs/README.vi.md">Tiếng Việt</a> · <a href="docs/README.zh-Hans.md">简体中文</a> · <a href="docs/README.zh-Hant.md">繁體中文</a></p>
 
 A Linux app that writes key settings to small USB macro keyboards — the ones sold with anything from a single
 knob to 21 keys, and up to four knobs. For each key and knob action (rotate left, press, rotate right) it sets
@@ -32,16 +32,16 @@ app would; one that doesn't say gets the one of those layouts you pick. The vend
 `1189:8890` and its own tool draws no shape, so its real shape isn't known: you tell the app how many keys and
 knobs it has and how many keys are in a row, and it draws a tidy arrangement of that.
 
-The app is available in 17 languages — English, Korean, Japanese, Chinese (Simplified and Traditional), German, Spanish
-(Spain and Latin America), French, Italian, Portuguese (Brazil and Portugal), Polish, Russian, Indonesian, Vietnamese
-and Thai — and follows the language of the desktop. Other languages get English.
+The app is available in 18 languages — English, Korean, Japanese, Chinese (Simplified and Traditional), German, Spanish
+(Spain and Latin America), French, Italian, Portuguese (Brazil and Portugal), Polish, Russian, Indonesian, Vietnamese,
+Thai and Arabic — and follows the language of the desktop. Other languages get English.
 
 The source in this repository is MIT licensed. The app icon — in `data/icons/`, and the picture at the top — is
 licensed under CC BY-SA 4.0 ([`LICENSES/CC-BY-SA-4.0.txt`](LICENSES/CC-BY-SA-4.0.txt)).
 
 ## macOS, Windows, Linux and the web
 
-MINIKeyboard comes in four editions built on the same rules — the same commands, the same 17 languages. The three apps take the same keyboards; the web edition, which runs in the browser, takes them all but the `1189:8890`.
+MINIKeyboard comes in four editions built on the same rules — the same commands, the same 18 languages. The three apps take the same keyboards; the web edition, which runs in the browser, takes them all but the `1189:8890`.
 
 | Repository | GitHub |
 |---|---|
@@ -133,7 +133,7 @@ every answer.
    - **Delay** — on firmware that keeps waits.
 5. **Save** (Ctrl+S) writes what changed. **Read** (Ctrl+R) asks a keyboard that reads back what it holds.
 
-**Preferences** (Ctrl+,) picks the interface language (one of the 17, or the desktop's) and light or dark; in a
+**Preferences** (Ctrl+,) picks the interface language (one of the 18, or the desktop's) and light or dark; in a
 build with an update feed, its General page has the automatic update check. **About MINIKeyboard** has the
 version and the open source licenses.
 

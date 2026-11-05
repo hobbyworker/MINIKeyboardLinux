@@ -37,7 +37,11 @@ pub fn keycap(label: &str) -> gtk::Button {
 /// A key cap with an icon above its title.
 pub fn tall_keycap(icon: &str, title: &str) -> gtk::Button {
     let content = gtk::Box::new(gtk::Orientation::Vertical, 3);
-    content.append(&gtk::Image::from_icon_name(icon));
+    let image = gtk::Image::from_icon_name(icon);
+    if crate::names::keeps_its_direction(icon) {
+        image.set_direction(gtk::TextDirection::Ltr);
+    }
+    content.append(&image);
     content.append(&gtk::Label::builder().label(title).wrap(true).justify(gtk::Justification::Center).build());
     let button = gtk::Button::builder().child(&content).build();
     button.add_css_class("keycap");
@@ -79,6 +83,18 @@ pub fn set_active(button: &impl IsA<gtk::Widget>, active: bool) {
 /// Buttons that wrap onto as many lines as they need.
 pub fn wrap_box() -> adw::WrapBox {
     adw::WrapBox::builder().child_spacing(4).line_spacing(4).build()
+}
+
+/// Lays out `widget` and everything in it left to right, in every language — the keyboard and its keys. GTK gives a
+/// widget the app's direction unless it is told otherwise, not its parent's, so each one is told.
+pub fn keep_left_to_right(widget: &impl IsA<gtk::Widget>) {
+    let widget = widget.as_ref();
+    widget.set_direction(gtk::TextDirection::Ltr);
+    let mut child = widget.first_child();
+    while let Some(current) = child {
+        keep_left_to_right(&current);
+        child = current.next_sibling();
+    }
 }
 
 /// Removes every child of a box.

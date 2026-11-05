@@ -322,7 +322,12 @@ fn info_view(info: &KeyboardInfo) -> gtk::Box {
         let column = gtk::Box::new(gtk::Orientation::Vertical, 3);
         for interface in &info.interfaces {
             let roles: Vec<String> = interface.roles.iter().map(|role| interface_role_title(*role)).collect();
-            let mark = if interface.is_configuration { "  ←" } else { "" };
+            // Points back at the interface, whichever way the line reads.
+            let mark = match (interface.is_configuration, crate::right_to_left()) {
+                (false, _) => "",
+                (true, true) => "  →",
+                (true, false) => "  ←",
+            };
             column.append(&text(&format!("{}  {}{mark}", interface.number, roles.join(", "))));
         }
         add(&t("Interfaces"), column.upcast());

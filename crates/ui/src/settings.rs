@@ -78,7 +78,7 @@ impl Settings {
 
 /// The languages the app speaks, each in its own script — someone looking for theirs recognises it there.
 /// ⚠️ Must match the translations installed, or the list offers a language that falls back to English.
-pub const LANGUAGES: [(&str, &str); 17] = [
+pub const LANGUAGES: [(&str, &str); 18] = [
     ("en", "English"),
     ("ko", "한국어"),
     ("ja", "日本語"),
@@ -96,6 +96,7 @@ pub const LANGUAGES: [(&str, &str); 17] = [
     ("id", "Bahasa Indonesia"),
     ("vi", "Tiếng Việt"),
     ("th", "ไทย"),
+    ("ar", "العربية"),
 ];
 
 /// gettext's name for a language: "pt-BR" → "pt_BR", "pt-PT" → "pt" (gettext's own Portuguese is Portugal's),
@@ -107,6 +108,30 @@ pub fn gettext_language(code: &str) -> String {
         "zh-Hant" => "zh_TW".to_owned(),
         code => code.replace('-', "_"),
     }
+}
+
+/// The languages written right to left — the app speaks Arabic; Hebrew, Persian and Urdu would join it.
+const RIGHT_TO_LEFT: [&str; 4] = ["ar", "he", "fa", "ur"];
+
+/// Whether the interface reads right to left. The first language in gettext's list that the app speaks decides — one it
+/// doesn't speak falls through to the next — and English or the `C` locale (where gettext reads no `LANGUAGE`) is left to
+/// right. `language` is `LANGUAGE`, `locale` the one gettext takes the language of messages from.
+pub fn right_to_left(language: Option<&str>, locale: Option<&str>) -> bool {
+    let base = |name: &str| name.split(['_', '-', '.', '@']).next().unwrap_or_default().to_owned();
+    let locale = locale.unwrap_or("C");
+    if matches!(base(locale).as_str(), "" | "C" | "POSIX") {
+        return false;
+    }
+    for name in language.filter(|list| !list.is_empty()).unwrap_or(locale).split(':') {
+        let base = base(name);
+        if base == "en" {
+            return false;
+        }
+        if LANGUAGES.iter().any(|(code, _)| code.split('-').next() == Some(base.as_str())) {
+            return RIGHT_TO_LEFT.contains(&base.as_str());
+        }
+    }
+    false
 }
 
 /// The regions whose Spanish is Latin America's — its countries and the US.
@@ -156,6 +181,18 @@ mod tests {
         assert_eq!(system_language(Some(""), Some("es_US.UTF-8")).as_deref(), Some("es_419:es_US"));
         assert_eq!(system_language(Some("es_AR:es"), Some("es_AR.UTF-8")).as_deref(), Some("es_419:es_AR:es"));
         assert_eq!(system_language(None, Some("es_CO.utf8@euro")).as_deref(), Some("es_419:es_CO"));
+    }
+
+    #[test]
+    fn arabic_reads_right_to_left_and_every_other_language_left_to_right() {
+        assert!(right_to_left(Some("ar"), Some("ko_KR.UTF-8")));
+        assert!(right_to_left(None, Some("ar_SA.UTF-8")));
+        assert!(right_to_left(Some("fa:ar"), Some("fa_IR.UTF-8")));
+        assert!(!right_to_left(Some("fa:en"), Some("fa_IR.UTF-8")));
+        assert!(!right_to_left(Some("ar"), Some("C")));
+        assert!(!right_to_left(None, Some("ko_KR.UTF-8")));
+        assert!(!right_to_left(Some("es_419:es_MX"), Some("es_MX.UTF-8")));
+        assert!(!right_to_left(None, None));
     }
 
     #[test]

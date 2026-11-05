@@ -1,0 +1,983 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: minikeyboard\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+
+#: crates/ui/src/canvas.rs:202 crates/ui/src/names.rs:320 crates/ui/src/window.rs:426
+msgid "Simulator"
+msgstr "المحاكي"
+
+#: crates/ui/src/dialogs.rs:63
+msgid "The keyboard reports its keys and knobs: %@"
+msgstr "تذكر لوحة المفاتيح مفاتيحها ومقابضها: %@"
+
+#: crates/ui/src/dialogs.rs:63 crates/ui/src/dialogs.rs:140 crates/ui/src/header.rs:178 crates/ui/src/header.rs:299
+msgid "Keys: %lld · Knobs: %lld"
+msgstr "المفاتيح: %1$lld · المقابض: %2$lld"
+
+#: crates/ui/src/dialogs.rs:65
+msgid "The keyboard doesn’t say how many keys and knobs it has."
+msgstr "لا تذكر لوحة المفاتيح عدد مفاتيحها ومقابضها."
+
+#: crates/ui/src/dialogs.rs:68
+msgid "Its real shape isn’t known either. Set how many keys and knobs it has and how many keys are in a row, then rotate it to match how it sits in front of you."
+msgstr "شكلها الحقيقي غير معروف أيضًا. حدد عدد المفاتيح والمقابض فيها وعدد المفاتيح في كل صف، ثم دوّر الشكل ليطابق وضعها أمامك."
+
+#: crates/ui/src/dialogs.rs:72
+msgid "Pick the shape that matches the keyboard, then rotate it to match how it sits in front of you."
+msgstr "اختر الشكل الذي يطابق لوحة المفاتيح، ثم دوّره ليطابق وضعها أمامك."
+
+#: crates/ui/src/dialogs.rs:170 crates/ui/src/window.rs:78 crates/ui/src/window.rs:301
+msgid "Rotate"
+msgstr "تدوير"
+
+#: crates/ui/src/dialogs.rs:173 crates/ui/src/window.rs:541
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: crates/ui/src/dialogs.rs:174
+msgid "Done"
+msgstr "تم"
+
+#: crates/ui/src/dialogs.rs:189
+msgid "Choose the Keyboard’s Shape"
+msgstr "اختيار شكل لوحة المفاتيح"
+
+#: crates/ui/src/dialogs.rs:243 crates/ui/src/names.rs:198
+msgid "Keys"
+msgstr "المفاتيح"
+
+#: crates/ui/src/dialogs.rs:244
+msgid "Keys per row"
+msgstr "المفاتيح في كل صف"
+
+#: crates/ui/src/dialogs.rs:247
+msgid "Knobs"
+msgstr "المقابض"
+
+#: crates/ui/src/dialogs.rs:348
+msgid "Linux lets an app open a USB keyboard only when a udev rule gives the signed-in user its device. Run these commands in a terminal once — they write %@ — then plug the keyboard in again."
+msgstr "لا يسمح Linux للتطبيق بفتح لوحة مفاتيح USB إلا إذا كانت هناك قاعدة udev تمنح الجهاز للمستخدم الذي سجّل الدخول. شغّل هذه الأوامر في الطرفية مرة واحدة — فهي تكتب الملف %@ — ثم أعد توصيل لوحة المفاتيح."
+
+#: crates/ui/src/dialogs.rs:371 crates/ui/src/log_window.rs:42
+msgid "Copy"
+msgstr "نسخ"
+
+#: crates/ui/src/dialogs.rs:379
+msgid "Allow Access to the Keyboard"
+msgstr "السماح بالوصول إلى لوحة المفاتيح"
+
+#: crates/ui/src/header.rs:48 crates/ui/src/header.rs:52 crates/ui/src/header.rs:225
+msgid "Choose a Keyboard"
+msgstr "اختيار لوحة مفاتيح"
+
+#: crates/ui/src/header.rs:55 crates/ui/src/header.rs:59 crates/ui/src/header.rs:258
+msgid "Keyboard Information"
+msgstr "معلومات لوحة المفاتيح"
+
+#: crates/ui/src/header.rs:60 crates/ui/src/header.rs:61
+msgid "Retry"
+msgstr "إعادة المحاولة"
+
+#: crates/ui/src/header.rs:62
+msgid "How to Allow…"
+msgstr "طريقة السماح…"
+
+#: crates/ui/src/header.rs:79
+msgid "Main Menu"
+msgstr "القائمة الرئيسية"
+
+#: crates/ui/src/header.rs:83
+msgid "Save"
+msgstr "حفظ"
+
+#: crates/ui/src/header.rs:83 crates/ui/src/window.rs:295
+msgid "Save to Keyboard"
+msgstr "حفظ في لوحة المفاتيح"
+
+#: crates/ui/src/header.rs:86
+msgid "Read"
+msgstr "قراءة"
+
+#: crates/ui/src/header.rs:87 crates/ui/src/window.rs:295
+msgid "Read from Keyboard"
+msgstr "قراءة من لوحة المفاتيح"
+
+#: crates/ui/src/header.rs:163
+msgid "Not Connected"
+msgstr "غير متصل"
+
+#: crates/ui/src/header.rs:163
+msgid "Connect the keyboard via USB."
+msgstr "وصّل لوحة المفاتيح عبر USB."
+
+#: crates/ui/src/header.rs:165 crates/ui/src/names.rs:289
+msgid "Access to the keyboard is needed"
+msgstr "يلزم إذن الوصول إلى لوحة المفاتيح"
+
+#: crates/ui/src/header.rs:166
+msgid "Add the udev rule for this keyboard, then plug it in again."
+msgstr "أضف قاعدة udev الخاصة بلوحة المفاتيح هذه، ثم أعد توصيلها."
+
+#: crates/ui/src/header.rs:168
+msgid "The keyboard couldn’t be opened"
+msgstr "تعذر فتح لوحة المفاتيح"
+
+#: crates/ui/src/header.rs:171
+msgid "Asking the keyboard what it is…"
+msgstr "يجري الاستعلام عن نوع لوحة المفاتيح…"
+
+#: crates/ui/src/header.rs:172
+msgid "Reading…"
+msgstr "تجري القراءة…"
+
+#: crates/ui/src/header.rs:173
+msgid "Saving…"
+msgstr "يجري الحفظ…"
+
+#: crates/ui/src/header.rs:174
+msgid "Simulated Keyboard"
+msgstr "لوحة مفاتيح المحاكي"
+
+#: crates/ui/src/header.rs:175
+msgid "Connected"
+msgstr "متصل"
+
+#: crates/ui/src/header.rs:178 crates/ui/src/names.rs:309 crates/ui/src/names.rs:311
+msgid "%@ · %@"
+msgstr "%@ · %@"
+
+#: crates/ui/src/header.rs:203 crates/ui/src/inspector.rs:116
+msgid "Layer %lld"
+msgstr "الطبقة %lld"
+
+#: crates/ui/src/header.rs:278
+msgid "Not provided by the keyboard"
+msgstr "لا توفره لوحة المفاتيح"
+
+#: crates/ui/src/header.rs:287
+msgid "Name"
+msgstr "الاسم"
+
+#: crates/ui/src/header.rs:288
+msgid "Manufacturer"
+msgstr "الشركة المصنعة"
+
+#: crates/ui/src/header.rs:289
+msgid "Serial Number"
+msgstr "الرقم التسلسلي"
+
+#: crates/ui/src/header.rs:291
+msgid "Chip"
+msgstr "الشريحة"
+
+#: crates/ui/src/header.rs:293
+msgid "Firmware"
+msgstr "البرنامج الثابت"
+
+#: crates/ui/src/header.rs:304
+msgid "Not tested yet"
+msgstr "لم يتم اختباره بعد"
+
+#: crates/ui/src/header.rs:319
+msgid "Power"
+msgstr "الطاقة"
+
+#: crates/ui/src/header.rs:328
+msgid "Interfaces"
+msgstr "الواجهات"
+
+#: crates/ui/src/header.rs:330 crates/ui/src/names.rs:152
+msgid "Configuration Channel"
+msgstr "قناة التكوين"
+
+#: crates/ui/src/header.rs:331
+msgid "Commands"
+msgstr "مجموعة الأوامر"
+
+#: crates/ui/src/inspector.rs:37 crates/ui/src/names.rs:224 crates/ui/src/pages.rs:696
+msgid "Select a key or knob."
+msgstr "حدد مفتاحًا أو مقبضًا."
+
+#: crates/ui/src/inspector.rs:44 crates/ui/src/log_window.rs:43
+msgid "Clear"
+msgstr "مسح"
+
+#: crates/ui/src/inspector.rs:45 crates/ui/src/window.rs:299
+msgid "Clear Layer"
+msgstr "مسح الطبقة"
+
+#: crates/ui/src/inspector.rs:84
+msgid "Next key with %@"
+msgstr "المفتاح التالي مع %@"
+
+#: crates/ui/src/inspector.rs:97
+msgid "Unsaved changes"
+msgstr "تغييرات غير محفوظة"
+
+#: crates/ui/src/inspector.rs:102
+msgid "No unsaved changes"
+msgstr "لا توجد تغييرات غير محفوظة"
+
+#: crates/ui/src/inspector.rs:124
+msgid "Not known — this keyboard doesn’t tell what its keys do. Whatever you set here is written when you save."
+msgstr "غير معروف — لا تكشف لوحة المفاتيح هذه عن وظائف مفاتيحها. يُكتب كل ما تضبطه هنا على لوحة المفاتيح عند الحفظ."
+
+#: crates/ui/src/inspector.rs:132
+msgid "Nothing"
+msgstr "لا شيء"
+
+#: crates/ui/src/inspector.rs:160
+msgid "Waits %lld ms"
+msgstr "انتظار %lld ms"
+
+#: crates/ui/src/inspector.rs:162
+msgid "%lld of %lld presses"
+msgstr "الضغطات: %1$lld من %2$lld"
+
+#: crates/ui/src/inspector.rs:165
+msgid "Remove Last Press"
+msgstr "إزالة آخر ضغطة"
+
+#: crates/ui/src/log_window.rs:41 crates/ui/src/log_window.rs:261
+msgid "Expand All"
+msgstr "توسيع الكل"
+
+#: crates/ui/src/log_window.rs:61
+msgid "No packets yet."
+msgstr "لا توجد حزم بعد."
+
+#: crates/ui/src/log_window.rs:78 crates/ui/src/window.rs:302
+msgid "Device Log"
+msgstr "سجل الجهاز"
+
+#: crates/ui/src/log_window.rs:153
+msgid "Packets: %lld"
+msgstr "الحزم: %lld"
+
+#: crates/ui/src/log_window.rs:177 crates/ui/src/log_window.rs:270
+msgid "Expand"
+msgstr "توسيع"
+
+#: crates/ui/src/log_window.rs:199 crates/ui/src/names.rs:328
+msgid "%lld bytes"
+msgstr "%lld بايت"
+
+#: crates/ui/src/log_window.rs:261
+msgid "Collapse All"
+msgstr "طي الكل"
+
+#: crates/ui/src/log_window.rs:270
+msgid "Collapse"
+msgstr "طي"
+
+#: crates/ui/src/names.rs:12
+msgid "Key %lld"
+msgstr "المفتاح %lld"
+
+#: crates/ui/src/names.rs:13
+msgid "Knob %lld · Rotate left"
+msgstr "المقبض %lld · تدوير إلى اليسار"
+
+#: crates/ui/src/names.rs:14
+msgid "Knob %lld · Press"
+msgstr "المقبض %lld · ضغط"
+
+#: crates/ui/src/names.rs:15
+msgid "Knob %lld · Rotate right"
+msgstr "المقبض %lld · تدوير إلى اليمين"
+
+#: crates/ui/src/names.rs:16
+msgid "Knob %lld · Press and rotate left"
+msgstr "المقبض %lld · ضغط وتدوير إلى اليسار"
+
+#: crates/ui/src/names.rs:18
+msgid "Knob %lld · Press and rotate right"
+msgstr "المقبض %lld · ضغط وتدوير إلى اليمين"
+
+#: crates/ui/src/names.rs:25
+msgid "Play/Pause"
+msgstr "تشغيل/إيقاف مؤقت"
+
+#: crates/ui/src/names.rs:26
+msgid "Stop"
+msgstr "إيقاف"
+
+#: crates/ui/src/names.rs:27
+msgid "Prev Song"
+msgstr "المسار السابق"
+
+#: crates/ui/src/names.rs:28
+msgid "Next Song"
+msgstr "المسار التالي"
+
+#: crates/ui/src/names.rs:29
+msgid "Mute"
+msgstr "كتم الصوت"
+
+#: crates/ui/src/names.rs:30
+msgid "Volume+"
+msgstr "مستوى الصوت +"
+
+#: crates/ui/src/names.rs:31
+msgid "Volume-"
+msgstr "مستوى الصوت -"
+
+#: crates/ui/src/names.rs:32
+msgid "Brightness+"
+msgstr "السطوع +"
+
+#: crates/ui/src/names.rs:33
+msgid "Brightness-"
+msgstr "السطوع -"
+
+#: crates/ui/src/names.rs:34
+msgid "Bass+"
+msgstr "الباس +"
+
+#: crates/ui/src/names.rs:35
+msgid "Bass-"
+msgstr "الباس -"
+
+#: crates/ui/src/names.rs:36
+msgid "Treble+"
+msgstr "التريبل +"
+
+#: crates/ui/src/names.rs:37
+msgid "Treble-"
+msgstr "التريبل -"
+
+#: crates/ui/src/names.rs:38
+msgid "Media Player"
+msgstr "مشغل الوسائط"
+
+#: crates/ui/src/names.rs:39
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: crates/ui/src/names.rs:40
+msgid "Calculator"
+msgstr "الحاسبة"
+
+#: crates/ui/src/names.rs:41
+msgid "My Computer"
+msgstr "جهاز الكمبيوتر"
+
+#: crates/ui/src/names.rs:42
+msgid "Web Home"
+msgstr "الويب: الرئيسية"
+
+#: crates/ui/src/names.rs:43
+msgid "Web Back"
+msgstr "الويب: رجوع"
+
+#: crates/ui/src/names.rs:44
+msgid "Web Forward"
+msgstr "الويب: تقدم"
+
+#: crates/ui/src/names.rs:45
+msgid "Web Refresh"
+msgstr "الويب: تحديث"
+
+#: crates/ui/src/names.rs:82
+msgid "Mouse Left"
+msgstr "زر الماوس الأيسر"
+
+#: crates/ui/src/names.rs:83
+msgid "Mouse Centre"
+msgstr "زر الماوس الأوسط"
+
+#: crates/ui/src/names.rs:84
+msgid "Mouse Right"
+msgstr "زر الماوس الأيمن"
+
+#: crates/ui/src/names.rs:85
+msgid "Mouse wheel Up"
+msgstr "عجلة الماوس لأعلى"
+
+#: crates/ui/src/names.rs:86
+msgid "Mouse wheel Down"
+msgstr "عجلة الماوس لأسفل"
+
+#: crates/ui/src/names.rs:87
+msgid "Ctrl + Mouse wheel Up"
+msgstr "Ctrl + عجلة الماوس لأعلى"
+
+#: crates/ui/src/names.rs:88
+msgid "Ctrl + Mouse wheel Down"
+msgstr "Ctrl + عجلة الماوس لأسفل"
+
+#: crates/ui/src/names.rs:89
+msgid "Shift + Mouse wheel Up"
+msgstr "Shift + عجلة الماوس لأعلى"
+
+#: crates/ui/src/names.rs:90
+msgid "Shift + Mouse wheel Down"
+msgstr "Shift + عجلة الماوس لأسفل"
+
+#: crates/ui/src/names.rs:91
+msgid "Alt + Mouse wheel Up"
+msgstr "Alt + عجلة الماوس لأعلى"
+
+#: crates/ui/src/names.rs:92
+msgid "Alt + Mouse wheel Down"
+msgstr "Alt + عجلة الماوس لأسفل"
+
+#: crates/ui/src/names.rs:111
+msgid "Control"
+msgstr "Control"
+
+#: crates/ui/src/names.rs:112
+msgid "Alt"
+msgstr "Alt"
+
+#: crates/ui/src/names.rs:113
+msgid "Shift"
+msgstr "Shift"
+
+#: crates/ui/src/names.rs:114
+msgid "Super"
+msgstr "Super"
+
+#: crates/ui/src/names.rs:115
+msgid "Right Control"
+msgstr "Control الأيمن"
+
+#: crates/ui/src/names.rs:116
+msgid "Right Alt"
+msgstr "Alt الأيمن"
+
+#: crates/ui/src/names.rs:117
+msgid "Right Shift"
+msgstr "Shift الأيمن"
+
+#: crates/ui/src/names.rs:118
+msgid "Right Super"
+msgstr "Super الأيمن"
+
+#: crates/ui/src/names.rs:124
+msgid "Red"
+msgstr "أحمر"
+
+#: crates/ui/src/names.rs:125
+msgid "Orange"
+msgstr "برتقالي"
+
+#: crates/ui/src/names.rs:126
+msgid "Yellow"
+msgstr "أصفر"
+
+#: crates/ui/src/names.rs:127
+msgid "Green"
+msgstr "أخضر"
+
+#: crates/ui/src/names.rs:128
+msgid "Cyan"
+msgstr "سماوي"
+
+#: crates/ui/src/names.rs:129
+msgid "Blue"
+msgstr "أزرق"
+
+#: crates/ui/src/names.rs:130
+msgid "Purple"
+msgstr "أرجواني"
+
+#: crates/ui/src/names.rs:149
+msgid "Keyboard"
+msgstr "لوحة المفاتيح"
+
+#: crates/ui/src/names.rs:150 crates/ui/src/names.rs:200 crates/ui/src/pages.rs:77
+msgid "Mouse"
+msgstr "الماوس"
+
+#: crates/ui/src/names.rs:151 crates/ui/src/names.rs:199 crates/ui/src/pages.rs:68
+msgid "Multimedia"
+msgstr "الوسائط المتعددة"
+
+#: crates/ui/src/names.rs:153
+msgid "Other"
+msgstr "أخرى"
+
+#: crates/ui/src/names.rs:161
+msgid "Off"
+msgstr "إيقاف"
+
+#: crates/ui/src/names.rs:162
+msgid "Blink Last Key"
+msgstr "وميض آخر مفتاح"
+
+#: crates/ui/src/names.rs:163
+msgid "Running Light"
+msgstr "ضوء متحرك"
+
+#: crates/ui/src/names.rs:164
+msgid "Mode %lld"
+msgstr "الوضع %lld"
+
+#: crates/ui/src/names.rs:170
+msgid "The last key pressed keeps blinking, in a new color with each press."
+msgstr "يواصل آخر مفتاح مضغوط الوميض، بلون جديد مع كل ضغطة."
+
+#: crates/ui/src/names.rs:171
+msgid "A light runs across the keys in order, in a new color each round."
+msgstr "يمر ضوء على المفاتيح بالترتيب، بلون جديد في كل دورة."
+
+#: crates/ui/src/names.rs:186
+msgid "Letters"
+msgstr "الأحرف"
+
+#: crates/ui/src/names.rs:187
+msgid "Numbers"
+msgstr "الأرقام"
+
+#: crates/ui/src/names.rs:188
+msgid "Editing"
+msgstr "التحرير"
+
+#: crates/ui/src/names.rs:189
+msgid "Symbols"
+msgstr "الرموز"
+
+#: crates/ui/src/names.rs:190
+msgid "Function Keys"
+msgstr "مفاتيح الوظائف"
+
+#: crates/ui/src/names.rs:191
+msgid "Navigation"
+msgstr "التنقل"
+
+#: crates/ui/src/names.rs:192
+msgid "Numpad"
+msgstr "لوحة الأرقام"
+
+#: crates/ui/src/names.rs:201 crates/ui/src/pages.rs:574
+msgid "LED"
+msgstr "LED"
+
+#: crates/ui/src/names.rs:202 crates/ui/src/pages.rs:687 crates/ui/src/pages.rs:699
+msgid "Delay"
+msgstr "التأخير"
+
+#: crates/ui/src/names.rs:208
+msgid "Saved to the simulator — nothing was written to a keyboard."
+msgstr "تم الحفظ في المحاكي — لم يُكتب شيء على أي لوحة مفاتيح."
+
+#: crates/ui/src/names.rs:209
+msgid "Saved to the keyboard."
+msgstr "تم الحفظ في لوحة المفاتيح."
+
+#: crates/ui/src/names.rs:210
+msgid "Saved, but some keys or knobs read back differently. Those changes stay unsaved."
+msgstr "تم الحفظ، لكن القراءة مجددًا أظهرت اختلافًا في بعض المفاتيح أو المقابض. تبقى تلك التغييرات غير محفوظة."
+
+#: crates/ui/src/names.rs:211
+msgid "Saved, but the keyboard couldn’t be read back to check."
+msgstr "تم الحفظ، لكن تعذرت القراءة مجددًا من لوحة المفاتيح للتحقق."
+
+#: crates/ui/src/names.rs:212
+msgid "Read from the keyboard."
+msgstr "تمت القراءة من لوحة المفاتيح."
+
+#: crates/ui/src/names.rs:213
+msgid "Nothing to save — no key has changed."
+msgstr "لا يوجد ما يُحفظ — لم يتغير أي مفتاح."
+
+#: crates/ui/src/names.rs:214
+msgid "The keyboard couldn’t be asked what it is."
+msgstr "تعذر الاستعلام عن نوع لوحة المفاتيح."
+
+#: crates/ui/src/names.rs:215
+msgid "Reading from the keyboard failed."
+msgstr "تعذرت القراءة من لوحة المفاتيح."
+
+#: crates/ui/src/names.rs:216
+msgid "Some keys or knobs couldn’t be read. They’re shown as before."
+msgstr "تعذرت قراءة بعض المفاتيح أو المقابض، وهي معروضة كما كانت من قبل."
+
+#: crates/ui/src/names.rs:217
+msgid "This keyboard’s firmware (type %lld) hasn’t been tested yet. If keys read or save wrong, please report it with the device log."
+msgstr "لم يتم اختبار البرنامج الثابت للوحة المفاتيح هذه (النوع %lld) بعد. إذا لم تُقرأ المفاتيح أو تُحفظ بشكل صحيح، فيُرجى الإبلاغ عن ذلك مع إرفاق سجل الجهاز."
+
+#: crates/ui/src/names.rs:221 crates/ui/src/names.rs:291
+msgid "Writing to the keyboard failed (%@)."
+msgstr "تعذرت الكتابة على لوحة المفاتيح (%@)."
+
+#: crates/ui/src/names.rs:222
+msgid "The keyboard is no longer connected."
+msgstr "لم تعد لوحة المفاتيح متصلة."
+
+#: crates/ui/src/names.rs:223
+msgid "A key holds up to %lld presses."
+msgstr "يمكن أن يصل عدد الضغطات في المفتاح الواحد إلى %lld."
+
+#: crates/ui/src/names.rs:226
+msgid "Modifiers alone make the key a modifier key, so they can’t go with other presses."
+msgstr "عند إضافة مفاتيح التعديل وحدها يصبح المفتاح مفتاح تعديل، لذا لا يمكن جمعها مع ضغطات أخرى."
+
+#: crates/ui/src/names.rs:228
+msgid "Only keys 1–%lld have a color. Select one of them."
+msgstr "اللون متاح للمفاتيح 1–%lld فقط. حدد أحدها."
+
+#: crates/ui/src/names.rs:229
+msgid "This keyboard can’t do that."
+msgstr "لا تدعم لوحة المفاتيح هذه ذلك."
+
+#: crates/ui/src/names.rs:239
+msgid "Media Key %@"
+msgstr "مفتاح وسائط %@"
+
+#: crates/ui/src/names.rs:248
+msgid "Enter"
+msgstr "Enter"
+
+#: crates/ui/src/names.rs:249
+msgid "Escape"
+msgstr "Escape"
+
+#: crates/ui/src/names.rs:250
+msgid "Backspace"
+msgstr "Backspace"
+
+#: crates/ui/src/names.rs:251
+msgid "Tab"
+msgstr "Tab"
+
+#: crates/ui/src/names.rs:252
+msgid "Space"
+msgstr "Space"
+
+#: crates/ui/src/names.rs:253
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+#: crates/ui/src/names.rs:254
+msgid "Menu Key"
+msgstr "مفتاح القائمة"
+
+#: crates/ui/src/names.rs:255
+msgid "Print Screen"
+msgstr "Print Screen"
+
+#: crates/ui/src/names.rs:256
+msgid "Scroll Lock"
+msgstr "Scroll Lock"
+
+#: crates/ui/src/names.rs:257
+msgid "Insert"
+msgstr "Insert"
+
+#: crates/ui/src/names.rs:258
+msgid "Home"
+msgstr "Home"
+
+#: crates/ui/src/names.rs:259
+msgid "Page Up"
+msgstr "Page Up"
+
+#: crates/ui/src/names.rs:260
+msgid "Delete"
+msgstr "Delete"
+
+#: crates/ui/src/names.rs:261
+msgid "End"
+msgstr "End"
+
+#: crates/ui/src/names.rs:262
+msgid "Page Down"
+msgstr "Page Down"
+
+#: crates/ui/src/names.rs:263
+msgid "Right Arrow"
+msgstr "سهم اليمين"
+
+#: crates/ui/src/names.rs:264
+msgid "Left Arrow"
+msgstr "سهم اليسار"
+
+#: crates/ui/src/names.rs:265
+msgid "Down Arrow"
+msgstr "سهم لأسفل"
+
+#: crates/ui/src/names.rs:266
+msgid "Up Arrow"
+msgstr "سهم لأعلى"
+
+#: crates/ui/src/names.rs:267
+msgid "Num Lock"
+msgstr "Num Lock"
+
+#: crates/ui/src/names.rs:268
+msgid "Keypad Enter"
+msgstr "Enter في لوحة الأرقام"
+
+#: crates/ui/src/names.rs:278
+msgid "Keypad %@"
+msgstr "%@ في لوحة الأرقام"
+
+#: crates/ui/src/names.rs:280
+msgid "Non-US Key %@ %@"
+msgstr "مفتاح %1$@ %2$@ في التخطيطات غير الأمريكية"
+
+#: crates/ui/src/names.rs:287
+msgid "Looking for the keyboard"
+msgstr "يجري البحث عن لوحة المفاتيح"
+
+#: crates/ui/src/names.rs:288
+msgid "Connected to %@, interface %lld"
+msgstr "متصل بالجهاز %1$@، الواجهة %2$lld"
+
+#: crates/ui/src/names.rs:290
+msgid "The keyboard couldn’t be opened (%@)."
+msgstr "تعذر فتح لوحة المفاتيح (%@)."
+
+#: crates/ui/src/names.rs:292
+msgid "Simulated keyboard: %@"
+msgstr "لوحة مفاتيح المحاكي: %@"
+
+#: crates/ui/src/names.rs:307 crates/ui/src/names.rs:327 crates/ui/src/names.rs:335
+msgid "Report ID %lld"
+msgstr "معرّف التقرير %lld"
+
+#: crates/ui/src/names.rs:309
+msgid "Keys: %lld · Knobs: %lld · Type %lld"
+msgstr "المفاتيح: %1$lld · المقابض: %2$lld · النوع %3$lld"
+
+#: crates/ui/src/names.rs:322
+msgid "Interface %lld · %@ · %@ · %@"
+msgstr "الواجهة %1$lld · %2$@ · %3$@ · %4$@"
+
+#: crates/ui/src/names.rs:335
+msgid "8890 Packets · %@"
+msgstr "حزم 8890 · %@"
+
+#: crates/ui/src/names.rs:336
+msgid "884x · Standard Firmware"
+msgstr "884x · برنامج ثابت قياسي"
+
+#: crates/ui/src/names.rs:337
+msgid "884x · Legacy Firmware"
+msgstr "884x · برنامج ثابت قديم"
+
+#: crates/ui/src/names.rs:338
+msgid "884x · Doesn’t Answer Identification"
+msgstr "884x · لا استجابة لاستعلام النوع"
+
+#: crates/ui/src/pages.rs:69
+msgid "A media key replaces what the key did."
+msgstr "يحل مفتاح الوسائط محل الإجراء السابق للمفتاح."
+
+#: crates/ui/src/pages.rs:78
+msgid "A mouse action replaces what the key did."
+msgstr "يحل إجراء الماوس محل الإجراء السابق للمفتاح."
+
+#: crates/ui/src/pages.rs:187
+msgid "Key Layout"
+msgstr "ترتيب المفاتيح"
+
+#: crates/ui/src/pages.rs:188
+msgid "Modifiers Only"
+msgstr "مفاتيح التعديل فقط"
+
+#: crates/ui/src/pages.rs:189
+msgid "Makes the key hold these modifiers, as a modifier key does."
+msgstr "يُبقي مفاتيح التعديل هذه مضغوطة ما دام المفتاح مضغوطًا، كما يفعل مفتاح التعديل."
+
+#: crates/ui/src/pages.rs:264
+msgid "Modifiers apply to the next key."
+msgstr "تنطبق مفاتيح التعديل على المفتاح التالي."
+
+#: crates/ui/src/pages.rs:266
+msgid "Modifiers apply to the next key. A key holds up to %lld presses, each modifier counting as one."
+msgstr "تنطبق مفاتيح التعديل على المفتاح التالي. يمكن أن يصل عدد الضغطات في المفتاح الواحد إلى %lld، ويُحسب كل مفتاح تعديل ضغطة واحدة."
+
+#: crates/ui/src/pages.rs:271
+msgid "Modifiers apply to the next key. A key holds up to %lld presses."
+msgstr "تنطبق مفاتيح التعديل على المفتاح التالي. يمكن أن يصل عدد الضغطات في المفتاح الواحد إلى %lld."
+
+#: crates/ui/src/pages.rs:335
+msgid "This keyboard doesn’t take this key."
+msgstr "لا يمكن تعيين هذا المفتاح في لوحة المفاتيح هذه."
+
+#: crates/ui/src/pages.rs:356
+msgid "More Keys"
+msgstr "مفاتيح أخرى"
+
+#: crates/ui/src/pages.rs:372
+msgid "Modifiers"
+msgstr "مفاتيح التعديل"
+
+#: crates/ui/src/pages.rs:389
+msgid "Shift Symbols"
+msgstr "رموز Shift"
+
+#: crates/ui/src/pages.rs:506 crates/ui/src/pages.rs:542
+msgid "Color"
+msgstr "اللون"
+
+#: crates/ui/src/pages.rs:510 crates/ui/src/pages.rs:574
+msgid "Lighting is set per layer; no key selection is needed."
+msgstr "تُضبط الإضاءة لكل طبقة على حدة، فلا داعي لتحديد مفتاح."
+
+#: crates/ui/src/pages.rs:541
+msgid "Select one of keys 1–%lld on the keyboard, then pick its color."
+msgstr "حدد أحد المفاتيح 1–%lld على لوحة المفاتيح، ثم اختر لونه."
+
+#: crates/ui/src/pages.rs:587
+msgid "Effect"
+msgstr "التأثير"
+
+#: crates/ui/src/pages.rs:670
+msgid "The selected key has no presses."
+msgstr "لا توجد ضغطات في المفتاح المحدد."
+
+#: crates/ui/src/pages.rs:674
+msgid "Press %lld"
+msgstr "الضغطة %lld"
+
+#: crates/ui/src/pages.rs:686
+msgid "Each press can wait before it is sent. Give the key its presses on the Keys page first."
+msgstr "يمكن أن تنتظر كل ضغطة قبل إرسالها. أضف أولًا ضغطات المفتاح في صفحة «المفاتيح»."
+
+#: crates/ui/src/pages.rs:700
+msgid "One wait for the whole key. Its presses stay."
+msgstr "انتظار واحد للمفتاح كله، وتبقى ضغطاته كما هي."
+
+#: crates/ui/src/preferences.rs:28
+msgid "Language & Appearance"
+msgstr "اللغة والمظهر"
+
+#: crates/ui/src/preferences.rs:29
+msgid "The base language is English. You can follow the system language or choose one yourself."
+msgstr "اللغة الأساسية هي الإنجليزية. يمكنك اتباع لغة النظام أو اختيار لغة بنفسك."
+
+#: crates/ui/src/preferences.rs:35 crates/ui/src/preferences.rs:47
+msgid "Follow System"
+msgstr "حسب النظام"
+
+#: crates/ui/src/preferences.rs:37
+msgid "Language"
+msgstr "اللغة"
+
+#: crates/ui/src/preferences.rs:47
+msgid "Light"
+msgstr "فاتح"
+
+#: crates/ui/src/preferences.rs:47
+msgid "Dark"
+msgstr "داكن"
+
+#: crates/ui/src/preferences.rs:49
+msgid "Appearance"
+msgstr "المظهر"
+
+#: crates/ui/src/preferences.rs:60
+msgid "UI"
+msgstr "UI"
+
+#: crates/ui/src/preferences.rs:62 crates/ui/src/window.rs:306
+msgid "Preferences"
+msgstr "التفضيلات"
+
+#: crates/ui/src/preferences.rs:64
+msgid "General"
+msgstr "عام"
+
+#: crates/ui/src/preferences.rs:67
+msgid "Prevent key repeat after changing the lighting"
+msgstr "منع تكرار المفاتيح بعد تغيير الإضاءة"
+
+#: crates/ui/src/preferences.rs:75
+msgid "Firmware Workarounds"
+msgstr "تجاوز أخطاء البرنامج الثابت"
+
+#: crates/ui/src/preferences.rs:76
+msgid "After its lighting is saved, the 1189:8890 keyboard repeats a key's first stroke without end when the key is pressed (its maker's software does the same). With this on, the app sends one more save after the lighting to stop that; the keys stay as they were. Off, the app sends just what the maker's software sends."
+msgstr "بعد حفظ الإضاءة في لوحة المفاتيح 1189:8890، يتكرر أول حرف في المفتاح بلا توقف عند الضغط عليه (ويحدث الأمر نفسه مع برنامج الشركة المصنعة). عند تشغيل هذا الخيار، يرسل التطبيق أمر حفظ إضافيًا بعد الإضاءة لمنع ذلك، ولا تتغير إعدادات المفاتيح. وعند إيقافه، يرسل التطبيق ما يرسله برنامج الشركة المصنعة فقط."
+
+#: crates/ui/src/preferences.rs:83
+msgid "Check for updates automatically"
+msgstr "التحقق من وجود تحديثات تلقائيًا"
+
+#: crates/ui/src/preferences.rs:124
+msgid "Language Changed"
+msgstr "تم تغيير اللغة"
+
+#: crates/ui/src/preferences.rs:125
+msgid "%@ needs to relaunch to apply the change."
+msgstr "يجب إعادة تشغيل %@ حتى يسري التغيير."
+
+#: crates/ui/src/preferences.rs:127
+msgid "Later"
+msgstr "لاحقًا"
+
+#: crates/ui/src/preferences.rs:127
+msgid "Relaunch Now"
+msgstr "إعادة التشغيل الآن"
+
+#: crates/ui/src/window.rs:70
+msgid "Keys appear here once the keyboard is connected."
+msgstr "ستظهر المفاتيح هنا بعد توصيل لوحة المفاتيح."
+
+#: crates/ui/src/window.rs:84 crates/ui/src/window.rs:301
+msgid "Shape…"
+msgstr "الشكل…"
+
+#: crates/ui/src/window.rs:137
+msgid "Download"
+msgstr "تنزيل"
+
+#: crates/ui/src/window.rs:299
+msgid "Clear Key"
+msgstr "مسح المفتاح"
+
+#: crates/ui/src/window.rs:308
+msgid "Check for Updates…"
+msgstr "التحقق من وجود تحديثات…"
+
+#: crates/ui/src/window.rs:310
+msgid "About %@"
+msgstr "حول %@"
+
+#: crates/ui/src/window.rs:361
+msgid "%@ is up to date."
+msgstr "لديك أحدث إصدار من %@."
+
+#: crates/ui/src/window.rs:362
+msgid "Couldn’t check for updates."
+msgstr "تعذر التحقق من وجود تحديثات."
+
+#: crates/ui/src/window.rs:369
+msgid "%1$@ %2$@ is available."
+msgstr "يتوفر الإصدار %2$@ من %1$@."
+
+#: crates/ui/src/window.rs:395
+msgid "Keyboard on USB"
+msgstr "لوحة مفاتيح USB"
+
+#: crates/ui/src/window.rs:538
+msgid "Switch Keyboards?"
+msgstr "هل تريد تبديل لوحة المفاتيح؟"
+
+#: crates/ui/src/window.rs:539
+msgid "Changes you haven’t saved will be lost."
+msgstr "ستفقد التغييرات التي لم تحفظها."
+
+#: crates/ui/src/window.rs:541
+msgid "Switch"
+msgstr "تبديل"
+
+#: crates/ui/src/window.rs:577
+msgid "Simulator in use"
+msgstr "المحاكي قيد الاستخدام"
+
+#: crates/ui/src/window.rs:580
+msgid "This isn't a real keyboard. Nothing you save here is written to any keyboard."
+msgstr "هذه ليست لوحة مفاتيح حقيقية. لا يُكتب أي شيء تحفظه هنا على أي لوحة مفاتيح."
+
+#: crates/ui/src/window.rs:588
+msgid "Back to the Keyboard on USB"
+msgstr "العودة إلى لوحة مفاتيح USB"

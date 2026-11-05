@@ -8,7 +8,7 @@ use presentation::{ActionCaption, BindingState, EditorModel, EditorTab, Selectio
 
 use crate::i18n::{t, tf};
 use crate::names::{caption_text, control_title, media_icon, media_title, mouse_icon, mouse_title};
-use crate::widgets::{caption, clear, wrap_box};
+use crate::widgets::{caption, clear, keep_left_to_right, wrap_box};
 
 pub struct Inspector {
     root: gtk::Box,
@@ -155,6 +155,9 @@ impl Inspector {
             chip.add_css_class("title-4");
             chips.append(&chip);
         }
+        // In the order they're typed, as on the key cap — left to right in every language, at the start of the line.
+        keep_left_to_right(&chips);
+        chips.set_halign(if crate::right_to_left() { gtk::Align::End } else { gtk::Align::Start });
         self.selected.append(&chips);
         if key_delay > 0 {
             self.selected.append(&caption(&tf("Waits %lld ms", &[&key_delay])));
@@ -173,7 +176,11 @@ impl Inspector {
 
 fn large(icon: &str, title: &str) -> gtk::Box {
     let row = gtk::Box::new(gtk::Orientation::Horizontal, 8);
-    row.append(&gtk::Image::builder().icon_name(icon).pixel_size(20).build());
+    let image = gtk::Image::builder().icon_name(icon).pixel_size(20).build();
+    if crate::names::keeps_its_direction(icon) {
+        image.set_direction(gtk::TextDirection::Ltr);
+    }
+    row.append(&image);
     let label = gtk::Label::new(Some(title));
     label.add_css_class("title-4");
     row.append(&label);

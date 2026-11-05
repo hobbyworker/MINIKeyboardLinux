@@ -9,8 +9,9 @@ use std::time::UNIX_EPOCH;
 use adw::prelude::*;
 use presentation::{DeviceLogModel, LogDirection, LogLine};
 
-use crate::i18n::{t, tf};
+use crate::i18n::{isolate, t, tf};
 use crate::names::log_event_message;
+use crate::widgets::keep_left_to_right;
 
 pub struct LogWindow {
     pub window: adw::Window,
@@ -69,6 +70,8 @@ impl LogWindow {
         content.append(&bar);
         content.append(&gtk::Separator::new(gtk::Orientation::Horizontal));
         content.append(&stack);
+        // Times and bytes: left to right in every language. A message keeps its own direction (Pango's, from its words).
+        keep_left_to_right(&content);
         let toolbar = adw::ToolbarView::new();
         toolbar.add_top_bar(&adw::HeaderBar::new());
         toolbar.set_content(Some(&content));
@@ -194,7 +197,10 @@ impl LogWindow {
         };
         header.append(&gtk::Label::builder().label(body).xalign(0.0).selectable(true).build());
         if line.is_shortened() {
-            let more = gtk::Label::new(Some(&format!("… {}", tf("%lld bytes", &[&line.bytes.len()]))));
+            // "…" right after the bytes, as the line reads — the left-to-right mark keeps the count's Arabic from
+            // turning the label round.
+            let count = isolate(&tf("%lld bytes", &[&line.bytes.len()]));
+            let more = gtk::Label::new(Some(&format!("\u{200E}… {count}")));
             more.add_css_class("dim-label");
             header.append(&more);
         }
@@ -211,6 +217,7 @@ impl LogWindow {
         column.append(&detail);
         column.add_css_class("log-line");
         let widget = gtk::ListBoxRow::builder().child(&column).activatable(false).build();
+        keep_left_to_right(&widget);
         let id = line.id;
         {
             let weak = Rc::downgrade(self);

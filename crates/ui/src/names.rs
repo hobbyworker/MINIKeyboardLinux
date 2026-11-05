@@ -46,6 +46,12 @@ pub fn media_title(media: MediaChoice) -> String {
     }
 }
 
+/// An icon that keeps its shape in right-to-left text: every one but back and forward, which turn round with the text
+/// (GTK takes the theme's "-rtl" icon). A media key, a volume, a rotation stays as it is.
+pub fn keeps_its_direction(icon: &str) -> bool {
+    !(icon.starts_with("go-previous") || icon.starts_with("go-next"))
+}
+
 /// An icon of the Adwaita theme.
 pub fn media_icon(media: MediaChoice) -> &'static str {
     match media {

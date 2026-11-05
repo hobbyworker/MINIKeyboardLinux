@@ -19,6 +19,8 @@ pub struct ShapeThumbnail {
 impl ShapeThumbnail {
     pub fn new(margin: f64) -> Self {
         let area = gtk::DrawingArea::new();
+        // A picture of the device: left to right in every language.
+        area.set_direction(gtk::TextDirection::Ltr);
         let drawing: Rc<RefCell<Option<ShapeDrawing>>> = Rc::default();
         let shown = drawing.clone();
         area.set_draw_func(move |area, context, width, height| {

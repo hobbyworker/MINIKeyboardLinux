@@ -23,9 +23,27 @@ pub fn t(message: &str) -> String {
     gettext(message)
 }
 
-/// A message in the user's language with its values put in.
+/// A message in the user's language with its values put in — in a right-to-left language each set apart from the
+/// words around it, so "8890-3" doesn't read "3-8890".
 pub fn tf(message: &str, values: &[&dyn Display]) -> String {
-    fill(&gettext(message), values)
+    if !crate::right_to_left() {
+        return fill(&gettext(message), values);
+    }
+    let isolated: Vec<String> = values.iter().map(|value| format!("\u{2068}{value}\u{2069}")).collect();
+    let values: Vec<&dyn Display> = isolated.iter().map(|value| value as &dyn Display).collect();
+    fill(&gettext(message), &values)
+}
+
+/// `text` set apart from the words around it in a right-to-left language: its own direction inside, in its place
+/// outside. Unchanged in the other languages.
+pub fn isolate(text: &str) -> String {
+    if crate::right_to_left() { format!("\u{2068}{text}\u{2069}") } else { text.to_owned() }
+}
+
+/// Key names and presses as the keys print them, left to right — in Arabic a lone "(" would turn round and "⇧("
+/// read ")⇧". Unchanged in the other languages.
+pub fn left_to_right(text: &str) -> String {
+    if crate::right_to_left() { format!("\u{2066}{text}\u{2069}") } else { text.to_owned() }
 }
 
 /// Replaces `%lld`, `%d` and `%@` with `values` in order, and `%1$lld`, `%2$@` with the value of that number.

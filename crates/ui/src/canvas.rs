@@ -12,6 +12,7 @@ use presentation::{ControlDrawing, ControlFace, ControlRef, KeyboardDrawing, Kno
 
 use crate::i18n::t;
 use crate::names::{caption_text, control_title};
+use crate::widgets::keep_left_to_right;
 
 /// Where a drawing in layout space lands in a widget: scaled to fit, in the middle.
 #[derive(Clone, Copy, Debug)]
@@ -144,7 +145,9 @@ glib::wrapper! {
 
 impl Default for KeyboardCanvas {
     fn default() -> Self {
-        glib::Object::new()
+        let canvas: Self = glib::Object::new();
+        canvas.set_direction(gtk::TextDirection::Ltr);
+        canvas
     }
 }
 
@@ -257,6 +260,8 @@ impl KeyboardCanvas {
                 handler(target);
             }
         });
+        // A picture of the keyboard: as it is, in every language.
+        keep_left_to_right(&button);
         button.set_parent(self);
         button
     }

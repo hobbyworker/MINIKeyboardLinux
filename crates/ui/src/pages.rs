@@ -9,13 +9,15 @@ use presentation::{
     LightingPage, MediaChoice, ModifierKey, MouseChoice, Rgb,
 };
 
-use crate::i18n::{t, tf};
+use crate::i18n::{left_to_right, t, tf};
 use crate::names::{
     control_title, key_group_title, led_color_css, led_color_title, lighting_mode_detail, lighting_mode_icon,
     lighting_mode_title, media_icon, media_title, modifier_title, mouse_icon, mouse_title, tab_title,
 };
 use crate::settings::Settings;
-use crate::widgets::{caption, clear, key_button, keycap, section, set_active, tall_keycap, wrap_box};
+use crate::widgets::{
+    caption, clear, keep_left_to_right, key_button, keycap, section, set_active, tall_keycap, wrap_box,
+};
 
 /// The tabs and the page under them.
 pub struct ActionPanel {
@@ -345,12 +347,16 @@ impl KeysPage {
             let quarters = |value: f64| (value * 4.0).round() as i32;
             self.board.attach(&button, quarters(cap.column), cap.row as i32, quarters(cap.width), 1);
         }
+        // Keys are laid out as on keyboards, left to right in every language; the titles above them read the
+        // app's way.
+        keep_left_to_right(&self.board);
         clear(&self.more);
         if !more.is_empty() {
             let keys = wrap_box();
             for key in more {
                 keys.append(&self.press_button(key, false));
             }
+            keep_left_to_right(&keys);
             self.more.append(&section(&t("More Keys"), None, &keys));
         }
         modifiers
@@ -367,12 +373,14 @@ impl KeysPage {
             row.append(&button);
             modifiers.push((modifier, button));
         }
+        keep_left_to_right(&row);
         self.grouped.append(&section(&t("Modifiers"), None, &row));
         for group in groups {
             let keys = wrap_box();
             for key in &group.keys {
                 keys.append(&self.press_button(key, false));
             }
+            keep_left_to_right(&keys);
             self.grouped.append(&section(&key_group_title(group.kind), None, &keys));
         }
         let symbols = wrap_box();
@@ -384,6 +392,7 @@ impl KeysPage {
             button.connect_clicked(move |_| editor.press_shifted(&key));
             symbols.append(&button);
         }
+        keep_left_to_right(&symbols);
         self.grouped.append(&section(&t("Shift Symbols"), None, &symbols));
         modifiers
     }
@@ -670,7 +679,11 @@ impl DelayView {
                     let grid = gtk::Grid::builder().column_spacing(14).row_spacing(6).build();
                     for (row, press) in presses.iter().enumerate() {
                         grid.attach(&dim(&tf("Press %lld", &[&(press.index + 1)])), 0, row as i32, 1, 1);
-                        let text = gtk::Label::builder().label(&press.text).xalign(0.0).width_request(90).build();
+                        let text = gtk::Label::builder()
+                            .label(left_to_right(&press.text))
+                            .xalign(0.0)
+                            .width_request(90)
+                            .build();
                         text.add_css_class("heading");
                         grid.attach(&text, 1, row as i32, 1, 1);
                         let index = press.index;

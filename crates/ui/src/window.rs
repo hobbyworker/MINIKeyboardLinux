@@ -78,6 +78,7 @@ impl MainWindow {
             .tooltip_text(t("Rotate"))
             .action_name("win.rotate")
             .build();
+        rotate.set_direction(gtk::TextDirection::Ltr);
         rotate.add_css_class("osd");
         rotate.add_css_class("circular");
         let shape = gtk::Button::builder().label(t("Shape…")).action_name("win.shape").build();

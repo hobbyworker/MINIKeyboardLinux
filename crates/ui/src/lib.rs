@@ -67,6 +67,9 @@ pub fn prepare(launch: &Launch) -> Rc<Settings> {
     {
         set_language(&language);
     }
+    RIGHT_TO_LEFT.get_or_init(|| {
+        settings::right_to_left(std::env::var("LANGUAGE").ok().as_deref(), messages_locale().as_deref())
+    });
     i18n::init(&launch.text_domain, &launch.locale_dir);
     Rc::new(settings)
 }
@@ -76,6 +79,14 @@ fn messages_locale() -> Option<String> {
     ["LC_ALL", "LC_MESSAGES", "LANG"]
         .into_iter()
         .find_map(|name| std::env::var(name).ok().filter(|value| !value.is_empty()))
+}
+
+/// Whether the interface reads right to left — decided with the language, set on GTK when the app starts.
+static RIGHT_TO_LEFT: OnceLock<bool> = OnceLock::new();
+
+/// Whether the interface reads right to left — Arabic.
+pub(crate) fn right_to_left() -> bool {
+    RIGHT_TO_LEFT.get().copied().unwrap_or(false)
 }
 
 /// `LANGUAGE` as the app found it, before a chosen language replaced it.
@@ -108,6 +119,10 @@ fn relaunch_command(executable: PathBuf, inherited_language: Option<OsString>) -
 pub fn run(launch: Launch, settings: Rc<Settings>, editor: Rc<EditorModel>, log: Rc<DeviceLogModel>) -> glib::ExitCode {
     let app = adw::Application::builder().application_id(&launch.info.id).build();
     app.connect_startup(|_| {
+        // The app's own language decides the direction, not GTK's guess from the locale — Arabic chosen in the app
+        // reads right to left, any other language left to right.
+        let direction = if right_to_left() { gtk::TextDirection::Rtl } else { gtk::TextDirection::Ltr };
+        gtk::Widget::set_default_direction(direction);
         let provider = gtk::CssProvider::new();
         provider.load_from_string(include_str!("style.css"));
         if let Some(display) = gtk::gdk::Display::default() {
